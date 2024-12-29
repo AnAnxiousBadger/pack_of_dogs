@@ -5,8 +5,8 @@ public partial class UIController : CanvasLayer
 {
 	// EXPORTS
 	[Export] private Label _diceRollLabel;
-	[Export] private Button _diceRollButton;
-	[Export] private Button _skipTurnButton;
+	[Export] private BaseButton _diceRollButton;
+	[Export] private BaseButton _skipTurnButton;
 	[Export] private Label _turnLabel;
 	// SIGNALS
 	[Signal] public delegate void DiceRollButtonUpEventHandler();
