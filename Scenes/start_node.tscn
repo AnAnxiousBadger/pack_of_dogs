@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cljv71f0hx7ch"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/StartNodeController.cs" id="1_dbbs5"]
+[ext_resource type="Material" uid="uid://boiisfmtv7ugo" path="res://Assets/Materials/red_mat.tres" id="2_aynoi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
+
+[node name="white_start_node" type="StaticBody3D" node_paths=PackedStringArray("outNeighbours")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+script = ExtResource("1_dbbs5")
+playerIndex = 0
+outNeighbours = [null]
+
+[node name="node_mesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_u5ls1")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_aynoi")
+
+[node name="modifiers" type="Node3D" parent="."]
+
+[node name="on_step" type="Node3D" parent="modifiers"]
+
+[node name="before_step" type="Node3D" parent="modifiers"]

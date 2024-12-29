@@ -1,0 +1,399 @@
+[gd_scene load_steps=16 format=3 uid="uid://cckbt066gn116"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
+[ext_resource type="Resource" uid="uid://wmjjs4j0t5rd" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
+[ext_resource type="PackedScene" uid="uid://cljv71f0hx7ch" path="res://Scenes/start_node.tscn" id="3_gcumj"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/EndNodeController.cs" id="5_xvup1"]
+[ext_resource type="Material" uid="uid://bhh6tft7b0va2" path="res://Assets/Materials/white_mat.tres" id="6_ij0xb"]
+[ext_resource type="Material" uid="uid://cgw63u1viedu" path="res://Assets/Materials/black_mat.tres" id="7_5itki"]
+[ext_resource type="PackedScene" uid="uid://dlohrab2t6ae5" path="res://Scenes/double_turn_modifier.tscn" id="8_p8fm0"]
+[ext_resource type="PackedScene" uid="uid://dr0xn4cbjhgst" path="res://Scenes/basic_node.tscn" id="8_pdjfc"]
+[ext_resource type="PackedScene" uid="uid://cg4abgvd0qv5a" path="res://Scenes/protected_node_modifier.tscn" id="9_bs3rs"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PieceController.cs" id="11_h4toi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t7yvu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_piin5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nod4v"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tm4u7"]
+height = 0.2
+radius = 0.3
+
+[node name="board" type="Node3D" node_paths=PackedStringArray("_endlabels")]
+script = ExtResource("1_5e8jc")
+_pieceStartingPositions = ExtResource("2_4wt4c")
+_endlabels = [NodePath("Label3D_01"), NodePath("Label3D_02")]
+
+[node name="node_container" type="Node3D" parent="."]
+
+[node name="white_start_node" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("3_gcumj")]
+outNeighbours = [NodePath("../board_node_01")]
+
+[node name="black_start_node" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("3_gcumj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_05")]
+
+[node name="white_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+script = ExtResource("5_xvup1")
+playerIndex = 0
+inNeighbours = [null]
+
+[node name="node_mesh" type="MeshInstance3D" parent="node_container/white_end_node"]
+mesh = SubResource("BoxMesh_u5ls1")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="node_container/white_end_node"]
+shape = SubResource("BoxShape3D_t7yvu")
+
+[node name="modifiers" type="Node3D" parent="node_container/white_end_node"]
+
+[node name="on_step" type="Node3D" parent="node_container/white_end_node/modifiers"]
+
+[node name="before_step" type="Node3D" parent="node_container/white_end_node/modifiers"]
+
+[node name="black_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+script = ExtResource("5_xvup1")
+playerIndex = 1
+inNeighbours = [null]
+
+[node name="node_mesh" type="MeshInstance3D" parent="node_container/black_end_node"]
+mesh = SubResource("BoxMesh_u5ls1")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="node_container/black_end_node"]
+shape = SubResource("BoxShape3D_piin5")
+
+[node name="modifiers" type="Node3D" parent="node_container/black_end_node"]
+
+[node name="on_step" type="Node3D" parent="node_container/black_end_node/modifiers"]
+
+[node name="before_step" type="Node3D" parent="node_container/black_end_node/modifiers"]
+
+[node name="board_node_01" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+playerIndex = 0
+outNeighbours = [NodePath("../board_node_02")]
+
+[node name="board_node_02" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+playerIndex = 0
+outNeighbours = [NodePath("../board_node_03")]
+
+[node name="board_node_03" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+playerIndex = 0
+outNeighbours = [NodePath("../board_node_04")]
+
+[node name="board_node_04" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+playerIndex = 0
+outNeighbours = [NodePath("../board_node_09")]
+
+[node name="double_turn_modifier" parent="node_container/board_node_04/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+
+[node name="board_node_05" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_06")]
+
+[node name="board_node_06" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_07")]
+
+[node name="board_node_07" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_08")]
+
+[node name="board_node_08" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_09")]
+
+[node name="double_turn_modifier" parent="node_container/board_node_08/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+
+[node name="board_node_09" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+outNeighbours = [NodePath("../board_node_10")]
+
+[node name="board_node_10" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+outNeighbours = [NodePath("../board_node_11")]
+
+[node name="board_node_11" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+outNeighbours = [NodePath("../board_node_12")]
+
+[node name="board_node_12" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+outNeighbours = [NodePath("../board_node_13")]
+
+[node name="double_turn_modifier" parent="node_container/board_node_12/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+
+[node name="protected_node_modifier" parent="node_container/board_node_12/modifiers" index="1" instance=ExtResource("9_bs3rs")]
+
+[node name="board_node_13" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+outNeighbours = [NodePath("../board_node_14")]
+
+[node name="board_node_14" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+outNeighbours = [NodePath("../board_node_15")]
+
+[node name="board_node_15" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+outNeighbours = [NodePath("../board_node_16")]
+
+[node name="board_node_16" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+outNeighbours = [NodePath("../board_node_17"), NodePath("../board_node_19")]
+
+[node name="board_node_17" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+playerIndex = 0
+outNeighbours = [NodePath("../board_node_18")]
+
+[node name="board_node_18" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+playerIndex = 0
+outNeighbours = [NodePath("../white_end_node")]
+
+[node name="double_turn_modifier" parent="node_container/board_node_18/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+
+[node name="board_node_19" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+playerIndex = 1
+outNeighbours = [NodePath("../board_node_20")]
+
+[node name="board_node_20" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+playerIndex = 1
+outNeighbours = [NodePath("../black_end_node")]
+
+[node name="double_turn_modifier" parent="node_container/board_node_20/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+
+[node name="pieces_container" type="Node3D" parent="."]
+
+[node name="piece_01" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_01"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_01"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_02" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_02"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_02"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_03" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_03"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_03"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_04" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_04"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_04"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_05" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_05"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_05"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_06" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_06"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_06"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_07" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_07"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("6_ij0xb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_07"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_08" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_08"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_08"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_09" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_09"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_09"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_10" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_10"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_10"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_11" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_11"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_11"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_12" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_12"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_12"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_13" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_13"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_13"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="piece_14" type="StaticBody3D" parent="pieces_container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+collision_layer = 2
+script = ExtResource("11_h4toi")
+playerIndex = 1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_14"]
+mesh = SubResource("CylinderMesh_nod4v")
+surface_material_override/0 = ExtResource("7_5itki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_14"]
+shape = SubResource("CylinderShape3D_tm4u7")
+
+[node name="Label3D_01" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+billboard = 1
+text = "0"
+font_size = 50
+outline_size = 20
+
+[node name="Label3D_02" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+billboard = 1
+text = "0"
+font_size = 50
+outline_size = 20
+
+[editable path="node_container/white_start_node"]
+[editable path="node_container/black_start_node"]
+[editable path="node_container/board_node_01"]
+[editable path="node_container/board_node_02"]
+[editable path="node_container/board_node_03"]
+[editable path="node_container/board_node_04"]
+[editable path="node_container/board_node_05"]
+[editable path="node_container/board_node_06"]
+[editable path="node_container/board_node_07"]
+[editable path="node_container/board_node_08"]
+[editable path="node_container/board_node_09"]
+[editable path="node_container/board_node_10"]
+[editable path="node_container/board_node_11"]
+[editable path="node_container/board_node_12"]
+[editable path="node_container/board_node_13"]
+[editable path="node_container/board_node_14"]
+[editable path="node_container/board_node_15"]
+[editable path="node_container/board_node_16"]
+[editable path="node_container/board_node_17"]
+[editable path="node_container/board_node_18"]
+[editable path="node_container/board_node_19"]
+[editable path="node_container/board_node_20"]

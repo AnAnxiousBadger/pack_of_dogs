@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr0xn4cbjhgst"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/BasicNodeController.cs" id="1_v33p2"]
+[ext_resource type="Material" uid="uid://fqd7lvxqxi6b" path="res://Assets/Materials/yellow_mat.tres" id="2_u8puj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sswvo"]
+
+[node name="board_node_01" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+script = ExtResource("1_v33p2")
+
+[node name="node_mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_u5ls1")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("2_u8puj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sswvo")
+
+[node name="modifiers" type="Node3D" parent="."]

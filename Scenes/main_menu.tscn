@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5d85fwg7u2pv"]
+
+[ext_resource type="Script" path="res://Scripts/UI_scripts/UIAnimationComponent.cs" id="1_u4gnx"]
+
+[node name="ROOT" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TextureRect" type="ColorRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+color = Color(1, 0, 1, 1)
+
+[node name="UI_animation_component" type="Node" parent="CanvasLayer/Control/HBoxContainer/TextureRect"]
+script = ExtResource("1_u4gnx")
+_hoverScale = Vector2(1.1, 1.1)
+_transitionType = 1
+
+[node name="TextureRect2" type="ColorRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+color = Color(1, 0, 1, 1)
+
+[node name="TextureRect3" type="ColorRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+color = Color(1, 0, 1, 1)
