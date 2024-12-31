@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=4 uid="uid://sq6lib15ysi4"]
+
+[ext_resource type="Script" path="res://Scripts/TickableController.cs" id="1_68th2"]
+[ext_resource type="Material" uid="uid://2kkdxwljsdy1" path="res://Assets/skip_button_mat.tres" id="2_15r34"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hpn8r"]
+_surfaces = [{
+"aabb": AABB(-2.10174, -0.869136, -0.835641, 4.20349, 1.73827, 1.67128),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ot72l"]
+resource_name = "skip_button_Cube_004"
+_surfaces = [{
+"aabb": AABB(-2.10174, -0.869136, -0.835641, 4.20349, 1.73827, 1.67128),
+"attribute_data": PackedByteArray("uDf0Obg39DmncQYAp3H0Oadx9DmncfQ5R+P0OQYA9DlZqQYAWan0OVmp9DlZqfQ5uDcKxrg3Csamcfj/pnEKxqZxCsamcQrGR+MKxgYACsZZqfj/WakKxlmpCsZZqQrG"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgALAAUAAgAIAAsABgAVAAkABgASABUAFAARABcAFAAOABEADAADAA8ADAAAAAMABwANABMABwABAA0AFgAEAAoAFgAQAAQA"),
+"material": ExtResource("2_15r34"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA//9U1QAAAAD/////AAD//////78AAP////9U1QAA////////AAAAAAAA//8AAAAAAABU1QAAAAAAAP//AAD//wAA//8AAP//AABU1QAA//8AAP////8AAP///7///wAA//9U1f//AAD///+//////////7////////9U1f////////+///8AAAAA/////wAAAABU1f//AAAAAP+//////wAA////////AABU1f////8AAP+//////6oqVNX/P/9//////1TVqir/P/9//z//v6oqVNX/P/9//z//v1TVqir/P/9//////6oqVNX/fwAA/////1TVqir/fwAA/z//v6oqVNX/fwAA/z//v1TVqir/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hpn8r")
+
+[node name="Node3D" type="StaticBody3D"]
+script = ExtResource("1_68th2")
+
+[node name="skip_button" type="Node3D" parent="."]
+
+[node name="skip_button_textured" type="MeshInstance3D" parent="skip_button"]
+mesh = SubResource("ArrayMesh_ot72l")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

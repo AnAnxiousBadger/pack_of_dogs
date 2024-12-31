@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=16 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
@@ -6,6 +6,9 @@
 [ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_k6vlu"]
 [ext_resource type="PackedScene" uid="uid://cckbt066gn116" path="res://Scenes/classic_board.tscn" id="5_bteu6"]
 [ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/roll_button.tscn" id="7_pnvo5"]
+[ext_resource type="Texture2D" uid="uid://cg126w5yurcb5" path="res://Assets/Materials/sand_diffuse.png" id="8_se4wb"]
+[ext_resource type="Texture2D" uid="uid://l52y1w47yn2v" path="res://Assets/Materials/sand_normal.png" id="9_k2jft"]
+[ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/skip_button.tscn" id="10_mffvp"]
 [ext_resource type="Script" path="res://Scripts/UIController.cs" id="13_ar2w6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8bys"]
@@ -21,8 +24,16 @@ ssr_enabled = true
 ssao_enabled = true
 sdfgi_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3x1m"]
+albedo_texture = ExtResource("8_se4wb")
+roughness = 0.9
+normal_enabled = true
+normal_scale = 1.5
+normal_texture = ExtResource("9_k2jft")
+
 [sub_resource type="QuadMesh" id="QuadMesh_v8fvy"]
-size = Vector2(15, 9)
+material = SubResource("StandardMaterial3D_g3x1m")
+size = Vector2(20, 20)
 
 [node name="ROOT" type="Node3D"]
 
@@ -57,14 +68,18 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0,
 [node name="board_elements" type="Node3D" parent="."]
 
 [node name="roll_button" parent="board_elements" instance=ExtResource("7_pnvo5")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777)
+
+[node name="Node3D" parent="board_elements" instance=ExtResource("10_mffvp")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
 
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.766045, -0.620885, 0.166366, 0, 0.258819, 0.965926, -0.642788, -0.739942, 0.198267, 0, 1.89, 0)
+transform = Transform3D(0.766045, -0.447324, 0.461603, 0, 0.718126, 0.695913, -0.642788, -0.5331, 0.550117, 0, 1.89, 0)
 light_color = Color(1, 1, 0.85098, 1)
 shadow_enabled = true
+shadow_bias = 0.0
 shadow_blur = 3.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]

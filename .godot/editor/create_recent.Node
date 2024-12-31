@@ -1,8 +1,8 @@
+AnimationPlayer
+StaticBody3D
 Node
 GPUParticles3D
 CollisionShape3D
-StaticBody3D
-AnimationPlayer
 WorldEnvironment
 MeshInstance3D
 Node3D
