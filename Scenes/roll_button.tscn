@@ -1,50 +1,215 @@
-[gd_scene load_steps=7 format=4 uid="uid://co1b1b74mbd1y"]
+[gd_scene load_steps=13 format=3 uid="uid://co1b1b74mbd1y"]
 
-[ext_resource type="Texture2D" uid="uid://f6jb4f3n0te8" path="res://Assets/UI/roll_button_diffuse.png" id="1_mbcaf"]
-[ext_resource type="Texture2D" uid="uid://garou7nnw0cp" path="res://Assets/UI/roll_button_normal.png" id="2_oho73"]
-[ext_resource type="Texture2D" uid="uid://wld03yf48eo0" path="res://Assets/UI/roll_button_roughness.png" id="3_e1iud"]
+[ext_resource type="Script" path="res://Scripts/TickableController.cs" id="1_gbxyn"]
+[ext_resource type="ArrayMesh" uid="uid://6qgfxj5bjf6m" path="res://Assets/UI/roll_button_Plane_003.res" id="2_x8bie"]
+[ext_resource type="Script" path="res://Scripts/TickableParticleSystemPoolController.cs" id="3_fhfmp"]
+[ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/Particles/pebbles_particles.tscn" id="4_gkqqa"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imp8j"]
-specular_mode = 2
-albedo_texture = ExtResource("1_mbcaf")
-roughness_texture = ExtResource("3_e1iud")
-normal_enabled = true
-normal_texture = ExtResource("2_oho73")
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4t8j"]
+size = Vector3(5.5332, 1.8349, 2.51801)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_s61so"]
-_surfaces = [{
-"aabb": AABB(-2.73945, -0.869136, -1.22025, 5.47889, 1.73827, 2.44049),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AgABAAAAAgADAAEAAwAFAAEAAwAHAAUAAAAGAAIAAAAEAAYAAgAHAAMAAgAGAAcAAQAEAAAAAQAFAAQABgAFAAcABgAEAAUA"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAD/////AAD///////8AAAAA//8AAAAA/////wAAAAAAAAAA//8AAP//AAD//wAAAAAAAAAAAAD//wAAAAAAAA==")
-}]
-blend_shape_mode = 0
+[sub_resource type="Animation" id="Animation_uatjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tickable_animated:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("tickable_animated:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_5xdji"]
-resource_name = "roll_button_Plane_003"
-_surfaces = [{
-"aabb": AABB(-2.73945, -0.869136, -1.22025, 5.47889, 1.73827, 2.44049),
-"attribute_data": PackedByteArray("dHe0MXR3tDF0d7QxdHdKznR3Ss50d0rONL20MTS9tDE0vbQxNL1KzjS9Ss40vUrOxkW0McZFtDF0dwYAxkVKzsZFSs50d/j/4u60MQYAtDE0vQYA4u5KzgYASs40vfj/"),
-"format": 34896613399,
-"index_count": 36,
-"index_data": PackedByteArray("BwAEAAEABwAKAAQACwARAAUACwAXABEAAgAUAAgAAgAOABQABgAVAAkABgASABUAAwAMAAAAAwAPAAwAEwAQABYAEwANABAA"),
-"material": SubResource("StandardMaterial3D_imp8j"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAD//////78AAP////9U1QAA/////////////////7////////9U1f////////+/AAD//wAA//8AAP//AABU1QAA//8AAP///////wAA////////AABU1f////8AAP+/AAAAAP///78AAAAA//9U1QAAAAD///////8AAP///7///wAA//9U1f//AAD///+/AAAAAAAA//8AAAAAAABU1QAAAAAAAP////8AAAAA/////wAAAABU1f//AAAAAP+//////1TVqir/P/9//////1TVqir/fwAA/z//v1TVqir/P/9//z//v1TVqir/fwAA/////6oqVNX/P/9//////6oqVNX/fwAA/z//v6oqVNX/P/9//z//v6oqVNX/fwAA")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_s61so")
+[sub_resource type="Animation" id="Animation_346r1"]
+resource_name = "on_disable"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.95, 0.95, 0.95), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tickable_animated:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0872665, 0.0349066, 0.0349066), Vector3(-2.75762, -0.0349066, -0.0349066), Vector3(-3.14159, 0, 0)]
+}
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="Animation" id="Animation_smgcm"]
+resource_name = "on_disabled_hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.14159, 0, 0), Vector3(-3.14159, -0.0174533, -0.0174533), Vector3(-3.14159, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tickable_animated:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
 
-[node name="roll_button2" type="Node3D" parent="."]
+[sub_resource type="Animation" id="Animation_d4x0t"]
+resource_name = "on_enable"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.95, 0.95, 0.95), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tickable_animated:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3.14159, 0, 0), Vector3(-3.22886, -0.0349066, -0.0349066), Vector3(-0.71733, 0.0349066, 0.0349066), Vector3(0, 0, 0)]
+}
 
-[node name="roll_button" type="MeshInstance3D" parent="roll_button2"]
-mesh = SubResource("ArrayMesh_5xdji")
+[sub_resource type="Animation" id="Animation_wx6un"]
+resource_name = "roll_button_nudge_face_up"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0174533, 0.0174533, 0.0174533), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tickable_animated:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8a0lx"]
+resource_name = "on_pressed"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tickable_animated:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0duc"]
+_data = {
+"RESET": SubResource("Animation_uatjh"),
+"on_disable": SubResource("Animation_346r1"),
+"on_disabled_hover": SubResource("Animation_smgcm"),
+"on_enable": SubResource("Animation_d4x0t"),
+"on_hover": SubResource("Animation_wx6un"),
+"on_pressed": SubResource("Animation_8a0lx")
+}
+
+[node name="tickable" type="StaticBody3D"]
+collision_layer = 4
+script = ExtResource("1_gbxyn")
+_hasEnableAnim = true
+_hasDisableAnim = true
+_hasPressedAnim = true
+_hasHoverAnim = true
+_hasHoverDisabledAnim = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00708008, 0.00723267, -0.00717163)
+shape = SubResource("BoxShape3D_x4t8j")
+
+[node name="tickable_animated" type="Node3D" parent="."]
+
+[node name="roll_button_mesh" type="MeshInstance3D" parent="tickable_animated"]
+mesh = ExtResource("2_x8bie")
 skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v0duc")
+}
+
+[node name="particle_pool" type="Node" parent="."]
+script = ExtResource("3_fhfmp")
+
+[node name="GPUParticles3D" parent="particle_pool" instance=ExtResource("4_gkqqa")]

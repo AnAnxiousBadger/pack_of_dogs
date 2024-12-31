@@ -6,85 +6,85 @@
 [sub_resource type="Resource" id="Resource_n8bbc"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, -5)
+pos = Vector3(-3, 0, -4.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_vywsu"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, -4)
+pos = Vector3(-3, 0, -3.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_1rong"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, -3)
+pos = Vector3(-3, 0, -2.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_su0cv"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, -2)
+pos = Vector3(-3, 0, -1.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_p68ao"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, -1)
+pos = Vector3(-3, 0, -0.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_fi02m"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, 0)
+pos = Vector3(-3, 0, 0.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_1s15h"]
 script = ExtResource("2_k27uv")
 playerIndex = 0
-pos = Vector3(-5, 0, 1)
+pos = Vector3(-3, 0, 1.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_3uy8s"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, -5)
+pos = Vector3(3, 0, -4.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_7y747"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, -4)
+pos = Vector3(3, 0, -3.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_au45g"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, -3)
+pos = Vector3(3, 0, -2.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_6yg7r"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, -2)
+pos = Vector3(3, 0, -1.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_bscek"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, -1)
+pos = Vector3(3, 0, -0.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_u4bb8"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, 0)
+pos = Vector3(3, 0, 0.5)
 isOccupied = false
 
 [sub_resource type="Resource" id="Resource_1bste"]
 script = ExtResource("2_k27uv")
 playerIndex = 1
-pos = Vector3(5, 0, 1)
+pos = Vector3(3, 0, 1.5)
 isOccupied = false
 
 [resource]

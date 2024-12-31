@@ -28,9 +28,17 @@ public abstract partial class BasePlayerController : Node
             gameController.boardController.SetplayerScoreLabel(this);
         }
     }
+    // TURN STATES
     protected PlayerTurnBaseState _currTurnState;
     public List<PlayerTurnBaseState> turnStates;
     private List<PlayerTurnBaseState> _previousStates;
+
+    // SIGNALS
+    [Signal] public delegate void DiceRolledEventHandler(int roll);
+    [Signal] public delegate void EnemyPieceHitEventHandler();
+    [Signal] public delegate void PieceHitEventHandler();
+    [Signal] public delegate void PieceMovedEventHandler(int dist); // yet to be implemented
+    [Signal] public delegate void TurnSkippedEventHandler();
     
     public void ReadyPlayer(){
         if(PlayerName == ""){
@@ -70,6 +78,5 @@ public abstract partial class BasePlayerController : Node
     public abstract void EndTurn();
     public abstract void ProcessTurn(float delta);
     public abstract void AddTurnToStateQueue();
-
 
 }

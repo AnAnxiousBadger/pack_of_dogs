@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://5302ih5o5de6"]
+
+[ext_resource type="Script" path="res://Scripts/TickableParticleSystemController.cs" id="1_xq518"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp55g"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Gradient" id="Gradient_fvrvp"]
+colors = PackedColorArray(0.427331, 0.246072, 0.062625, 1, 0.9698, 0.770236, 0.584621, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bamlh"]
+gradient = SubResource("Gradient_fvrvp")
+
+[sub_resource type="Curve" id="Curve_r0iuq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dgvj7"]
+curve = SubResource("Curve_r0iuq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecngq"]
+particle_flag_rotate_y = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_dgvj7")
+color_initial_ramp = SubResource("GradientTexture1D_bamlh")
+
+[sub_resource type="BoxMesh" id="BoxMesh_s6su1"]
+size = Vector3(0.07, 0.07, 0.07)
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_xp55g")
+emitting = false
+amount = 16
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ecngq")
+draw_pass_1 = SubResource("BoxMesh_s6su1")
+script = ExtResource("1_xq518")

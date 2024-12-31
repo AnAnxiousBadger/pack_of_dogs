@@ -32,3 +32,21 @@ D:\Szabhey\Hackerman\Godot\pack_of_dogs\.godot\mono\temp\obj\Debug\refint\UR 2.d
 D:\Szabhey\Hackerman\Godot\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.pdb
 D:\Szabhey\Hackerman\Godot\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.genruntimeconfig.cache
 D:\Szabhey\Hackerman\Godot\pack_of_dogs\.godot\mono\temp\obj\Debug\ref\UR 2.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\UR 2.deps.json
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\UR 2.runtimeconfig.json
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\UR 2.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\UR 2.pdb
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.csproj.AssemblyReference.cache
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.AssemblyInfoInputs.cache
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.AssemblyInfo.cs
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.csproj.CoreCompileInputs.cache
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.sourcelink.json
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.csproj.Up2Date
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\refint\UR 2.dll
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.pdb
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\UR 2.genruntimeconfig.cache
+C:\Szabhey\Hackerman\Godot\ur_2\pack_of_dogs\.godot\mono\temp\obj\Debug\ref\UR 2.dll

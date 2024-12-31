@@ -185,9 +185,10 @@ outNeighbours = [NodePath("../black_end_node")]
 [node name="double_turn_modifier" parent="node_container/board_node_20/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
 [node name="pieces_container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="piece_01" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -199,7 +200,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_02" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -211,7 +212,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_03" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -223,7 +224,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_04" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -235,7 +236,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_05" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -0.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -247,7 +248,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_06" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -259,7 +260,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_07" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -271,7 +272,7 @@ surface_material_override/0 = ExtResource("6_ij0xb")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_08" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -284,7 +285,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_09" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -297,7 +298,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_10" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -310,7 +311,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_11" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -323,7 +324,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_12" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -336,7 +337,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_13" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0.5)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -349,7 +350,7 @@ surface_material_override/0 = ExtResource("7_5itki")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_14" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.53)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1

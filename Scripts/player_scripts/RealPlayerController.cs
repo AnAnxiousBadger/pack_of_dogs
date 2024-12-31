@@ -8,14 +8,11 @@ public partial class RealPlayerController : BasePlayerController
     private bool didSelectPiece = false;
     public PieceController selectedPiece = null;
     public List<BoardNodeController> possibeNodes = new();
-    private const float MOUSERAYDIST = 1000f;
 
     // STATES
     public RealPlayerTurnRollState rollState;
     public RealPlayerTurnSelectPieceState selectPieceState;
     public RealPlayerTurnSelectNodeState selectNodeState;
-
-    public enum CollisionMask {NODE, PIECE}
 
     public override void _Ready()
     {
@@ -54,36 +51,6 @@ public partial class RealPlayerController : BasePlayerController
         turnStates.Add(rollState);
         turnStates.Add(selectPieceState);
         turnStates.Add(selectNodeState);
-    }
-
-    public StaticBody3D CastRayFromMouse(CollisionMask mask){
-        StaticBody3D resultBody = null;
-        Vector2 mouse = GetViewport().GetMousePosition();
-        if(Input.IsActionJustReleased("left_mouse")){
-            PhysicsDirectSpaceState3D space = gameController.GetWorld3D().DirectSpaceState;
-            Vector3 start = GetViewport().GetCamera3D().ProjectRayOrigin(mouse);
-            Vector3 end = GetViewport().GetCamera3D().ProjectPosition(mouse, MOUSERAYDIST);
-            PhysicsRayQueryParameters3D rayParams = new()
-            {
-                From = start,
-                To = end
-                
-            };
-
-            if(mask == CollisionMask.NODE){
-                rayParams.CollisionMask = 0b00000000_00000000_00000000_00000001;
-            }
-            else if(mask == CollisionMask.PIECE){
-                rayParams.CollisionMask = 0b00000000_00000000_00000000_00000010;
-            }
-
-            Godot.Collections.Dictionary result = space.IntersectRay(rayParams);
-            if(result.ContainsKey("collider")){
-                resultBody = (StaticBody3D) result["collider"];
-            }
-        }
-
-        return resultBody;
     }
 
     public void SelectPiece(PieceController piece){
@@ -125,6 +92,7 @@ public partial class RealPlayerController : BasePlayerController
     }
 
     private void _OnSkipTurn(){
+        EmitSignal(SignalName.TurnSkipped);
         gameController.uiController.SetSkipButtonActivity(false);
         gameController.SwitchTurn();
     }

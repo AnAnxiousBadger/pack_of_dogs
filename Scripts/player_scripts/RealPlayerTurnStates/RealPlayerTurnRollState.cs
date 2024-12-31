@@ -20,8 +20,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
 
     private void _OnDiceRolled(int roll){
         p.roll = roll;
-        p.gameController.diceController.CanRoll = false;
-
+        p.EmitSignal(BasePlayerController.SignalName.DiceRolled, 0);
         // SET SKIP IF CANNOT MOVE
         if(roll == 0){
             p.gameController.uiController.SetSkipButtonActivity(true);

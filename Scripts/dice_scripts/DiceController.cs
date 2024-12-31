@@ -4,18 +4,19 @@ using System.Collections.Generic;
 
 public partial class DiceController : Node
 {
+	// EXPORTS
+	[Export] private TickableController _rollButton;
 	// REFERENCES
 	private GameController _gameController;
 	private UIController _uiController;
 	private Timer _diceRollTimer;
 	// OTHER
 	private bool _canRoll = false;
-	private RandomNumberGenerator _rand;
 	public bool CanRoll {
 		get { return _canRoll; }
 		set {
-			_canRoll = value; 
-			_uiController.SetDiceRollButtonActivity(value);
+			_canRoll = value;
+			_rollButton.IsActive = value;
 		}
 	}
 	// SIGNALS
@@ -25,9 +26,8 @@ public partial class DiceController : Node
 		_gameController = gameController;
 		_uiController = gameController.uiController;
 		_diceRollTimer = (Timer) GetNode("dice_roll_timer");
-		_rand = new();
 		_diceRollTimer.Timeout += _OnDiceRollTimerTimeout;
-		_uiController.DiceRollButtonUp += _OnRollDiceRollButtonUp;
+		_rollButton.OnReleasedTickable += _OnRollDiceRollButtonUp;
 	}
 
     private int RollDice(RollSettings settings){
@@ -39,7 +39,7 @@ public partial class DiceController : Node
 			partialWeights.Add(totalWeight);
 		}
 
-		int rollResult = _rand.RandiRange(1, totalWeight);
+		int rollResult = RandomGenerator.Instance.GetRandIntInRange(1, totalWeight);
 
 		int roll = int.MinValue;
 		for (int i = 0; i < partialWeights.Count; i++)
@@ -54,6 +54,7 @@ public partial class DiceController : Node
 	}
 
 	private void _OnRollDiceRollButtonUp(){
+		CanRoll = false;
 		_uiController.SetDiceRollLabelRolling();
 		_diceRollTimer.Start();
 	}
