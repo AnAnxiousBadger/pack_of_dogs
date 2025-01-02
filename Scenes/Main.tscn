@@ -1,14 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=15 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_m4lkn"]
 [ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_k6vlu"]
-[ext_resource type="PackedScene" uid="uid://cckbt066gn116" path="res://Scenes/classic_board.tscn" id="5_bteu6"]
-[ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/roll_button.tscn" id="7_pnvo5"]
-[ext_resource type="Texture2D" uid="uid://cg126w5yurcb5" path="res://Assets/Materials/sand_diffuse.png" id="8_se4wb"]
-[ext_resource type="Texture2D" uid="uid://l52y1w47yn2v" path="res://Assets/Materials/sand_normal.png" id="9_k2jft"]
-[ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/skip_button.tscn" id="10_mffvp"]
+[ext_resource type="PackedScene" uid="uid://cckbt066gn116" path="res://Scenes/board_scenes/classic_board.tscn" id="5_bteu6"]
+[ext_resource type="Script" path="res://Scripts/tickable_scripts/BoardElementsController.cs" id="6_2dr7h"]
+[ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/tickables/roll_button.tscn" id="7_pnvo5"]
+[ext_resource type="Material" uid="uid://1pquyv7ntoj2" path="res://Assets/materials/sand_mat.tres" id="10_5l0i8"]
+[ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/tickables/skip_button.tscn" id="10_mffvp"]
 [ext_resource type="Script" path="res://Scripts/UIController.cs" id="13_ar2w6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8bys"]
@@ -24,25 +24,19 @@ ssr_enabled = true
 ssao_enabled = true
 sdfgi_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3x1m"]
-albedo_texture = ExtResource("8_se4wb")
-roughness = 0.9
-normal_enabled = true
-normal_scale = 1.5
-normal_texture = ExtResource("9_k2jft")
-
 [sub_resource type="QuadMesh" id="QuadMesh_v8fvy"]
-material = SubResource("StandardMaterial3D_g3x1m")
+material = ExtResource("10_5l0i8")
 size = Vector2(20, 20)
 
 [node name="ROOT" type="Node3D"]
 
-[node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController")]
+[node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController", "boardElementsController")]
 script = ExtResource("1_m4lkn")
 cam = NodePath("../Camera3D")
 uiController = NodePath("../UI_controller")
 diceController = NodePath("../dice_controller")
 boardController = NodePath("../classic_board")
+boardElementsController = NodePath("../board_elements")
 
 [node name="players_container" type="Node" parent="."]
 
@@ -54,23 +48,25 @@ rollSettings = ExtResource("2_k6vlu")
 script = ExtResource("1_joypr")
 rollSettings = ExtResource("2_k6vlu")
 
-[node name="dice_controller" type="Node" parent="." node_paths=PackedStringArray("_rollButton")]
+[node name="dice_controller" type="Node" parent="."]
 script = ExtResource("1_57n5o")
-_rollButton = NodePath("../board_elements/roll_button")
 
 [node name="dice_roll_timer" type="Timer" parent="dice_controller"]
-wait_time = 0.25
+wait_time = 0.05
 one_shot = true
 
 [node name="classic_board" parent="." instance=ExtResource("5_bteu6")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0, 0)
 
-[node name="board_elements" type="Node3D" parent="."]
+[node name="board_elements" type="Node3D" parent="." node_paths=PackedStringArray("rollButton", "skipButton")]
+script = ExtResource("6_2dr7h")
+rollButton = NodePath("roll_button")
+skipButton = NodePath("skip_button")
 
 [node name="roll_button" parent="board_elements" instance=ExtResource("7_pnvo5")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777)
 
-[node name="Node3D" parent="board_elements" instance=ExtResource("10_mffvp")]
+[node name="skip_button" parent="board_elements" instance=ExtResource("10_mffvp")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
 
 [node name="Environment" type="Node3D" parent="."]

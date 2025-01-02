@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://babbjaxygjrls"
-path.s3tc="res://.godot/imported/lime_normal.png-6e2fdce77e5dde97bc458936f721efcc.s3tc.ctex"
+path.s3tc="res://.godot/imported/lime_normal.png-5a2df16222758ef47701cc9acf585ac9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Materials/lime_normal.png"
-dest_files=["res://.godot/imported/lime_normal.png-6e2fdce77e5dde97bc458936f721efcc.s3tc.ctex"]
+source_file="res://Assets/materials/lime_normal.png"
+dest_files=["res://.godot/imported/lime_normal.png-5a2df16222758ef47701cc9acf585ac9.s3tc.ctex"]
 
 [params]
 

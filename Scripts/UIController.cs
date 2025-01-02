@@ -5,23 +5,11 @@ public partial class UIController : CanvasLayer
 {
 	// EXPORTS
 	[Export] private Label _diceRollLabel;
-	//[Export] private BaseButton _diceRollButton;
 	[Export] private BaseButton _skipTurnButton;
 	[Export] private Label _turnLabel;
-	// SIGNALS
-	[Signal] public delegate void DiceRollButtonUpEventHandler();
-	[Signal] public delegate void SkipTurnButtonUpEventHandler();
 
-	public void ReadyUIController(){
-		//_diceRollButton.ButtonUp += _OnDiceRollButtonUp;
-		_skipTurnButton.ButtonUp += _OnSkipTurnButtonUp;
-	}
-	/*private void _OnDiceRollButtonUp(){
-		EmitSignal(SignalName.DiceRollButtonUp);
-	}*/
-	private void _OnSkipTurnButtonUp(){
-		EmitSignal(SignalName.SkipTurnButtonUp);
-	}
+	public void ReadyUIController(){}
+
     public void SetTurnLabel(string playerName){
 		_turnLabel.Text = playerName + "'s Turn";
 	}
@@ -34,8 +22,5 @@ public partial class UIController : CanvasLayer
 	}
 	public void SetDiceRollLabelUnset(){
 		_diceRollLabel.Text = "Roll!";
-	}
-	public void SetSkipButtonActivity(bool isActive){
-		_skipTurnButton.Disabled = !isActive;
 	}
 }

@@ -14,13 +14,13 @@ public partial class EndNodeController : BoardNodeController
         shape.Disabled = true;
 
         // INCREASE POINTS
-        piece.player.Score += 1;
+        piece.player.DeliveredPieces += 1;
         
     }
 
     public override void Highlight()
     {
-        Material mat = GD.Load<Material>("res://Assets/Materials/orange_mat.tres");
+        Material mat = GD.Load<Material>("res://Assets/materials/base_color_materials/orange_mat.tres");
         _mesh.SetSurfaceOverrideMaterial(0, mat);
     }
 
@@ -28,10 +28,10 @@ public partial class EndNodeController : BoardNodeController
     {
         Material mat;
         if(playerIndex == 0){
-            mat = GD.Load<Material>("res://Assets/Materials/white_mat.tres");
+            mat = GD.Load<Material>("res://Assets/materials/base_color_materials/white_mat.tres");
         }
         else{
-            mat = GD.Load<Material>("res://Assets/Materials/black_mat.tres");
+            mat = GD.Load<Material>("res://Assets/materials/base_color_materials/black_mat.tres");
         }
         _mesh.SetSurfaceOverrideMaterial(0, mat);
     }

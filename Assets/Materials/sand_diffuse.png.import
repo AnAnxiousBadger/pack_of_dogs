@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cg126w5yurcb5"
-path.s3tc="res://.godot/imported/sand_diffuse.png-32ccff657bed03ef9395d8a20d8edd26.s3tc.ctex"
+path.s3tc="res://.godot/imported/sand_diffuse.png-a6ab66184a0ab8461e523e56202ddbee.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Materials/sand_diffuse.png"
-dest_files=["res://.godot/imported/sand_diffuse.png-32ccff657bed03ef9395d8a20d8edd26.s3tc.ctex"]
+source_file="res://Assets/materials/sand_diffuse.png"
+dest_files=["res://.godot/imported/sand_diffuse.png-a6ab66184a0ab8461e523e56202ddbee.s3tc.ctex"]
 
 [params]
 

@@ -28,10 +28,11 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
             {
                 if(node.currPieces[i].player != p){
                     StartNodeController startNode = p.gameController.boardController.GetStartNode(node.currPieces[i].player);
-                    p.gameController.boardController.MovePiece(node.currPieces[i], startNode);
                     // EMIT SIGNALS
                     p.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
                     node.currPieces[i].player.EmitSignal(BasePlayerController.SignalName.PieceHit);
+                    // MOVE PIECE
+                    p.gameController.boardController.MovePiece(node.currPieces[i], startNode);
                 }
             }
 

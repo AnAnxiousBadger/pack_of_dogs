@@ -23,7 +23,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
         p.EmitSignal(BasePlayerController.SignalName.DiceRolled, 0);
         // SET SKIP IF CANNOT MOVE
         if(roll == 0){
-            p.gameController.uiController.SetSkipButtonActivity(true);
+            p.gameController.boardElementsController.skipButton.IsActive = true;
         }
         else{
             int noMovePicesCount = 0;
@@ -40,8 +40,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
                 }
             }
             if(noMovePicesCount == piecesInGameCount){
-                p.gameController.uiController.SetSkipButtonActivity(true);
-                p.turnStates.Remove(p.selectNodeState);
+                p.gameController.boardElementsController.skipButton.IsActive = true;
             }
         }
 

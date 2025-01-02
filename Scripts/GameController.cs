@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 public partial class GameController : Node3D
 {
+	// EXPORTS
 	[Export] public Camera3D cam;
 	[Export] public UIController uiController;
 	[Export] public DiceController diceController;
 	[Export] public BoardController boardController;
+	[Export] public BoardElementsController boardElementsController;
 	public List<BasePlayerController> players;
 	private Queue<BasePlayerController> _playersQueue;
 	public BasePlayerController currPlayer;
@@ -22,10 +24,17 @@ public partial class GameController : Node3D
 		get { return _staticBodyUnderMouse; }
 		private set {
 			if(value != _staticBodyUnderMouse){
+				if(_staticBodyUnderMouse is TickableController t1){
+					t1.OnHoverStopped();
+				}
 				_staticBodyUnderMouse = value;
-				HoverTickable();
+				if(value is TickableController t2){
+					t2.OnHover();
+				}
 			}
-			HandleClickTickable();
+			if(value is TickableController t3){
+				boardElementsController.HandleClickTickable(t3, _staticBodyHitPos);
+			}
 		}
 	}
 	public override void _Ready()
@@ -45,6 +54,10 @@ public partial class GameController : Node3D
 		diceController.ReadyDiceController(this);
 		SetUpPlayers();
 		boardController.ReadyBoardController(this);
+		for (int i = 0; i < players.Count; i++)
+		{
+			players[i].piecesToDeliver = 1;
+		}
 	}
 
 	private void SetUpPlayers(){
@@ -65,14 +78,15 @@ public partial class GameController : Node3D
 
     public void SwitchTurn(){
 		currPlayer?.EndTurn();
-		currPlayer = _playersQueue.Dequeue();
-		currPlayer.StartTurn();
-		_playersQueue.Enqueue(currPlayer);
+		if(_playersQueue.Count > 0){
+			currPlayer = _playersQueue.Dequeue();
+			currPlayer.StartTurn();
+			_playersQueue.Enqueue(currPlayer);
 
-		// SET UI
-		ChangeTurnDisplaName();
-		uiController.SetDiceRollLabelUnset();
-		
+			// SET UI
+			ChangeTurnDisplaName();
+			uiController.SetDiceRollLabelUnset();
+		}
 	}
 
 	public void ChangeTurnDisplaName(){
@@ -81,7 +95,7 @@ public partial class GameController : Node3D
 		}
 	}
 
-	public (StaticBody3D, Vector3) CastRayFromMouse(/*CollisionMask mask*/){
+	public (StaticBody3D, Vector3) CastRayFromMouse(){
         StaticBody3D resultBody = null;
 		Vector3 resultCoord = Vector3.Zero;
         Vector2 mouse = GetViewport().GetMousePosition();
@@ -112,20 +126,8 @@ public partial class GameController : Node3D
         return (resultBody, resultCoord);
     }
 
-	private void HandleClickTickable(){
-		if(StaticBodyUnderMouse is TickableController tickable){
-			if(Input.IsActionJustPressed("left_mouse")){
-				tickable.OnPressed(_staticBodyHitPos);
-			}
-			if(Input.IsActionJustReleased("left_mouse")){
-				tickable.OnReleased();
-			}
-		}
-	}
-
-	private void HoverTickable(){
-		if(StaticBodyUnderMouse is TickableController tickable){
-			tickable.OnHover();
-		}
+	public void EndGame(){
+		_playersQueue.Clear();
+		GD.Print("END");
 	}
 }

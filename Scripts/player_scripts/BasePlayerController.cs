@@ -20,12 +20,17 @@ public abstract partial class BasePlayerController : Node
 		}
 	}
     public int roll = -1;
-    private int _score = 0;
-    public int Score {
-        get { return _score; }
+    public int piecesToDeliver = 0;
+    private int _deliveredPieces = 0;
+    public int DeliveredPieces {
+        get { return _deliveredPieces; }
         set { 
-            _score = value;
+            _deliveredPieces = value;
+            EmitSignal(SignalName.PieceDelivered);
             gameController.boardController.SetplayerScoreLabel(this);
+            if(_deliveredPieces == piecesToDeliver){
+                gameController.EndGame();
+            }
         }
     }
     // TURN STATES
@@ -39,12 +44,13 @@ public abstract partial class BasePlayerController : Node
     [Signal] public delegate void PieceHitEventHandler();
     [Signal] public delegate void PieceMovedEventHandler(int dist); // yet to be implemented
     [Signal] public delegate void TurnSkippedEventHandler();
+    [Signal] public delegate void PieceDeliveredEventHandler();
     
     public void ReadyPlayer(){
         if(PlayerName == ""){
 			PlayerName = Name;
 		}
-        _score = 0;
+        _deliveredPieces = 0;
     }
     public void SwitchToNextTurnState(){
         if(_currTurnState != null){

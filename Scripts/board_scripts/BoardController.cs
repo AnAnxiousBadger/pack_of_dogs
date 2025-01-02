@@ -61,6 +61,8 @@ public partial class BoardController : Node3D
         	shape.Disabled = false;
 			// Pair pieces and players
 			pieces[i].player = _gameController.players[pieces[i].playerIndex];
+			// Set winning condition
+			pieces[i].player.piecesToDeliver += 1;
 		}
 	}
 
@@ -108,6 +110,6 @@ public partial class BoardController : Node3D
     }
 
 	public void SetplayerScoreLabel(BasePlayerController player){
-		_endlabels[player.playerIndex].Text = player.Score.ToString();
+		_endlabels[player.playerIndex].Text = player.DeliveredPieces.ToString();
 	}
 }

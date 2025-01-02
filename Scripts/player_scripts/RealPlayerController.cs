@@ -5,7 +5,6 @@ using System.Linq;
 
 public partial class RealPlayerController : BasePlayerController
 {
-    private bool didSelectPiece = false;
     public PieceController selectedPiece = null;
     public List<BoardNodeController> possibeNodes = new();
 
@@ -31,7 +30,7 @@ public partial class RealPlayerController : BasePlayerController
         selectNodeState = new(this);
         turnStates.Add(selectNodeState);
 
-        gameController.uiController.SkipTurnButtonUp += _OnSkipTurn;
+        gameController.boardElementsController.skipButton.OnReleasedTickable += _OnSkipTurn;
 
         SwitchToNextTurnState();
     }
@@ -43,7 +42,7 @@ public partial class RealPlayerController : BasePlayerController
 
     public override void EndTurn()
     {
-        gameController.uiController.SkipTurnButtonUp -= _OnSkipTurn;
+        gameController.boardElementsController.skipButton.OnReleasedTickable -= _OnSkipTurn;
     }
 
     public override void AddTurnToStateQueue()
@@ -55,11 +54,10 @@ public partial class RealPlayerController : BasePlayerController
 
     public void SelectPiece(PieceController piece){
         selectedPiece = piece;
-        didSelectPiece = true;
 
         // Indicate that the piece is selected
         MeshInstance3D m = (MeshInstance3D)piece.GetChild(0);
-        Material mat = GD.Load<Material>("res://Assets/Materials/red_mat.tres");
+        Material mat = GD.Load<Material>("res://Assets/materials/base_color_materials/red_mat.tres");
         m.SetSurfaceOverrideMaterial(0, mat);
 
         // Calculate where it can step
@@ -75,10 +73,10 @@ public partial class RealPlayerController : BasePlayerController
         MeshInstance3D m = (MeshInstance3D)selectedPiece.GetChild(0);
         Material mat;
         if(selectedPiece.playerIndex == 0){
-            mat = GD.Load<Material>("res://Assets/Materials/white_mat.tres");
+            mat = GD.Load<Material>("res://Assets/materials/base_color_materials/white_mat.tres");
         }
         else{
-            mat = GD.Load<Material>("res://Assets/Materials/black_mat.tres");
+            mat = GD.Load<Material>("res://Assets/materials/base_color_materials/black_mat.tres");
         }
         m.SetSurfaceOverrideMaterial(0, mat);
 
@@ -88,12 +86,11 @@ public partial class RealPlayerController : BasePlayerController
         }
 
         selectedPiece = null;
-        didSelectPiece = false;
     }
 
-    private void _OnSkipTurn(){
+    private void _OnSkipTurn(Vector3 hitPos){
         EmitSignal(SignalName.TurnSkipped);
-        gameController.uiController.SetSkipButtonActivity(false);
+        gameController.boardElementsController.skipButton.IsActive = false;
         gameController.SwitchTurn();
     }
 

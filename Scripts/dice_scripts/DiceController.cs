@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 public partial class DiceController : Node
 {
-	// EXPORTS
-	[Export] private TickableController _rollButton;
 	// REFERENCES
 	private GameController _gameController;
 	private UIController _uiController;
 	private Timer _diceRollTimer;
+	private TickableController _rollButton;
 	// OTHER
 	private bool _canRoll = false;
 	public bool CanRoll {
@@ -27,6 +26,7 @@ public partial class DiceController : Node
 		_uiController = gameController.uiController;
 		_diceRollTimer = (Timer) GetNode("dice_roll_timer");
 		_diceRollTimer.Timeout += _OnDiceRollTimerTimeout;
+		_rollButton = _gameController.boardElementsController.rollButton;
 		_rollButton.OnReleasedTickable += _OnRollDiceRollButtonUp;
 	}
 
@@ -53,7 +53,7 @@ public partial class DiceController : Node
 		return roll;
 	}
 
-	private void _OnRollDiceRollButtonUp(){
+	private void _OnRollDiceRollButtonUp(Vector3 hitPos){
 		CanRoll = false;
 		_uiController.SetDiceRollLabelRolling();
 		_diceRollTimer.Start();

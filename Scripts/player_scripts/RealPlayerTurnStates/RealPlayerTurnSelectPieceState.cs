@@ -8,7 +8,9 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
         p.gameController._collisionMask = GameController.CollisionMask.PIECE;
     }
 
-    public override void ExitTurnState(){}
+    public override void ExitTurnState(){
+        
+    }
 
     public override void ProcessTurnState(float delta)
     {

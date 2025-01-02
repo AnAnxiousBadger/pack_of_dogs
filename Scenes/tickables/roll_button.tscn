@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://co1b1b74mbd1y"]
+
+[ext_resource type="Script" path="res://Scripts/tickable_scripts/TickableController.cs" id="1_gbxyn"]
+[ext_resource type="ArrayMesh" uid="uid://6qgfxj5bjf6m" path="res://Assets/meshes/roll_button_mesh.res" id="2_4i51b"]
+[ext_resource type="Script" path="res://Scripts/tickable_scripts/TickableParticleSystemPoolController.cs" id="3_fhfmp"]
+[ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/button_tickable_animations.res" id="3_jy5s7"]
+[ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/particles/lime_chipped_particles.tscn" id="4_gkqqa"]
+[ext_resource type="PackedScene" uid="uid://c12ldrm2t1xij" path="res://Scenes/particles/sand_dust_ring_particles2.tscn" id="6_euhl8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4t8j"]
+size = Vector3(5.5332, 1.8349, 2.51801)
+
+[node name="tickable" type="StaticBody3D"]
+collision_layer = 4
+script = ExtResource("1_gbxyn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00708008, 0.00723267, -0.00717163)
+shape = SubResource("BoxShape3D_x4t8j")
+
+[node name="tickable_animated" type="Node3D" parent="."]
+
+[node name="roll_button_mesh" type="MeshInstance3D" parent="tickable_animated"]
+mesh = ExtResource("2_4i51b")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"button_tickable_animations": ExtResource("3_jy5s7")
+}
+
+[node name="particle_pool" type="Node3D" parent="."]
+script = ExtResource("3_fhfmp")
+
+[node name="lime_chipped_particles" parent="particle_pool" instance=ExtResource("4_gkqqa")]
+IsPositionDependent = true
+
+[node name="sand_dust_ring_particles" parent="particle_pool" instance=ExtResource("6_euhl8")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.8, 0)
+EmittingSignal = 2

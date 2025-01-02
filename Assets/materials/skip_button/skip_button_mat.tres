@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://2kkdxwljsdy1"]
+
+[ext_resource type="Texture2D" uid="uid://bfysd1l55ehqr" path="res://Assets/materials/skip_button/skip_button_diffuse.png" id="1_v6kdl"]
+[ext_resource type="Texture2D" uid="uid://c8xsljfi4chfv" path="res://Assets/materials/skip_button/skip_button_normal.png" id="2_dpt1b"]
+[ext_resource type="Texture2D" uid="uid://c21yjwc170mou" path="res://Assets/materials/skip_button/skip_button_roughness.png" id="3_7p8fv"]
+
+[resource]
+albedo_texture = ExtResource("1_v6kdl")
+roughness_texture = ExtResource("3_7p8fv")
+normal_enabled = true
+normal_texture = ExtResource("2_dpt1b")
