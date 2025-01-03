@@ -3,6 +3,7 @@ using Godot;
 
 public partial class BasicNodeController : BoardNodeController
 {
+    Node3D hihglight;
     public override void DoOnLeaveNodeAction(PieceController piece){
         EmitSignal(SignalName.Onleave, piece);
     }
@@ -14,13 +15,14 @@ public partial class BasicNodeController : BoardNodeController
 
     public override void Highlight()
     {
-        Material mat = GD.Load<Material>("res://Assets/materials/base_color_materials/orange_mat.tres");
-        _mesh.SetSurfaceOverrideMaterial(0, mat);
+        PackedScene highLightScene = GD.Load<PackedScene>("res://Scenes/highlight_node.tscn");
+        hihglight = highLightScene.Instantiate() as Node3D;
+        AddChild(hihglight);
+        hihglight.Position = new Vector3(0f, 0.51f, 0f);
     }
 
     public override void RemoveHighlight()
     {
-        Material mat = GD.Load<Material>("res://Assets/materials/base_color_materials/yellow_mat.tres");
-        _mesh.SetSurfaceOverrideMaterial(0, mat);
+        hihglight?.QueueFree();
     }
 }

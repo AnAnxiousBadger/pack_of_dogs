@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cg126w5yurcb5" path="res://Assets/materials/sand_diffuse.png" id="1_p6u6v"]
 [ext_resource type="Texture2D" uid="uid://l52y1w47yn2v" path="res://Assets/materials/sand_normal.png" id="2_74nsu"]
 
+
 [resource]
 albedo_texture = ExtResource("1_p6u6v")
 roughness = 0.9

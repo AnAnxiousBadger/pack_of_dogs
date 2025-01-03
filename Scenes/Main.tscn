@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/tickables/skip_button.tscn" id="10_mffvp"]
 [ext_resource type="Script" path="res://Scripts/UIController.cs" id="13_ar2w6"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_v8fvy"]
+material = ExtResource("10_5l0i8")
+size = Vector2(20, 20)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8bys"]
 
 [sub_resource type="Sky" id="Sky_8x2vi"]
@@ -23,10 +27,6 @@ tonemap_mode = 2
 ssr_enabled = true
 ssao_enabled = true
 sdfgi_enabled = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_v8fvy"]
-material = ExtResource("10_5l0i8")
-size = Vector2(20, 20)
 
 [node name="ROOT" type="Node3D"]
 
@@ -68,6 +68,11 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777
 
 [node name="skip_button" parent="board_elements" instance=ExtResource("10_mffvp")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
+
+[node name="Floor" type="MeshInstance3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
+mesh = SubResource("QuadMesh_v8fvy")
+skeleton = NodePath("../..")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -147,7 +152,3 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "X's turn"
 horizontal_alignment = 1
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
-mesh = SubResource("QuadMesh_v8fvy")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dby173sn3x80l"]
+
+[ext_resource type="Shader" uid="uid://d3vrtlueo5ac2" path="res://Assets/materials/shaders/highlight_node_shader/highlight_node_shader.tres" id="1_qy0e2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kx5h1"]
+render_priority = 0
+shader = ExtResource("1_qy0e2")
+shader_parameter/noise_01_rotation_speed = 1.0
+shader_parameter/noise_02_rotation_speed2 = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_s63kg"]
+
+[node name="highlight_node" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_kx5h1")
+mesh = SubResource("QuadMesh_s63kg")

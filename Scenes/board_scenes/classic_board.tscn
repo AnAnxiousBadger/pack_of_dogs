@@ -1,19 +1,28 @@
-[gd_scene load_steps=16 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=24 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
 [ext_resource type="Resource" uid="uid://wmjjs4j0t5rd" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
 [ext_resource type="PackedScene" uid="uid://cljv71f0hx7ch" path="res://Scenes/board_scenes/start_node.tscn" id="3_gcumj"]
+[ext_resource type="ArrayMesh" uid="uid://cerdvqn70s3ge" path="res://Assets/meshes/node_mesh.res" id="5_xmb13"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/EndNodeController.cs" id="5_xvup1"]
 [ext_resource type="Material" uid="uid://bhh6tft7b0va2" path="res://Assets/materials/base_color_materials/white_mat.tres" id="6_ij0xb"]
 [ext_resource type="Material" uid="uid://cgw63u1viedu" path="res://Assets/materials/base_color_materials/black_mat.tres" id="7_5itki"]
+[ext_resource type="Material" uid="uid://cn1ghjaacflew" path="res://Assets/materials/node_mats/basic_node/basic_node_mat.tres" id="8_7ea7m"]
 [ext_resource type="PackedScene" uid="uid://dlohrab2t6ae5" path="res://Scenes/board_scenes/double_turn_modifier.tscn" id="8_p8fm0"]
 [ext_resource type="PackedScene" uid="uid://dr0xn4cbjhgst" path="res://Scenes/board_scenes/basic_node.tscn" id="8_pdjfc"]
 [ext_resource type="PackedScene" uid="uid://cg4abgvd0qv5a" path="res://Scenes/board_scenes/protected_node_modifier.tscn" id="9_bs3rs"]
+[ext_resource type="Material" uid="uid://bev50o78b2pd0" path="res://Assets/materials/node_mats/rosette_01/rosette_01_node_mat.tres" id="9_yuum3"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/PieceController.cs" id="11_h4toi"]
+[ext_resource type="Material" uid="uid://dcvcc2tis8ir1" path="res://Assets/materials/node_mats/rosette_02/rosette_02_node_mat.tres" id="11_jplgx"]
+[ext_resource type="Material" uid="uid://bhhraovyhl4od" path="res://Assets/materials/node_mats/rosette_03/rosette_03_node_mat.tres" id="12_vqsbo"]
+[ext_resource type="Material" uid="uid://cn1266qsv883q" path="res://Assets/materials/node_mats/rosette_04/rosette_04_node_mat.tres" id="14_ofun2"]
+[ext_resource type="Material" uid="uid://b7rfq4ard3w03" path="res://Assets/materials/node_mats/rosette_05/rosette_05_node_mat.tres" id="15_r2kyl"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
+[sub_resource type="SphereMesh" id="SphereMesh_lvjsa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7yvu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_n7rt4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_piin5"]
 
@@ -48,9 +57,8 @@ playerIndex = 0
 inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/white_end_node"]
-mesh = SubResource("BoxMesh_u5ls1")
+mesh = SubResource("SphereMesh_lvjsa")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("6_ij0xb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="node_container/white_end_node"]
 shape = SubResource("BoxShape3D_t7yvu")
@@ -68,7 +76,7 @@ playerIndex = 1
 inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/black_end_node"]
-mesh = SubResource("BoxMesh_u5ls1")
+mesh = SubResource("SphereMesh_n7rt4")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("7_5itki")
 
@@ -85,20 +93,36 @@ shape = SubResource("BoxShape3D_piin5")
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_02")]
 
+[node name="node_mesh" parent="node_container/board_node_01" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_02" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_03")]
+
+[node name="node_mesh" parent="node_container/board_node_02" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_03" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_04")]
 
+[node name="node_mesh" parent="node_container/board_node_03" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_04" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_09")]
+
+[node name="node_mesh" parent="node_container/board_node_04" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("9_yuum3")
 
 [node name="double_turn_modifier" parent="node_container/board_node_04/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
@@ -107,20 +131,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_06")]
 
+[node name="node_mesh" parent="node_container/board_node_05" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_06" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_07")]
+
+[node name="node_mesh" parent="node_container/board_node_06" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_07" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_08")]
 
+[node name="node_mesh" parent="node_container/board_node_07" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_08" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_09")]
+
+[node name="node_mesh" parent="node_container/board_node_08" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("11_jplgx")
 
 [node name="double_turn_modifier" parent="node_container/board_node_08/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
@@ -128,17 +168,33 @@ outNeighbours = [NodePath("../board_node_09")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 outNeighbours = [NodePath("../board_node_10")]
 
+[node name="node_mesh" parent="node_container/board_node_09" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_10" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 outNeighbours = [NodePath("../board_node_11")]
+
+[node name="node_mesh" parent="node_container/board_node_10" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_11" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 outNeighbours = [NodePath("../board_node_12")]
 
+[node name="node_mesh" parent="node_container/board_node_11" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_12" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 outNeighbours = [NodePath("../board_node_13")]
+
+[node name="node_mesh" parent="node_container/board_node_12" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("12_vqsbo")
 
 [node name="double_turn_modifier" parent="node_container/board_node_12/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
@@ -148,27 +204,51 @@ outNeighbours = [NodePath("../board_node_13")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 outNeighbours = [NodePath("../board_node_14")]
 
+[node name="node_mesh" parent="node_container/board_node_13" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_14" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 outNeighbours = [NodePath("../board_node_15")]
+
+[node name="node_mesh" parent="node_container/board_node_14" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_15" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 outNeighbours = [NodePath("../board_node_16")]
 
+[node name="node_mesh" parent="node_container/board_node_15" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_16" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 outNeighbours = [NodePath("../board_node_17"), NodePath("../board_node_19")]
+
+[node name="node_mesh" parent="node_container/board_node_16" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_17" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_18")]
 
+[node name="node_mesh" parent="node_container/board_node_17" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_18" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 playerIndex = 0
 outNeighbours = [NodePath("../white_end_node")]
+
+[node name="node_mesh" parent="node_container/board_node_18" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("14_ofun2")
 
 [node name="double_turn_modifier" parent="node_container/board_node_18/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
@@ -177,10 +257,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_20")]
 
+[node name="node_mesh" parent="node_container/board_node_19" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("8_7ea7m")
+
 [node name="board_node_20" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 playerIndex = 1
 outNeighbours = [NodePath("../black_end_node")]
+
+[node name="node_mesh" parent="node_container/board_node_20" index="0"]
+mesh = ExtResource("5_xmb13")
+surface_material_override/0 = ExtResource("15_r2kyl")
 
 [node name="double_turn_modifier" parent="node_container/board_node_20/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 

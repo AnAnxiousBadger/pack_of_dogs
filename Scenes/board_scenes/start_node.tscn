@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/StartNodeController.cs" id="1_dbbs5"]
 [ext_resource type="Material" uid="uid://boiisfmtv7ugo" path="res://Assets/materials/base_color_materials/red_mat.tres" id="2_aynoi"]
 
+
 [sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
 
 [node name="white_start_node" type="StaticBody3D" node_paths=PackedStringArray("outNeighbours")]

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c8xsljfi4chfv" path="res://Assets/materials/skip_button/skip_button_normal.png" id="2_dpt1b"]
 [ext_resource type="Texture2D" uid="uid://c21yjwc170mou" path="res://Assets/materials/skip_button/skip_button_roughness.png" id="3_7p8fv"]
 
+
 [resource]
 albedo_texture = ExtResource("1_v6kdl")
 roughness_texture = ExtResource("3_7p8fv")

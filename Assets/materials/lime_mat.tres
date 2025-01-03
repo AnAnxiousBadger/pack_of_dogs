@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://babbjaxygjrls" path="res://Assets/materials/lime_normal.png" id="2_yevqm"]
 
 
+
 [resource]
 albedo_texture = ExtResource("1_aoqa1")
 normal_enabled = true

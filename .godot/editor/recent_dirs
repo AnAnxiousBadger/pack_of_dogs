@@ -1,7 +1,14 @@
+res://Assets/materials/node_mats/rosette_05
+res://Assets/materials/node_mats/rosette_04
+res://Assets/materials/node_mats/rosette_03
+res://Assets/materials/node_mats/rosette_02
+res://Assets/Materials/shaders/highlight_node_shader
+res://Scenes
+res://Assets/meshes
+res://Assets/Materials/shaders
+res://Assets/Materials/node_mats
 res://Scenes/particles
 res://Assets
-res://Assets/meshes
 res://Assets/Materials
 res://Scripts
-res://Scenes
 res://Scenes/Particles

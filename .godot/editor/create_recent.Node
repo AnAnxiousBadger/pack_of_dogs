@@ -1,8 +1,8 @@
+MeshInstance3D
 Node3D
 GPUParticles3D
 AnimationTree
 AnimationPlayer
-MeshInstance3D
 CollisionShape3D
 StaticBody3D
 Node

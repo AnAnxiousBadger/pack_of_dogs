@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cn1266qsv883q"]
+
+[ext_resource type="Texture2D" uid="uid://btu1ci6lwp8i7" path="res://Assets/materials/node_mats/rosette_04/rosette_04_diffuse.png" id="1_65c6g"]
+[ext_resource type="Texture2D" uid="uid://13i1lmir6afp" path="res://Assets/materials/node_mats/rosette_04/rosette_04_normal.png" id="2_jyndt"]
+[ext_resource type="Texture2D" uid="uid://pp64jyccpwlc" path="res://Assets/materials/node_mats/rosette_04/rosette_04_roughness.png" id="3_fwcj8"]
+
+[resource]
+albedo_texture = ExtResource("1_65c6g")
+roughness_texture = ExtResource("3_fwcj8")
+normal_enabled = true
+normal_texture = ExtResource("2_jyndt")

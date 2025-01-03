@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://garou7nnw0cp" path="res://Assets/materials/roll_button/roll_button_normal.png" id="2_y2o2d"]
 [ext_resource type="Texture2D" uid="uid://wld03yf48eo0" path="res://Assets/materials/roll_button/roll_button_roughness.png" id="3_bpcfl"]
 
+
 [resource]
 specular_mode = 2
 albedo_texture = ExtResource("1_4n876")
