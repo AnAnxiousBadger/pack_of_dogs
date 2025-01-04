@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlohrab2t6ae5"]
+[gd_scene load_steps=3 format=3 uid="uid://dlohrab2t6ae5"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_node_modifiers/DoubleTurnModifier.cs" id="1_ge7fl"]
+[ext_resource type="PackedScene" uid="uid://bo6k7xqvn15aj" path="res://Scenes/board_scenes/double_turn_visual_effect.tscn" id="2_rponm"]
 
 [node name="double_turn_modifier" type="Node3D"]
 script = ExtResource("1_ge7fl")
+_visualEffect = ExtResource("2_rponm")

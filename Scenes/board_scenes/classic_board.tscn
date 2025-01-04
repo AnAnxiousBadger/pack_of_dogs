@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=25 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
 [ext_resource type="Resource" uid="uid://wmjjs4j0t5rd" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
 [ext_resource type="PackedScene" uid="uid://cljv71f0hx7ch" path="res://Scenes/board_scenes/start_node.tscn" id="3_gcumj"]
 [ext_resource type="ArrayMesh" uid="uid://cerdvqn70s3ge" path="res://Assets/meshes/node_mesh.res" id="5_xmb13"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/EndNodeController.cs" id="5_xvup1"]
-[ext_resource type="Material" uid="uid://bhh6tft7b0va2" path="res://Assets/materials/base_color_materials/white_mat.tres" id="6_ij0xb"]
 [ext_resource type="Material" uid="uid://cgw63u1viedu" path="res://Assets/materials/base_color_materials/black_mat.tres" id="7_5itki"]
 [ext_resource type="Material" uid="uid://cn1ghjaacflew" path="res://Assets/materials/node_mats/basic_node/basic_node_mat.tres" id="8_7ea7m"]
 [ext_resource type="PackedScene" uid="uid://dlohrab2t6ae5" path="res://Scenes/board_scenes/double_turn_modifier.tscn" id="8_p8fm0"]
@@ -17,6 +16,9 @@
 [ext_resource type="Material" uid="uid://bhhraovyhl4od" path="res://Assets/materials/node_mats/rosette_03/rosette_03_node_mat.tres" id="12_vqsbo"]
 [ext_resource type="Material" uid="uid://cn1266qsv883q" path="res://Assets/materials/node_mats/rosette_04/rosette_04_node_mat.tres" id="14_ofun2"]
 [ext_resource type="Material" uid="uid://b7rfq4ard3w03" path="res://Assets/materials/node_mats/rosette_05/rosette_05_node_mat.tres" id="15_r2kyl"]
+[ext_resource type="ArrayMesh" uid="uid://vvc44mosg6ek" path="res://Assets/meshes/piece_mesh.res" id="17_f0v5b"]
+[ext_resource type="Material" uid="uid://dlndqr8mug10x" path="res://Assets/materials/piece_mats/piece_light_mat.tres" id="18_883nr"]
+[ext_resource type="Material" uid="uid://di3ygheini6vr" path="res://Assets/materials/piece_mats/piece_dark_mat.tres" id="19_uth2o"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_lvjsa"]
 
@@ -25,11 +27,6 @@
 [sub_resource type="SphereMesh" id="SphereMesh_n7rt4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_piin5"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_nod4v"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.2
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tm4u7"]
 height = 0.2
@@ -281,8 +278,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_01"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_01"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -293,8 +290,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_02"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_02"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -305,8 +302,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_03"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_03"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -317,8 +314,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_04"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_04"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -329,8 +326,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_05"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_05"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -341,8 +338,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_06"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_06"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -353,8 +350,8 @@ collision_layer = 2
 script = ExtResource("11_h4toi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_07"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("6_ij0xb")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("18_883nr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_07"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -366,8 +363,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_08"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_08"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -379,8 +376,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_09"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_09"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -392,8 +389,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_10"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_10"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -405,8 +402,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_11"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_11"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -418,8 +415,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_12"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_12"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -431,8 +428,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_13"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_13"]
 shape = SubResource("CylinderShape3D_tm4u7")
@@ -444,8 +441,8 @@ script = ExtResource("11_h4toi")
 playerIndex = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pieces_container/piece_14"]
-mesh = SubResource("CylinderMesh_nod4v")
-surface_material_override/0 = ExtResource("7_5itki")
+mesh = ExtResource("17_f0v5b")
+surface_material_override/0 = ExtResource("19_uth2o")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_14"]
 shape = SubResource("CylinderShape3D_tm4u7")

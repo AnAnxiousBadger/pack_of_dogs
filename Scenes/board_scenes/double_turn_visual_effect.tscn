@@ -1,0 +1,285 @@
+[gd_scene load_steps=27 format=3 uid="uid://bo6k7xqvn15aj"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/BoardNodeVisualEffectController.cs" id="1_lap1p"]
+[ext_resource type="ArrayMesh" uid="uid://pudmqpj15qgt" path="res://Assets/meshes/rosette_flower_mesh.res" id="2_hqvd7"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/rosette_mesh_shader.tres" id="3_2da2p"]
+[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/rosette_mesh_gradient_texture.tres" id="4_gn2o5"]
+[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/rosette_node_glow_shader.tres" id="5_3gp3p"]
+[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/rosette_glow_shader_noise_01.tres" id="6_ir01n"]
+[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/rosette_glow_shader_noise_02.tres" id="7_f2sj0"]
+[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/rosette_effect_particle_texture.png" id="8_hg483"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djm85"]
+render_priority = 0
+shader = ExtResource("3_2da2p")
+shader_parameter/rosette_diffuse = ExtResource("4_gn2o5")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wrk15"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qr0k"]
+render_priority = 0
+shader = ExtResource("5_3gp3p")
+shader_parameter/noise_rotation_speed = 1.0
+shader_parameter/shader_alpha = 1.0
+shader_parameter/noise_01 = ExtResource("6_ir01n")
+shader_parameter/noise_02 = ExtResource("7_f2sj0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lpfj"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("8_hg483")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_yhf8k"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.261484, 1), 0.0, 0.0, 0, 0, Vector2(0.678445, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vltca"]
+curve = SubResource("Curve_yhf8k")
+
+[sub_resource type="Curve" id="Curve_i3q5d"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1o5ct"]
+curve = SubResource("Curve_i3q5d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4ltm"]
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 5.0
+tangential_accel_max = 5.0
+damping_min = 0.3
+damping_max = 0.3
+scale_curve = SubResource("CurveTexture_1o5ct")
+color = Color(3, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_vltca")
+
+[sub_resource type="QuadMesh" id="QuadMesh_46kqt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq1ar"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_jef8x"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250883, 1), 0.0, 0.0, 0, 0, Vector2(0.742049, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_gxgl4"]
+curve = SubResource("Curve_jef8x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_muxio"]
+particle_flag_align_y = true
+angle_min = 1.07288e-05
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -5.0
+tangential_accel_max = -5.0
+damping_min = 3.0
+damping_max = 3.0
+scale_min = 0.02
+scale_max = 0.04
+color = Color(3, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_gxgl4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_y1uu0"]
+
+[sub_resource type="Animation" id="Animation_kj6aq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rosette_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rosette_mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tab_cuneiform_particlerm_:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("light_particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bouh7"]
+resource_name = "rosette_effect_animation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rosette_mesh:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.397311, 0), Vector3(0, 0.577, 0), Vector3(0, 0.397311, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rosette_mesh:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tab_cuneiform_particlerm_:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("light_particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EndEffect"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ah4u"]
+_data = {
+"RESET": SubResource("Animation_kj6aq"),
+"rosette_effect_animation": SubResource("Animation_bouh7")
+}
+
+[node name="double_turn_visual_effect" type="Node3D"]
+script = ExtResource("1_lap1p")
+
+[node name="rosette_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = ExtResource("2_hqvd7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_djm85")
+
+[node name="node_glow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.503465, 0)
+mesh = SubResource("QuadMesh_wrk15")
+surface_material_override/0 = SubResource("ShaderMaterial_0qr0k")
+
+[node name="tab_cuneiform_particlerm_" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543442, 0)
+material_override = SubResource("StandardMaterial3D_6lpfj")
+emitting = false
+amount = 10
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_i4ltm")
+draw_pass_1 = SubResource("QuadMesh_46kqt")
+
+[node name="light_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539729, 0)
+material_override = SubResource("StandardMaterial3D_sq1ar")
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_muxio")
+draw_pass_1 = SubResource("QuadMesh_y1uu0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7ah4u")
+}

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dlndqr8mug10x"]
+
+[ext_resource type="Texture2D" uid="uid://djgq361nxmtwa" path="res://Assets/materials/piece_mats/piece_light_diffuse.png" id="1_xviid"]
+[ext_resource type="Texture2D" uid="uid://cygq64x6vcn5h" path="res://Assets/materials/piece_mats/piece_light_normal.png" id="2_o07uc"]
+[ext_resource type="Texture2D" uid="uid://bber6rrcwusfh" path="res://Assets/materials/piece_mats/piece_light_roughness.png" id="3_wrcv3"]
+
+[resource]
+albedo_texture = ExtResource("1_xviid")
+roughness_texture = ExtResource("3_wrcv3")
+normal_enabled = true
+normal_texture = ExtResource("2_o07uc")
