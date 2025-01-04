@@ -83,7 +83,7 @@ texture = ExtResource("2_n8f7o")
 operator = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_hrbku"]
-size = Vector2(1686.01, 778)
+size = Vector2(1686.01, 881)
 title = "Rotate UV"
 attached_nodes = PackedInt32Array(10, 25, 27, 15, 16, 24, 23, 21, 22, 19, 20, 18, 17, 11)
 
