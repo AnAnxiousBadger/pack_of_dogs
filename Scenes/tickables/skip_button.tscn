@@ -1,19 +1,30 @@
 [gd_scene load_steps=8 format=3 uid="uid://sq6lib15ysi4"]
 
-[ext_resource type="Script" path="res://Scripts/tickable_scripts/TickableController.cs" id="1_68th2"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableController.cs" id="1_68th2"]
 [ext_resource type="ArrayMesh" uid="uid://gvwb3yveeogx" path="res://Assets/meshes/skip_button_mesh.res" id="2_ar8bw"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableEffect.cs" id="2_r1ags"]
 [ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/button_tickable_animations.res" id="3_0sha5"]
-[ext_resource type="Script" path="res://Scripts/tickable_scripts/TickableParticleSystemPoolController.cs" id="3_qnfx1"]
-[ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/particles/lime_chipped_particles.tscn" id="5_ms6jp"]
-[ext_resource type="PackedScene" uid="uid://c12ldrm2t1xij" path="res://Scenes/particles/sand_dust_ring_particles2.tscn" id="6_y601i"]
+
+[sub_resource type="Resource" id="Resource_33wbw"]
+script = ExtResource("2_r1ags")
+signaltype = 0
+effectName = "chipped_lime_visual_effect"
+onClickPosition = true
+
+[sub_resource type="Resource" id="Resource_jcqd0"]
+script = ExtResource("2_r1ags")
+signaltype = 1
+effectName = "sand_dust_ring_visual_effect"
+onClickPosition = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r45px"]
 size = Vector3(4.25732, 1.78229, 1.74329)
 
-[node name="skip_button" type="StaticBody3D"]
+[node name="skip_button_tickable" type="StaticBody3D"]
 collision_layer = 4
 script = ExtResource("1_68th2")
 _isActive = false
+_effects = Array[Object]([SubResource("Resource_33wbw"), SubResource("Resource_jcqd0")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00610352, -0.00137329, -0.00775146)
@@ -29,14 +40,3 @@ skeleton = NodePath("")
 libraries = {
 "button_tickable_animations": ExtResource("3_0sha5")
 }
-
-[node name="particle_pool" type="Node3D" parent="."]
-script = ExtResource("3_qnfx1")
-
-[node name="lime_particles" parent="particle_pool" instance=ExtResource("5_ms6jp")]
-EmittingSignal = 1
-IsPositionDependent = true
-
-[node name="sand_dust_ring_particles" parent="particle_pool" instance=ExtResource("6_y601i")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, -0.8, 0)
-EmittingSignal = 2

@@ -1,19 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=18 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_m4lkn"]
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/VisualEffectPoolController.cs" id="2_2no1u"]
+[ext_resource type="PackedScene" uid="uid://bo6k7xqvn15aj" path="res://Scenes/visual_effects/double_turn_visual_effect.tscn" id="2_08enj"]
 [ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_k6vlu"]
+[ext_resource type="PackedScene" uid="uid://dby173sn3x80l" path="res://Scenes/visual_effects/highlight_node_visual_effect.tscn" id="3_3vpxh"]
+[ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/visual_effects/chipped_lime_visual_effect.tscn" id="5_bg7ve"]
 [ext_resource type="PackedScene" uid="uid://cckbt066gn116" path="res://Scenes/board_scenes/classic_board.tscn" id="5_bteu6"]
-[ext_resource type="Script" path="res://Scripts/tickable_scripts/BoardElementsController.cs" id="6_2dr7h"]
-[ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/tickables/roll_button.tscn" id="7_pnvo5"]
-[ext_resource type="Material" uid="uid://1pquyv7ntoj2" path="res://Assets/materials/sand_mat.tres" id="10_5l0i8"]
-[ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/tickables/skip_button.tscn" id="10_mffvp"]
+[ext_resource type="PackedScene" uid="uid://c12ldrm2t1xij" path="res://Scenes/visual_effects/sand_dust_ring_visual_effect.tscn" id="6_mxrkg"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/EndOfGameUIController.cs" id="12_c0w3o"]
+[ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_01.tscn" id="13_5bfqh"]
 [ext_resource type="Script" path="res://Scripts/UIController.cs" id="13_ar2w6"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_v8fvy"]
-material = ExtResource("10_5l0i8")
-size = Vector2(20, 20)
+[ext_resource type="PackedScene" uid="uid://bw0g17cm7tld6" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_display.tscn" id="14_g8v77"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8bys"]
 
@@ -30,13 +30,26 @@ sdfgi_enabled = true
 
 [node name="ROOT" type="Node3D"]
 
-[node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController", "boardElementsController")]
+[node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController", "visualEffectPool")]
 script = ExtResource("1_m4lkn")
 cam = NodePath("../Camera3D")
-uiController = NodePath("../UI_controller")
+uiController = NodePath("../UI_root")
 diceController = NodePath("../dice_controller")
 boardController = NodePath("../classic_board")
-boardElementsController = NodePath("../board_elements")
+visualEffectPool = NodePath("../visual_effect_pool")
+
+[node name="visual_effect_pool" type="Node3D" parent="."]
+script = ExtResource("2_2no1u")
+
+[node name="double_turn_visual_effect" parent="visual_effect_pool" instance=ExtResource("2_08enj")]
+visible = false
+
+[node name="highlight_node_visual_effect" parent="visual_effect_pool" instance=ExtResource("3_3vpxh")]
+visible = false
+
+[node name="chipped_lime_visual_effect" parent="visual_effect_pool" instance=ExtResource("5_bg7ve")]
+
+[node name="sand_dust_ring_visual_effect" parent="visual_effect_pool" instance=ExtResource("6_mxrkg")]
 
 [node name="players_container" type="Node" parent="."]
 
@@ -56,28 +69,11 @@ wait_time = 0.05
 one_shot = true
 
 [node name="classic_board" parent="." instance=ExtResource("5_bteu6")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0, 0)
-
-[node name="board_elements" type="Node3D" parent="." node_paths=PackedStringArray("rollButton", "skipButton")]
-script = ExtResource("6_2dr7h")
-rollButton = NodePath("roll_button")
-skipButton = NodePath("skip_button")
-
-[node name="roll_button" parent="board_elements" instance=ExtResource("7_pnvo5")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777)
-
-[node name="skip_button" parent="board_elements" instance=ExtResource("10_mffvp")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
-
-[node name="Floor" type="MeshInstance3D" parent="board_elements"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
-mesh = SubResource("QuadMesh_v8fvy")
-skeleton = NodePath("../..")
 
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(0.766045, -0.447324, 0.461603, 0, 0.718126, 0.695913, -0.642788, -0.5331, 0.550117, 0, 1.89, 0)
+transform = Transform3D(-0.642788, -0.5331, 0.550117, 0, 0.718126, 0.695913, -0.766045, 0.447324, -0.461603, 0, 1.89, 0)
 light_color = Color(1, 1, 0.85098, 1)
 shadow_enabled = true
 shadow_bias = 0.0
@@ -91,21 +87,18 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23,
 fov = 20.0
 size = 9.209
 
-[node name="UI_controller" type="CanvasLayer" parent="." node_paths=PackedStringArray("_diceRollLabel", "_skipTurnButton", "_turnLabel")]
-script = ExtResource("13_ar2w6")
-_diceRollLabel = NodePath("UI_root/dice_roll_container/roll_label")
-_skipTurnButton = NodePath("UI_root/dice_roll_container/HBoxContainer/skip_button")
-_turnLabel = NodePath("UI_root/turn_container/turn_label")
-
-[node name="UI_root" type="Control" parent="UI_controller"]
+[node name="UI_root" type="Control" parent="." node_paths=PackedStringArray("_diceRollLabel", "_turnLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("13_ar2w6")
+_diceRollLabel = NodePath("dice_roll_container/roll_label")
+_turnLabel = NodePath("turn_container/turn_label")
 
-[node name="dice_roll_container" type="VBoxContainer" parent="UI_controller/UI_root"]
+[node name="dice_roll_container" type="VBoxContainer" parent="UI_root"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -119,25 +112,13 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 2
 
-[node name="roll_label" type="Label" parent="UI_controller/UI_root/dice_roll_container"]
+[node name="roll_label" type="Label" parent="UI_root/dice_roll_container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "Roll!"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI_controller/UI_root/dice_roll_container"]
-layout_mode = 2
-alignment = 1
-
-[node name="roll_button" type="TextureButton" parent="UI_controller/UI_root/dice_roll_container/HBoxContainer"]
-layout_mode = 2
-disabled = true
-
-[node name="skip_button" type="TextureButton" parent="UI_controller/UI_root/dice_roll_container/HBoxContainer"]
-layout_mode = 2
-disabled = true
-
-[node name="turn_container" type="VBoxContainer" parent="UI_controller/UI_root"]
+[node name="turn_container" type="VBoxContainer" parent="UI_root"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -147,8 +128,169 @@ offset_right = 150.0
 offset_bottom = 130.0
 grow_horizontal = 2
 
-[node name="turn_label" type="Label" parent="UI_controller/UI_root/turn_container"]
+[node name="turn_label" type="Label" parent="UI_root/turn_container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "X's turn"
 horizontal_alignment = 1
+
+[node name="end_of_game_UI" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_player", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_c0w3o")
+_player = NodePath("../../players_container/player_01")
+_playerNameContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/player_names_container")
+_piecesDeliveredContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/pieces_delivered_container")
+_rollStatsContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/roll_stats_container")
+_distanceMovedContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/distance_travelled")
+_enemyPiecesHitContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/enemies_pieces_hit")
+_piecesHitContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/own_pieces_hit")
+_turnsSkippedContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/turns_skipped")
+_luckyScoreContainer = NodePath("MarginContainer/ScrollContainer/VBoxContainer/lucky_score")
+_labelType01 = ExtResource("13_5bfqh")
+_rollStatsDisplay = ExtResource("14_g8v77")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI_root/end_of_game_UI/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "END OF GAME SUMMARY"
+horizontal_alignment = 1
+
+[node name="player_names_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="player" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/player_names_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="prophecy" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/prophecy"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Prophecy"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/prophecy"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "The dice favored you, then the serpent delayed your path, but your resolve carried you forward. Enki watches over you."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/prophecy"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "The dice favored you, then the serpent delayed your path, but your resolve carried you forward. Enki watches over you."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="pieces_delivered_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="pieces_delivered" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/pieces_delivered_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pieces delivered"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="roll_stats_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/roll_stats_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Roll statistics"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="distance_travelled" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/distance_travelled"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Distance pieces moved"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemies_pieces_hit" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/enemies_pieces_hit"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enemy pieces hit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="own_pieces_hit" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/own_pieces_hit"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Own pieces hit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="turns_skipped" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/turns_skipped"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Turns skipped"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="lucky_score" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/ScrollContainer/VBoxContainer/lucky_score"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lucky score"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
 {
@@ -14,6 +15,7 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
     {
         // HANDLE DESELECT
         if((Input.IsActionJustReleased("right_mouse") || Input.IsActionJustReleased("escape")) && p.selectedPiece != null){
+            p.selectedPiece.RemoveHighlight();
             p.DeselectPiece();
             p.SwitchToPreviousTurnState();
         }
@@ -24,20 +26,22 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
 
         if(body is BoardNodeController node && p.possibeNodes.Contains(node)){
             // KICK OTHER PLAYER'S PIECES OUT
-            for (int i = 0; i < node.currPieces.Count; i++)
-            {
-                if(node.currPieces[i].player != p){
-                    StartNodeController startNode = p.gameController.boardController.GetStartNode(node.currPieces[i].player);
+            List<PieceController> enemyPiecesOnNode = node.GetEnemyPieces(p);
+            if(enemyPiecesOnNode.Count > 0){
+                for (int i = 0; i < enemyPiecesOnNode.Count; i++)
+                {
+                    StartNodeController startNode = enemyPiecesOnNode[i].player.gameController.boardController.GetStartNode(enemyPiecesOnNode[i].player);
                     // EMIT SIGNALS
                     p.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
                     node.currPieces[i].player.EmitSignal(BasePlayerController.SignalName.PieceHit);
                     // MOVE PIECE
-                    p.gameController.boardController.MovePiece(node.currPieces[i], startNode);
+                    enemyPiecesOnNode[i].player.gameController.boardController.MovePiece(node.currPieces[i], startNode, true);
                 }
             }
 
             // MOVE OWN PIECE
-            p.gameController.boardController.MovePiece(p.selectedPiece, node);
+            p.gameController.boardController.MovePiece(p.selectedPiece, node, false);
+            p.EmitSignal(BasePlayerController.SignalName.PieceMoved, p.roll);
             p.DeselectPiece();
 
             p.SwitchToNextTurnState();

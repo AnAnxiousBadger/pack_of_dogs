@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds5b52kdp3lqj"]
+
+[ext_resource type="Script" path="res://Scripts/UI_scripts/RollBarUIController.cs" id="1_bwps4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fcvxk"]
+font_size = 8
+
+[node name="roll_bar" type="VBoxContainer" node_paths=PackedStringArray("_rollPercentLabel", "_rollLabel", "_rollbar")]
+alignment = 1
+script = ExtResource("1_bwps4")
+_rollPercentLabel = NodePath("roll_percent_label")
+_rollLabel = NodePath("roll_label")
+_rollbar = NodePath("roll_percent_bar")
+
+[node name="roll_percent_label" type="Label" parent="."]
+layout_mode = 2
+text = "11.2%"
+label_settings = SubResource("LabelSettings_fcvxk")
+horizontal_alignment = 1
+
+[node name="roll_percent_bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(15, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+value = 6.0
+fill_mode = 3
+show_percentage = false
+
+[node name="roll_label" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1

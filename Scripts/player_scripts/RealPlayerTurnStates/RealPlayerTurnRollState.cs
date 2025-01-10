@@ -5,10 +5,12 @@ using System.Collections.Generic;
 public class RealPlayerTurnRollState : PlayerTurnBaseState
 {
     private new RealPlayerController p;
+    private List<PlayerRollScore> playerRollScores;
     public override void EnterTurnState()
     {
         p.gameController.diceController.CanRoll = true;
         p.gameController.diceController.DiceRolled += _OnDiceRolled;
+        playerRollScores = p.CalculateLuckyRolls();
     }
 
     public override void ExitTurnState()
@@ -20,10 +22,18 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
 
     private void _OnDiceRolled(int roll){
         p.roll = roll;
-        p.EmitSignal(BasePlayerController.SignalName.DiceRolled, 0);
+        p.EmitSignal(BasePlayerController.SignalName.DiceRolled, roll);
+        //float luckyScore = luckyScoresForRolls[roll];
+        for (int i = 0; i < playerRollScores.Count; i++)
+        {
+            PlayerRollScore playerRollScore = playerRollScores[i];
+            if(playerRollScore.isAffected){
+                playerRollScore.Player.EmitSignal(BasePlayerController.SignalName.LuckEventFired, playerRollScore.GetRollScore(roll));
+            }
+        }
         // SET SKIP IF CANNOT MOVE
         if(roll == 0){
-            p.gameController.boardElementsController.skipButton.IsActive = true;
+            p.gameController.boardController.boardElementsController.skipButton.IsActive = true;
         }
         else{
             int noMovePicesCount = 0;
@@ -40,7 +50,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
                 }
             }
             if(noMovePicesCount == piecesInGameCount){
-                p.gameController.boardElementsController.skipButton.IsActive = true;
+                p.gameController.boardController.boardElementsController.skipButton.IsActive = true;
             }
         }
 

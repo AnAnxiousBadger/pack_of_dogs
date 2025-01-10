@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class UIController : CanvasLayer
+public partial class UIController : Control
 {
 	// EXPORTS
 	[Export] private Label _diceRollLabel;

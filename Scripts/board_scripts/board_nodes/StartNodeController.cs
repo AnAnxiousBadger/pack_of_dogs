@@ -12,10 +12,7 @@ public partial class StartNodeController : BoardNodeController
     public override void DoOnLeaveNodeAction(PieceController piece){
         _gameController.boardController.FreeStartingPosition(piece);
     }
-    public override void DoOnStepNodeAction(PieceController piece)
-    {
-        piece.Position = _gameController.boardController.TakeFreeStartingPosition(piece);
-    }
+    public override void DoOnStepNodeAction(PieceController piece){}
 
     public override void Highlight()
     {

@@ -4,3 +4,4 @@
 
 [node name="protected_node_modifier" type="Node3D"]
 script = ExtResource("1_c1t7p")
+modifierName = "protected_node_modifier"

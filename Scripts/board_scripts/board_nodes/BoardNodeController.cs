@@ -14,8 +14,10 @@ public abstract partial class BoardNodeController : StaticBody3D
 	protected MeshInstance3D _mesh;
 	// OTHER
 	public bool canBeSteppedOn = true;
-	private List<BoardNodeModifier> _modifiers;
 	public List<PieceController> currPieces;
+	public Vector3 TopPos{
+		get { return GlobalPosition + new Vector3(0f, 0.6f, 0f);}
+	}
 	// SIGNALS
 	[Signal] public delegate void OnStepEventHandler(PieceController piece);
 	[Signal] public delegate void OnleaveEventHandler(PieceController piece);
@@ -24,17 +26,37 @@ public abstract partial class BoardNodeController : StaticBody3D
 		_gameController = gameController;
 		_mesh = (MeshInstance3D)GetNode("node_mesh");
 		currPieces = new();
-		//GetModifiers(); // Not needed for now
 	}
-	public void GetModifiers(){
-		_modifiers = new();
-		Godot.Collections.Array<Node> onStepModifierNodes = GetNode("modifiers").GetChildren();
-		for (int i = 0; i < onStepModifierNodes.Count; i++)
+	public bool HasModifier(string name){
+		List<BoardNodeModifier> mods = GetModifiers();
+		for (int i = 0; i < mods.Count; i++)
 		{
-			if(onStepModifierNodes[i] is BoardNodeModifier mod){
-				_modifiers.Add(mod);
+			if(mods[i].modifierName == name){
+				return true;
 			}
 		}
+		return false;
+	}
+	private List<BoardNodeModifier> GetModifiers(){
+		List<BoardNodeModifier> modifiers = new();
+		Godot.Collections.Array<Node> children = GetNode("modifiers").GetChildren();
+		for (int i = 0; i < children.Count; i++)
+		{
+			if(children[i] is BoardNodeModifier mod){
+				modifiers.Add(mod);
+			}
+		}
+		return modifiers;
+	}
+	public List<PieceController> GetEnemyPieces(BasePlayerController ownPlayer){
+		List<PieceController> enemies = new();
+		for (int i = 0; i < currPieces.Count; i++)
+		{
+			if(currPieces[i].player != ownPlayer){
+				enemies.Add(currPieces[i]);
+			}
+		}
+		return enemies;
 	}
 
 	public List<BoardNodeController> MoveAlongNodesFromNode(int steps, int playerIndex, bool canMoveToOwnPiece){

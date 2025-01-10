@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://bo6k7xqvn15aj"]
 
-[ext_resource type="Script" path="res://Scripts/board_scripts/BoardNodeVisualEffectController.cs" id="1_lap1p"]
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_xgltw"]
 [ext_resource type="ArrayMesh" uid="uid://pudmqpj15qgt" path="res://Assets/meshes/rosette_flower_mesh.res" id="2_hqvd7"]
 [ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/rosette_mesh_shader.tres" id="3_2da2p"]
 [ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/rosette_mesh_gradient_texture.tres" id="4_gn2o5"]
@@ -20,7 +20,7 @@ shader_parameter/rosette_diffuse = ExtResource("4_gn2o5")
 render_priority = 0
 shader = ExtResource("5_3gp3p")
 shader_parameter/noise_rotation_speed = 1.0
-shader_parameter/shader_alpha = 1.0
+shader_parameter/shader_alpha = 0.0
 shader_parameter/noise_01 = ExtResource("6_ir01n")
 shader_parameter/noise_02 = ExtResource("7_f2sj0")
 
@@ -137,7 +137,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -166,7 +166,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_bouh7"]
 resource_name = "rosette_effect_animation"
-length = 2.0
+length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -174,7 +174,7 @@ tracks/0/path = NodePath("rosette_mesh:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 2),
+"times": PackedFloat32Array(0.2, 0.7, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.397311, 0), Vector3(0, 0.577, 0), Vector3(0, 0.397311, 0)]
@@ -186,7 +186,7 @@ tracks/1/path = NodePath("rosette_mesh:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0.2, 2.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
@@ -198,7 +198,7 @@ tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 2),
+"times": PackedFloat32Array(0.2, 0.7, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
@@ -210,7 +210,7 @@ tracks/3/path = NodePath("tab_cuneiform_particlerm_:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 1.6),
+"times": PackedFloat32Array(0, 0.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -222,7 +222,7 @@ tracks/4/path = NodePath("light_particles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 1.6),
+"times": PackedFloat32Array(0, 0.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -234,7 +234,7 @@ tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(2),
+"times": PackedFloat32Array(2.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -249,7 +249,9 @@ _data = {
 }
 
 [node name="double_turn_visual_effect" type="Node3D"]
-script = ExtResource("1_lap1p")
+script = ExtResource("1_xgltw")
+effectName = "double_turn_visual_effect"
+poolCount = 3
 
 [node name="rosette_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)

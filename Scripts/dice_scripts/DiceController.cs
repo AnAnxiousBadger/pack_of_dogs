@@ -26,7 +26,7 @@ public partial class DiceController : Node
 		_uiController = gameController.uiController;
 		_diceRollTimer = (Timer) GetNode("dice_roll_timer");
 		_diceRollTimer.Timeout += _OnDiceRollTimerTimeout;
-		_rollButton = _gameController.boardElementsController.rollButton;
+		_rollButton = _gameController.boardController.boardElementsController.rollButton;
 		_rollButton.OnReleasedTickable += _OnRollDiceRollButtonUp;
 	}
 

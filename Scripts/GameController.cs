@@ -10,7 +10,7 @@ public partial class GameController : Node3D
 	[Export] public UIController uiController;
 	[Export] public DiceController diceController;
 	[Export] public BoardController boardController;
-	[Export] public BoardElementsController boardElementsController;
+	[Export] public VisualEffectPoolController visualEffectPool;
 	public List<BasePlayerController> players;
 	private Queue<BasePlayerController> _playersQueue;
 	public BasePlayerController currPlayer;
@@ -33,7 +33,7 @@ public partial class GameController : Node3D
 				}
 			}
 			if(value is TickableController t3){
-				boardElementsController.HandleClickTickable(t3, _staticBodyHitPos);
+				boardController.boardElementsController.HandleClickTickable(t3, _staticBodyHitPos);
 			}
 		}
 	}

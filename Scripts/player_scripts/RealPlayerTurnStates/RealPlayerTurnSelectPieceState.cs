@@ -20,6 +20,7 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
         }
         if(body is PieceController piece && piece.playerIndex == p.playerIndex){
             p.SelectPiece(piece);
+            piece.HighlightPiece();
             p.SwitchToNextTurnState();
         }
     }

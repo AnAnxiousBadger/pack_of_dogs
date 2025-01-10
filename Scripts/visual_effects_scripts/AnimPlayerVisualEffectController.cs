@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
-public partial class BoardNodeVisualEffectController : Node3D
+public partial class AnimPlayerVisualEffectController : VisualEffectController
 {
 	// http://psd.museum.upenn.edu/nepsd-frame.html
 	private AnimationPlayer _anim;
@@ -12,11 +13,13 @@ public partial class BoardNodeVisualEffectController : Node3D
 		animation = _anim.GetAnimationList()[1];
 	}
 
-	public void PlayVisualEffect(){
+	/*public override void Play(){
+		base.Play();
 		_anim.Play(animation);
-	}
-
-	private void EndEffect(){
-		QueueFree();
-	}
+	}*/
+    public override void Play(Vector3 globalPos)
+    {
+        base.Play(globalPos);
+		_anim.Play(animation);
+    }
 }

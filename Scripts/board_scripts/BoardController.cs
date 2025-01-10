@@ -8,15 +8,18 @@ public partial class BoardController : Node3D
 	// EXPORTS
 	[Export] private PieceStartingPositions _pieceStartingPositions;
 	[Export] public Label3D[] _endlabels;
+	[Export] public BoardElementsController boardElementsController;
+	[Export] private PiecePathController _pieceMovingPath;
+	[Export] private PiecePathController _pieceKickingpath;
 	// REFERENCES
-	private GameController _gameController;
+	public GameController gameController;
 	// OTHER
 	public List<PieceController> pieces = new();
 	private List<BoardNodeController> _nodes = new();
 	private List<StartNodeController> _startNodes = new();
 
 	public void ReadyBoardController(GameController gameController){
-		_gameController = gameController;
+		this.gameController = gameController;
 		SetUpBoard();
 	}
 	
@@ -36,7 +39,7 @@ public partial class BoardController : Node3D
 		{
 			if(nodeContainerChildren[i] is BoardNodeController node){
 				_nodes.Add(node);
-				node.SetUpNode(_gameController);
+				node.SetUpNode(gameController);
 				// Get start nodes
 				if(node is StartNodeController startNode){
 					_startNodes.Add(startNode);
@@ -60,7 +63,8 @@ public partial class BoardController : Node3D
 			CollisionShape3D shape = (CollisionShape3D) pieces[i].GetChild(1);
         	shape.Disabled = false;
 			// Pair pieces and players
-			pieces[i].player = _gameController.players[pieces[i].playerIndex];
+			pieces[i].player = gameController.players[pieces[i].playerIndex];
+			pieces[i].player.pieces.Add(pieces[i]);
 			// Set winning condition
 			pieces[i].player.piecesToDeliver += 1;
 		}
@@ -99,14 +103,22 @@ public partial class BoardController : Node3D
 		}
 		return null;
 	}
-	public void MovePiece(PieceController piece, BoardNodeController node){
+	public void MovePiece(PieceController piece, BoardNodeController node, bool isKicked){
 		piece.currNode.DoOnLeaveNodeAction(piece);
 
+		if(isKicked){
+			_pieceKickingpath.SetUpPiecePath(piece.GlobalPosition, ToGlobal(TakeFreeStartingPosition(piece)), piece);
+		}
+		else{
+			_pieceMovingPath.SetUpPiecePath(piece.GlobalPosition, node.GlobalPosition + new Vector3(0f, 0.6f, 0f), piece);
+		}
+		
         piece.currNode.currPieces.Remove(piece);
         piece.currNode = node;
         node.currPieces.Add(piece);
 
 		node.DoOnStepNodeAction(piece);
+		
     }
 
 	public void SetplayerScoreLabel(BasePlayerController player){

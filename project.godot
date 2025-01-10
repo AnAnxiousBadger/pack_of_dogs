@@ -28,6 +28,10 @@ window/size/viewport_height=563
 
 project/assembly_name="UR 2"
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 left_mouse={

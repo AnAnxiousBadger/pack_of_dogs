@@ -4,7 +4,9 @@ using System;
 public partial class TickableController : StaticBody3D
 {
 	// EXPORTS
+	[Export] private BoardController _boardController;
 	[Export] private bool _isActive = true;
+	[Export] private TickableEffect[] _effects;
 	public bool IsActive
 	{
 		get{ return _isActive; }
@@ -61,7 +63,7 @@ public partial class TickableController : StaticBody3D
 
 	public void OnPressed(Vector3 pos){
 		if(IsActive){
-			EmitSignal(SignalName.OnPressedTickable, pos);
+			PlayVisualEffect(TickableEffect.SignalType.PRESSED, pos);
 			if(_hasPressedAnim){
 				_anim.Play(_animLibrary + "/on_pressed");
 			}
@@ -74,12 +76,29 @@ public partial class TickableController : StaticBody3D
 	}
 	public void OnReleased(Vector3 pos){
 		if(IsActive){
+			PlayVisualEffect(TickableEffect.SignalType.RELEASED, pos);
 			EmitSignal(SignalName.OnReleasedTickable, pos);
 		}
 	}
 	public void OnHoverStopped(){
 		if(IsActive && (!_anim.IsPlaying() || _anim.CurrentAnimation == _animLibrary + "/on_pressed")){
 			_anim.Play(_animLibrary + "/RESET");
+		}
+	}
+
+	private void PlayVisualEffect(TickableEffect.SignalType signalType, Vector3 clickPos){
+		for (int i = 0; i < _effects.Length; i++)
+		{
+			if(signalType == _effects[i].signaltype){
+				Vector3 pos;
+				if(_effects[i].onClickPosition){
+					pos = clickPos;
+				}
+				else{
+					pos = GlobalPosition;
+				}
+				_boardController.gameController.visualEffectPool.PlayVisualEffect(_effects[i].effectName, pos);
+			}
 		}
 	}
 }

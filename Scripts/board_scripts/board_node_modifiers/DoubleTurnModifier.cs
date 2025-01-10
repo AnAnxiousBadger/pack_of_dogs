@@ -8,8 +8,6 @@ public partial class DoubleTurnModifier : BoardNodeModifier
     {
         piece.player.AddTurnToStateQueue();
         
-        BoardNodeVisualEffectController visualEffect =  (BoardNodeVisualEffectController)_visualEffect.Instantiate();
-        AddChild(visualEffect);
-        visualEffect.PlayVisualEffect();
+        piece.player.gameController.visualEffectPool.PlayVisualEffect("double_turn_visual_effect", GlobalPosition);
     }
 }

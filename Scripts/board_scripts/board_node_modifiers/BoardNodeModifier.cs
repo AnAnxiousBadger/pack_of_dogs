@@ -3,6 +3,7 @@ using System;
 
 public abstract partial class BoardNodeModifier : Node3D
 {
+    [Export] public string modifierName;
 	protected BoardNodeController _node;
     public override void _Ready()
     {

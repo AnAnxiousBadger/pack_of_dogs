@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public partial class TickableParticleSystemController : GpuParticles3D
 {
 	public enum SignalType {PRESSED, RELEASED, ACTIVITY_CHANGED}
-
+ 
 	// EXPORTS
 	private SignalType _emittingSignal;
 	[Export] public SignalType EmittingSignal {

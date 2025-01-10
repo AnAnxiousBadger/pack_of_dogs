@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://5302ih5o5de6"]
 
 [ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/lime_particle_mesh.res" id="1_0pmum"]
-[ext_resource type="Script" path="res://Scripts/tickable_scripts/TickableParticleSystemController.cs" id="2_7tf5v"]
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_e0ddx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp55g"]
 vertex_color_use_as_albedo = true
@@ -30,8 +30,13 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_dgvj7")
 color_initial_ramp = SubResource("GradientTexture1D_bamlh")
 
-[node name="lime_chipped_particles" type="GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="chipped_lime_visual_effect" type="Node3D"]
+script = ExtResource("1_e0ddx")
+effectName = "chipped_lime_visual_effect"
+isPositionDependent = true
+poolCount = 5
+
+[node name="particles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_xp55g")
 emitting = false
 amount = 16
@@ -40,4 +45,3 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ecngq")
 draw_pass_1 = ExtResource("1_0pmum")
-script = ExtResource("2_7tf5v")

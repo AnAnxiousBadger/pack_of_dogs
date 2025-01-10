@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=35 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
 [ext_resource type="Resource" uid="uid://wmjjs4j0t5rd" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
@@ -19,6 +19,11 @@
 [ext_resource type="ArrayMesh" uid="uid://vvc44mosg6ek" path="res://Assets/meshes/piece_mesh.res" id="17_f0v5b"]
 [ext_resource type="Material" uid="uid://dlndqr8mug10x" path="res://Assets/materials/piece_mats/piece_light_mat.tres" id="18_883nr"]
 [ext_resource type="Material" uid="uid://di3ygheini6vr" path="res://Assets/materials/piece_mats/piece_dark_mat.tres" id="19_uth2o"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePathController.cs" id="20_vmkov"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/BoardElementsController.cs" id="21_6pu4o"]
+[ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/tickables/roll_button.tscn" id="22_8t8dn"]
+[ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/tickables/skip_button.tscn" id="23_infi4"]
+[ext_resource type="Material" uid="uid://1pquyv7ntoj2" path="res://Assets/materials/sand_mat.tres" id="24_wtplm"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_lvjsa"]
 
@@ -32,23 +37,52 @@
 height = 0.2
 radius = 0.3
 
-[node name="board" type="Node3D" node_paths=PackedStringArray("_endlabels")]
+[sub_resource type="QuadMesh" id="QuadMesh_maree"]
+material = ExtResource("24_wtplm")
+size = Vector2(20, 20)
+
+[sub_resource type="Curve3D" id="Curve3D_u24pp"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_q6my8"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Curve3D" id="Curve3D_ymmih"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_penbj"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="board" type="Node3D" node_paths=PackedStringArray("_endlabels", "boardElementsController", "_pieceMovingPath", "_pieceKickingpath")]
 script = ExtResource("1_5e8jc")
 _pieceStartingPositions = ExtResource("2_4wt4c")
 _endlabels = [NodePath("Label3D_01"), NodePath("Label3D_02")]
+boardElementsController = NodePath("board_elements")
+_pieceMovingPath = NodePath("piece_path")
+_pieceKickingpath = NodePath("kicking_path")
 
 [node name="node_container" type="Node3D" parent="."]
 
 [node name="white_start_node" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("3_gcumj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 outNeighbours = [NodePath("../board_node_01")]
 
 [node name="black_start_node" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("3_gcumj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_05")]
 
 [node name="white_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_xvup1")
 playerIndex = 0
 inNeighbours = [null]
@@ -67,7 +101,7 @@ shape = SubResource("BoxShape3D_t7yvu")
 [node name="before_step" type="Node3D" parent="node_container/white_end_node/modifiers"]
 
 [node name="black_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("5_xvup1")
 playerIndex = 1
 inNeighbours = [null]
@@ -87,6 +121,7 @@ shape = SubResource("BoxShape3D_piin5")
 [node name="before_step" type="Node3D" parent="node_container/black_end_node/modifiers"]
 
 [node name="board_node_01" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_02")]
 
@@ -95,7 +130,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_02" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_03")]
 
@@ -104,7 +139,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_03" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_04")]
 
@@ -113,7 +148,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_04" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_09")]
 
@@ -124,7 +159,7 @@ surface_material_override/0 = ExtResource("9_yuum3")
 [node name="double_turn_modifier" parent="node_container/board_node_04/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
 [node name="board_node_05" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_06")]
 
@@ -133,7 +168,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_06" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_07")]
 
@@ -142,7 +177,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_07" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_08")]
 
@@ -151,7 +186,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_08" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_09")]
 
@@ -162,7 +197,7 @@ surface_material_override/0 = ExtResource("11_jplgx")
 [node name="double_turn_modifier" parent="node_container/board_node_08/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
 [node name="board_node_09" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
 outNeighbours = [NodePath("../board_node_10")]
 
 [node name="node_mesh" parent="node_container/board_node_09" index="0"]
@@ -170,7 +205,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_10" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 outNeighbours = [NodePath("../board_node_11")]
 
 [node name="node_mesh" parent="node_container/board_node_10" index="0"]
@@ -178,7 +213,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_11" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 outNeighbours = [NodePath("../board_node_12")]
 
 [node name="node_mesh" parent="node_container/board_node_11" index="0"]
@@ -186,7 +221,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_12" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 outNeighbours = [NodePath("../board_node_13")]
 
 [node name="node_mesh" parent="node_container/board_node_12" index="0"]
@@ -198,7 +233,7 @@ surface_material_override/0 = ExtResource("12_vqsbo")
 [node name="protected_node_modifier" parent="node_container/board_node_12/modifiers" index="1" instance=ExtResource("9_bs3rs")]
 
 [node name="board_node_13" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 outNeighbours = [NodePath("../board_node_14")]
 
 [node name="node_mesh" parent="node_container/board_node_13" index="0"]
@@ -206,7 +241,6 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_14" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 outNeighbours = [NodePath("../board_node_15")]
 
 [node name="node_mesh" parent="node_container/board_node_14" index="0"]
@@ -214,7 +248,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_15" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 outNeighbours = [NodePath("../board_node_16")]
 
 [node name="node_mesh" parent="node_container/board_node_15" index="0"]
@@ -222,7 +256,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_16" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 outNeighbours = [NodePath("../board_node_17"), NodePath("../board_node_19")]
 
 [node name="node_mesh" parent="node_container/board_node_16" index="0"]
@@ -230,7 +264,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_17" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../board_node_18")]
 
@@ -239,7 +273,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_18" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 playerIndex = 0
 outNeighbours = [NodePath("../white_end_node")]
 
@@ -250,7 +284,7 @@ surface_material_override/0 = ExtResource("14_ofun2")
 [node name="double_turn_modifier" parent="node_container/board_node_18/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
 [node name="board_node_19" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_20")]
 
@@ -259,7 +293,7 @@ mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("8_7ea7m")
 
 [node name="board_node_20" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../black_end_node")]
 
@@ -270,10 +304,9 @@ surface_material_override/0 = ExtResource("15_r2kyl")
 [node name="double_turn_modifier" parent="node_container/board_node_20/modifiers" index="0" instance=ExtResource("8_p8fm0")]
 
 [node name="pieces_container" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="piece_01" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -285,7 +318,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_02" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -297,7 +330,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_03" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -309,7 +342,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_04" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -321,7 +354,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_05" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -333,7 +366,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_06" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -345,7 +378,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_07" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.4, 3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 
@@ -357,7 +390,7 @@ surface_material_override/0 = ExtResource("18_883nr")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_08" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -370,7 +403,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_09" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -383,7 +416,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_10" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -396,7 +429,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_11" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -409,7 +442,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_12" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -422,7 +455,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_13" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -435,7 +468,7 @@ surface_material_override/0 = ExtResource("19_uth2o")
 shape = SubResource("CylinderShape3D_tm4u7")
 
 [node name="piece_14" type="StaticBody3D" parent="pieces_container"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.53)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.4, -3)
 collision_layer = 2
 script = ExtResource("11_h4toi")
 playerIndex = 1
@@ -447,15 +480,66 @@ surface_material_override/0 = ExtResource("19_uth2o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_14"]
 shape = SubResource("CylinderShape3D_tm4u7")
 
+[node name="board_elements" type="Node3D" parent="." node_paths=PackedStringArray("rollButton", "skipButton")]
+script = ExtResource("21_6pu4o")
+rollButton = NodePath("roll_button")
+skipButton = NodePath("skip_button")
+
+[node name="roll_button" parent="board_elements" node_paths=PackedStringArray("_boardController") instance=ExtResource("22_8t8dn")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777)
+_boardController = NodePath("../..")
+
+[node name="skip_button" parent="board_elements" node_paths=PackedStringArray("_boardController") instance=ExtResource("23_infi4")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
+_boardController = NodePath("../..")
+
+[node name="Floor" type="MeshInstance3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
+mesh = SubResource("QuadMesh_maree")
+skeleton = NodePath("../..")
+
+[node name="piece_path" type="Path3D" parent="." node_paths=PackedStringArray("_pathFollow", "_pieceGuide")]
+curve = SubResource("Curve3D_u24pp")
+script = ExtResource("20_vmkov")
+_pathFollow = NodePath("path_follow")
+_pieceGuide = NodePath("path_follow/piece_guide")
+
+[node name="path_follow" type="PathFollow3D" parent="piece_path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+rotation_mode = 0
+loop = false
+tilt_enabled = false
+
+[node name="piece_guide" type="Node3D" parent="piece_path/path_follow"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="piece_path/path_follow/piece_guide"]
+visible = false
+mesh = SubResource("SphereMesh_q6my8")
+
+[node name="kicking_path" type="Path3D" parent="." node_paths=PackedStringArray("_pathFollow", "_pieceGuide")]
+curve = SubResource("Curve3D_ymmih")
+script = ExtResource("20_vmkov")
+_pathFollow = NodePath("kicking_path_follow")
+_pieceGuide = NodePath("kicking_path_follow/piece_kicking-guide")
+
+[node name="kicking_path_follow" type="PathFollow3D" parent="kicking_path"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 0)
+
+[node name="piece_kicking-guide" type="Node3D" parent="kicking_path/kicking_path_follow"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="kicking_path/kicking_path_follow/piece_kicking-guide"]
+visible = false
+mesh = SubResource("BoxMesh_penbj")
+
 [node name="Label3D_01" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 billboard = 1
 text = "0"
 font_size = 50
 outline_size = 20
 
 [node name="Label3D_02" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 billboard = 1
 text = "0"
 font_size = 50

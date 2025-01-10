@@ -1,13 +1,15 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerStats
 {
     public BasePlayerController player;
     private List<int> _rolls;
+    private List<float> _luckyScores;
     private int _enemyPiecesHit;
-    private int _totalDistanceMoved; // yet to be implemented
+    private int _totalDistanceMoved;
     private int _piecesHit;
     private int _turnsSkipped;
     private int _deliveredPieces;
@@ -19,6 +21,11 @@ public class PlayerStats
     private void ReadyPlayerStats(){
         _rolls = new();
         _enemyPiecesHit = 0;
+        _piecesHit = 0;
+        _totalDistanceMoved = 0;
+        _turnsSkipped = 0;
+        _deliveredPieces = 0;
+        _luckyScores = new();
 
         player.DiceRolled += _OnRoll;
         player.EnemyPieceHit += _OnEnemeyPieceHit;
@@ -26,6 +33,7 @@ public class PlayerStats
         player.PieceMoved += _OnPieceMoved;
         player.TurnSkipped += _OnTurnSkipped;
         player.PieceDelivered += _OnPieceDelivered;
+        player.LuckEventFired += _OnLuckEventFired;
     }
 
     private void _OnRoll(int roll){
@@ -46,9 +54,22 @@ public class PlayerStats
     private void _OnPieceDelivered(){
         _deliveredPieces += 1;
     }
-    public Dictionary<string, int> GetStats(){ // yet to be implemented
-        Dictionary<string, int> stats = new();
-
+    private void _OnLuckEventFired(float score){
+        _luckyScores.Add(score);
+    }
+    public Dictionary<string, object> GetStats(){
+        Dictionary<string, object> stats = new()
+        {
+            { "player_name", player.PlayerName },
+            { "roll_settings", player.rollSettings },
+            { "pieces_delivered", _deliveredPieces },
+            { "rolls", _rolls },
+            { "distance_moved", _totalDistanceMoved },
+            { "enemy_pieces_hit", _enemyPiecesHit },
+            { "pieces_hit", _piecesHit },
+            { "turns_skipped", _turnsSkipped },
+            { "lucky_score", _luckyScores.Sum() }
+        };
         return stats;
     }
 }

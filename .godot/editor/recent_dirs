@@ -1,7 +1,10 @@
+res://Scenes/UI_scenes/end_of_game_stats
+res://Scripts/UI_scripts
+res://Scripts/visual_effects_scripts
+res://Scripts/board_scripts
 res://Assets/materials/piece_mats
 res://Assets/meshes
 res://Scenes/board_scenes
-res://Scripts/board_scripts
 res://Assets/materials/shaders
 res://Assets/materials/node_mats/rosette_05
 res://Assets/materials/node_mats/rosette_04
