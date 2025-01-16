@@ -9,7 +9,7 @@ public partial class PiecePathController : Path3D
 	private bool _isSetUp = false;
 	private PieceController _guidedPiece;
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if(_isSetUp){
 			_pathFollow.ProgressRatio += (float)delta * _speed;

@@ -23,6 +23,7 @@ random_generator="*res://Scripts/RandomGenerator.cs"
 
 window/size/viewport_width=1000
 window/size/viewport_height=563
+window/size/always_on_top=true
 
 [dotnet]
 

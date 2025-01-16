@@ -6,16 +6,14 @@ public partial class DiceController : Node
 {
 	// REFERENCES
 	private GameController _gameController;
-	private UIController _uiController;
 	private Timer _diceRollTimer;
-	private TickableController _rollButton;
 	// OTHER
 	private bool _canRoll = false;
 	public bool CanRoll {
 		get { return _canRoll; }
 		set {
 			_canRoll = value;
-			_rollButton.IsActive = value;
+			GameController.Instance.ChangeRollButtonActivity(value);
 		}
 	}
 	// SIGNALS
@@ -23,11 +21,7 @@ public partial class DiceController : Node
 
 	public void ReadyDiceController(GameController gameController){
 		_gameController = gameController;
-		_uiController = gameController.uiController;
-		_diceRollTimer = (Timer) GetNode("dice_roll_timer");
-		_diceRollTimer.Timeout += _OnDiceRollTimerTimeout;
-		_rollButton = _gameController.boardController.boardElementsController.rollButton;
-		_rollButton.OnReleasedTickable += _OnRollDiceRollButtonUp;
+		GameController.Instance.OnRollButtonUsed += _OnRollDiceRollButtonUp;
 	}
 
     private int RollDice(RollSettings settings){
@@ -53,15 +47,10 @@ public partial class DiceController : Node
 		return roll;
 	}
 
-	private void _OnRollDiceRollButtonUp(Vector3 hitPos){
+	private void _OnRollDiceRollButtonUp(){
 		CanRoll = false;
-		_uiController.SetDiceRollLabelRolling();
-		_diceRollTimer.Start();
-	}
-
-	private void _OnDiceRollTimerTimeout(){
-		int roll = RollDice(_gameController.currPlayer.rollSettings);
-		_uiController.SetDiceRollLabel(roll);
+		int roll = RollDice(GameController.Instance.currPlayer.rollSettings);
 		EmitSignal(SignalName.DiceRolled, roll);
 	}
+
 }

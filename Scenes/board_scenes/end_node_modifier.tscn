@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1po21jaukn42"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/board_node_modifiers/EndNodeModifier.cs" id="1_g7uyg"]
+
+[node name="end_node_modifier" type="Node3D"]
+script = ExtResource("1_g7uyg")
+modifierName = "end_node_modifier"

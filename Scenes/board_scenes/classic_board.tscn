@@ -1,15 +1,18 @@
-[gd_scene load_steps=35 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=62 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
-[ext_resource type="Resource" uid="uid://wmjjs4j0t5rd" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
+[ext_resource type="Resource" uid="uid://btqbu51rifne0" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
 [ext_resource type="PackedScene" uid="uid://cljv71f0hx7ch" path="res://Scenes/board_scenes/start_node.tscn" id="3_gcumj"]
 [ext_resource type="ArrayMesh" uid="uid://cerdvqn70s3ge" path="res://Assets/meshes/node_mesh.res" id="5_xmb13"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/EndNodeController.cs" id="5_xvup1"]
-[ext_resource type="Material" uid="uid://cgw63u1viedu" path="res://Assets/materials/base_color_materials/black_mat.tres" id="7_5itki"]
+[ext_resource type="PackedScene" uid="uid://d1po21jaukn42" path="res://Scenes/board_scenes/end_node_modifier.tscn" id="5_yqwlj"]
+[ext_resource type="ArrayMesh" uid="uid://c5n3a52r4wwpk" path="res://Assets/meshes/end_node_L.res" id="6_rpjhg"]
+[ext_resource type="Material" uid="uid://q371u6yj343v" path="res://Assets/materials/end_node_mat/end_node_mat.tres" id="7_73q4c"]
 [ext_resource type="Material" uid="uid://cn1ghjaacflew" path="res://Assets/materials/node_mats/basic_node/basic_node_mat.tres" id="8_7ea7m"]
 [ext_resource type="PackedScene" uid="uid://dlohrab2t6ae5" path="res://Scenes/board_scenes/double_turn_modifier.tscn" id="8_p8fm0"]
 [ext_resource type="PackedScene" uid="uid://dr0xn4cbjhgst" path="res://Scenes/board_scenes/basic_node.tscn" id="8_pdjfc"]
 [ext_resource type="PackedScene" uid="uid://cg4abgvd0qv5a" path="res://Scenes/board_scenes/protected_node_modifier.tscn" id="9_bs3rs"]
+[ext_resource type="ArrayMesh" uid="uid://bm3746ua0ha88" path="res://Assets/meshes/end_node_R.res" id="9_vey60"]
 [ext_resource type="Material" uid="uid://bev50o78b2pd0" path="res://Assets/materials/node_mats/rosette_01/rosette_01_node_mat.tres" id="9_yuum3"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/PieceController.cs" id="11_h4toi"]
 [ext_resource type="Material" uid="uid://dcvcc2tis8ir1" path="res://Assets/materials/node_mats/rosette_02/rosette_02_node_mat.tres" id="11_jplgx"]
@@ -23,15 +26,26 @@
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardElementsController.cs" id="21_6pu4o"]
 [ext_resource type="PackedScene" uid="uid://co1b1b74mbd1y" path="res://Scenes/tickables/roll_button.tscn" id="22_8t8dn"]
 [ext_resource type="PackedScene" uid="uid://sq6lib15ysi4" path="res://Scenes/tickables/skip_button.tscn" id="23_infi4"]
+[ext_resource type="ArrayMesh" uid="uid://g57h3oruk08m" path="res://Assets/meshes/classic_board_frame_mesh.res" id="23_ym1hj"]
 [ext_resource type="Material" uid="uid://1pquyv7ntoj2" path="res://Assets/materials/sand_mat.tres" id="24_wtplm"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_lvjsa"]
+[ext_resource type="ArrayMesh" uid="uid://blsfupu03sxt0" path="res://Assets/meshes/ziggurat_mesh.res" id="25_dscxs"]
+[ext_resource type="ArrayMesh" uid="uid://fces5s3rdag6" path="res://Assets/meshes/dice_meshes/dice_mesh.res" id="25_omowt"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableController.cs" id="25_re4pd"]
+[ext_resource type="ArrayMesh" uid="uid://bmaww8vjy8yff" path="res://Assets/meshes/dice_meshes/0_mesh.res" id="26_3yv61"]
+[ext_resource type="ArrayMesh" uid="uid://dmdntfryekr4" path="res://Assets/meshes/dice_meshes/2_mesh.res" id="27_8euef"]
+[ext_resource type="ArrayMesh" uid="uid://d4kus5yietbl" path="res://Assets/meshes/dice_meshes/3_mesh.res" id="28_6s3u4"]
+[ext_resource type="ArrayMesh" uid="uid://cxg1318knv8xk" path="res://Assets/meshes/dice_meshes/1_mesh.res" id="28_wcvog"]
+[ext_resource type="ArrayMesh" uid="uid://b05uj3c6io7bx" path="res://Assets/meshes/dice_meshes/4_mesh.res" id="29_cifin"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/DiceDisplayController.cs" id="31_wicgr"]
+[ext_resource type="Texture2D" uid="uid://k277qlwgiupv" path="res://Assets/smoke_sprite_sheet.jpg" id="33_xie2q"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePositionGeneratorTool.cs" id="39_vfh7x"]
+[ext_resource type="Resource" uid="uid://duffpvm1mbita" path="res://Assets/normal_piece_end_positions.tres" id="40_ooftl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7yvu"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_n7rt4"]
+size = Vector3(1.09457, 1.06947, 1.10129)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_piin5"]
+size = Vector3(1.08486, 1.05231, 1.15073)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tm4u7"]
 height = 0.2
@@ -40,6 +54,198 @@ radius = 0.3
 [sub_resource type="QuadMesh" id="QuadMesh_maree"]
 material = ExtResource("24_wtplm")
 size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bdls"]
+size = Vector3(0.870117, 0.267616, 0.863342)
+
+[sub_resource type="Animation" id="Animation_bdswq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dust_particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_t7c2r"]
+resource_name = "hover_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.05, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0349066, 0.0349066, 0.0349066), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gjfc2"]
+resource_name = "pre_roll_animation"
+length = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_l1adp"]
+resource_name = "roll_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, 0), Vector3(-6.28319, 0, 0), Vector3(-9.42478, 0, 0), Vector3(-12.8282, 0, 0), Vector3(-12.5664, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("dice_display_controller")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"HideNumbers"
+}, {
+"args": [],
+"method": &"ShowRollNumber"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("dust_particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ega6e"]
+_data = {
+"RESET": SubResource("Animation_bdswq"),
+"hover_animation": SubResource("Animation_t7c2r"),
+"pre_roll_animation": SubResource("Animation_gjfc2"),
+"roll_animation": SubResource("Animation_l1adp")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4rd8"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("33_xie2q")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_distance = 0.01
+
+[sub_resource type="Curve" id="Curve_6cw3p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49835, 0.543709), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_50h1p"]
+curve = SubResource("Curve_6cw3p")
+
+[sub_resource type="Curve" id="Curve_ylnrg"]
+_data = [Vector2(0, 0.500662), 0.0, 0.0, 0, 0, Vector2(0.310231, 1), 0.0, 0.0, 0, 0, Vector2(0.9967, 0.535099), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3heh6"]
+curve = SubResource("Curve_ylnrg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ohuf4"]
+particle_flag_rotate_y = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+radial_velocity_min = 0.999978
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_3heh6")
+color = Color(1, 0.8, 0.501961, 0.54902)
+alpha_curve = SubResource("CurveTexture_50h1p")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_2xkhy"]
+size = Vector2(2, 2)
 
 [sub_resource type="Curve3D" id="Curve3D_u24pp"]
 _data = {
@@ -62,10 +268,10 @@ point_count = 2
 [sub_resource type="BoxMesh" id="BoxMesh_penbj"]
 size = Vector3(0.1, 0.1, 0.1)
 
-[node name="board" type="Node3D" node_paths=PackedStringArray("_endlabels", "boardElementsController", "_pieceMovingPath", "_pieceKickingpath")]
+[node name="board" type="Node3D" node_paths=PackedStringArray("boardElementsController", "_pieceMovingPath", "_pieceKickingpath")]
 script = ExtResource("1_5e8jc")
 _pieceStartingPositions = ExtResource("2_4wt4c")
-_endlabels = [NodePath("Label3D_01"), NodePath("Label3D_02")]
+_pieceEndPositions = ExtResource("40_ooftl")
 boardElementsController = NodePath("board_elements")
 _pieceMovingPath = NodePath("piece_path")
 _pieceKickingpath = NodePath("kicking_path")
@@ -88,37 +294,37 @@ playerIndex = 0
 inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/white_end_node"]
-mesh = SubResource("SphereMesh_lvjsa")
+mesh = ExtResource("6_rpjhg")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("7_73q4c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="node_container/white_end_node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15068, 0.432961, 0.14242)
 shape = SubResource("BoxShape3D_t7yvu")
 
 [node name="modifiers" type="Node3D" parent="node_container/white_end_node"]
 
-[node name="on_step" type="Node3D" parent="node_container/white_end_node/modifiers"]
-
-[node name="before_step" type="Node3D" parent="node_container/white_end_node/modifiers"]
+[node name="end_node_modifier" parent="node_container/white_end_node/modifiers" instance=ExtResource("5_yqwlj")]
 
 [node name="black_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("5_xvup1")
+stereo = 1
 playerIndex = 1
 inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/black_end_node"]
-mesh = SubResource("SphereMesh_n7rt4")
+mesh = ExtResource("9_vey60")
 skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("7_5itki")
+surface_material_override/0 = ExtResource("7_73q4c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="node_container/black_end_node"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145557, 0.421661, -0.114578)
 shape = SubResource("BoxShape3D_piin5")
 
 [node name="modifiers" type="Node3D" parent="node_container/black_end_node"]
 
-[node name="on_step" type="Node3D" parent="node_container/black_end_node/modifiers"]
-
-[node name="before_step" type="Node3D" parent="node_container/black_end_node/modifiers"]
+[node name="end_node_modifier" parent="node_container/black_end_node/modifiers" instance=ExtResource("5_yqwlj")]
 
 [node name="board_node_01" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
@@ -228,9 +434,9 @@ outNeighbours = [NodePath("../board_node_13")]
 mesh = ExtResource("5_xmb13")
 surface_material_override/0 = ExtResource("12_vqsbo")
 
-[node name="double_turn_modifier" parent="node_container/board_node_12/modifiers" index="0" instance=ExtResource("8_p8fm0")]
+[node name="protected_node_modifier" parent="node_container/board_node_12/modifiers" index="0" instance=ExtResource("9_bs3rs")]
 
-[node name="protected_node_modifier" parent="node_container/board_node_12/modifiers" index="1" instance=ExtResource("9_bs3rs")]
+[node name="double_turn_modifier" parent="node_container/board_node_12/modifiers" index="1" instance=ExtResource("8_p8fm0")]
 
 [node name="board_node_13" parent="node_container" node_paths=PackedStringArray("outNeighbours") instance=ExtResource("8_pdjfc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
@@ -480,23 +686,91 @@ surface_material_override/0 = ExtResource("19_uth2o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="pieces_container/piece_14"]
 shape = SubResource("CylinderShape3D_tm4u7")
 
-[node name="board_elements" type="Node3D" parent="." node_paths=PackedStringArray("rollButton", "skipButton")]
+[node name="board_elements" type="Node3D" parent="." node_paths=PackedStringArray("rollButton")]
 script = ExtResource("21_6pu4o")
 rollButton = NodePath("roll_button")
-skipButton = NodePath("skip_button")
 
-[node name="roll_button" parent="board_elements" node_paths=PackedStringArray("_boardController") instance=ExtResource("22_8t8dn")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155034, -0.678777)
-_boardController = NodePath("../..")
+[node name="roll_button" parent="board_elements" instance=ExtResource("22_8t8dn")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0, -0.58)
 
-[node name="skip_button" parent="board_elements" node_paths=PackedStringArray("_boardController") instance=ExtResource("23_infi4")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, -0.155, 0.428223)
-_boardController = NodePath("../..")
+[node name="skip_button" parent="board_elements" instance=ExtResource("23_infi4")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0, 0.6)
+
+[node name="frame" type="MeshInstance3D" parent="board_elements"]
+mesh = ExtResource("23_ym1hj")
 
 [node name="Floor" type="MeshInstance3D" parent="board_elements"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
 mesh = SubResource("QuadMesh_maree")
 skeleton = NodePath("../..")
+
+[node name="ziggurat" type="StaticBody3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="ziggurat_mesh" type="MeshInstance3D" parent="board_elements/ziggurat"]
+mesh = ExtResource("25_dscxs")
+skeleton = NodePath("../../..")
+
+[node name="dice_display" type="StaticBody3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.339, -2.2)
+collision_layer = 4
+script = ExtResource("25_re4pd")
+_effects = Array[Object]([])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="board_elements/dice_display"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00244141, -0.000919342, 9.15527e-05)
+shape = SubResource("BoxShape3D_5bdls")
+
+[node name="Node3D" type="Node3D" parent="board_elements/dice_display"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="board_elements/dice_display/Node3D"]
+mesh = ExtResource("25_omowt")
+skeleton = NodePath("../..")
+
+[node name="0_mesh" type="MeshInstance3D" parent="board_elements/dice_display/Node3D/MeshInstance3D"]
+visible = false
+mesh = ExtResource("26_3yv61")
+
+[node name="1_mesh" type="MeshInstance3D" parent="board_elements/dice_display/Node3D/MeshInstance3D"]
+visible = false
+mesh = ExtResource("28_wcvog")
+skeleton = NodePath("../0_mesh")
+
+[node name="2_mesh" type="MeshInstance3D" parent="board_elements/dice_display/Node3D/MeshInstance3D"]
+visible = false
+mesh = ExtResource("27_8euef")
+skeleton = NodePath("../1_mesh")
+
+[node name="3_mesh" type="MeshInstance3D" parent="board_elements/dice_display/Node3D/MeshInstance3D"]
+visible = false
+mesh = ExtResource("28_6s3u4")
+skeleton = NodePath("../2_mesh")
+
+[node name="4_mesh" type="MeshInstance3D" parent="board_elements/dice_display/Node3D/MeshInstance3D"]
+visible = false
+mesh = ExtResource("29_cifin")
+skeleton = NodePath("../3_mesh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="board_elements/dice_display"]
+libraries = {
+"": SubResource("AnimationLibrary_ega6e")
+}
+
+[node name="dice_display_controller" type="Node" parent="board_elements/dice_display" node_paths=PackedStringArray("_rollButton", "_numberMeshes", "_tickable", "_anim")]
+script = ExtResource("31_wicgr")
+_rollButton = NodePath("../../roll_button")
+_numberMeshes = [NodePath("../Node3D/MeshInstance3D/0_mesh"), NodePath("../Node3D/MeshInstance3D/1_mesh"), NodePath("../Node3D/MeshInstance3D/2_mesh"), NodePath("../Node3D/MeshInstance3D/3_mesh"), NodePath("../Node3D/MeshInstance3D/4_mesh")]
+_tickable = NodePath("..")
+_anim = NodePath("../AnimationPlayer")
+
+[node name="dust_particles" type="GPUParticles3D" parent="board_elements/dice_display"]
+material_override = SubResource("StandardMaterial3D_r4rd8")
+emitting = false
+amount = 36
+explosiveness = 0.5
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_ohuf4")
+draw_pass_1 = SubResource("QuadMesh_2xkhy")
 
 [node name="piece_path" type="Path3D" parent="." node_paths=PackedStringArray("_pathFollow", "_pieceGuide")]
 curve = SubResource("Curve3D_u24pp")
@@ -531,19 +805,51 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 
 visible = false
 mesh = SubResource("BoxMesh_penbj")
 
-[node name="Label3D_01" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-billboard = 1
-text = "0"
-font_size = 50
-outline_size = 20
+[node name="piece_starting_positions" type="Node3D" parent="."]
+visible = false
+script = ExtResource("39_vfh7x")
 
-[node name="Label3D_02" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
-billboard = 1
-text = "0"
-font_size = 50
-outline_size = 20
+[node name="Marker3D" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022, -0.203, 1.5)
+
+[node name="Marker3D2" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.501, -0.004, 1.476)
+
+[node name="Marker3D3" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.477, 0.194, 0.732)
+
+[node name="Marker3D4" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242, 0.194, 0.736)
+
+[node name="Marker3D5" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, 0.395, 1.241)
+
+[node name="Marker3D6" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256, 0.597, 1.21)
+
+[node name="Marker3D7" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159, 0.684, 0.849)
+
+[node name="Marker3D8" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022, -0.203, -1.5)
+
+[node name="Marker3D9" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.501, -0.004, -1.476)
+
+[node name="Marker3D10" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.477, 0.194, -0.732)
+
+[node name="Marker3D11" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.242, 0.194, -0.736)
+
+[node name="Marker3D12" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.214, 0.395, -1.241)
+
+[node name="Marker3D13" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256, 0.597, -1.21)
+
+[node name="Marker3D14" type="Marker3D" parent="piece_starting_positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159, 0.684, -0.849)
 
 [editable path="node_container/white_start_node"]
 [editable path="node_container/black_start_node"]

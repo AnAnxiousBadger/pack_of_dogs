@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class PieceController : StaticBody3D
 {
@@ -10,6 +11,8 @@ public partial class PieceController : StaticBody3D
     private bool _isMoving = false;
     private Node3D _guideNode;
     private bool _isHighLit = false;
+    /* public Queue<PieceController> kickingPieceQueue;*/
+    //[Signal] public delegate void OnPieceArrivedToNodeEventHandler(PieceController piece, BoardNodeController node);
 
     public void HighlightPiece(){
         Tween tween = GetTree().CreateTween();
@@ -34,9 +37,11 @@ public partial class PieceController : StaticBody3D
         _guideNode = null;
         _isMoving = false;
         GlobalPosition = targetPos;
+        //EmitSignal(SignalName.OnPieceArrivedToNode, this, currNode);
+        HandleOnArrive(currNode);
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if(_isMoving){
             GlobalPosition = _guideNode.GlobalPosition;
@@ -48,5 +53,18 @@ public partial class PieceController : StaticBody3D
                 Rotation = new Vector3(Mathf.DegToRad(Mathf.Clamp(- 60f / 300f * toMouse.Length(), -60, 0)), toMouse.AngleTo(Vector2.Up), 0);
             }
         }
+    }
+
+    private void HandleOnArrive(BoardNodeController node){
+        bool doKickEffect = false;
+        PieceController enemyPieceOnNode = node.GetEnemyPiece(player);
+		if(enemyPieceOnNode != null){
+			player.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
+			enemyPieceOnNode.player.EmitSignal(BasePlayerController.SignalName.PieceHit);
+			BoardNodeController startNode = GameController.Instance.boardController.GetStartNode(enemyPieceOnNode.player);
+			GameController.Instance.boardController.MovePiece(enemyPieceOnNode, startNode, true);
+            doKickEffect = true;
+		}
+        node.ChainOnStepModifiers(this, doKickEffect);
     }
 }

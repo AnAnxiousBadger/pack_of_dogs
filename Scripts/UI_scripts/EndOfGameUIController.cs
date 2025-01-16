@@ -5,6 +5,7 @@ using System.Linq;
 
 public partial class EndOfGameUIController : PanelContainer
 {	
+	// http://www.codex99.com/typography/1.html
 	[Export] BasePlayerController _player; // TEMPORARY
 	[ExportCategory("Statistics containers")]
 	[Export] private HBoxContainer _playerNameContainer;

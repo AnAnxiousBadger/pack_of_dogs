@@ -4,23 +4,19 @@ using System;
 public partial class UIController : Control
 {
 	// EXPORTS
-	[Export] private Label _diceRollLabel;
-	[Export] private BaseButton _skipTurnButton;
-	[Export] private Label _turnLabel;
+	[Export] private TurnPanelUIController _turnPanel;
+	[Export] private VBoxContainer _scoresPanel;
+	[Export] private PackedScene _playerScorePanel;
 
-	public void ReadyUIController(){}
-
+	public void SetUpUI(){
+		for (int i = 0; i < GameController.Instance.players.Count; i++)
+		{
+			PlayerScoreContainerUIController scoreContainer = _playerScorePanel.Instantiate() as PlayerScoreContainerUIController;
+			_scoresPanel.AddChild(scoreContainer);
+			scoreContainer.SetPlayerScoreLabel(GameController.Instance.players[i]);
+		}
+	}
     public void SetTurnLabel(string playerName){
-		_turnLabel.Text = playerName + "'s Turn";
-	}
-
-	public void SetDiceRollLabel(int roll){
-		_diceRollLabel.Text = roll.ToString();
-	}
-	public void SetDiceRollLabelRolling(){
-		_diceRollLabel.Text = "...";
-	}
-	public void SetDiceRollLabelUnset(){
-		_diceRollLabel.Text = "Roll!";
+		_turnPanel.ChangeTurn(playerName);
 	}
 }

@@ -1,0 +1,701 @@
+[gd_scene load_steps=22 format=3 uid="uid://w5o5xjmn1xn1"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_hh83t"]
+[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_shader.tres" id="2_lsnx8"]
+[ext_resource type="Texture2D" uid="uid://d3h81ur4ekpc5" path="res://Assets/materials/shaders/protected_node_effect_color_gradient.tres" id="3_41ny5"]
+[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_01.tres" id="4_jn3te"]
+[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="5_1axr0"]
+[ext_resource type="ArrayMesh" uid="uid://bs10405u6gpp2" path="res://Assets/meshes/shield_mesh.res" id="6_q1x3k"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="7_lj266"]
+[ext_resource type="ArrayMesh" uid="uid://4cd61hifqvv5" path="res://Assets/meshes/spear_mesh.res" id="8_gtu3s"]
+[ext_resource type="Texture2D" uid="uid://cy03k2ljcyh7s" path="res://Assets/materials/shaders/dul_cuneiform.png" id="9_otcik"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_kg76o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wdriv"]
+render_priority = 0
+shader = ExtResource("2_lsnx8")
+shader_parameter/noise_rotation_speed = 1.0
+shader_parameter/shader_alpha = 0.0
+shader_parameter/color_gradient = ExtResource("3_41ny5")
+shader_parameter/noise_01 = ExtResource("4_jn3te")
+shader_parameter/noise_02 = ExtResource("5_1axr0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kb27c"]
+render_priority = 0
+shader = ExtResource("7_lj266")
+shader_parameter/alpha = 1.0
+shader_parameter/rosette_diffuse = ExtResource("3_41ny5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0chs"]
+render_priority = 0
+shader = ExtResource("7_lj266")
+shader_parameter/alpha = 0.0
+shader_parameter/rosette_diffuse = ExtResource("3_41ny5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4ocn"]
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("9_otcik")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_2i8nn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.237624, 1), 0.0, 0.0, 0, 0, Vector2(0.772277, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_1uope"]
+curve = SubResource("Curve_2i8nn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg8cr"]
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.01, 0.5)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 3.0
+tangential_accel_max = 3.0
+damping_min = 3.0
+damping_max = 3.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(1, 1, 3, 1)
+alpha_curve = SubResource("CurveTexture_1uope")
+
+[sub_resource type="QuadMesh" id="QuadMesh_oakso"]
+
+[sub_resource type="Animation" id="Animation_euer2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shield_mesh_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shield_mesh_02:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shield_mesh_03:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("shield_mesh_04:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("shield_mesh_05:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shield_mesh_01:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("shield_mesh_02:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("shield_mesh_03:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("shield_mesh_04:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("shield_mesh_05:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("shield_mesh_01:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("shield_mesh_02:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("shield_mesh_03:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("shield_mesh_04:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("spear_mesh_01:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.7, -0.15)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("spear_mesh_01:surface_material_override/0:shader_parameter/alpha")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("spear_mesh_02:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.15, 0.7, 0)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("spear_mesh_03:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.7, 0.15)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("spear_mesh_04:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.15, 0.7, 0)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("cuneiform_particles:emitting")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("nod_highlight:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("shield_mesh_01:surface_material_override/0:shader_parameter/alpha")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_o0bvf"]
+resource_name = "protected_node_animation"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shield_mesh_01:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0.25, 0.9, -0.25), Vector3(0.25, 0.9, -0.25), Vector3(0.2, 0.9, -0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shield_mesh_02:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0.25, 0.9, 0.25), Vector3(0.25, 0.9, 0.25), Vector3(0.2, 0.9, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("shield_mesh_03:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(-0.25, 0.9, 0.25), Vector3(-0.25, 0.9, 0.25), Vector3(-0.2, 0.9, 0.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("shield_mesh_04:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(-0.25, 0.9, -0.25), Vector3(-0.25, 0.9, -0.25), Vector3(-0.2, 0.9, -0.2)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("shield_mesh_05:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.9, 0), Vector3(0, 1, 0), Vector3(0, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shield_mesh_01:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.65, 0.65, 0.65), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("shield_mesh_02:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.65, 0.65, 0.65), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("shield_mesh_03:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.65, 0.65, 0.65), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("shield_mesh_04:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.65, 0.65, 0.65), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("shield_mesh_05:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6, 0.6, 0.6), Vector3(0.7, 0.7, 0.7), Vector3(0.7, 0.7, 0.7), Vector3(0.5, 0.5, 0.5)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("shield_mesh_01:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.254818, 0, -0.261799)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("shield_mesh_02:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, -0.261799)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("shield_mesh_03:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0.261799)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("shield_mesh_04:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.261799, 0, 0.261799)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("spear_mesh_01:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.466667, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.7, -0.15), Vector3(0, 1, -0.25)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("spear_mesh_01:surface_material_override/0:shader_parameter/alpha")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.433333, 0.466667, 0.566667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("spear_mesh_02:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.466667, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.15, 0.7, 0), Vector3(0.25, 1, 0)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("spear_mesh_03:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.466667, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.7, 0.15), Vector3(0, 1, 0.25)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("spear_mesh_04:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0.466667, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.15, 0.7, 0), Vector3(-0.25, 1, 0)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("cuneiform_particles:emitting")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("nod_highlight:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("shield_mesh_01:surface_material_override/0:shader_parameter/alpha")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/22/type = "method"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath(".")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EndEffect"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxu6q"]
+_data = {
+"RESET": SubResource("Animation_euer2"),
+"protected_node_animation": SubResource("Animation_o0bvf")
+}
+
+[node name="protected_node_modifier_visual_effect" type="Node3D"]
+script = ExtResource("1_hh83t")
+effectName = "protected_node_modifier_visual_effect"
+poolCount = 2
+
+[node name="nod_highlight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.51, 0)
+mesh = SubResource("QuadMesh_kg76o")
+surface_material_override/0 = SubResource("ShaderMaterial_wdriv")
+
+[node name="shield_mesh_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9, 0)
+mesh = ExtResource("6_q1x3k")
+surface_material_override/0 = SubResource("ShaderMaterial_kb27c")
+
+[node name="shield_mesh_02" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9, 0)
+mesh = ExtResource("6_q1x3k")
+skeleton = NodePath("../shield_mesh_01")
+surface_material_override/0 = SubResource("ShaderMaterial_kb27c")
+
+[node name="shield_mesh_03" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9, 0)
+mesh = ExtResource("6_q1x3k")
+skeleton = NodePath("../shield_mesh_01")
+surface_material_override/0 = SubResource("ShaderMaterial_kb27c")
+
+[node name="shield_mesh_04" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9, 0)
+mesh = ExtResource("6_q1x3k")
+skeleton = NodePath("../shield_mesh_01")
+surface_material_override/0 = SubResource("ShaderMaterial_kb27c")
+
+[node name="shield_mesh_05" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9, 0)
+mesh = ExtResource("6_q1x3k")
+skeleton = NodePath("../shield_mesh_01")
+surface_material_override/0 = SubResource("ShaderMaterial_kb27c")
+
+[node name="spear_mesh_01" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.563816, 0.205212, 0, -0.205212, 0.563816, 0, 0.7, -0.15)
+mesh = ExtResource("8_gtu3s")
+surface_material_override/0 = SubResource("ShaderMaterial_i0chs")
+
+[node name="spear_mesh_02" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.563816, 0.205212, 0, -0.205212, 0.563816, 0, 0, 0, 0.6, 0.15, 0.7, 0)
+mesh = ExtResource("8_gtu3s")
+surface_material_override/0 = SubResource("ShaderMaterial_i0chs")
+
+[node name="spear_mesh_03" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.563816, -0.205212, 0, 0.205212, 0.563816, 0, 0.7, 0.15)
+mesh = ExtResource("8_gtu3s")
+surface_material_override/0 = SubResource("ShaderMaterial_i0chs")
+
+[node name="spear_mesh_04" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.563816, -0.205212, 0, 0.205212, 0.563816, 0, 0, 0, 0.6, -0.15, 0.7, 0)
+mesh = ExtResource("8_gtu3s")
+surface_material_override/0 = SubResource("ShaderMaterial_i0chs")
+
+[node name="cuneiform_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.687719, 0)
+material_override = SubResource("StandardMaterial3D_d4ocn")
+emitting = false
+amount = 20
+explosiveness = 0.5
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_tg8cr")
+draw_pass_1 = SubResource("QuadMesh_oakso")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cxu6q")
+}

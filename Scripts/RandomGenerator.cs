@@ -13,4 +13,8 @@ public partial class RandomGenerator : Node
     public int GetRandIntInRange(int inf, int sup){
         return _rand.RandiRange(inf, sup);
     }
+
+    public float GetRandFInRange(float inf, float sup){
+        return _rand.RandfRange(inf, sup);
+    }
 }

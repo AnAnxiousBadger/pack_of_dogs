@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class VisualEffectPoolController : Node3D
 {
 
-    private Dictionary<string, Queue<VisualEffectController>> visualEffectDict = new();
+    private Dictionary<string, Queue<VisualEffectController>> _visualEffectDict = new();
     public override void _Ready()
     {
         // CREATE QUEUES
@@ -24,25 +24,19 @@ public partial class VisualEffectPoolController : Node3D
                     effects.Enqueue(dupe);
                     AddChild(dupe);
                 }
-                visualEffectDict.Add(effect.effectName, effects);
+                _visualEffectDict.Add(effect.effectName, effects);
             }
         }
     }
-    /*public VisualEffectController PlayVisualEffect(string effectName){
-        VisualEffectController effect = visualEffectDict[effectName].Dequeue();
-        effect.Visible = true;
-        effect.Play();
-        return effect;
-    }*/
+
     public VisualEffectController PlayVisualEffect(string effectName, Vector3 globalPos){
-        VisualEffectController effect = visualEffectDict[effectName].Dequeue();
-        effect.Visible = true;
+        VisualEffectController effect = _visualEffectDict[effectName].Dequeue();
         effect.Play(globalPos);
         return effect;
     }
 
     public void ReQueueEffect(VisualEffectController effect){
-        visualEffectDict[effect.effectName].Enqueue(effect);
-        effect.Visible = false;
+        effect.GlobalPosition = GlobalPosition;
+        _visualEffectDict[effect.effectName].Enqueue(effect);
     }
 }

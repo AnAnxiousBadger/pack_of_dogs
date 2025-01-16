@@ -30,7 +30,7 @@ public partial class RealPlayerController : BasePlayerController
         selectNodeState = new(this);
         turnStates.Add(selectNodeState);
 
-        gameController.boardController.boardElementsController.skipButton.OnReleasedTickable += _OnSkipTurn;
+        GameController.Instance.OnSkipButtonUsed += _OnSkipTurn;
 
         SwitchToNextTurnState();
     }
@@ -42,7 +42,8 @@ public partial class RealPlayerController : BasePlayerController
 
     public override void EndTurn()
     {
-        gameController.boardController.boardElementsController.skipButton.OnReleasedTickable -= _OnSkipTurn;
+        GameController.Instance.OnSkipButtonUsed -= _OnSkipTurn;
+        base.EndTurn();
     }
 
     public override void AddTurnToStateQueue()
@@ -73,9 +74,8 @@ public partial class RealPlayerController : BasePlayerController
         selectedPiece = null;
     }
 
-    private void _OnSkipTurn(Vector3 hitPos){
+    private void _OnSkipTurn(){
         EmitSignal(SignalName.TurnSkipped);
-        gameController.boardController.boardElementsController.skipButton.IsActive = false;
         gameController.SwitchTurn();
     }
 

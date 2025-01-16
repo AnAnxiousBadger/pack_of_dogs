@@ -1,2 +1,2 @@
-PieceStartingPositions
+PiecePositions
 RollSettings

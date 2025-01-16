@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dcddcjb1gp8bk"]
+
+[ext_resource type="Texture2D" uid="uid://barfvern11q2n" path="res://Assets/materials/ziggurat_mats/sand_no_pebbles_diffuse.png" id="1_i5vpq"]
+[ext_resource type="Texture2D" uid="uid://coas2iqnapem1" path="res://Assets/materials/ziggurat_mats/sand_no_pebbles_normal.png" id="2_fbaj0"]
+
+[resource]
+albedo_texture = ExtResource("1_i5vpq")
+roughness = 0.9
+normal_enabled = true
+normal_texture = ExtResource("2_fbaj0")

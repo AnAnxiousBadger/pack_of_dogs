@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public partial class GameController : Node3D
 {
+	public static GameController Instance { get;  private set;}
 	// EXPORTS
 	[Export] public Camera3D cam;
 	[Export] public UIController uiController;
@@ -23,22 +24,22 @@ public partial class GameController : Node3D
 	public StaticBody3D StaticBodyUnderMouse {
 		get { return _staticBodyUnderMouse; }
 		private set {
-			if(value != _staticBodyUnderMouse){
-				if(_staticBodyUnderMouse is TickableController t1){
-					t1.OnHoverStopped();
-				}
-				_staticBodyUnderMouse = value;
-				if(value is TickableController t2){
-					t2.OnHover();
-				}
-			}
-			if(value is TickableController t3){
-				boardController.boardElementsController.HandleClickTickable(t3, _staticBodyHitPos);
-			}
+			boardController.boardElementsController.HandleTickableInterActions(_staticBodyUnderMouse, value, _staticBodyHitPos);
+			_staticBodyUnderMouse = value;
 		}
 	}
+	// SIGNALS
+	[Signal] public delegate void OnRollButtonUsedEventHandler();
+	[Signal] public delegate void OnRollButtonActivityChangeEventHandler(bool isActive);
+	[Signal] public delegate void OnSkipButtonUsedEventHandler();
+	[Signal] public delegate void OnSkipButtonActivityChangeEventHandler(bool isActive);
 	public override void _Ready()
 	{
+		if(Instance != null){
+			QueueFree();
+			return;
+		}
+		Instance = this;
 		SetUpGame();
 		SwitchTurn();
 	}
@@ -50,14 +51,14 @@ public partial class GameController : Node3D
     }
 
 	private void SetUpGame(){
-		uiController.ReadyUIController();
 		diceController.ReadyDiceController(this);
 		SetUpPlayers();
 		boardController.ReadyBoardController(this);
 		for (int i = 0; i < players.Count; i++)
 		{
-			players[i].piecesToDeliver = 1;
+			players[i].piecesToDeliver = players[i].pieces.Count;
 		}
+		uiController.SetUpUI();
 	}
 
 	private void SetUpPlayers(){
@@ -85,7 +86,6 @@ public partial class GameController : Node3D
 
 			// SET UI
 			ChangeTurnDisplaName();
-			uiController.SetDiceRollLabelUnset();
 		}
 	}
 
@@ -129,5 +129,18 @@ public partial class GameController : Node3D
 	public void EndGame(){
 		_playersQueue.Clear();
 		GD.Print("END");
+	}
+
+	public void RollButtonUsed(){
+		EmitSignal(SignalName.OnRollButtonUsed);
+	}
+	public void ChangeRollButtonActivity(bool isActive){
+		EmitSignal(SignalName.OnRollButtonActivityChange, isActive);
+	}
+	public void SkipButtonUsed(){
+		EmitSignal(SignalName.OnSkipButtonUsed);
+	}
+	public void ChangeSkipButtonActivity(bool isActive){
+		EmitSignal(SignalName.OnSkipButtonActivityChange, isActive);
 	}
 }

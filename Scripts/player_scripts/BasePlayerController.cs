@@ -12,7 +12,7 @@ public abstract partial class BasePlayerController : Node
     public GameController gameController;
     // OTHER
     public int playerIndex = -1;
-    private string _playerName = "";
+    [Export] private string _playerName = "";
 	public string PlayerName {
 		get { return _playerName; }
 		set { 
@@ -30,7 +30,7 @@ public abstract partial class BasePlayerController : Node
         set { 
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
-            gameController.boardController.SetplayerScoreLabel(this);
+            //gameController.boardController.SetplayerScoreLabel(this);
             if(_deliveredPieces == piecesToDeliver){
                 gameController.EndGame();
             }
@@ -49,6 +49,8 @@ public abstract partial class BasePlayerController : Node
     [Signal] public delegate void TurnSkippedEventHandler();
     [Signal] public delegate void PieceDeliveredEventHandler();
     [Signal] public delegate void LuckEventFiredEventHandler(float score);
+    [Signal] public delegate void TurnStartedEventHandler();
+    [Signal] public delegate void TurnEndedEventHandler();
     
     public void ReadyPlayer(){
         if(PlayerName == ""){
@@ -85,8 +87,11 @@ public abstract partial class BasePlayerController : Node
     public virtual void StartTurn(){
         turnStates = new();
         _previousStates = new();
+        EmitSignal(SignalName.TurnStarted);
     }
-    public abstract void EndTurn();
+    public virtual void EndTurn(){
+        EmitSignal(SignalName.TurnEnded);
+    }
     public abstract void ProcessTurn(float delta);
     public abstract void AddTurnToStateQueue();
 
@@ -122,18 +127,23 @@ public abstract partial class BasePlayerController : Node
                                 if(destinations[k].HasModifier("double_turn_modifier")){
                                     rollQualityForPiece = 1;
                                 }
-                                if(destinations[k].GetEnemyPieces(this).Count > 0){
+                                if(destinations[k].GetEnemyPiece(this) != null){
                                     rollQualityForPiece = 1;
                                     // Add roll that affects enemies
-                                    List<PieceController> enemyPiecesOnNode = destinations[k].GetEnemyPieces(this);
+                                    PieceController enemyPieceOnNode = destinations[k].GetEnemyPiece(this);
                                     List<BasePlayerController> playersAlreadyCounted = new();
-                                    for (int l = 0; l < enemyPiecesOnNode.Count; l++)
-                                    {
-                                        if(!playersAlreadyCounted.Contains(enemyPiecesOnNode[l].player)){
-                                            playersAlreadyCounted.Add(enemyPiecesOnNode[l].player);
-                                            badRollsForEnemies.Add((enemyPiecesOnNode[l].player, roll));
-                                        }
+                                    if(!playersAlreadyCounted.Contains(enemyPieceOnNode.player)){
+                                        playersAlreadyCounted.Add(enemyPieceOnNode.player);
+                                        badRollsForEnemies.Add((enemyPieceOnNode.player, roll));
                                     }
+
+                                    /*for (int l = 0; l < enemyPieceOnNode.Count; l++)
+                                    {
+                                        if(!playersAlreadyCounted.Contains(enemyPieceOnNode[l].player)){
+                                            playersAlreadyCounted.Add(enemyPieceOnNode[l].player);
+                                            badRollsForEnemies.Add((enemyPieceOnNode[l].player, roll));
+                                        }
+                                    }*/
 
                                 }
                             }
@@ -238,9 +248,6 @@ public abstract partial class BasePlayerController : Node
 
         return playerRollScores;
         
-    }
-    public void CalculateLuckyScore(){
-
     }
 
 }

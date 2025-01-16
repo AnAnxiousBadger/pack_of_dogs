@@ -6,10 +6,11 @@ public class PlayerRollScore
 {
     public BasePlayerController Player { get; private set; }
     public List<RollScore> RollScores{ get; private set; }
-    public bool isAffected { 
+    public bool IsAffected { 
         get {
-            return IsAffected();
-    }}
+            return GetIsAffected();
+        }
+    }
 
     public PlayerRollScore(BasePlayerController player, RollSettings rollSettings = null){
         this.Player = player;
@@ -22,7 +23,7 @@ public class PlayerRollScore
             
         }
     }
-    private bool IsAffected(){
+    private bool GetIsAffected(){
         for (int i = 0; i < RollScores.Count; i++)
         {
             if(RollScores[i].score != 0f){

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class TickableParticleSystemPoolController : Node3D
 {
-    private List<TickableParticleSystemQueue> _queues;
+    /*private List<TickableParticleSystemQueue> _queues;
     
     public override void _Ready()
     {
@@ -52,6 +52,6 @@ public partial class TickableParticleSystemPoolController : Node3D
                 _queues[i].EmitParticles(pos);
             }
         }
-    }
+    }*/
 
 }

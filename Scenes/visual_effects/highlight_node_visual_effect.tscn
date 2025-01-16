@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dby173sn3x80l"]
 
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/SimpleVisualEffectController.cs" id="1_kg3bg"]
 [ext_resource type="Shader" uid="uid://d3vrtlueo5ac2" path="res://Assets/materials/shaders/highlight_node_shader/highlight_node_shader.tres" id="1_qy0e2"]
-[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/VisualEffectController.cs" id="1_umbhi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kx5h1"]
 render_priority = 0
@@ -12,7 +12,7 @@ shader_parameter/noise_02_rotation_speed2 = 1.0
 [sub_resource type="QuadMesh" id="QuadMesh_s63kg"]
 
 [node name="highlight_node_visual_effect" type="Node3D"]
-script = ExtResource("1_umbhi")
+script = ExtResource("1_kg3bg")
 effectName = "highlight_node_visual_effect"
 poolCount = 3
 

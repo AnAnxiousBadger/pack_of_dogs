@@ -23,17 +23,16 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
     private void _OnDiceRolled(int roll){
         p.roll = roll;
         p.EmitSignal(BasePlayerController.SignalName.DiceRolled, roll);
-        //float luckyScore = luckyScoresForRolls[roll];
         for (int i = 0; i < playerRollScores.Count; i++)
         {
             PlayerRollScore playerRollScore = playerRollScores[i];
-            if(playerRollScore.isAffected){
+            if(playerRollScore.IsAffected){
                 playerRollScore.Player.EmitSignal(BasePlayerController.SignalName.LuckEventFired, playerRollScore.GetRollScore(roll));
             }
         }
         // SET SKIP IF CANNOT MOVE
         if(roll == 0){
-            p.gameController.boardController.boardElementsController.skipButton.IsActive = true;
+            GameController.Instance.ChangeSkipButtonActivity(true);
         }
         else{
             int noMovePicesCount = 0;
@@ -50,7 +49,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
                 }
             }
             if(noMovePicesCount == piecesInGameCount){
-                p.gameController.boardController.boardElementsController.skipButton.IsActive = true;
+                GameController.Instance.ChangeSkipButtonActivity(true);
             }
         }
 

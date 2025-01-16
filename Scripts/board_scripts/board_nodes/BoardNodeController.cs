@@ -15,12 +15,15 @@ public abstract partial class BoardNodeController : StaticBody3D
 	// OTHER
 	public bool canBeSteppedOn = true;
 	public List<PieceController> currPieces;
-	public Vector3 TopPos{
+	public virtual Vector3 TopPos{
 		get { return GlobalPosition + new Vector3(0f, 0.6f, 0f);}
 	}
+	private Queue<BoardNodeModifier> _onStepModQueue = new();
+	private PieceController _modsQueuePiece;
 	// SIGNALS
-	[Signal] public delegate void OnStepEventHandler(PieceController piece);
-	[Signal] public delegate void OnleaveEventHandler(PieceController piece);
+	//[Signal] public delegate void OnStepEventHandler(PieceController piece);
+	[Signal] public delegate void OnLeaveEventHandler(PieceController piece);
+	[Signal] public delegate void OnAllOnStepModifierAppliedEventHandler(BoardNodeController node);
 	
 	public virtual void SetUpNode(GameController gameController){
 		_gameController = gameController;
@@ -48,15 +51,15 @@ public abstract partial class BoardNodeController : StaticBody3D
 		}
 		return modifiers;
 	}
-	public List<PieceController> GetEnemyPieces(BasePlayerController ownPlayer){
-		List<PieceController> enemies = new();
+	public PieceController GetEnemyPiece(BasePlayerController ownPlayer){
+		PieceController enemy = null;
 		for (int i = 0; i < currPieces.Count; i++)
 		{
 			if(currPieces[i].player != ownPlayer){
-				enemies.Add(currPieces[i]);
+				enemy = currPieces[i];
 			}
 		}
-		return enemies;
+		return enemy;
 	}
 
 	public List<BoardNodeController> MoveAlongNodesFromNode(int steps, int playerIndex, bool canMoveToOwnPiece){
@@ -89,7 +92,42 @@ public abstract partial class BoardNodeController : StaticBody3D
 
 		return finalNodes;
 	}
+	public void ChainOnStepModifiers(PieceController piece, bool addKickVisualEffect){
+		_modsQueuePiece = piece;
+		List<BoardNodeModifier> mods = GetModifiers();
+		for (int i = 0; i < mods.Count; i++)
+		{
+			mods[i].OnModifierApplied += ApplyNextOnStepModInQueue;
+		}
+		_onStepModQueue = new Queue<BoardNodeModifier>(mods);
 
+		if(addKickVisualEffect){
+			VisualEffectController effect = GameController.Instance.visualEffectPool.PlayVisualEffect("kick_piece_visual_effect", GlobalPosition);
+			effect.OnEffectEnded += _OnKickEffectFinishedStartModifierChain;
+		}
+		else{
+			ApplyNextOnStepModInQueue(null);
+		}	
+	}
+	private void _OnKickEffectFinishedStartModifierChain(VisualEffectController effect){
+		effect.OnEffectEnded -= _OnKickEffectFinishedStartModifierChain;
+		ApplyNextOnStepModInQueue(null);
+	}
+	private void ApplyNextOnStepModInQueue(BoardNodeModifier triggeringMod){
+		if (triggeringMod != null)
+		{
+			triggeringMod.OnModifierApplied -= ApplyNextOnStepModInQueue;
+		}
+		
+		if(_onStepModQueue.Count > 0){
+			BoardNodeModifier mod = _onStepModQueue.Dequeue();
+			mod.ApplyOnStepModifier(_modsQueuePiece);
+		}
+		else{
+			DoOnStepNodeAction(_modsQueuePiece);
+			EmitSignal(SignalName.OnAllOnStepModifierApplied, this);
+		}
+	}
 	public abstract void Highlight();
 	public abstract void RemoveHighlight();
 	public abstract void DoOnLeaveNodeAction(PieceController piece);

@@ -6,13 +6,13 @@ public partial class VisualEffectController : Node3D
 	[Export] public string effectName;
 	[Export] public int poolCount;
 	public VisualEffectPoolController pool;
+	[Signal] public delegate void OnEffectEndedEventHandler(VisualEffectController effect);
 	public virtual void Play(Vector3 globalPos){
 		GlobalPosition = globalPos;
-		Visible = true;
 	}
 
 	public virtual void EndEffect(){
-		Visible = false;
+		EmitSignal(SignalName.OnEffectEnded, this);
 		pool.ReQueueEffect(this);
 	}
 }

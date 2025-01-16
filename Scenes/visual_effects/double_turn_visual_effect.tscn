@@ -1,18 +1,90 @@
-[gd_scene load_steps=27 format=3 uid="uid://bo6k7xqvn15aj"]
+[gd_scene load_steps=33 format=4 uid="uid://bo6k7xqvn15aj"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_xgltw"]
-[ext_resource type="ArrayMesh" uid="uid://pudmqpj15qgt" path="res://Assets/meshes/rosette_flower_mesh.res" id="2_hqvd7"]
-[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/rosette_mesh_shader.tres" id="3_2da2p"]
-[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/rosette_mesh_gradient_texture.tres" id="4_gn2o5"]
-[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/rosette_node_glow_shader.tres" id="5_3gp3p"]
-[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/rosette_glow_shader_noise_01.tres" id="6_ir01n"]
-[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/rosette_glow_shader_noise_02.tres" id="7_f2sj0"]
-[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/rosette_effect_particle_texture.png" id="8_hg483"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="3_2da2p"]
+[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_bottom_gradient_texture.tres" id="3_2th2q"]
+[ext_resource type="Texture2D" uid="uid://dphqeupe087jg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_top_gradient_texture.tres" id="3_55a2i"]
+[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_shader.tres" id="5_3gp3p"]
+[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_01.tres" id="6_ir01n"]
+[ext_resource type="Texture2D" uid="uid://curn2elo7ribq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_gradient.tres" id="6_rjboe"]
+[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="7_f2sj0"]
+[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_effect_particle_texture.png" id="8_hg483"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_djm85"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h4rf"]
 render_priority = 0
 shader = ExtResource("3_2da2p")
-shader_parameter/rosette_diffuse = ExtResource("4_gn2o5")
+shader_parameter/alpha = 1.0
+shader_parameter/rosette_diffuse = ExtResource("3_55a2i")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rdf7s"]
+_surfaces = [{
+"aabb": AABB(-0.307875, 0.00381333, -0.307875, 0.61575, 0.0953199, 0.61575),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMA"),
+"lods": [0.00385624, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("w8CVtOGaAABSgAAAsIAAAPXb//8N2QAADZ+VtCC/AAC/r7GKLK0AADVllbQxPwAAQYAAAEd/AADxff//AAAAAK2WlbRmPQAALX6xiko+AADhmpW0Oz8AALCAAACsfwAADdn//wkkAAAgv5W08WAAACytsYo/UAAAzcCVtDVlAAC3gAAAQYAAAP/////xfQAAmMKVtK2WAAC0wbGKLX4AADs/lbQdZQAArH8AAE5/AAAJJP//8SYAAPFglbTeQAAAP1CxitJSAADJmpW0zcAAAL1/AAC3gAAADYL/////AABRaZW0mMIAANGBsYq0wQAAHWWVtMPAAABOfwAAUoAAAPEm///12wAA3kCVtA2fAADSUrGKv68AADE/lbTJmgAAR38AAL1/AAAAAP//DYIAAGY9lbRRaQAASj6xitGBAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kmu6s"]
+resource_name = "double_turn_rosette_mesh_rosette_flower_mesh_001"
+_surfaces = [{
+"aabb": AABB(-0.307875, 0.00381333, -0.307875, 0.61575, 0.0953199, 0.61575),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9Dfg=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMA"),
+"lods": [0.00385624, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQA")],
+"material": SubResource("ShaderMaterial_5h4rf"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("w8CVtOGadv9SgAAAsIB3/PXb//8N2SH7DZ+VtCC/eve/r7GKLK3a+zVllbQxP9vJQYAAAEd/OMTxff//AABxxa2WlbRmPTrALX6xiko+0cThmpW0Oz+y17CAAACsf9jVDdn//wkkR9cgv5W08WCq1SytsYo/UIfWzcCVtDVliOq3gAAAQYDk6//////xfVXtmMKVtK2Wku60wbGKLX6R7Ds/lbQdZb/ErH8AAE5/yrsJJP//8SZxvPFglbTeQI+zP1CxitJSIrzJmpW0zcCL671/AAC3gBflDYL/////9uNRaZW0mMIE3tGBsYq0wZbkHWWVtMPAjNhOfwAAUoD7z/Em///12zfP3kCVtA2f+sbSUrGKv6+nzzE/lbTJml7KR38AAL1/gcAAAP//DYJbwGY9lbRRaXK2Sj6xitGBecBCa0e0tMTBEgDFZhI6vaUP4MSYEni1Xpg9sbSgUbGDoYetQqpLsQ2hGJv4qIuYYLH8mHixAJfwucOYYrE2gqK4DYKQwLGCF8BKg6nHW4JOwE/cI3+Y2CCGytdHiIHT04882B+Hz9AcJ+bKMiShyyYk4cRNIEXLMCR51ow7G9J4OFjT0zgpzn80tdKnOKvftFyM3nxbt+CjXD7frFmS3whc")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rdf7s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_di1ef"]
+render_priority = 0
+shader = ExtResource("3_2da2p")
+shader_parameter/alpha = 1.0
+shader_parameter/rosette_diffuse = ExtResource("3_2th2q")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dbppr"]
+_surfaces = [{
+"aabb": AABB(-0.456085, -0.0305201, -0.456085, 0.912169, 0.11777, 0.912169),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMAKwAuACoAKwAvAC4AKQAsACgAKQAtACwAPQAvACsAKgAtACkAKgAuAC0AKAAsADQALwAyAC4ALwAzADIALQAwACwALQAxADAAPQAzAC8ALgAxAC0ALgAyADEALAAwADQAMwA3ADIAMwA4ADcAMQA1ADAAMQA2ADUAPQA4ADMAMgA2ADEAMgA3ADYAMAA1ADQAOAA7ADcAOAA8ADsANgA5ADUANgA6ADkAPQA8ADgANwA6ADYANwA7ADoANQA5ADQAPAAqADsAPAArACoAOgAoADkAOgApACgAPQArADwAOwApADoAOwAqACkAOQAoADQA"),
+"lods": [0.0339501, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQAKwAsACgAKwAvACwAPQAvACsAPQArADwAPQA8ADcAKAAsADQALAAwADQAOQAoADQALwAwACwALwAzADAAPQAzAC8APQA3ADMAMwA3ADAAMAA3ADQANwA8ADkANwA5ADQAPAAoADkAPAArACgA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 62,
+"vertex_data": PackedByteArray("ZctcjQ2AAACbgFdCjYAAAP//AACgsgAA0rhcje6xAAAFwllXOpkAALhKXI2lSgAA9X9XQix/AABJSQAAsAEAAB97XI2CNAAAJmNZV3g/AAANgFyNmTQAAI2AV0JjfwAAoLIAAAAAAADusVyNLEcAADqZWVf5PQAAWbVcjbhKAADSgFdC9X8AAE7+AABJSQAAfMtcjR97AACGwFlXJmMAAJk0XI3xfwAAY39XQnF/AAAAAAAAXk0AACxHXI0QTgAA+T1ZV8RmAABGtVyNWbUAAAmAV0LSgAAAtbYAAE7+AADfhFyNfMsAANicWVeGwAAA8X9cjWXLAABxf1dCm4AAAF5NAAD//wAAEE5cjdK4AADEZllXBcIAAKVKXI1GtQAALH9XQgmAAACwAQAAtbYAAII0XI3fhAAAeD9ZV9icAAD/f9vnZ3YAAP9/qKh6cAAA/3+JWnpwAAD/f1YbZ3YAAB6J2+cIfQAAwo6oqDN7AADCjolaM3sAAB6JVhsIfQAAooXb58KHAAAeiaiojYwAAB6JiVqNjAAAooVWG8KHAAD/f////38AAFx62+fChwAA4HaoqI2MAADgdolajYwAAFx6VhvChwAA4Hbb5wh9AAA8caioM3sAADxxiVozewAA4HZWGwh9AAD/fzID/38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w0dy4"]
+resource_name = "double_turn_rosette_mesh_rosette_flower_mesh"
+_surfaces = [{
+"aabb": AABB(-0.456085, -0.0305201, -0.456085, 0.912169, 0.11777, 0.912169),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfpmZMjOZmWVmmZmZmZmZzMxmZjIzZmZlZmZmmZlmZszMMzMyMzMzZWYzM5mZMzPMzJkZAADMTAAA/38AADKzAABl5gAAAAAyM///MjMAAGVm//9lZgAAmZn//5mZAADMzP//zMzMzDIzzMxlZszMmJnMzMzMmRn//8xM////f///MrP//2Xm//+ZmTIzmZkyM5mZMjOZmTIzmZnMzJmZzMyZmczMmZnMzGZmMjNmZjIzZmYyM2ZmMjNmZszMZmbMzGZmzMxmZszMMzMyMzMzMjMzMzIzMzMyMzMzMjMzM8zMMzPMzDMzzMyZGQAAzEwAAP9/AAAyswAAZeYAAAAAmZkAAJmZAACZmf//mZn//5mZ//+ZmczMMjPMzDIzzMwyM8zMMjPMzMzMzMzMzMzMzMzMzMzMmRn//8xM////f///MrP//2Xm//8="),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMAKwAuACoAKwAvAC4AKQAsACgAKQAtACwARwAvACsAKgAtACkAKgAuAC0AKAAsADYALwAyAC4ALwAzADIALQAwACwALQAxADAARgAzAC8ALgAxAC0ALgAyADEALAAwADUAMwA9ADIAMwA/AD0AMQA5ADAAMQA7ADkARQA/ADMAMgA7ADEAMgA9ADsAMAA5ADQAQABDAD4AQABEAEMAPABBADoAPABCAEEASQBEAEAAPgBCADwAPgBDAEIAOgBBADgARAAqAEMARAArACoAQgAoAEEAQgApACgASAArAEQAQwApAEIAQwAqACkAQQAoADcA"),
+"lods": [0.0339501, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQATgBSAEoATwBWAFMAdwAvAFAAeABQAHIAeQByAGsASwBUAGQAVABcAGMAcABLAGUAVwBaAFUAWABfAFsAdgBgAFkAdQBoAGAAYQBnAF0AXgBpAGIAagBxAG0AbABuAGYAcwBMAG8AdABRAE0A")],
+"material": SubResource("ShaderMaterial_di1ef"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 122,
+"vertex_data": PackedByteArray("ZctcjQ2A4v6bgFdCjYC5/v//AACgsgD70rhcje6xCPwFwllXOpkr/rhKXI2lSqXO9X9XQix/38RJSQAAsAGMyh97XI2CNNrAJmNZV3g/uccNgFyNmTS/2o2AV0Jjf/nToLIAAAAAvdrusVyNLEfh0zqZWVf5PV3XWbVcjbhKuevSgFdC9X9K6E7+AABJSRvvfMtcjR97MOuGwFlXJmOv65k0XI3xf3vKY39XQnF/db8AAAAAXk1zwixHXI0QTm63+T1ZV8Rm9cBGtVyNWbXV7QmAV0LSgLzqtbYAAE7+jOXfhFyNfMuE49icWVeGwC7o8X9cjWXLfdxxf1dCm4AO1l5NAAD//6vSEE5cjdK4K83EZllXBcJk1KVKXI1GtazPLH9XQgmAKsawAQAAtbadxYI0XI3fhH68eD9ZV9ic5cX/f9vnZ3b///9/qKh6cP///3+JWnpw////f1YbZ3b//x6J2+cIfQLSwo6oqDN7Y83CjolaM3tjzR6JVhsIfQLSooXb58KHwqoeiaiojYwAnB6JiVqNjACcooVWG8KHwqr/f////3//v/9/////f17O/3////9/C+7/f////38L7v9/////f17OXHrb58KH+6lcetvnwoeIs+B2qKiNjBac4HaoqI2MHp7gdolajYwWnOB2iVqNjB6eXHpWG8KH+6lcelYbwoeIs+B22+cIfQLSPHGoqDN7Y808cYlaM3tjzeB2VhsIfQLS/38yA/9//7//fzID/39ezv9/MgP/fwvu/38yA/9/C+7/fzID/39ezv9/2+dndpX1/3/b52d2hv//f9vnZ3aF8f9/2+dndnj1/39WG2d2ofT/f1YbZ3bj7v9/Vhtndi///39WG2d2NPQeidvnCH3h2R6J2+cIfTfWHonb5wh9V9ceidvnCH1txx6JVhsIfTrWHolWGwh9wcQeiVYbCH17xB6JVhsIfbHUooXb58KHMKyihdvnwof7pKKF2+fCh4q3ooXb58KHHZOihdvnwocKrKKFVhvCh5SoooVWG8KHyLSihVYbwod2lf9/////f/+r/3////9/7Mf/f////3/b6/9/////f4vr/3////9/ELrgdolajYyhkuB2iVqNjByt4HaJWo2Mkp/gdolajYzSquB2iVqNjDev4HaJWo2MCangdtvnCH0XxOB22+cIfZTI4Hbb5wh9vNPgdtvnCH003OB2VhsIfXfF4HZWGwh9INbgdlYbCH3K0+B2VhsIfcLY/38yA/9/k67/fzID/38fx/9/MgP/f/Xs/38yA/9/Quz/fzID/39AweB+PLcXf/m/HDxrBA5ESwVbPtoBsclplubF9Jsrx/ygO8TypqbGdJ6/rQmjLKprqiitjqs+qveyxavqqoSXFK07lVa1aJmUs8yXf7ttl1q06/vdfXn7QH2d9hqRgvcKkzb8SofA0v4YdcpuFurMTBOWw8wPuMvfFM7bny5S1MQqbdmZKdHQfiTj1i4qQuf4SV/hrUWm6YVGoOJbQIDlEEb/f+7X/38F8AZw///vV///W7i3F0iZowpbdUkZR2hbODXTzj4Or4QjelwOLzFBNVP+//9/FtotNPDI4xHikQ23LbTopdTgV68gp2auYLZ11puX28h2Vp7J20hj6FgvKZ9nLt3Yt5ejx6OKtea2Zlv1o0dH6AAA/3/RSxZaHG7xSA43G+7oJdHLAHj/B4J+fQFWcVXx0XvQ+7d+RwFpjWkN5oIY/RiH5fglqYgOAXewF4DFPR05orwNj3BSJ/KJ5gMvcREo/GGASP+2fSivarAcCtkQQ/5shRkv5gVMSlPZO8w2EmGfVnw3dveIiD3Sni8Vv3QPmo9dwNip4Lb+ZcfCliAnqjGv269rmXf6JS03zMy+Nbzahjru5JQnx2CLwOO4nQy4S2Ji9OM66+JAeOr881sE88IEwYSaT5JT9G+9Qcc+AvCwM8/T")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dbppr")
 
 [sub_resource type="QuadMesh" id="QuadMesh_wrk15"]
 
@@ -21,6 +93,7 @@ render_priority = 0
 shader = ExtResource("5_3gp3p")
 shader_parameter/noise_rotation_speed = 1.0
 shader_parameter/shader_alpha = 0.0
+shader_parameter/color_gradient = ExtResource("6_rjboe")
 shader_parameter/noise_01 = ExtResource("6_ir01n")
 shader_parameter/noise_02 = ExtResource("7_f2sj0")
 
@@ -39,14 +112,14 @@ particles_anim_loop = false
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.261484, 1), 0.0, 0.0, 0, 0, Vector2(0.678445, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_vltca"]
+[sub_resource type="CurveTexture" id="CurveTexture_3viey"]
 curve = SubResource("Curve_yhf8k")
 
 [sub_resource type="Curve" id="Curve_i3q5d"]
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.15), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_1o5ct"]
+[sub_resource type="CurveTexture" id="CurveTexture_k2r3o"]
 curve = SubResource("Curve_i3q5d")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4ltm"]
@@ -59,9 +132,9 @@ tangential_accel_min = 5.0
 tangential_accel_max = 5.0
 damping_min = 0.3
 damping_max = 0.3
-scale_curve = SubResource("CurveTexture_1o5ct")
+scale_curve = SubResource("CurveTexture_k2r3o")
 color = Color(3, 1, 1, 1)
-alpha_curve = SubResource("CurveTexture_vltca")
+alpha_curve = SubResource("CurveTexture_3viey")
 
 [sub_resource type="QuadMesh" id="QuadMesh_46kqt"]
 
@@ -106,7 +179,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("rosette_mesh:position")
+tracks/0/path = NodePath("rosette_bottom_mesh:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +191,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("rosette_mesh:rotation")
+tracks/1/path = NodePath("rosette_bottom_mesh:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -142,7 +215,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("tab_cuneiform_particlerm_:emitting")
+tracks/3/path = NodePath("tab_cuneiform_particles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -163,6 +236,54 @@ tracks/4/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rosette_top_mesh:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("rosette_top_mesh:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("rosette_bottom_mesh:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("rosette_top_mesh:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1)]
+}
 
 [sub_resource type="Animation" id="Animation_bouh7"]
 resource_name = "rosette_effect_animation"
@@ -170,11 +291,11 @@ length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("rosette_mesh:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath("rosette_bottom_mesh:position")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.7, 2.2),
+"times": PackedFloat32Array(0, 0.1, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.397311, 0), Vector3(0, 0.577, 0), Vector3(0, 0.397311, 0)]
@@ -182,11 +303,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("rosette_mesh:rotation")
+tracks/1/path = NodePath("rosette_bottom_mesh:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 2.2),
+"times": PackedFloat32Array(0, 2.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
@@ -195,10 +316,10 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter/shader_alpha")
-tracks/2/interp = 2
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.7, 2.2),
+"times": PackedFloat32Array(0, 0.1, 2.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
@@ -206,11 +327,11 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("tab_cuneiform_particlerm_:emitting")
+tracks/3/path = NodePath("tab_cuneiform_particles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.6),
+"times": PackedFloat32Array(0, 0.0333333, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -222,7 +343,7 @@ tracks/4/path = NodePath("light_particles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.6),
+"times": PackedFloat32Array(0, 0.0333333, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -241,6 +362,54 @@ tracks/5/keys = {
 "method": &"EndEffect"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("rosette_top_mesh:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.397311, 0), Vector3(0, 0.562, 0), Vector3(0, 0.397311, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("rosette_top_mesh:rotation")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("rosette_bottom_mesh:scale")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1), Vector3(1.15, 1.15, 1.15), Vector3(1.1, 1.1, 1.1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("rosette_top_mesh:scale")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1), Vector3(1.15, 1.15, 1.15), Vector3(1.1, 1.1, 1.1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ah4u"]
 _data = {
@@ -253,18 +422,22 @@ script = ExtResource("1_xgltw")
 effectName = "double_turn_visual_effect"
 poolCount = 3
 
-[node name="rosette_mesh" type="MeshInstance3D" parent="."]
+[node name="rosette_top_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
-mesh = ExtResource("2_hqvd7")
+mesh = SubResource("ArrayMesh_kmu6s")
+skeleton = NodePath("../rosette_bottom_mesh")
+
+[node name="rosette_bottom_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_w0dy4")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_djm85")
 
 [node name="node_glow" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.503465, 0)
 mesh = SubResource("QuadMesh_wrk15")
 surface_material_override/0 = SubResource("ShaderMaterial_0qr0k")
 
-[node name="tab_cuneiform_particlerm_" type="GPUParticles3D" parent="."]
+[node name="tab_cuneiform_particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543442, 0)
 material_override = SubResource("StandardMaterial3D_6lpfj")
 emitting = false

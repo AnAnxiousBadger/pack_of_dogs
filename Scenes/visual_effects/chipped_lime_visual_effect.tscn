@@ -33,7 +33,6 @@ color_initial_ramp = SubResource("GradientTexture1D_bamlh")
 [node name="chipped_lime_visual_effect" type="Node3D"]
 script = ExtResource("1_e0ddx")
 effectName = "chipped_lime_visual_effect"
-isPositionDependent = true
 poolCount = 5
 
 [node name="particles" type="GPUParticles3D" parent="."]

@@ -1,92 +1,92 @@
-[gd_resource type="Resource" script_class="PieceStartingPositions" load_steps=17 format=3 uid="uid://wmjjs4j0t5rd"]
+[gd_resource type="Resource" script_class="PiecePositions" load_steps=17 format=3 uid="uid://btqbu51rifne0"]
 
-[ext_resource type="Script" path="res://Scripts/board_scripts/PieceStartingPositions.cs" id="1_ttop3"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/PieceStartingPosition.cs" id="2_k27uv"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePosition.cs" id="1_imskh"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePositions.cs" id="2_mghtf"]
 
-[sub_resource type="Resource" id="Resource_n8bbc"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_gkrh8"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(-4.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_vywsu"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_p757n"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(-3.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_1rong"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_inmoc"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(-2.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_su0cv"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_fy1my"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(-1.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_p68ao"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_2q5j6"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(-0.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_fi02m"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_f45fv"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(0.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_1s15h"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_7q1kq"]
+script = ExtResource("1_imskh")
 playerIndex = 0
 pos = Vector3(1.5, -0.4, 3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_3uy8s"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_r5woy"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(-4.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_7y747"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_b2h4m"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(-3.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_au45g"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_m3bvn"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(-2.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_6yg7r"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_y2baf"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(-1.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_bscek"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_xy4dp"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(-0.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_u4bb8"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_8urll"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(0.5, -0.4, -3)
 isOccupied = false
 
-[sub_resource type="Resource" id="Resource_1bste"]
-script = ExtResource("2_k27uv")
+[sub_resource type="Resource" id="Resource_6l41d"]
+script = ExtResource("1_imskh")
 playerIndex = 1
 pos = Vector3(1.5, -0.4, -3)
 isOccupied = false
 
 [resource]
-script = ExtResource("1_ttop3")
-startingPositions = Array[Object]([SubResource("Resource_n8bbc"), SubResource("Resource_vywsu"), SubResource("Resource_1rong"), SubResource("Resource_su0cv"), SubResource("Resource_p68ao"), SubResource("Resource_fi02m"), SubResource("Resource_1s15h"), SubResource("Resource_3uy8s"), SubResource("Resource_7y747"), SubResource("Resource_au45g"), SubResource("Resource_6yg7r"), SubResource("Resource_bscek"), SubResource("Resource_u4bb8"), SubResource("Resource_1bste")])
+script = ExtResource("2_mghtf")
+positions = [SubResource("Resource_gkrh8"), SubResource("Resource_p757n"), SubResource("Resource_inmoc"), SubResource("Resource_fy1my"), SubResource("Resource_2q5j6"), SubResource("Resource_f45fv"), SubResource("Resource_7q1kq"), SubResource("Resource_r5woy"), SubResource("Resource_b2h4m"), SubResource("Resource_m3bvn"), SubResource("Resource_y2baf"), SubResource("Resource_xy4dp"), SubResource("Resource_8urll"), SubResource("Resource_6l41d")]

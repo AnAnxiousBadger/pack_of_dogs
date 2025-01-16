@@ -1,0 +1,92 @@
+[gd_resource type="Resource" script_class="PiecePositions" load_steps=17 format=3 uid="uid://duffpvm1mbita"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePosition.cs" id="1_jxal1"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/PiecePositions.cs" id="2_acd11"]
+
+[sub_resource type="Resource" id="Resource_c6d32"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(0.022, -0.203, 1.5)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_25s8e"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(-0.501, -0.004, 1.476)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_7p7hi"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(-0.477, 0.194, 0.732)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_hyqot"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(-0.242, 0.194, 0.736)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_08l62"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(-0.214, 0.395, 1.241)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_5a7ov"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(0.256, 0.597, 1.21)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_q8j5k"]
+script = ExtResource("1_jxal1")
+playerIndex = 0
+pos = Vector3(0.159, 0.684, 0.849)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_cb4m4"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(0.022, -0.203, -1.5)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_dfqly"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(-0.501, -0.004, -1.476)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_b8k0o"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(-0.477, 0.194, -0.732)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_5qvf7"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(-0.242, 0.194, -0.736)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_rw1r5"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(-0.214, 0.395, -1.241)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_smu1k"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(0.256, 0.597, -1.21)
+isOccupied = false
+
+[sub_resource type="Resource" id="Resource_1ow2r"]
+script = ExtResource("1_jxal1")
+playerIndex = 1
+pos = Vector3(0.159, 0.684, -0.849)
+isOccupied = false
+
+[resource]
+script = ExtResource("2_acd11")
+positions = [SubResource("Resource_c6d32"), SubResource("Resource_25s8e"), SubResource("Resource_7p7hi"), SubResource("Resource_hyqot"), SubResource("Resource_08l62"), SubResource("Resource_5a7ov"), SubResource("Resource_q8j5k"), SubResource("Resource_cb4m4"), SubResource("Resource_dfqly"), SubResource("Resource_b8k0o"), SubResource("Resource_5qvf7"), SubResource("Resource_rw1r5"), SubResource("Resource_smu1k"), SubResource("Resource_1ow2r")]

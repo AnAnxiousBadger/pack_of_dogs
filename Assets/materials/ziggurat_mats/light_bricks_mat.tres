@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cw8768jlfuvki"]
+
+[ext_resource type="Texture2D" uid="uid://lqrjikrq2a43" path="res://Assets/materials/ziggurat_mats/light_bricks_diffuse.png" id="1_avr6f"]
+[ext_resource type="Texture2D" uid="uid://cwt5t2pkv26aj" path="res://Assets/materials/ziggurat_mats/bricks_normal.png" id="2_1no8g"]
+
+[resource]
+albedo_texture = ExtResource("1_avr6f")
+roughness = 0.9
+normal_enabled = true
+normal_texture = ExtResource("2_1no8g")
