@@ -1,10 +1,10 @@
+res://Scripts/UI_scripts
 res://Assets/materials/shaders/end_node_shader
 res://Scenes/visual_effects
 res://Assets/meshes
 res://Assets
 res://Assets/materials/end_node_mat
 res://Assets/UI
-res://Scripts/UI_scripts
 res://Scenes/UI_scenes
 res://Scripts/visual_effects_scripts
 res://Scenes/board_scenes

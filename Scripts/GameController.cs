@@ -17,7 +17,7 @@ public partial class GameController : Node3D
 	public BasePlayerController currPlayer;
 	private Vector2 mousePos = Vector2.Zero;
 	public enum CollisionMask {NODE, PIECE}
-	public CollisionMask _collisionMask = CollisionMask.PIECE;
+	public CollisionMask collisionMask = CollisionMask.PIECE;
 	private const float MOUSERAYDIST = 1000f;
 	private StaticBody3D _staticBodyUnderMouse = null;
 	private Vector3 _staticBodyHitPos = Vector3.Zero;
@@ -33,6 +33,7 @@ public partial class GameController : Node3D
 	[Signal] public delegate void OnRollButtonActivityChangeEventHandler(bool isActive);
 	[Signal] public delegate void OnSkipButtonUsedEventHandler();
 	[Signal] public delegate void OnSkipButtonActivityChangeEventHandler(bool isActive);
+	[Signal] public delegate void GameEndedEventHandler(BasePlayerController winner);
 	public override void _Ready()
 	{
 		if(Instance != null){
@@ -51,9 +52,9 @@ public partial class GameController : Node3D
     }
 
 	private void SetUpGame(){
-		diceController.ReadyDiceController(this);
+		diceController.ReadyDiceController();
 		SetUpPlayers();
-		boardController.ReadyBoardController(this);
+		boardController.ReadyBoardController();
 		for (int i = 0; i < players.Count; i++)
 		{
 			players[i].piecesToDeliver = players[i].pieces.Count;
@@ -69,7 +70,6 @@ public partial class GameController : Node3D
 		for (int i = 0; i < playersArray.Count; i++)
 		{
 			BasePlayerController p = (BasePlayerController)playersArray[i];
-			p.gameController = this;
 			p.playerIndex = i;
 			p.ReadyPlayer();
 			players.Add(p);
@@ -108,10 +108,10 @@ public partial class GameController : Node3D
 			To = end
 		};
 
-		if(_collisionMask == CollisionMask.NODE){
+		if(collisionMask == CollisionMask.NODE){
 			rayParams.CollisionMask = 0b00000000_00000000_00000000_00000101;
 		}
-		else if(_collisionMask == CollisionMask.PIECE){
+		else if(collisionMask == CollisionMask.PIECE){
 			rayParams.CollisionMask = 0b00000000_00000000_00000000_00000110;
 		}
 
@@ -126,8 +126,9 @@ public partial class GameController : Node3D
         return (resultBody, resultCoord);
     }
 
-	public void EndGame(){
+	public void EndGame(BasePlayerController winner){
 		_playersQueue.Clear();
+		EmitSignal(SignalName.GameEnded, winner);
 		GD.Print("END");
 	}
 

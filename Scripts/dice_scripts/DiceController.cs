@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public partial class DiceController : Node
 {
 	// REFERENCES
-	private GameController _gameController;
 	private Timer _diceRollTimer;
 	// OTHER
 	private bool _canRoll = false;
@@ -19,8 +18,7 @@ public partial class DiceController : Node
 	// SIGNALS
 	[Signal] public delegate void DiceRolledEventHandler(int roll);
 
-	public void ReadyDiceController(GameController gameController){
-		_gameController = gameController;
+	public void ReadyDiceController(){
 		GameController.Instance.OnRollButtonUsed += _OnRollDiceRollButtonUp;
 	}
 

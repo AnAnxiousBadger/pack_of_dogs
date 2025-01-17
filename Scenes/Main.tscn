@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=45 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://tlk2gdo5dwcs" path="res://Scenes/visual_effects/kick_piece_visual_effect.tscn" id="8_m8bxi"]
 [ext_resource type="PackedScene" uid="uid://w5o5xjmn1xn1" path="res://Scenes/visual_effects/protected_node_modifier_visual_effect.tscn" id="9_qnedv"]
 [ext_resource type="PackedScene" uid="uid://ckjnx582x3uc6" path="res://Scenes/visual_effects/end_node_L_highlight_visual_effect.tscn" id="11_ms1ad"]
-[ext_resource type="Script" path="res://Scripts/UI_scripts/EndOfGameUIController.cs" id="12_c0w3o"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/StatsUIController.cs" id="12_c0w3o"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/TurnPanelUIController.cs" id="12_eudcj"]
 [ext_resource type="PackedScene" uid="uid://cxklwjiq12pfm" path="res://Scenes/visual_effects/end_node_R_highlight_visual_effect.tscn" id="12_fdi6m"]
 [ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_01.tscn" id="13_5bfqh"]
@@ -29,6 +29,9 @@
 [ext_resource type="StyleBox" uid="uid://bj0sti6muiqx2" path="res://Assets/UI/end_of_game_light_style_box_texture.tres" id="22_2bbm8"]
 [ext_resource type="Texture2D" uid="uid://cg3vx2l2brskj" path="res://Assets/UI/cuneiform_texture.png" id="24_flpg6"]
 [ext_resource type="PackedScene" uid="uid://dgdh8witafwgo" path="res://Scenes/UI_scenes/player_score_container.tscn" id="25_m8qy1"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/StatsContainer.cs" id="29_6daux"]
+[ext_resource type="Texture2D" uid="uid://dvskxkivesq1n" path="res://Assets/UI/menu_button_texture.png" id="31_msxn7"]
+[ext_resource type="Texture2D" uid="uid://81kuaib1ula6" path="res://Assets/UI/menu_button_pressed_texture.png" id="32_tln0x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x8bys"]
 
@@ -146,6 +149,13 @@ font_size = 20
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.196078)
 shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tashm"]
+bg_color = Color(0.388235, 0.329412, 0.243137, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ROOT" type="Node3D"]
 
@@ -283,7 +293,13 @@ libraries = {
 "": SubResource("AnimationLibrary_c14mh")
 }
 
-[node name="end_of_game_UI" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_player", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
+[node name="player_scores_UI" type="VBoxContainer" parent="UI_root"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = 40.0
+offset_bottom = 40.0
+
+[node name="stats_UI_controller" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_tableTitle", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = 8
@@ -299,7 +315,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("17_e855u")
 script = ExtResource("12_c0w3o")
-_player = NodePath("../../players_container/player_01")
+_tableTitle = NodePath("MarginContainer/VBoxContainer/PanelContainer2/PanelContainer/MarginContainer/table_title")
 _playerNameContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6/MarginContainer/player_names_container")
 _piecesDeliveredContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/MarginContainer/pieces_delivered_container")
 _rollStatsContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/roll_stats_container")
@@ -311,11 +327,11 @@ _luckyScoreContainer = NodePath("MarginContainer/VBoxContainer/ScrollContainer/V
 _labelType01 = ExtResource("13_5bfqh")
 _rollStatsDisplay = ExtResource("14_g8v77")
 
-[node name="background_blur" type="Panel" parent="UI_root/end_of_game_UI"]
+[node name="background_blur" type="Panel" parent="UI_root/stats_UI_controller"]
 material = SubResource("ShaderMaterial_t8du5")
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 10
@@ -323,211 +339,243 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer"]
 clip_children = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_al31t")
 
-[node name="PanelContainer" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/PanelContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4esgw")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/PanelContainer2/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/PanelContainer2/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/PanelContainer2/PanelContainer/MarginContainer"]
+[node name="table_title" type="Label" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/PanelContainer2/PanelContainer/MarginContainer"]
 layout_mode = 2
 text = "End of Game Summary"
 label_settings = SubResource("LabelSettings_4r5ey")
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PanelContainer6" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer6" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("22_2bbm8")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="player_names_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6/MarginContainer"]
+[node name="player_names_container" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="player" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6/MarginContainer/player_names_container" instance=ExtResource("13_5bfqh")]
+[node name="player" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer6/MarginContainer/player_names_container" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 horizontal_alignment = 0
 
-[node name="prophecy" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="prophecy" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
+[node name="Label" type="Label" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Prophecy"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
+[node name="Label2" type="Label" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "The dice favored you, then the serpent delayed your path, but your resolve carried you forward. Enki watches over you."
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Label3" type="Label" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
+[node name="Label3" type="Label" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/prophecy"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "The dice favored you, then the serpent delayed your path, but your resolve carried you forward. Enki watches over you."
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="PanelContainer5" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("19_mo5jj")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="pieces_delivered_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/MarginContainer"]
+[node name="pieces_delivered_container" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="pieces_delivered2" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/MarginContainer/pieces_delivered_container" instance=ExtResource("13_5bfqh")]
+[node name="pieces_delivered2" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/MarginContainer/pieces_delivered_container" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Pieces Delivered"
 horizontal_alignment = 0
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("22_2bbm8")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="roll_stats_container" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer"]
+[node name="roll_stats_container" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="roll_stats" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/roll_stats_container" instance=ExtResource("13_5bfqh")]
+[node name="roll_stats" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/roll_stats_container" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Roll Statistics"
 horizontal_alignment = 0
 
-[node name="PanelContainer7" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer7" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("19_mo5jj")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="distance_travelled" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7/MarginContainer"]
+[node name="distance_travelled" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="own_pieces_hit" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7/MarginContainer/distance_travelled" instance=ExtResource("13_5bfqh")]
+[node name="own_pieces_hit" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer7/MarginContainer/distance_travelled" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Distance Pieces Travelled"
 horizontal_alignment = 0
 
-[node name="PanelContainer3" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("22_2bbm8")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="enemies_pieces_hit" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/MarginContainer"]
+[node name="enemies_pieces_hit" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="enemy_pieces_hi" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/MarginContainer/enemies_pieces_hit" instance=ExtResource("13_5bfqh")]
+[node name="enemy_pieces_hi" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/MarginContainer/enemies_pieces_hit" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Enemy Pieces Hit"
 horizontal_alignment = 0
 
-[node name="PanelContainer8" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer8" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("19_mo5jj")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="own_pieces_hit" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8/MarginContainer"]
+[node name="own_pieces_hit" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="own_pieces_hit" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8/MarginContainer/own_pieces_hit" instance=ExtResource("13_5bfqh")]
+[node name="own_pieces_hit" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer8/MarginContainer/own_pieces_hit" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Own Pieces Hit"
 horizontal_alignment = 0
 
-[node name="PanelContainer4" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("22_2bbm8")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="turns_skipped" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/MarginContainer"]
+[node name="turns_skipped" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="turns_skipped" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/MarginContainer/turns_skipped" instance=ExtResource("13_5bfqh")]
+[node name="turns_skipped" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/MarginContainer/turns_skipped" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Turns Skipped"
 horizontal_alignment = 0
 
-[node name="PanelContainer9" type="PanelContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer9" type="PanelContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("19_mo5jj")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9"]
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9"]
 layout_mode = 2
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="lucky_score" type="HBoxContainer" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9/MarginContainer"]
+[node name="lucky_score" type="HBoxContainer" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+script = ExtResource("29_6daux")
 
-[node name="lucky_score" parent="UI_root/end_of_game_UI/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9/MarginContainer/lucky_score" instance=ExtResource("13_5bfqh")]
+[node name="lucky_score" parent="UI_root/stats_UI_controller/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer9/MarginContainer/lucky_score" instance=ExtResource("13_5bfqh")]
 layout_mode = 2
 text = "Lucky Score"
 horizontal_alignment = 0
 
-[node name="player_scores_UI" type="VBoxContainer" parent="UI_root"]
+[node name="PanelContainer" type="PanelContainer" parent="UI_root"]
 layout_mode = 1
 anchors_preset = -1
-offset_top = 40.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tashm")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureButton" type="TextureButton" parent="UI_root/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("31_msxn7")
+texture_pressed = ExtResource("32_tln0x")
+ignore_texture_size = true
+stretch_mode = 5

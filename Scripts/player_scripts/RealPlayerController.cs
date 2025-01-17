@@ -76,7 +76,7 @@ public partial class RealPlayerController : BasePlayerController
 
     private void _OnSkipTurn(){
         EmitSignal(SignalName.TurnSkipped);
-        gameController.SwitchTurn();
+        GameController.Instance.SwitchTurn();
     }
 
     

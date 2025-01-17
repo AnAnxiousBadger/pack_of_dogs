@@ -11,8 +11,6 @@ public partial class PieceController : StaticBody3D
     private bool _isMoving = false;
     private Node3D _guideNode;
     private bool _isHighLit = false;
-    /* public Queue<PieceController> kickingPieceQueue;*/
-    //[Signal] public delegate void OnPieceArrivedToNodeEventHandler(PieceController piece, BoardNodeController node);
 
     public void HighlightPiece(){
         Tween tween = GetTree().CreateTween();
@@ -37,7 +35,6 @@ public partial class PieceController : StaticBody3D
         _guideNode = null;
         _isMoving = false;
         GlobalPosition = targetPos;
-        //EmitSignal(SignalName.OnPieceArrivedToNode, this, currNode);
         HandleOnArrive(currNode);
     }
 
@@ -65,6 +62,7 @@ public partial class PieceController : StaticBody3D
 			GameController.Instance.boardController.MovePiece(enemyPieceOnNode, startNode, true);
             doKickEffect = true;
 		}
+        node.DoOnStepNodeAction(this);
         node.ChainOnStepModifiers(this, doKickEffect);
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 public class PlayerStats
 {
     public BasePlayerController player;
+    private int _totalTurns;
     private List<int> _rolls;
     private List<float> _luckyScores;
     private int _enemyPiecesHit;
@@ -19,6 +20,7 @@ public class PlayerStats
     }
 
     private void ReadyPlayerStats(){
+        _totalTurns = 0;
         _rolls = new();
         _enemyPiecesHit = 0;
         _piecesHit = 0;
@@ -27,6 +29,7 @@ public class PlayerStats
         _deliveredPieces = 0;
         _luckyScores = new();
 
+        player.TurnEnded += _OnTurnEnded;
         player.DiceRolled += _OnRoll;
         player.EnemyPieceHit += _OnEnemeyPieceHit;
         player.PieceHit += _OnPieceHit;
@@ -35,7 +38,9 @@ public class PlayerStats
         player.PieceDelivered += _OnPieceDelivered;
         player.LuckEventFired += _OnLuckEventFired;
     }
-
+    private void _OnTurnEnded(){
+        _totalTurns += 1;
+    }
     private void _OnRoll(int roll){
         _rolls.Add(roll);
     }
@@ -61,6 +66,7 @@ public class PlayerStats
         Dictionary<string, object> stats = new()
         {
             { "player_name", player.PlayerName },
+            { "total_turns", _totalTurns},
             { "roll_settings", player.rollSettings },
             { "pieces_delivered", _deliveredPieces },
             { "rolls", _rolls },

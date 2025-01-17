@@ -10,7 +10,6 @@ public abstract partial class BoardNodeController : StaticBody3D
     [Export] public BoardNodeController[] inNeighbours = Array.Empty<BoardNodeController>();
 	[Export] public BoardNodeController[] outNeighbours = Array.Empty<BoardNodeController>();
 	// REFERENCES
-	protected GameController _gameController;
 	protected MeshInstance3D _mesh;
 	// OTHER
 	public bool canBeSteppedOn = true;
@@ -21,12 +20,10 @@ public abstract partial class BoardNodeController : StaticBody3D
 	private Queue<BoardNodeModifier> _onStepModQueue = new();
 	private PieceController _modsQueuePiece;
 	// SIGNALS
-	//[Signal] public delegate void OnStepEventHandler(PieceController piece);
-	[Signal] public delegate void OnLeaveEventHandler(PieceController piece);
+	[Signal] public delegate void OnLeaveEventHandler(PieceController piece); // SHOULD BE HANDLED LIKE ONSTEP
 	[Signal] public delegate void OnAllOnStepModifierAppliedEventHandler(BoardNodeController node);
 	
-	public virtual void SetUpNode(GameController gameController){
-		_gameController = gameController;
+	public virtual void SetUpNode(){
 		_mesh = (MeshInstance3D)GetNode("node_mesh");
 		currPieces = new();
 	}
@@ -124,13 +121,15 @@ public abstract partial class BoardNodeController : StaticBody3D
 			mod.ApplyOnStepModifier(_modsQueuePiece);
 		}
 		else{
-			DoOnStepNodeAction(_modsQueuePiece);
 			EmitSignal(SignalName.OnAllOnStepModifierApplied, this);
 		}
 	}
 	public abstract void Highlight();
 	public abstract void RemoveHighlight();
 	public abstract void DoOnLeaveNodeAction(PieceController piece);
+	/// <Summary>
+	/// Actions to do immeadeatly on PieceController arrival
+	/// </Summary>
 	public abstract void DoOnStepNodeAction(PieceController piece);
 
 }

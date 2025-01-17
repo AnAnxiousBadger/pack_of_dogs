@@ -9,7 +9,6 @@ public abstract partial class BasePlayerController : Node
     // EXPORTS
     [Export] public RollSettings rollSettings;
     // REFERENCES
-    public GameController gameController;
     // OTHER
     public int playerIndex = -1;
     [Export] private string _playerName = "";
@@ -17,7 +16,7 @@ public abstract partial class BasePlayerController : Node
 		get { return _playerName; }
 		set { 
 			_playerName = value;
-			gameController.ChangeTurnDisplaName();
+			GameController.Instance.ChangeTurnDisplaName();
 		}
 	}
     public PlayerStats playerStats;
@@ -30,9 +29,8 @@ public abstract partial class BasePlayerController : Node
         set { 
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
-            //gameController.boardController.SetplayerScoreLabel(this);
             if(_deliveredPieces == piecesToDeliver){
-                gameController.EndGame();
+                GameController.Instance.EndGame(this);
             }
         }
     }
@@ -72,7 +70,7 @@ public abstract partial class BasePlayerController : Node
 
         }
         else{
-            gameController.SwitchTurn();
+            GameController.Instance.SwitchTurn();
         }
     }
 
@@ -136,15 +134,6 @@ public abstract partial class BasePlayerController : Node
                                         playersAlreadyCounted.Add(enemyPieceOnNode.player);
                                         badRollsForEnemies.Add((enemyPieceOnNode.player, roll));
                                     }
-
-                                    /*for (int l = 0; l < enemyPieceOnNode.Count; l++)
-                                    {
-                                        if(!playersAlreadyCounted.Contains(enemyPieceOnNode[l].player)){
-                                            playersAlreadyCounted.Add(enemyPieceOnNode[l].player);
-                                            badRollsForEnemies.Add((enemyPieceOnNode[l].player, roll));
-                                        }
-                                    }*/
-
                                 }
                             }
                         }
@@ -163,9 +152,9 @@ public abstract partial class BasePlayerController : Node
         }
 
         List<PlayerRollScore> playerRollScores = new();
-        for (int i = 0; i < gameController.players.Count; i++)
+        for (int i = 0; i < GameController.Instance.players.Count; i++)
         {
-            playerRollScores.Add(new PlayerRollScore(gameController.players[i], rollSettings));
+            playerRollScores.Add(new PlayerRollScore(GameController.Instance.players[i], rollSettings));
         }
 
         for (int i = 0; i < rollSettings.rollChances.Length; i++)
@@ -187,10 +176,10 @@ public abstract partial class BasePlayerController : Node
 
         // CALCULATIONS FOR ENEMIES
         Dictionary<BasePlayerController, List<int>> enemiesRollsDict = new(); // <player, unlucky rolls>
-        for (int i = 0; i < gameController.players.Count; i++)
+        for (int i = 0; i < GameController.Instance.players.Count; i++)
         {
-            if(gameController.players[i] != this){
-                enemiesRollsDict.Add(gameController.players[i], new List<int>());
+            if(GameController.Instance.players[i] != this){
+                enemiesRollsDict.Add(GameController.Instance.players[i], new List<int>());
 
             }  
         }
@@ -203,9 +192,9 @@ public abstract partial class BasePlayerController : Node
         }
 
 
-        for (int i = 0; i < gameController.players.Count; i++)
+        for (int i = 0; i < GameController.Instance.players.Count; i++)
         {
-            BasePlayerController p = gameController.players[i];
+            BasePlayerController p = GameController.Instance.players[i];
             if(p != this){
                 PlayerRollScore playerRollScore = playerRollScores.Find(pl => pl.Player == p);
 

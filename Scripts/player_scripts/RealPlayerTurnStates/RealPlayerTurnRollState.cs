@@ -8,14 +8,14 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
     private List<PlayerRollScore> playerRollScores;
     public override void EnterTurnState()
     {
-        p.gameController.diceController.CanRoll = true;
-        p.gameController.diceController.DiceRolled += _OnDiceRolled;
+        GameController.Instance.diceController.CanRoll = true;
+        GameController.Instance.diceController.DiceRolled += _OnDiceRolled;
         playerRollScores = p.CalculateLuckyRolls();
     }
 
     public override void ExitTurnState()
     {
-        p.gameController.diceController.DiceRolled -= _OnDiceRolled;
+        GameController.Instance.diceController.DiceRolled -= _OnDiceRolled;
     }
 
     public override void ProcessTurnState(float delta){}
@@ -37,9 +37,9 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
         else{
             int noMovePicesCount = 0;
             int piecesInGameCount = 0;
-            for (int i = 0; i < p.gameController.boardController.pieces.Count; i++)
+            for (int i = 0; i < GameController.Instance.boardController.pieces.Count; i++)
             {
-                PieceController piece = p.gameController.boardController.pieces[i];
+                PieceController piece = GameController.Instance.boardController.pieces[i];
                 if(piece.playerIndex == p.playerIndex && !piece.hasArrived){
                     piecesInGameCount ++;
                     List<BoardNodeController> possibleDestination = piece.currNode.MoveAlongNodesFromNode(roll, p.playerIndex, false);

@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw0g17cm7tld6"]
+[gd_scene load_steps=8 format=3 uid="uid://bw0g17cm7tld6"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/RollStatsDisplayUIController.cs" id="1_u7yro"]
 [ext_resource type="PackedScene" uid="uid://ds5b52kdp3lqj" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_roll_bar.tscn" id="2_q1xnv"]
 [ext_resource type="FontFile" uid="uid://de4ytv5nbl6fy" path="res://Assets/UI/fonts/Poppins/Poppins-Regular.ttf" id="3_daghw"]
 [ext_resource type="FontFile" uid="uid://ceeq2bunmt1u3" path="res://Assets/UI/fonts/Poppins/Poppins-Medium.ttf" id="4_dhvod"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t4u1"]
+bg_color = Color(0.141176, 0.0980392, 0.0588235, 0.501961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_vekou"]
 font = ExtResource("3_daghw")
@@ -13,17 +20,82 @@ font_size = 8
 font = ExtResource("4_dhvod")
 font_size = 8
 
-[node name="roll_stats_display" type="VBoxContainer" node_paths=PackedStringArray("_rollBarContainer", "_averageRollLabel")]
+[node name="roll_stats_display" type="VBoxContainer" node_paths=PackedStringArray("_rollBarContainer", "_totalTurnsLabel", "_totalRollsLabel", "_averageRollLabel")]
 size_flags_horizontal = 3
 alignment = 1
 script = ExtResource("1_u7yro")
 _rollBar = ExtResource("2_q1xnv")
-_rollBarContainer = NodePath("roll_bars_container")
+_rollBarContainer = NodePath("MarginContainer/PanelContainer/MarginContainer/roll_bars_container")
+_totalTurnsLabel = NodePath("total_turns_container/total_turns_label")
+_totalRollsLabel = NodePath("total_rolls_container/average_roll_label")
 _averageRollLabel = NodePath("average_roll_container/average_roll_label")
 
-[node name="roll_bars_container" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2t4u1")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="roll_bars_container" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
+
+[node name="roll_bar" parent="MarginContainer/PanelContainer/MarginContainer/roll_bars_container" instance=ExtResource("2_q1xnv")]
+visible = false
+layout_mode = 2
+
+[node name="roll_bar2" parent="MarginContainer/PanelContainer/MarginContainer/roll_bars_container" instance=ExtResource("2_q1xnv")]
+visible = false
+layout_mode = 2
+
+[node name="roll_bar3" parent="MarginContainer/PanelContainer/MarginContainer/roll_bars_container" instance=ExtResource("2_q1xnv")]
+visible = false
+layout_mode = 2
+
+[node name="roll_bar4" parent="MarginContainer/PanelContainer/MarginContainer/roll_bars_container" instance=ExtResource("2_q1xnv")]
+visible = false
+layout_mode = 2
+
+[node name="roll_bar5" parent="MarginContainer/PanelContainer/MarginContainer/roll_bars_container" instance=ExtResource("2_q1xnv")]
+visible = false
+layout_mode = 2
+
+[node name="total_turns_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="total_turns_container"]
+layout_mode = 2
+text = "total turns:"
+label_settings = SubResource("LabelSettings_vekou")
+
+[node name="total_turns_label" type="Label" parent="total_turns_container"]
+layout_mode = 2
+text = "2.15"
+label_settings = SubResource("LabelSettings_242n2")
+
+[node name="total_rolls_container" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="total_rolls_container"]
+layout_mode = 2
+text = "total rolls:"
+label_settings = SubResource("LabelSettings_vekou")
+
+[node name="average_roll_label" type="Label" parent="total_rolls_container"]
+layout_mode = 2
+text = "2.15"
+label_settings = SubResource("LabelSettings_242n2")
 
 [node name="average_roll_container" type="HBoxContainer" parent="."]
 layout_mode = 2

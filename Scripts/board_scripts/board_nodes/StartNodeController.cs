@@ -4,9 +4,9 @@ using System;
 public partial class StartNodeController : BoardNodeController
 {
     public BasePlayerController player;
-    public override void SetUpNode(GameController gameController)
+    public override void SetUpNode()
     {
-        base.SetUpNode(gameController);
+        base.SetUpNode();
         player = GameController.Instance.players[playerIndex];
     }
     public override void DoOnLeaveNodeAction(PieceController piece){
@@ -14,13 +14,7 @@ public partial class StartNodeController : BoardNodeController
     }
     public override void DoOnStepNodeAction(PieceController piece){}
 
-    public override void Highlight()
-    {
-        
-    }
+    public override void Highlight(){}
 
-    public override void RemoveHighlight()
-    {
-        
-    }
+    public override void RemoveHighlight(){}
 }

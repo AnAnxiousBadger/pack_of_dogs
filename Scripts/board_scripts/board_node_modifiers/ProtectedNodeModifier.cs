@@ -8,7 +8,6 @@ public partial class ProtectedNodeModifier : BoardNodeModifier
         _node.canBeSteppedOn = false;
         VisualEffectController effect = GameController.Instance.visualEffectPool.PlayVisualEffect("protected_node_modifier_visual_effect", GlobalPosition);
         effect.OnEffectEnded += _OnEffectEndedEmitModifierAppliedSignal;
-        //EmitSignal(SignalName.OnModifierApplied, this);
     }
     protected override void ApplyOnLeaveModifier(PieceController piece)
     {

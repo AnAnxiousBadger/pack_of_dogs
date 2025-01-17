@@ -9,7 +9,6 @@ public abstract partial class BoardNodeModifier : Node3D
     public override void _Ready()
     {
         _node = GetParent().GetParent() as BoardNodeController;
-		//_node.OnStep += ApplyOnStepModifier;
 		_node.OnLeave += ApplyOnLeaveModifier;
     }
     public virtual void ApplyOnStepModifier(PieceController piece){}

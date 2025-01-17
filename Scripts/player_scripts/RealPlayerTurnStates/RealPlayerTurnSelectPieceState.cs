@@ -5,7 +5,7 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
 {
     private new RealPlayerController p;
     public override void EnterTurnState(){
-        p.gameController._collisionMask = GameController.CollisionMask.PIECE;
+        GameController.Instance.collisionMask = GameController.CollisionMask.PIECE;
     }
 
     public override void ExitTurnState(){
@@ -16,7 +16,7 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
     {
         StaticBody3D body = null;
         if(Input.IsActionJustReleased("left_mouse")){
-            body = p.gameController.StaticBodyUnderMouse;
+            body = GameController.Instance.StaticBodyUnderMouse;
         }
         if(body is PieceController piece && piece.playerIndex == p.playerIndex){
             p.SelectPiece(piece);

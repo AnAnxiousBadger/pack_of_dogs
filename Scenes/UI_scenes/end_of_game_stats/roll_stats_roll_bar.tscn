@@ -9,7 +9,7 @@ font = ExtResource("2_euhxw")
 font_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hovws"]
-bg_color = Color(0.14, 0.098, 0.06, 0.5)
+bg_color = Color(0.14, 0.098, 0.06, 0)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3

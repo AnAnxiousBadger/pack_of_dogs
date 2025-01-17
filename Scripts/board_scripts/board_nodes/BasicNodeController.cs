@@ -7,10 +7,7 @@ public partial class BasicNodeController : BoardNodeController
     public override void DoOnLeaveNodeAction(PieceController piece){
         EmitSignal(SignalName.OnLeave, piece);
     }
-    public override void DoOnStepNodeAction(PieceController piece)
-    {
-        //EmitSignal(SignalName.OnStep, piece);
-    }
+    public override void DoOnStepNodeAction(PieceController piece){}
 
     public override void Highlight()
     {
