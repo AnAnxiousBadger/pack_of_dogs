@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class PieceController : StaticBody3D
 {
@@ -12,10 +13,10 @@ public partial class PieceController : StaticBody3D
     private Node3D _guideNode;
     private bool _isHighLit = false;
 
-    public void HighlightPiece(){
+    public void HighlightPiece(bool allowTurnToMouse){
         Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", new Vector3(Position.X, Position.Y + 1f, Position.Z), 0.35f).SetTrans(Tween.TransitionType.Cubic);
-        _isHighLit = true;
+        _isHighLit = allowTurnToMouse;
     }
 
     public void RemoveHighlight(){
@@ -54,15 +55,29 @@ public partial class PieceController : StaticBody3D
 
     private void HandleOnArrive(BoardNodeController node){
         bool doKickEffect = false;
-        PieceController enemyPieceOnNode = node.GetEnemyPiece(player);
-		if(enemyPieceOnNode != null){
-			player.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
-			enemyPieceOnNode.player.EmitSignal(BasePlayerController.SignalName.PieceHit);
-			BoardNodeController startNode = GameController.Instance.boardController.GetStartNode(enemyPieceOnNode.player);
-			GameController.Instance.boardController.MovePiece(enemyPieceOnNode, startNode, true);
-            doKickEffect = true;
+        List<PieceController> enemyPiecesOnNode = node.GetEnemyPieces(player);
+		if(enemyPiecesOnNode.Count > 0){
+            foreach (PieceController enemyPiece in enemyPiecesOnNode)
+            {
+                player.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
+                enemyPiece.player.EmitSignal(BasePlayerController.SignalName.PieceHit);
+                BoardNodeController startNode = GameController.Instance.boardController.GetStartNode(enemyPiece.player);
+                GameController.Instance.boardController.MovePiece(enemyPiece, startNode, true);
+                doKickEffect = true;
+            } 
 		}
         node.DoOnStepNodeAction(this);
         node.ChainOnStepModifiers(this, doKickEffect);
+    }
+
+    public bool CanPieceMove(int roll){
+        //List<BoardNodeController> possibleDestination = currNode.MoveForwardAlongNodesFromNode(roll, playerIndex, false);
+        List<BoardNodeController> possibleDestination = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(currNode, roll, playerIndex, false);
+        if(possibleDestination.Count == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

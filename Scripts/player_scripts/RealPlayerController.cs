@@ -13,15 +13,15 @@ public partial class RealPlayerController : BasePlayerController
     public RealPlayerTurnSelectPieceState selectPieceState;
     public RealPlayerTurnSelectNodeState selectNodeState;
 
-    public override void _Ready()
+    /*public override void _Ready()
     {
         base._Ready();
-    }
+    }*/
 
     public override void StartTurn()
     {
         base.StartTurn();
-
+        GameController.Instance.allowClicksOnTickableButtons = true;
         // CREATE STATES
         rollState = new(this);
         turnStates.Add(rollState);
@@ -57,7 +57,7 @@ public partial class RealPlayerController : BasePlayerController
         selectedPiece = piece;
 
         // Calculate where it can step
-        possibeNodes = piece.currNode.MoveAlongNodesFromNode(roll, playerIndex, false);
+        possibeNodes = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, playerIndex, false);
 
         // Indicate possible destinations
         foreach (BoardNodeController node in possibeNodes)
@@ -66,12 +66,14 @@ public partial class RealPlayerController : BasePlayerController
         }
     }
     public void DeselectPiece(){
-        foreach (BoardNodeController node in possibeNodes)
-        {
-            node.RemoveHighlight();
-        }
+        if(selectedPiece != null){
+            foreach (BoardNodeController node in possibeNodes)
+            {
+                node.RemoveHighlight();
+            }
 
-        selectedPiece = null;
+            selectedPiece = null;
+        }
     }
 
     private void _OnSkipTurn(){

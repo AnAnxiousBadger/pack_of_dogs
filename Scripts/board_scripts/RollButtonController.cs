@@ -4,45 +4,52 @@ using System.Runtime.CompilerServices;
 
 public partial class RollButtonController : TickableButtonController
 {
+	[Signal] public delegate void OnPressedRollEventHandler(Vector3 pos, bool isActive);
+	[Signal] public delegate void OnRollPressStoppedEventHandler(bool isActive);
 	public override void _Ready()
 	{
-		base._Ready();
-		_isActive = true;
-		_tickable.isActive = true;
+		IsActive = true;
 		GameController.Instance.OnRollButtonActivityChange += ChangeActivity;
+		GameController.Instance.boardController.boardElementsController.OnRollDiceWithoutClicking += _OnButtonPressedWithoutClicking;
 	}
 
-	protected override void _OnButtonHovered(Vector3 pos){
-		if(_isActive){
+	public override void OnHovered(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/on_hover");
 		}
-		else{
+		else if(GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/on_disabled_hover");
 		}
+		
 	}
 
-	protected override void _OnButtonPressed(Vector3 pos, bool tickableIsActive){
-		if(_isActive){
+	public override void OnPressed(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/on_pressed");
 		}
+		EmitSignal(SignalName.OnPressedRoll, pos, IsActive && GameController.Instance.allowClicksOnTickableButtons);
 	}
-	protected override void _OnButtonReleased(Vector3 pos, bool tickableIsActive){
-		if(_isActive){
-			ChangeActivity(false);
-			GameController.Instance.RollButtonUsed();
+	public override void OnReleased(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
+			DoButtonReleaseAction();
 		}
 	}
-    protected override void _OnButtonPressStopped(bool tickableIsActive)
+	protected override void DoButtonReleaseAction(){
+		ChangeActivity(false);
+		GameController.Instance.RollButtonUsed();
+	}
+    public override void OnPressStopped()
     {
-		if(_isActive){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/RESET");
-		} 
+		}
+		EmitSignal(SignalName.OnRollPressStopped, IsActive && GameController.Instance.allowClicksOnTickableButtons);
     }
 
-    protected override void DisAbleRollButton(){
+    protected override void DisAbleButton(){
 		_anim.Play("roll/on_disable");
 	}
-	protected override void EnableRollButton(){
+	protected override void EnableButton(){
 		_anim.Play("roll/on_enable");
 	}
 

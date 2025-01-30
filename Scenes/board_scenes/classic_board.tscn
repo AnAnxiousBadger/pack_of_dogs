@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=70 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
 [ext_resource type="Resource" uid="uid://btqbu51rifne0" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
@@ -30,8 +30,8 @@
 [ext_resource type="Material" uid="uid://1pquyv7ntoj2" path="res://Assets/materials/sand_mat.tres" id="24_wtplm"]
 [ext_resource type="ArrayMesh" uid="uid://blsfupu03sxt0" path="res://Assets/meshes/ziggurat_mesh.res" id="25_dscxs"]
 [ext_resource type="ArrayMesh" uid="uid://fces5s3rdag6" path="res://Assets/meshes/dice_meshes/dice_mesh.res" id="25_omowt"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableController.cs" id="25_re4pd"]
 [ext_resource type="ArrayMesh" uid="uid://bmaww8vjy8yff" path="res://Assets/meshes/dice_meshes/0_mesh.res" id="26_3yv61"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableEffect.cs" id="26_ucbak"]
 [ext_resource type="ArrayMesh" uid="uid://dmdntfryekr4" path="res://Assets/meshes/dice_meshes/2_mesh.res" id="27_8euef"]
 [ext_resource type="ArrayMesh" uid="uid://d4kus5yietbl" path="res://Assets/meshes/dice_meshes/3_mesh.res" id="28_6s3u4"]
 [ext_resource type="ArrayMesh" uid="uid://cxg1318knv8xk" path="res://Assets/meshes/dice_meshes/1_mesh.res" id="28_wcvog"]
@@ -39,7 +39,10 @@
 [ext_resource type="Script" path="res://Scripts/board_scripts/DiceDisplayController.cs" id="31_wicgr"]
 [ext_resource type="Texture2D" uid="uid://k277qlwgiupv" path="res://Assets/smoke_sprite_sheet.jpg" id="33_xie2q"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/PiecePositionGeneratorTool.cs" id="39_vfh7x"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatPathController.cs" id="40_bexro"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatManager.cs" id="40_n3pom"]
 [ext_resource type="Resource" uid="uid://duffpvm1mbita" path="res://Assets/normal_piece_end_positions.tres" id="40_ooftl"]
+[ext_resource type="PackedScene" uid="uid://c1eu75883604g" path="res://Scenes/tickables/goat.tscn" id="40_r67tw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7yvu"]
 size = Vector3(1.09457, 1.06947, 1.10129)
@@ -51,9 +54,33 @@ size = Vector3(1.08486, 1.05231, 1.15073)
 height = 0.2
 radius = 0.3
 
-[sub_resource type="QuadMesh" id="QuadMesh_maree"]
-material = ExtResource("24_wtplm")
-size = Vector2(20, 20)
+[sub_resource type="Resource" id="Resource_0wxum"]
+script = ExtResource("26_ucbak")
+signaltype = 0
+effectName = "chipped_lime_visual_effect"
+onClickPosition = true
+allowOnDisabledTickableButtonClicks = false
+
+[sub_resource type="Resource" id="Resource_xyjy7"]
+script = ExtResource("26_ucbak")
+signaltype = 1
+effectName = "sand_dust_ring_visual_effect"
+onClickPosition = false
+allowOnDisabledTickableButtonClicks = false
+
+[sub_resource type="Resource" id="Resource_3jo35"]
+script = ExtResource("26_ucbak")
+signaltype = 1
+effectName = "sand_dust_ring_visual_effect"
+onClickPosition = false
+allowOnDisabledTickableButtonClicks = false
+
+[sub_resource type="Resource" id="Resource_lau5i"]
+script = ExtResource("26_ucbak")
+signaltype = 0
+effectName = "chipped_lime_visual_effect"
+onClickPosition = true
+allowOnDisabledTickableButtonClicks = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5bdls"]
 size = Vector3(0.870117, 0.267616, 0.863342)
@@ -155,13 +182,25 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-3.14159, 0, 0), Vector3(-6.28319, 0, 0), Vector3(-9.42478, 0, 0), Vector3(-12.8282, 0, 0), Vector3(-12.5664, 0, 0)]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("dice_display_controller")
+tracks/1/path = NodePath("dust_particles:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -171,18 +210,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"ShowRollNumber"
 }]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("dust_particles:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ega6e"]
@@ -247,6 +274,10 @@ anim_speed_max = 1.0
 [sub_resource type="QuadMesh" id="QuadMesh_2xkhy"]
 size = Vector2(2, 2)
 
+[sub_resource type="QuadMesh" id="QuadMesh_maree"]
+material = ExtResource("24_wtplm")
+size = Vector2(20, 20)
+
 [sub_resource type="Curve3D" id="Curve3D_u24pp"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -268,6 +299,13 @@ point_count = 2
 [sub_resource type="BoxMesh" id="BoxMesh_penbj"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="Curve3D" id="Curve3D_86ha5"]
+_data = {
+"points": PackedVector3Array(0.501631, -1.37091e-06, -1.13323, -0.501631, 1.37091e-06, 1.13323, 9.682, -0.5, 1.053, 1.13724, 1.5825e-05, -0.674618, -1.13724, -1.5825e-05, 0.674618, 6.67, -0.5, 2.177, 0.745596, -1.73748e-05, 0.262075, -0.745596, 1.73748e-05, -0.262075, 3.097, -0.5, 2.167, 0.82946, -1.92225e-05, -0.0654778, -0.82946, 1.92225e-05, 0.0654778, 1.359, -0.5, 1.889, 0.98641, 7.7486e-06, -0.036736, -0.98641, -7.7486e-06, 0.036736, -0.81, -0.5, 2.307, 0.587693, 2.73585e-05, 0.118352, -0.587693, -2.73585e-05, -0.118352, -2.484, -0.5, 2.187, 0.685707, 4.42266e-05, 0.082083, -0.685707, -4.42266e-05, -0.082083, -3.89, -0.5, 1.968, 0.653059, 4.22001e-05, -0.0688542, -0.653059, -4.22001e-05, 0.0688542, -5.257, -0.5, 1.968, 0.439833, 3.74317e-05, 0.528156, -0.439833, -3.74317e-05, -0.528156, -6.586, -0.5, 1.669, 0.148871, 4.48227e-05, 0.609652, -0.148871, -4.48227e-05, -0.609652, -6.402, -0.5, 0.056, 0.267024, 3.11136e-05, 0.73293, -0.267024, -3.11136e-05, -0.73293, -6.325, -0.5, -1.043, 0.926315, -2.49147e-05, 0.276246, -0.926315, 2.49147e-05, -0.276246, -8.042, -0.5, -2.136, 0, 0, 0, 0, 0, 0, -9.736, -0.5, -2.497),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
+
 [node name="board" type="Node3D" node_paths=PackedStringArray("boardElementsController", "_pieceMovingPath", "_pieceKickingpath")]
 script = ExtResource("1_5e8jc")
 _pieceStartingPositions = ExtResource("2_4wt4c")
@@ -287,11 +325,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 playerIndex = 1
 outNeighbours = [NodePath("../board_node_05")]
 
-[node name="white_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
+[node name="white_end_node" type="StaticBody3D" parent="node_container"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_xvup1")
 playerIndex = 0
-inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/white_end_node"]
 mesh = ExtResource("6_rpjhg")
@@ -306,12 +343,11 @@ shape = SubResource("BoxShape3D_t7yvu")
 
 [node name="end_node_modifier" parent="node_container/white_end_node/modifiers" instance=ExtResource("5_yqwlj")]
 
-[node name="black_end_node" type="StaticBody3D" parent="node_container" node_paths=PackedStringArray("inNeighbours")]
+[node name="black_end_node" type="StaticBody3D" parent="node_container"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("5_xvup1")
 stereo = 1
 playerIndex = 1
-inNeighbours = [null]
 
 [node name="node_mesh" type="MeshInstance3D" parent="node_container/black_end_node"]
 mesh = ExtResource("9_vey60")
@@ -692,30 +728,21 @@ rollButton = NodePath("roll_button")
 
 [node name="roll_button" parent="board_elements" instance=ExtResource("22_8t8dn")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0, -0.58)
+Effects = Array[Object]([SubResource("Resource_0wxum"), SubResource("Resource_xyjy7")])
 
 [node name="skip_button" parent="board_elements" instance=ExtResource("23_infi4")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0, 0.6)
+Effects = Array[Object]([SubResource("Resource_3jo35"), SubResource("Resource_lau5i")])
 
-[node name="frame" type="MeshInstance3D" parent="board_elements"]
-mesh = ExtResource("23_ym1hj")
-
-[node name="Floor" type="MeshInstance3D" parent="board_elements"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
-mesh = SubResource("QuadMesh_maree")
-skeleton = NodePath("../..")
-
-[node name="ziggurat" type="StaticBody3D" parent="board_elements"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-
-[node name="ziggurat_mesh" type="MeshInstance3D" parent="board_elements/ziggurat"]
-mesh = ExtResource("25_dscxs")
-skeleton = NodePath("../../..")
-
-[node name="dice_display" type="StaticBody3D" parent="board_elements"]
+[node name="dice_display" type="StaticBody3D" parent="board_elements" node_paths=PackedStringArray("_rollButton", "_numberMeshes", "_dustParticles", "_anim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.339, -2.2)
 collision_layer = 4
-script = ExtResource("25_re4pd")
-_effects = Array[Object]([])
+script = ExtResource("31_wicgr")
+_rollButton = NodePath("../roll_button")
+_numberMeshes = [NodePath("Node3D/MeshInstance3D/0_mesh"), NodePath("Node3D/MeshInstance3D/1_mesh"), NodePath("Node3D/MeshInstance3D/2_mesh"), NodePath("Node3D/MeshInstance3D/3_mesh"), NodePath("Node3D/MeshInstance3D/4_mesh")]
+_dustParticles = NodePath("dust_particles")
+Effects = Array[Object]([])
+_anim = NodePath("AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="board_elements/dice_display"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00244141, -0.000919342, 9.15527e-05)
@@ -756,13 +783,6 @@ libraries = {
 "": SubResource("AnimationLibrary_ega6e")
 }
 
-[node name="dice_display_controller" type="Node" parent="board_elements/dice_display" node_paths=PackedStringArray("_rollButton", "_numberMeshes", "_tickable", "_anim")]
-script = ExtResource("31_wicgr")
-_rollButton = NodePath("../../roll_button")
-_numberMeshes = [NodePath("../Node3D/MeshInstance3D/0_mesh"), NodePath("../Node3D/MeshInstance3D/1_mesh"), NodePath("../Node3D/MeshInstance3D/2_mesh"), NodePath("../Node3D/MeshInstance3D/3_mesh"), NodePath("../Node3D/MeshInstance3D/4_mesh")]
-_tickable = NodePath("..")
-_anim = NodePath("../AnimationPlayer")
-
 [node name="dust_particles" type="GPUParticles3D" parent="board_elements/dice_display"]
 material_override = SubResource("StandardMaterial3D_r4rd8")
 emitting = false
@@ -771,6 +791,21 @@ explosiveness = 0.5
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_ohuf4")
 draw_pass_1 = SubResource("QuadMesh_2xkhy")
+
+[node name="frame" type="MeshInstance3D" parent="board_elements"]
+mesh = ExtResource("23_ym1hj")
+
+[node name="Floor" type="MeshInstance3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.5, 0)
+mesh = SubResource("QuadMesh_maree")
+skeleton = NodePath("../..")
+
+[node name="ziggurat" type="StaticBody3D" parent="board_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="ziggurat_mesh" type="MeshInstance3D" parent="board_elements/ziggurat"]
+mesh = ExtResource("25_dscxs")
+skeleton = NodePath("../../..")
 
 [node name="piece_path" type="Path3D" parent="." node_paths=PackedStringArray("_pathFollow", "_pieceGuide")]
 curve = SubResource("Curve3D_u24pp")
@@ -850,6 +885,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256, 0.597, -1.21)
 
 [node name="Marker3D14" type="Marker3D" parent="piece_starting_positions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159, 0.684, -0.849)
+
+[node name="goat_manager" type="Node3D" parent="." node_paths=PackedStringArray("_goatContainer", "_goatPaths")]
+script = ExtResource("40_n3pom")
+_goatContainer = NodePath("goat_container")
+_goatPaths = [NodePath("goat_path_1")]
+
+[node name="goat_container" type="Node3D" parent="goat_manager"]
+
+[node name="goat_path_1" type="Path3D" parent="goat_manager" node_paths=PackedStringArray("_spawnPoint", "_reverseSpawnPoint")]
+curve = SubResource("Curve3D_86ha5")
+script = ExtResource("40_bexro")
+_spawnPoint = NodePath("spawn_point_pos")
+_reverseSpawnPoint = NodePath("inverse_spawn_point_pos")
+_goatScene = ExtResource("40_r67tw")
+
+[node name="spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.083, -0.5, -0.02)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_1/spawn_point_pos"]
+
+[node name="inverse_spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.954, -0.5, -2.625)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_1/inverse_spawn_point_pos"]
 
 [editable path="node_container/white_start_node"]
 [editable path="node_container/black_start_node"]

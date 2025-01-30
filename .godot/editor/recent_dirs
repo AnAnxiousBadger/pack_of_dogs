@@ -1,3 +1,7 @@
+res://Scripts/board_scripts/goat_scripts
+res://Scripts/board_scripts
+res://Assets/materials/goat_mat
+res://Scenes/tickables
 res://Scripts/UI_scripts
 res://Assets/materials/shaders/end_node_shader
 res://Scenes/visual_effects
@@ -12,11 +16,7 @@ res://Scenes
 res://Assets/materials/classic_board_frame_textures
 res://Assets/materials/shaders
 res://Assets/materials/shaders/roll_button_rosette_shader
-res://Scripts/board_scripts
 res://Assets/materials/dice_mats
 res://Assets/meshes/dice_meshes
 res://Assets/materials/ziggurat_mats
 res://Scenes/UI_scenes/end_of_game_stats
-res://Assets/materials/piece_mats
-res://Assets/materials/node_mats/rosette_05
-res://Assets/materials/node_mats/rosette_04

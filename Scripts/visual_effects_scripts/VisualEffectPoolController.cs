@@ -31,6 +31,7 @@ public partial class VisualEffectPoolController : Node3D
 
     public VisualEffectController PlayVisualEffect(string effectName, Vector3 globalPos){
         VisualEffectController effect = _visualEffectDict[effectName].Dequeue();
+
         effect.Play(globalPos);
         return effect;
     }

@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
 {
-    private new RealPlayerController p;
+    private new readonly RealPlayerController p;
     public override void EnterTurnState(){
         GameController.Instance.collisionMask = GameController.CollisionMask.NODE;
     }
 
-    public override void ExitTurnState(){}
+    public override void ExitTurnState(){
+        p.selectedPiece?.RemoveHighlight();
+        p.DeselectPiece();
+    }
 
     public override void ProcessTurnState(float delta)
     {
@@ -19,9 +22,9 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
             p.DeselectPiece();
             p.SwitchToPreviousTurnState();
         }
-        StaticBody3D body = null;
+        PhysicsBody3D body = null;
         if(Input.IsActionJustReleased("left_mouse") && p.selectedPiece != null){
-            body = GameController.Instance.StaticBodyUnderMouse;
+            body = GameController.Instance.PhysicsBodyUnderMouse;
         }
 
         if(body is BoardNodeController node && p.possibeNodes.Contains(node)){
@@ -29,8 +32,7 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
             node.OnAllOnStepModifierApplied += _OnPieceMovedAndProcessed;
             GameController.Instance.boardController.MovePiece(p.selectedPiece, node, false);
             p.EmitSignal(BasePlayerController.SignalName.PieceMoved, p.roll);
-            
-            p.DeselectPiece();            
+            p.DeselectPiece();
         }
     }
 

@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class RealPlayerTurnRollState : PlayerTurnBaseState
 {
-    private new RealPlayerController p;
+    private readonly new RealPlayerController p;
     private List<PlayerRollScore> playerRollScores;
     public override void EnterTurnState()
     {
         GameController.Instance.diceController.CanRoll = true;
         GameController.Instance.diceController.DiceRolled += _OnDiceRolled;
-        playerRollScores = p.CalculateLuckyRolls();
+        playerRollScores = p.CalculateRollLuckScores();
     }
 
     public override void ExitTurnState()
@@ -22,6 +22,21 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
 
     private void _OnDiceRolled(int roll){
         p.roll = roll;
+
+        
+        /*List<AIMove> possibleMoves = new();
+        foreach (PieceController piece in p.pieces)
+        {
+            if(!piece.hasArrived){
+                List<BoardNodeController> piecePossibleDestinations = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, piece.playerIndex, false);
+                for (int i = 0; i < piecePossibleDestinations.Count; i++)
+                {
+                    possibleMoves.Add(new AIMove(piece, piecePossibleDestinations[i], roll));
+                }
+            }
+        }
+        GD.Print("------------------------");*/
+
         p.EmitSignal(BasePlayerController.SignalName.DiceRolled, roll);
         for (int i = 0; i < playerRollScores.Count; i++)
         {
@@ -31,26 +46,8 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
             }
         }
         // SET SKIP IF CANNOT MOVE
-        if(roll == 0){
+        if(p.GetSkippingAvailability(roll)){
             GameController.Instance.ChangeSkipButtonActivity(true);
-        }
-        else{
-            int noMovePicesCount = 0;
-            int piecesInGameCount = 0;
-            for (int i = 0; i < GameController.Instance.boardController.pieces.Count; i++)
-            {
-                PieceController piece = GameController.Instance.boardController.pieces[i];
-                if(piece.playerIndex == p.playerIndex && !piece.hasArrived){
-                    piecesInGameCount ++;
-                    List<BoardNodeController> possibleDestination = piece.currNode.MoveAlongNodesFromNode(roll, p.playerIndex, false);
-                    if(possibleDestination.Count == 0){
-                        noMovePicesCount++;
-                    }
-                }
-            }
-            if(noMovePicesCount == piecesInGameCount){
-                GameController.Instance.ChangeSkipButtonActivity(true);
-            }
         }
 
         // SWITCH TO SELECT PIECE STATE

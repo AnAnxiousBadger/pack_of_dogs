@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=46 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cxklwjiq12pfm" path="res://Scenes/visual_effects/end_node_R_highlight_visual_effect.tscn" id="12_fdi6m"]
 [ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_01.tscn" id="13_5bfqh"]
 [ext_resource type="Script" path="res://Scripts/UIController.cs" id="13_ar2w6"]
+[ext_resource type="Script" path="res://Scripts/player_scripts/AIPlayerController.cs" id="14_56tec"]
 [ext_resource type="PackedScene" uid="uid://bw0g17cm7tld6" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_display.tscn" id="14_g8v77"]
 [ext_resource type="Shader" uid="uid://b8iubafi475k0" path="res://Assets/UI/UI_blur_shader.tres" id="14_icby2"]
 [ext_resource type="StyleBox" uid="uid://dqq3v63jx3014" path="res://Assets/UI/turn_panel_background_texture.tres" id="16_qots1"]
@@ -191,6 +192,15 @@ script = ExtResource("2_2no1u")
 
 [node name="players_container" type="Node" parent="."]
 
+[node name="player_03" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
+script = ExtResource("14_56tec")
+timer = NodePath("ai_timer")
+isActive = false
+rollSettings = ExtResource("2_k6vlu")
+_playerName = "Robot Emma"
+
+[node name="ai_timer" type="Timer" parent="players_container/player_03"]
+
 [node name="player_01" type="Node" parent="players_container"]
 script = ExtResource("1_joypr")
 rollSettings = ExtResource("2_k6vlu")
@@ -219,7 +229,7 @@ shadow_blur = 3.0
 environment = SubResource("Environment_o21uq")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 34, 0)
 fov = 20.0
 size = 9.209
 

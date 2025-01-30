@@ -34,4 +34,25 @@ public partial class RollSettings : Resource
         }
         return rollChanceDict;
     }
+    public Dictionary<int, float> GetRollChanceDictWithChances(){
+        Dictionary<int, float> rollChanceDictWithChances = new ();
+        int totalWeight = GetTotalWeight();
+        for (int i = 0; i < rollChances.Length; i++)
+        {
+            rollChanceDictWithChances.Add(rollChances[i].result, (float)rollChances[i].weight / totalWeight);
+        }
+        return rollChanceDictWithChances;
+    }
+
+    public float GetAverageRoll(){
+        int totalWeights = GetTotalWeight();
+        int a = 0;
+        foreach (RollChance rollChance in rollChances)
+        {
+            a += rollChance.weight * rollChance.result;
+        }
+
+        return a / totalWeights;
+    }
+
 }

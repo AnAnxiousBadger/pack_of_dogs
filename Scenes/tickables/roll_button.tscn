@@ -1,31 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://co1b1b74mbd1y"]
+[gd_scene load_steps=9 format=3 uid="uid://co1b1b74mbd1y"]
 
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableController.cs" id="1_gbxyn"]
 [ext_resource type="ArrayMesh" uid="uid://6qgfxj5bjf6m" path="res://Assets/meshes/roll_button_mesh.res" id="2_4i51b"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/TickableEffect.cs" id="2_rre6x"]
 [ext_resource type="Material" uid="uid://blkvgwocwandk" path="res://Assets/materials/roll_button/roll_button_mat.tres" id="3_h2bec"]
 [ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/button_tickable_animations.res" id="3_jy5s7"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/RollButtonController.cs" id="6_j28ii"]
 
-[sub_resource type="Resource" id="Resource_31yaa"]
-script = ExtResource("2_rre6x")
-signaltype = 1
-effectName = "sand_dust_ring_visual_effect"
-onClickPosition = false
-
-[sub_resource type="Resource" id="Resource_g547h"]
+[sub_resource type="Resource" id="Resource_c5ehs"]
 script = ExtResource("2_rre6x")
 signaltype = 0
 effectName = "chipped_lime_visual_effect"
 onClickPosition = true
+allowOnDisabledTickableButtonClicks = true
+
+[sub_resource type="Resource" id="Resource_jvl5q"]
+script = ExtResource("2_rre6x")
+signaltype = 1
+effectName = "sand_dust_ring_visual_effect"
+onClickPosition = false
+allowOnDisabledTickableButtonClicks = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x4t8j"]
 size = Vector3(5.5332, 1.8349, 2.51801)
 
-[node name="roll_button_tickable" type="StaticBody3D"]
+[node name="roll_button_tickable" type="StaticBody3D" node_paths=PackedStringArray("_anim")]
 collision_layer = 4
-script = ExtResource("1_gbxyn")
-_effects = Array[Object]([SubResource("Resource_31yaa"), SubResource("Resource_g547h")])
+script = ExtResource("6_j28ii")
+_anim = NodePath("AnimationPlayer")
+_effects = Array[Object]([SubResource("Resource_c5ehs"), SubResource("Resource_jvl5q")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00708008, 0.00723267, -0.00717163)
@@ -42,8 +44,3 @@ surface_material_override/0 = ExtResource("3_h2bec")
 libraries = {
 "roll": ExtResource("3_jy5s7")
 }
-
-[node name="roll_button_controller" type="Node" parent="." node_paths=PackedStringArray("_tickable", "_anim")]
-script = ExtResource("6_j28ii")
-_tickable = NodePath("..")
-_anim = NodePath("../AnimationPlayer")

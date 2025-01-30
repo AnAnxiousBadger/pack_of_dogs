@@ -5,41 +5,43 @@ public partial class SkipButtonController : TickableButtonController
 {
 	public override void _Ready()
 	{
-		base._Ready();
-		_isActive = false;
-		_tickable.isActive = false;
+		IsActive = false;
 		_anim.Play("skip/face_down");
 		GameController.Instance.OnSkipButtonActivityChange += ChangeActivity;
+		GameController.Instance.boardController.boardElementsController.OnSkipWithoutClicking += _OnButtonPressedWithoutClicking;
 	}
-	protected override void _OnButtonHovered(Vector3 pos){
-		if(_isActive){
+	public override void OnHovered(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/on_hover");
 		}
-		else{
+		else if(GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/on_disabled_hover");
 		}
 	}
-	protected override void _OnButtonPressed(Vector3 pos, bool tickableIsActive){
-		if(_isActive){
+	public override void OnPressed(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/on_pressed");
 		}
 	}
-	protected override void _OnButtonReleased(Vector3 pos, bool tickableIsActive){
-		if(_isActive){
-			ChangeActivity(false);
-			GameController.Instance.SkipButtonUsed();
+	public override void OnReleased(Vector3 pos){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
+			DoButtonReleaseAction();
 		}
 	}
-	protected override void _OnButtonPressStopped(bool tickableIsActive)
+	protected override void DoButtonReleaseAction(){
+		ChangeActivity(false);
+		GameController.Instance.SkipButtonUsed();
+	}
+	public override void OnPressStopped()
     {
-		if(_isActive){
+		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/RESET");
 		} 
     }
-	protected override void DisAbleRollButton(){
+	protected override void DisAbleButton(){
 		_anim.Play("skip/on_disable");
 	}
-	protected override void EnableRollButton(){
+	protected override void EnableButton(){
 		_anim.Play("skip/on_enable");
 	}
 }

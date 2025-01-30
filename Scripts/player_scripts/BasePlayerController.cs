@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 public abstract partial class BasePlayerController : Node
 {
     // EXPORTS
+    [Export] public bool isActive = true;
     [Export] public RollSettings rollSettings;
     // REFERENCES
     // OTHER
@@ -61,6 +62,7 @@ public abstract partial class BasePlayerController : Node
         if(_currTurnState != null){
             _currTurnState.ExitTurnState();
             _previousStates.Add(_currTurnState);
+            _currTurnState = null;
         }
         
         if(turnStates.Count > 0){
@@ -89,11 +91,39 @@ public abstract partial class BasePlayerController : Node
     }
     public virtual void EndTurn(){
         EmitSignal(SignalName.TurnEnded);
+        _currTurnState?.ExitTurnState();
     }
     public abstract void ProcessTurn(float delta);
     public abstract void AddTurnToStateQueue();
+    /// <summary>
+    /// Returns wheter the the player has to skip or not
+    /// </summary>
+    public bool GetSkippingAvailability(int roll){
+        if(roll == 0){
+            return true;
+        }
+        else{
+            int piecesCannotMoveCount = 0;
+            int piecesInGameCount = 0;
+            foreach (PieceController piece in pieces)
+            {
+                if(!piece.hasArrived){
+                    piecesInGameCount ++;
+                    if(!piece.CanPieceMove(roll)){
+                        piecesCannotMoveCount ++;
+                    }
+                }
+            }
+            if(piecesCannotMoveCount == piecesInGameCount){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
 
-    public List<PlayerRollScore> CalculateLuckyRolls(){
+    public List<PlayerRollScore> CalculateRollLuckScores(){
         // How much luck score each roll worths
         Godot.Collections.Dictionary<int, float> luckyScoreForRolls = new();
         // List of rolls that might hurt enemies
@@ -115,7 +145,8 @@ public abstract partial class BasePlayerController : Node
                 {
                     if(!pieces[j].hasArrived){
                         int rollQualityForPiece = 0;
-                        List<BoardNodeController> destinations = pieces[j].currNode.MoveAlongNodesFromNode(roll, playerIndex, false);
+                        //List<BoardNodeController> destinations = pieces[j].currNode.MoveForwardAlongNodesFromNode(roll, playerIndex, false);
+                        List<BoardNodeController> destinations = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(pieces[j].currNode, roll, playerIndex, false);
                         if(destinations.Count == 0) {
                             rollQualityForPiece = -1;
                         }
@@ -125,15 +156,20 @@ public abstract partial class BasePlayerController : Node
                                 if(destinations[k].HasModifier("double_turn_modifier")){
                                     rollQualityForPiece = 1;
                                 }
-                                if(destinations[k].GetEnemyPiece(this) != null){
+                                if(destinations[k].GetEnemyPieces(this).Count > 0 /*!= null*/){
                                     rollQualityForPiece = 1;
                                     // Add roll that affects enemies
-                                    PieceController enemyPieceOnNode = destinations[k].GetEnemyPiece(this);
+                                    //PieceController enemyPieceOnNode = destinations[k].GetEnemyPieces(this);
+                                    List<PieceController> enemyPiecesOnNode = destinations[k].GetEnemyPieces(this);
                                     List<BasePlayerController> playersAlreadyCounted = new();
-                                    if(!playersAlreadyCounted.Contains(enemyPieceOnNode.player)){
-                                        playersAlreadyCounted.Add(enemyPieceOnNode.player);
-                                        badRollsForEnemies.Add((enemyPieceOnNode.player, roll));
+                                    foreach (PieceController enemyPiece in enemyPiecesOnNode)
+                                    {   
+                                        if(!playersAlreadyCounted.Contains(enemyPiece.player)){
+                                            playersAlreadyCounted.Add(enemyPiece.player);
+                                            badRollsForEnemies.Add((enemyPiece.player, roll));
+                                        }
                                     }
+                                    
                                 }
                             }
                         }
@@ -238,5 +274,5 @@ public abstract partial class BasePlayerController : Node
         return playerRollScores;
         
     }
-
+    
 }

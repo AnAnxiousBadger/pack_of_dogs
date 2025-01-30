@@ -19,15 +19,16 @@ public partial class GameController : Node3D
 	public enum CollisionMask {NODE, PIECE}
 	public CollisionMask collisionMask = CollisionMask.PIECE;
 	private const float MOUSERAYDIST = 1000f;
-	private StaticBody3D _staticBodyUnderMouse = null;
+	private PhysicsBody3D _physicsBodyUnderMouse = null;
 	private Vector3 _staticBodyHitPos = Vector3.Zero;
-	public StaticBody3D StaticBodyUnderMouse {
-		get { return _staticBodyUnderMouse; }
+	public PhysicsBody3D PhysicsBodyUnderMouse {
+		get { return _physicsBodyUnderMouse; }
 		private set {
-			boardController.boardElementsController.HandleTickableInterActions(_staticBodyUnderMouse, value, _staticBodyHitPos);
-			_staticBodyUnderMouse = value;
+			boardController.boardElementsController.HandleTickableInterActions(_physicsBodyUnderMouse, value, _staticBodyHitPos);
+			_physicsBodyUnderMouse = value;
 		}
 	}
+	public bool allowClicksOnTickableButtons = false;
 	// SIGNALS
 	[Signal] public delegate void OnRollButtonUsedEventHandler();
 	[Signal] public delegate void OnRollButtonActivityChangeEventHandler(bool isActive);
@@ -47,7 +48,7 @@ public partial class GameController : Node3D
 
 	public override void _Process(double delta)
     {
-		(StaticBodyUnderMouse, _staticBodyHitPos) = CastRayFromMouse();
+		(PhysicsBodyUnderMouse, _staticBodyHitPos) = CastRayFromMouse();
         currPlayer?.ProcessTurn((float)delta);
     }
 
@@ -70,10 +71,12 @@ public partial class GameController : Node3D
 		for (int i = 0; i < playersArray.Count; i++)
 		{
 			BasePlayerController p = (BasePlayerController)playersArray[i];
-			p.playerIndex = i;
-			p.ReadyPlayer();
-			players.Add(p);
-			_playersQueue.Enqueue(p);
+			if(p.isActive){
+				p.playerIndex = players.Count;
+				p.ReadyPlayer();
+				players.Add(p);
+				_playersQueue.Enqueue(p);
+			}
 		}
 	}
 
@@ -95,8 +98,8 @@ public partial class GameController : Node3D
 		}
 	}
 
-	public (StaticBody3D, Vector3) CastRayFromMouse(){
-        StaticBody3D resultBody = null;
+	public (PhysicsBody3D, Vector3) CastRayFromMouse(){
+        PhysicsBody3D resultBody = null;
 		Vector3 resultCoord = Vector3.Zero;
         Vector2 mouse = GetViewport().GetMousePosition();
 		PhysicsDirectSpaceState3D space = GetWorld3D().DirectSpaceState;
@@ -117,7 +120,7 @@ public partial class GameController : Node3D
 
 		Godot.Collections.Dictionary result = space.IntersectRay(rayParams);
 		if(result.ContainsKey("collider")){
-			resultBody = (StaticBody3D) result["collider"];
+			resultBody = (PhysicsBody3D) result["collider"];
 		}
 		if(result.ContainsKey("position")){
 			resultCoord = (Vector3) result["position"];
@@ -128,6 +131,7 @@ public partial class GameController : Node3D
 
 	public void EndGame(BasePlayerController winner){
 		_playersQueue.Clear();
+		currPlayer = null;
 		EmitSignal(SignalName.GameEnded, winner);
 		GD.Print("END");
 	}

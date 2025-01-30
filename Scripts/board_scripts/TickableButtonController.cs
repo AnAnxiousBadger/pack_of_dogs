@@ -1,36 +1,34 @@
 using Godot;
 using System;
 
-public abstract partial class TickableButtonController : Node
+public abstract partial class TickableButtonController : StaticBody3D, ITickable
 {
-    [Export] protected TickableController _tickable;
+    public bool IsActive {get; set;}
+    [Export] public TickableEffect[] Effects {get; set;}
 	[Export] protected AnimationPlayer _anim;
-    protected bool _isActive;
-    public override void _Ready()
-	{
-		_tickable.OnHoveredTickable +=_OnButtonHovered;
-		_tickable.OnPressedTickable +=_OnButtonPressed;
-		_tickable.OnReleasedTickable +=_OnButtonReleased;
-        _tickable.OnPressTickableStopped += _OnButtonPressStopped;
-	}
-    protected virtual void _OnButtonHovered(Vector3 pos){}
-	protected virtual void _OnButtonPressed(Vector3 pos, bool tickableIsActive){}
-	protected virtual void _OnButtonReleased(Vector3 pos, bool tickableIsActive){}
-    protected virtual void _OnButtonPressStopped(bool tickableIsActive){}    
-    protected virtual void DisAbleRollButton(){}
-	protected virtual void EnableRollButton(){}
-
-    protected void ChangeActivity(bool isActive){
-		_tickable.isActive = isActive;
-
-        if(isActive != _isActive){
-            if(isActive){
-                EnableRollButton();
+    public virtual void OnHovered(Vector3 pos){}
+    public virtual void OnPressed(Vector3 pos){}
+    public virtual void OnReleased(Vector3 pos){}
+    public virtual void OnPressStopped(){}
+    public Vector3 GetGlobalPos(){
+        return GlobalPosition;
+    }
+    protected virtual void DisAbleButton(){}
+	protected virtual void EnableButton(){}
+    protected void ChangeActivity(bool active){
+		if(active != IsActive){
+            if(active){
+                EnableButton();
             }
-            else if(!isActive){
-                DisAbleRollButton();
+            else{
+                DisAbleButton();
             }
         }
-		_isActive = isActive;
+        
+        IsActive = active;
+	}
+    protected virtual void DoButtonReleaseAction(){}
+    protected void _OnButtonPressedWithoutClicking(BasePlayerController p){
+		DoButtonReleaseAction();
 	}
 }
