@@ -1,8 +1,10 @@
 Timer
-MeshInstance3D
-Node3D
-Marker3D
 CollisionShape3D
+MeshInstance3D
+StaticBody3D
+Node3D
+RayCast3D
+Marker3D
 CharacterBody3D
 Path3D
 PathFollow3D
@@ -10,5 +12,3 @@ Sprite3D
 Node
 MarginContainer
 TextureButton
-PanelContainer
-TextureRect

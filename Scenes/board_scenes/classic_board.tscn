@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://cckbt066gn116"]
+[gd_scene load_steps=72 format=3 uid="uid://cckbt066gn116"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/BoardController.cs" id="1_5e8jc"]
 [ext_resource type="Resource" uid="uid://btqbu51rifne0" path="res://Assets/normal_piece_starting_positions.tres" id="2_4wt4c"]
@@ -40,7 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://k277qlwgiupv" path="res://Assets/smoke_sprite_sheet.jpg" id="33_xie2q"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/PiecePositionGeneratorTool.cs" id="39_vfh7x"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatPathController.cs" id="40_bexro"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatManager.cs" id="40_n3pom"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatPathManager.cs" id="40_n3pom"]
 [ext_resource type="Resource" uid="uid://duffpvm1mbita" path="res://Assets/normal_piece_end_positions.tres" id="40_ooftl"]
 [ext_resource type="PackedScene" uid="uid://c1eu75883604g" path="res://Scenes/tickables/goat.tscn" id="40_r67tw"]
 
@@ -301,10 +301,24 @@ size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Curve3D" id="Curve3D_86ha5"]
 _data = {
-"points": PackedVector3Array(0.501631, -1.37091e-06, -1.13323, -0.501631, 1.37091e-06, 1.13323, 9.682, -0.5, 1.053, 1.13724, 1.5825e-05, -0.674618, -1.13724, -1.5825e-05, 0.674618, 6.67, -0.5, 2.177, 0.745596, -1.73748e-05, 0.262075, -0.745596, 1.73748e-05, -0.262075, 3.097, -0.5, 2.167, 0.82946, -1.92225e-05, -0.0654778, -0.82946, 1.92225e-05, 0.0654778, 1.359, -0.5, 1.889, 0.98641, 7.7486e-06, -0.036736, -0.98641, -7.7486e-06, 0.036736, -0.81, -0.5, 2.307, 0.587693, 2.73585e-05, 0.118352, -0.587693, -2.73585e-05, -0.118352, -2.484, -0.5, 2.187, 0.685707, 4.42266e-05, 0.082083, -0.685707, -4.42266e-05, -0.082083, -3.89, -0.5, 1.968, 0.653059, 4.22001e-05, -0.0688542, -0.653059, -4.22001e-05, 0.0688542, -5.257, -0.5, 1.968, 0.439833, 3.74317e-05, 0.528156, -0.439833, -3.74317e-05, -0.528156, -6.586, -0.5, 1.669, 0.148871, 4.48227e-05, 0.609652, -0.148871, -4.48227e-05, -0.609652, -6.402, -0.5, 0.056, 0.267024, 3.11136e-05, 0.73293, -0.267024, -3.11136e-05, -0.73293, -6.325, -0.5, -1.043, 0.926315, -2.49147e-05, 0.276246, -0.926315, 2.49147e-05, -0.276246, -8.042, -0.5, -2.136, 0, 0, 0, 0, 0, 0, -9.736, -0.5, -2.497),
+"points": PackedVector3Array(0.501631, -1.37091e-06, -1.13323, 0, 0, 0, 9.682, 0, 1.053, 0, 0, 0, 0, 0, 0, 6.67, 0, 2.177, 0, 0, 0, 0, 0, 0, 3.097, 0, 2.167, 0, 0, 0, 0, 0, 0, 1.359, 0, 1.889, 0, 0, 0, 0, 0, 0, -0.81, 0, 2.307, 0, 0, 0, 0, 0, 0, -2.484, 0, 2.187, 0, 0, 0, 0, 0, 0, -3.89, 0, 1.968, 0, 0, 0, 0, 0, 0, -5.305, 0, 2.306, 0, 0, 0, 0, 0, 0, -6.586, 0, 1.669, 0, 0, 0, 0, 0, 0, -6.325, 0, -1.043, 0, 0, 0, 0, 0, 0, -8.042, 0, -2.136, 0, 0, 0, 0, 0, 0, -9.736, 0, -2.497),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 12
+
+[sub_resource type="Curve3D" id="Curve3D_t5err"]
+_data = {
+"points": PackedVector3Array(0.412807, 0, -0.934887, 0, 0, 0, 9.96645, 0, -4.26836, 0, 0, 0, 0, 0, 0, 8.58788, 0, -3.46039, 0, 0, 0, 0, 0, 0, 8.18792, 0, -2.40839, 0, 0, 0, 0, 0, 0, 7.15528, 0, -3.11122, 0, 0, 0, 0, 0, 0, 6.17188, 0, -3.68265, 0, 0, 0, 0, 0, 0, 5.31139, 0, -3.80171, 0, 0, 0, 0, 0, 0, 3.22141, 0, -3.21742, 0, 0, 0, 0, 0, 0, 2.25508, 0, -2.20614, 0, 0, 0, 0, 0, 0, 0.547142, 0, -2.11625, 0, 0, 0, 0, 0, 0, -1.38553, 0, -2.49828, 0, 0, 0, 0, 0, 0, -5.83516, 0, -1.91399, 0, 0, 0, 0, 0, 0, -7.83524, 0, 0.288353, 0, 0, 0, 0, 0, 0, -9.74544, 0, 2.85026),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 13
+
+[sub_resource type="Curve3D" id="Curve3D_81fdb"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 3.85789, 0, -8.82115, 0, 0, 0, 0, 0, 0, 2.58439, 0, -5.41532, 0, 0, 0, 0, 0, 0, 1.29356, 0, -4.68716, 0, 0, 0, 0, 0, 0, 1.52525, 0, -3.8928, 0, 0, 0, 0, 0, 0, 3.11396, 0, -2.89986, 0, 0, 0, 0, 0, 0, 2.94847, 0, 1.89937, 0, 0, 0, 0, 0, 0, 3.87521, 0, 2.75992, 0, 0, 0, 0, 0, 0, 2.61748, 0, 4.58031, 0, 0, 0, 0, 0, 0, 1.87625, 0, 5.80643, 0, 0, 0, 0, 0, 0, -1.00565, 0, 7.83276, 0, 0, 0, 0, 0, 0, -3.61737, 0, 9.36377),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 11
 
 [node name="board" type="Node3D" node_paths=PackedStringArray("boardElementsController", "_pieceMovingPath", "_pieceKickingpath")]
 script = ExtResource("1_5e8jc")
@@ -886,10 +900,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256, 0.597, -1.21)
 [node name="Marker3D14" type="Marker3D" parent="piece_starting_positions"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.159, 0.684, -0.849)
 
-[node name="goat_manager" type="Node3D" parent="." node_paths=PackedStringArray("_goatContainer", "_goatPaths")]
+[node name="goat_manager" type="Node3D" parent="." node_paths=PackedStringArray("_goatContainer", "_goatPaths", "_goatSpawnTimer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 script = ExtResource("40_n3pom")
 _goatContainer = NodePath("goat_container")
-_goatPaths = [NodePath("goat_path_1")]
+_goatPaths = [NodePath("goat_path_1"), NodePath("goat_path_2"), NodePath("goat_path_3")]
+_goatScene = ExtResource("40_r67tw")
+_goatSpawnTimer = NodePath("goat_spawn_timer")
+
+[node name="goat_spawn_timer" type="Timer" parent="goat_manager"]
+wait_time = 15.0
+one_shot = true
 
 [node name="goat_container" type="Node3D" parent="goat_manager"]
 
@@ -898,7 +919,6 @@ curve = SubResource("Curve3D_86ha5")
 script = ExtResource("40_bexro")
 _spawnPoint = NodePath("spawn_point_pos")
 _reverseSpawnPoint = NodePath("inverse_spawn_point_pos")
-_goatScene = ExtResource("40_r67tw")
 
 [node name="spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.083, -0.5, -0.02)
@@ -909,6 +929,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.083, -0.5, -0.02)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.954, -0.5, -2.625)
 
 [node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_1/inverse_spawn_point_pos"]
+
+[node name="goat_path_2" type="Path3D" parent="goat_manager" node_paths=PackedStringArray("_spawnPoint", "_reverseSpawnPoint")]
+curve = SubResource("Curve3D_t5err")
+script = ExtResource("40_bexro")
+_spawnPoint = NodePath("spawn_point_pos")
+_reverseSpawnPoint = NodePath("inverse_spawn_point_pos")
+
+[node name="spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5661, -0.5, -4.31232)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_2/spawn_point_pos"]
+
+[node name="inverse_spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3922, -0.5, 3.44268)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_2/inverse_spawn_point_pos"]
+
+[node name="goat_path_3" type="Path3D" parent="goat_manager" node_paths=PackedStringArray("_spawnPoint", "_reverseSpawnPoint")]
+curve = SubResource("Curve3D_81fdb")
+script = ExtResource("40_bexro")
+_spawnPoint = NodePath("spawn_point_pos")
+_reverseSpawnPoint = NodePath("inverse_spawn_point_pos")
+
+[node name="spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31615, -0.5, -9.96419)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_3/spawn_point_pos"]
+
+[node name="inverse_spawn_point_pos" type="Node3D" parent="goat_manager/goat_path_3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.51981, -0.5, 9.68084)
+
+[node name="Marker3D" type="Marker3D" parent="goat_manager/goat_path_3/inverse_spawn_point_pos"]
 
 [editable path="node_container/white_start_node"]
 [editable path="node_container/black_start_node"]

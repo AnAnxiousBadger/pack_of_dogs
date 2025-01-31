@@ -1,7 +1,7 @@
+res://Scenes/tickables
 res://Scripts/board_scripts/goat_scripts
 res://Scripts/board_scripts
 res://Assets/materials/goat_mat
-res://Scenes/tickables
 res://Scripts/UI_scripts
 res://Assets/materials/shaders/end_node_shader
 res://Scenes/visual_effects

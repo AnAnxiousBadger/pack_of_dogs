@@ -16,16 +16,18 @@ public partial class GoatController : CharacterBody3D, ITickable
 	[Export] private float alignmentFactor = 0f;
 	[Export] private float cohesionFactor = 0f;
 	[Export] private float pathFollowFactor = 0.1f;
+	[Export] private float _randomVelocityFactor = 0.03f;
 	[Export] private float speed = 0.15f;
 
 	private Queue<Vector3> _pathPoses = new();
 	private Vector3 _currPathPosTarget;
+	private GoatPathController _goatPath;
     public override void _Ready()
     {
 		IsActive = true;
 		separationRadius = RandomGenerator.Instance.GetRandFInRange(0.35f, 0.45f);
 		_anim.Seek(RandomGenerator.Instance.GetRandFInRange(0f, 1.9f));
-		_timer.WaitTime = RandomGenerator.Instance.GetRandFInRange(8f, 15f);
+		_timer.WaitTime = RandomGenerator.Instance.GetRandFInRange(3f, 5f);
 		_timer.Timeout += _OnTimerTimeOut;
 		_timer.Start();
     }
@@ -39,7 +41,7 @@ public partial class GoatController : CharacterBody3D, ITickable
 
 		Velocity += GetVelocityToPath();
 
-		Velocity += _randomVelocity;
+		Velocity += _randomVelocity * _randomVelocityFactor;
 
 		ClampVelocity();
 		Velocity = new Vector3(Velocity.X, 0f, Velocity.Z);
@@ -47,17 +49,43 @@ public partial class GoatController : CharacterBody3D, ITickable
 		UpdateRotation((float)delta);
 		
 	}
-	public void SetGoatOnPath(GoatPathController path){
+	public void SetGoatOnPath(GoatPathController path, bool isInverse){
+		_goatPath = path;
 		Curve3D pathCurve = path.Curve;
-		for (int i = 0; i < pathCurve.PointCount; i++)
-		{
-			_pathPoses.Enqueue(pathCurve.GetPointPosition(i));
+		if(!isInverse){
+			for (int i = 0; i < pathCurve.PointCount; i++)
+			{
+				_pathPoses.Enqueue(pathCurve.GetPointPosition(i));
+			}
 		}
+		else{
+			for (int i = pathCurve.PointCount - 1; i > -1; i--)
+			{
+				_pathPoses.Enqueue(pathCurve.GetPointPosition(i));
+			}
+		}
+		
 		GetNextPosTarget();
 	}
 	private void GetNextPosTarget(){
 		if(_pathPoses.Count > 0){
 			_currPathPosTarget = _pathPoses.Dequeue();
+		}
+		else{
+			for (int i = 0; i < flock.Count; i++)
+			{
+				if(flock[i] != this){
+					for (int j = 0; j < flock[i].flock.Count; j++)
+					{
+						if(flock[i].flock[j] == this){
+							flock[i].flock.RemoveAt(j);
+							break;
+						}
+					}
+				}
+			}
+			_goatPath.GoatsArrived ++;
+			QueueFree();
 		}
 	}
 	private Vector3 GetVelocityToPath(){
@@ -116,6 +144,7 @@ public partial class GoatController : CharacterBody3D, ITickable
 		return (separationVelocity, alignmentVelocity, cohesionVelocity);
 	}
 
+
 	private void ClampVelocity(){
 		Vector3 dir = Velocity.Normalized();
 		Velocity = dir * speed;
@@ -130,12 +159,13 @@ public partial class GoatController : CharacterBody3D, ITickable
 
 	private void _OnTimerTimeOut(){
 		if(_randomVelocity == Vector3.Zero){
-			_randomVelocity = new Vector3 (RandomGenerator.Instance.GetRandFInRange(0f, 0.1f), 0f, RandomGenerator.Instance.GetRandFInRange(0f, 0.1f));
+			//_randomVelocity = new Vector3 (RandomGenerator.Instance.GetRandFInRange(0f, 1f), 0f, RandomGenerator.Instance.GetRandFInRange(0f, 1f)).Normalized();
+			_randomVelocity = Velocity.Normalized().Rotated(Vector3.Up, Mathf.RadToDeg(RandomGenerator.Instance.GetRandFInRange(-45f, 45f)));
 		}
 		else{
 			_randomVelocity = Vector3.Zero;
 		}
-		_timer.Start();
+		//_timer.Start();
 	}
 	public void OnHovered(Vector3 pos){
 		return;

@@ -17,4 +17,13 @@ public partial class RandomGenerator : Node
     public float GetRandFInRange(float inf, float sup){
         return _rand.RandfRange(inf, sup);
     }
+
+    public bool GetRandomBool(){
+        if(_rand.RandiRange(0, 1) == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

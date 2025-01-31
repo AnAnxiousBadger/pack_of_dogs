@@ -235,6 +235,7 @@ height = 0.467953
 
 [node name="goat" type="CharacterBody3D" node_paths=PackedStringArray("_anim", "_timer")]
 collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_y48nm")
 Effects = Array[Object]([])
 _anim = NodePath("AnimationPlayer")
@@ -363,7 +364,7 @@ libraries = {
 autoplay = "goat_walking"
 speed_scale = 0.75
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="tickable_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0.146, 0)
 shape = SubResource("CapsuleShape3D_ddejj")
 

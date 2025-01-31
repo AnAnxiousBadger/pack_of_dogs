@@ -3,40 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[Tool]
 public partial class GoatPathController : Path3D
 {
-	/*#region ToolVars
-		[Export] private bool _canRunInEditor = false;
-		private bool _spawn = false;
-		[Export] public bool Spawn{
-			get { return _spawn; }
-			set {
-				if(_canRunInEditor){
-					_canRunInEditor = false;
-					_spawn = false;
-					Godot.Collections.Array<Node> children = _goatContainer.GetChildren();
-					foreach (Node child in children)
-					{
-						child.Free();
-					}
-					SpawnGoats(_goatContainer, _goatNum, _reverseSpawn);
-				}
-			}
-		}
-		[Export] private Node3D _goatContainer;
-		[Export] private int _goatNum = 3;
-		[Export] private bool _reverseSpawn = false;
-	#endregion*/
 	[Export] private Node3D _spawnPoint;
 	[Export] private Node3D _reverseSpawnPoint;
-	[Export] private PackedScene _goatScene;
-	private float _spawnSeparationRadius = 0.45f;
-	public override void _Ready()
-	{
+	private float _spawnSeparationRadius = 1f;
+	private int _goatsOnPath = 0;
+	private int _goatsArrived = 0;
+	public int GoatsArrived {
+		get { return _goatsArrived;}
+		set {
+			_goatsArrived = value;
+			if(_goatsArrived == _goatsOnPath){
+				_goatsArrived = 0;
+				_goatsOnPath = 0;
+				EmitSignal(SignalName.AllGoatsArrived);
+			}
+		}
 	}
+	[Signal] public delegate void AllGoatsArrivedEventHandler();
 
-	public void SpawnGoats(Node3D goatContainerNode, int num, bool inversePos){
+	public void SpawnGoats(PackedScene goatScene, Node3D goatContainerNode, int num, bool inversePos){
 		if(num > 0){
 			Vector3 originPos = _spawnPoint.Position;
 			if(inversePos){
@@ -51,14 +38,15 @@ public partial class GoatPathController : Path3D
 			List<GoatController> goatFlock = new();
 			foreach (Vector2 point in spawnPoses)
 			{
-				GoatController goat = SpawnGoat(new Vector3(point.X, -0.5f, point.Y), goatContainerNode);
+				GoatController goat = SpawnGoat(goatScene, new Vector3(point.X, 0, point.Y), goatContainerNode);
 				goatFlock.Add(goat);
 			}
 			foreach (GoatController goat in goatFlock)
 			{
 				goat.flock = goatFlock;
-				goat.SetGoatOnPath(this);
+				goat.SetGoatOnPath(this, inversePos);
 			}
+			_goatsOnPath = num;
 		}
 		
 	}
@@ -66,8 +54,6 @@ public partial class GoatPathController : Path3D
 	private Vector2 GetRandomPointAtDistance(Vector2 origin)
     {
         float angle = RandomGenerator.Instance.GetRandFInRange(0f, Mathf.DegToRad(360));
-		/*RandomNumberGenerator rand = new();
-		float angle = rand.RandfRange(0f, Mathf.DegToRad(360));*/
 		return origin + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * _spawnSeparationRadius;
     }
 
@@ -92,10 +78,9 @@ public partial class GoatPathController : Path3D
 		return chosenPoint;
 	}
 
-	private GoatController SpawnGoat(Vector3 pos, Node3D parent){
-		GoatController goat = _goatScene.Instantiate() as GoatController;
+	private GoatController SpawnGoat(PackedScene goatScene, Vector3 pos, Node3D parent){
+		GoatController goat = goatScene.Instantiate() as GoatController;
 		parent.AddChild(goat);
-		//goat.Owner = GetTree().EditedSceneRoot;
 		goat.Position = pos;
 		return goat;
 	}
