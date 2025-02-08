@@ -14,9 +14,10 @@ public partial class StatsContainer : HBoxContainer
 		}
 	}
 	public void AddStat(string statString, PackedScene labelScene){
-		Label statLabel = labelScene.Instantiate() as Label;
+		HBoxContainer labelContainer = labelScene.Instantiate() as HBoxContainer;
+		Label statLabel = labelContainer.GetNode("stat_label") as Label;
 		statLabel.Text = statString.ToString();
-        AddChild(statLabel);
+        AddChild(labelContainer);
 	}
 
 	public void AddStat(List<int> rollables, List<float> rollPercent, int totalTurns, int totalRolls, float rollAverage, PackedScene rollDisplayScene){

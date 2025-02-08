@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=10 format=3 uid="uid://dvcai8l8vgqpb"]
+
+[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_sqxhg"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_cnvo0"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_e4q7c"]
+[ext_resource type="AudioStream" uid="uid://cb8vapdeqkd1w" path="res://Assets/sounds/audio_streams/board_controller_library/piece_picked.mp3" id="4_gjkjs"]
+[ext_resource type="AudioStream" uid="uid://rwubi6555p80" path="res://Assets/sounds/audio_streams/board_controller_library/piece_moved_01.mp3" id="5_f33lp"]
+
+[sub_resource type="Resource" id="Resource_u52ik"]
+script = ExtResource("3_e4q7c")
+deltaPitchScale = Vector2(-0.3, 0.3)
+
+[sub_resource type="Resource" id="Resource_bgq66"]
+script = ExtResource("2_cnvo0")
+sound = ExtResource("4_gjkjs")
+identifier = "picked_piece"
+settings = SubResource("Resource_u52ik")
+
+[sub_resource type="Resource" id="Resource_gp2w2"]
+script = ExtResource("3_e4q7c")
+deltaPitchScale = Vector2(-0.3, 0.3)
+
+[sub_resource type="Resource" id="Resource_h6asq"]
+script = ExtResource("2_cnvo0")
+sound = ExtResource("5_f33lp")
+identifier = "piece_moved"
+settings = SubResource("Resource_gp2w2")
+
+[resource]
+script = ExtResource("1_sqxhg")
+soundEffects = Array[Resource]([SubResource("Resource_bgq66"), SubResource("Resource_h6asq")])

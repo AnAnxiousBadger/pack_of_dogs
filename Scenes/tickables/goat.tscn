@@ -1,7 +1,15 @@
-[gd_scene load_steps=15 format=4 uid="uid://c1eu75883604g"]
+[gd_scene load_steps=17 format=4 uid="uid://c1eu75883604g"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatController.cs" id="1_y48nm"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableVisualEffect.cs" id="2_58cqu"]
 [ext_resource type="Material" uid="uid://ej8egkw18wkc" path="res://Assets/materials/goat_mat/goat_mat.tres" id="2_ryycx"]
+
+[sub_resource type="Resource" id="Resource_n6ow4"]
+script = ExtResource("2_58cqu")
+onClickPosition = true
+allowOnDisabledTickableButtonClicks = true
+signaltype = 0
+effectName = "bleating_particles_visual_effect"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7wyi"]
 
@@ -223,6 +231,20 @@ tracks/12/path = NodePath("goat_armature/Skeleton3D:hind_leg_L")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = PackedFloat32Array(0, 1, 0.93342, 1.53412, -0.166315, 0.5, 1, 0.93342, 1.53412, -0.166315, 0.533333, 1, 0.933266, 1.53963, -0.16935, 0.566667, 1, 0.932906, 1.55254, -0.176445, 0.6, 1, 0.932365, 1.57193, -0.187108, 0.633333, 1, 0.931668, 1.59691, -0.200847, 0.666667, 1, 0.930839, 1.62659, -0.21717, 0.7, 1, 0.929886, 1.66074, -0.235953, 0.733333, 1, 0.928877, 1.69691, -0.255844, 0.8, 1, 0.926789, 1.77171, -0.296979, 0.833333, 1, 0.925761, 1.80855, -0.317239, 0.866667, 1, 0.924808, 1.84271, -0.336022, 0.9, 1, 0.923948, 1.87351, -0.35296, 0.933333, 1, 0.923207, 1.90006, -0.36756, 0.966667, 1, 0.92261, 1.92146, -0.37933, 1, 1, 0.922181, 1.93682, -0.387779, 1.03333, 1, 0.922027, 1.94234, -0.390814, 1.06667, 1, 0.922148, 1.93799, -0.388425, 1.1, 1, 0.922547, 1.92372, -0.380572, 1.13333, 1, 0.923203, 1.9002, -0.367642, 1.16667, 1, 0.924076, 1.86894, -0.350447, 1.2, 1, 0.925154, 1.83029, -0.329191, 1.23333, 1, 0.926326, 1.78831, -0.306107, 1.3, 1, 0.928782, 1.7003, -0.257704, 1.33333, 1, 0.929985, 1.65721, -0.234011, 1.36667, 1, 0.931063, 1.61856, -0.212754, 1.4, 1, 0.931988, 1.58545, -0.194544, 1.43333, 1, 0.932716, 1.55935, -0.180193, 1.46667, 1, 0.933207, 1.54175, -0.170512, 1.5, 1, 0.93342, 1.53412, -0.166315, 1.95833, 1, 0.93342, 1.53412, -0.166315)
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"SpawnFootPrintDecal"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2j5ui"]
 _data = {
@@ -237,7 +259,8 @@ height = 0.467953
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_y48nm")
-Effects = Array[Object]([])
+Effects = Array[Object]([SubResource("Resource_n6ow4")])
+SoundEffects = Array[Object]([])
 _anim = NodePath("AnimationPlayer")
 _timer = NodePath("Timer")
 
@@ -362,7 +385,6 @@ libraries = {
 "": SubResource("AnimationLibrary_2j5ui")
 }
 autoplay = "goat_walking"
-speed_scale = 0.75
 
 [node name="tickable_collision_shape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0, 0.146, 0)

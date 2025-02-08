@@ -2,11 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class GoatController : CharacterBody3D, ITickable
+public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 {
 	public bool IsActive {get; set;}
-	[Export] public TickableEffect[] Effects {get; set;}
-	public List<GoatController> flock;
+	public Node3D TickableNode {get  => this;}
+	[Export] public TickableVisualEffect[] Effects {get; set;}
+	[Export] public TickableSoundEffect[] SoundEffects {get; set;}
+	public List<GoatController> flock = new();
 	[Export] private AnimationPlayer _anim;
 	[Export] private Timer _timer;
 	private Vector3 _randomVelocity = Vector3.Zero;
@@ -22,9 +24,17 @@ public partial class GoatController : CharacterBody3D, ITickable
 	private Queue<Vector3> _pathPoses = new();
 	private Vector3 _currPathPosTarget;
 	private GoatPathController _goatPath;
+
+	public IPoolManager Pool {get; set;}
+    public string Identifier { get; set; }
+    public Node PoolableNode => this;
+
+	private bool canBleat = true;
+	private AudioStreamPlayer3D _tempAudioStreamPlayer = null;
+
     public override void _Ready()
     {
-		IsActive = true;
+		IsActive = false;
 		separationRadius = RandomGenerator.Instance.GetRandFInRange(0.35f, 0.45f);
 		_anim.Seek(RandomGenerator.Instance.GetRandFInRange(0f, 1.9f));
 		_timer.WaitTime = RandomGenerator.Instance.GetRandFInRange(3f, 5f);
@@ -33,21 +43,22 @@ public partial class GoatController : CharacterBody3D, ITickable
     }
     public override void _PhysicsProcess(double delta)
 	{
-		Velocity = Vector3.Zero;
-		(Vector3 separationVelocity, Vector3 alignmentVelocity, Vector3 cohesionVelocity) = FlockSteer();
-		Velocity += separationVelocity;
-		Velocity += alignmentVelocity;
-		Velocity += cohesionVelocity;
+		if(IsActive){
+			Velocity = Vector3.Zero;
+			(Vector3 separationVelocity, Vector3 alignmentVelocity, Vector3 cohesionVelocity) = FlockSteer();
+			Velocity += separationVelocity;
+			Velocity += alignmentVelocity;
+			Velocity += cohesionVelocity;
 
-		Velocity += GetVelocityToPath();
+			Velocity += GetVelocityToPath();
 
-		Velocity += _randomVelocity * _randomVelocityFactor;
+			Velocity += _randomVelocity * _randomVelocityFactor;
 
-		ClampVelocity();
-		Velocity = new Vector3(Velocity.X, 0f, Velocity.Z);
-		Position += Velocity * (float)delta;
-		UpdateRotation((float)delta);
-		
+			ClampVelocity();
+			Velocity = new Vector3(Velocity.X, 0f, Velocity.Z);
+			Position += Velocity * (float)delta;
+			UpdateRotation((float)delta);
+		}
 	}
 	public void SetGoatOnPath(GoatPathController path, bool isInverse){
 		_goatPath = path;
@@ -85,7 +96,7 @@ public partial class GoatController : CharacterBody3D, ITickable
 				}
 			}
 			_goatPath.GoatsArrived ++;
-			QueueFree();
+			Pool.ReQueuePoolable(this);
 		}
 	}
 	private Vector3 GetVelocityToPath(){
@@ -159,19 +170,43 @@ public partial class GoatController : CharacterBody3D, ITickable
 
 	private void _OnTimerTimeOut(){
 		if(_randomVelocity == Vector3.Zero){
-			//_randomVelocity = new Vector3 (RandomGenerator.Instance.GetRandFInRange(0f, 1f), 0f, RandomGenerator.Instance.GetRandFInRange(0f, 1f)).Normalized();
 			_randomVelocity = Velocity.Normalized().Rotated(Vector3.Up, Mathf.RadToDeg(RandomGenerator.Instance.GetRandFInRange(-45f, 45f)));
 		}
 		else{
 			_randomVelocity = Vector3.Zero;
 		}
-		//_timer.Start();
+	}
+	/// <summary>
+	/// Called from <c>AnimationPlayer</c> at the first frame.
+	/// </summary>
+	public void SpawnFootPrintDecal(){
+		if(IsActive){
+			GoatFootPrintDecalController footPrint = Pool.GetPoolable("goat_print", GlobalPosition) as GoatFootPrintDecalController;
+			footPrint.GlobalPosition = GlobalPosition;
+			footPrint.GlobalRotation = GlobalRotation;
+			footPrint.OnSpawn();
+		}
 	}
 	public void OnHovered(Vector3 pos){
 		return;
 	}
 	public void OnPressed(Vector3 pos){
-		GD.Print("mek");
+		if(canBleat){
+			if(Pool is GoatPathManager goatPathManager){
+				AudioStreamPlayer3D ap = AudioManager.Instance.PlaySound(goatPathManager.goatAudioLibrary.GetSound("goat_bleating"), this, false);
+				if(ap != null){
+					canBleat = false;
+					_tempAudioStreamPlayer = ap;
+					_tempAudioStreamPlayer.Finished += _OnBleatFinished;
+				}
+			}
+		}
+		
+	}
+	private void _OnBleatFinished(){
+		_tempAudioStreamPlayer.Finished -= _OnBleatFinished;
+		_tempAudioStreamPlayer = null;
+		canBleat = true;
 	}
 	public void OnReleased(Vector3 pos){
 		return;

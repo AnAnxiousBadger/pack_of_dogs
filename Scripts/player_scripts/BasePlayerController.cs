@@ -30,7 +30,7 @@ public abstract partial class BasePlayerController : Node
         set { 
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
-            if(_deliveredPieces == piecesToDeliver){
+            if(_deliveredPieces == /*piecesToDeliver*/ 1){
                 GameController.Instance.EndGame(this);
             }
         }

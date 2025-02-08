@@ -54,6 +54,7 @@ public partial class RealPlayerController : BasePlayerController
     }
 
     public void SelectPiece(PieceController piece){
+        GameController.Instance.uiController.canEscapeActOnUI = false;
         selectedPiece = piece;
 
         // Calculate where it can step
@@ -66,6 +67,7 @@ public partial class RealPlayerController : BasePlayerController
         }
     }
     public void DeselectPiece(){
+        GameController.Instance.uiController.canEscapeActOnUI = true;
         if(selectedPiece != null){
             foreach (BoardNodeController node in possibeNodes)
             {

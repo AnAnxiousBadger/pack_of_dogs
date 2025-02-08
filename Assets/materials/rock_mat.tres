@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://k1hhebyjk3fy"]
+
+[ext_resource type="Texture2D" uid="uid://6l7kl5b2r7yu" path="res://Assets/materials/lime_diffuse.png" id="1_uncji"]
+[ext_resource type="Texture2D" uid="uid://cuat7dvnmwypi" path="res://Assets/materials/rock_normal.png" id="2_bjmmn"]
+
+[resource]
+albedo_texture = ExtResource("1_uncji")
+roughness = 0.9
+normal_enabled = true
+normal_texture = ExtResource("2_bjmmn")

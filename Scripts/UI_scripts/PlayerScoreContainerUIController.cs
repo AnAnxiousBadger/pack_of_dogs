@@ -9,7 +9,7 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 	[Export] private Label _playerScoreLabel;
 	[Export] private Label _playerMaxScoreLabel;
 	[Export] private int _maxNameLength = 15;
-	[Export] private PanelContainer _currentPanel;
+	//[Export] private PanelContainer _currentPanel;
 
 	public void SetPlayerScoreLabel(BasePlayerController player){
 		string playerName = player.PlayerName;
@@ -21,19 +21,19 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 		_playerMaxScoreLabel.Text = player.piecesToDeliver.ToString();
 		_player = player;
 		_player.PieceDelivered += UpdatePlayerScore;
-		_player.TurnStarted += ShowCurrentPlayer;
-		_player.TurnEnded += HideCurrentPlayer;
+		//_player.TurnStarted += ShowCurrentPlayer;
+		//_player.TurnEnded += HideCurrentPlayer;
 	}
 	public void UpdatePlayerScore(){
 		_playerScoreLabel.Text = _player.DeliveredPieces.ToString();
 	}
 
-	private void ShowCurrentPlayer(){
+	/*private void ShowCurrentPlayer(){
 		_currentPanel.Modulate = new Color(1,1,1,1);
 	}
 
 	private void HideCurrentPlayer(){
 		_currentPanel.Modulate = new Color(1,1,1,0);
-	}
+	}*/
 
 }

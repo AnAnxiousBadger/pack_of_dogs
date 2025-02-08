@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_effect_particle_texture.png" id="5_58bir"]
 [ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="5_sv3sr"]
 [ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_bottom_gradient_texture.tres" id="6_oo5qo"]
-[ext_resource type="ArrayMesh" uid="uid://db5nk83175wnw" path="res://Assets/meshes/rosette_top_mesh.res" id="7_slfjh"]
+[ext_resource type="ArrayMesh" uid="uid://db5nk83175wnw" path="res://Assets/meshes/visual_effect_meshes/rosette_top_mesh.res" id="7_slfjh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mfwia"]
 render_priority = 0

@@ -2,11 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 public partial class StatsUIController : PanelContainer
 {	
 	// http://www.codex99.com/typography/1.html
 
+	[Export] private UIController _UIController;
 	[Export] private Label _tableTitle;
 	[ExportCategory("Statistics containers")]
 	[Export] private StatsContainer _playerNameContainer;
@@ -20,6 +22,7 @@ public partial class StatsUIController : PanelContainer
 
 	[ExportCategory("UI prefabs")]
 	[Export] private PackedScene _labelType01;
+	[Export] private PackedScene _labelType02;
 	[Export] private PackedScene _rollStatsDisplay;
 
 	private BasePlayerController _winner = null;
@@ -27,24 +30,15 @@ public partial class StatsUIController : PanelContainer
     public override void _Ready()
     {
         Visible = false;
-    }
-    public override void _Process(double delta)
-    {
-		if(Input.IsActionJustPressed("tab")){
-			if(!Visible){
-				GetAndDisplayStats(); 
-			}
-			if(_winner != null){
-				SetStatTableVisibility(!Visible, "End of Game Summary"); // SET CLICKABILITY SET CROWN
-			}	
-			else{
-				SetStatTableVisibility(!Visible, "Player Statistics");
-			}
-		}
+		GameController.Instance.GameEnded += winner => _winner = winner;
     }
     public void AddPlayerStatsToUI(Dictionary<string, object> stats){
 		// Set player name
-		_playerNameContainer.AddStat(stats["player_name"].ToString(), _labelType01);
+		PackedScene nameLabelScene = _labelType01;
+		if(stats["player"] == _winner){
+			nameLabelScene = _labelType02;
+		}
+		_playerNameContainer.AddStat(stats["player_name"].ToString(), nameLabelScene);
 
 		// Set delivered pieces
 		_piecesDeliveredContainer.AddStat(stats["pieces_delivered"].ToString(), _labelType01);
@@ -99,14 +93,20 @@ public partial class StatsUIController : PanelContainer
 
 		// Set lucky csore
 		float score = (float)stats["lucky_score"];
-		_luckyScoreContainer.AddStat(score.ToString("F2"), _labelType01);
+		_luckyScoreContainer.AddStat(score.ToString("F2", CultureInfo.InvariantCulture), _labelType01);
 	}
 
-	private void SetStatTableVisibility(bool visible, string title){
-		_tableTitle.Text = title;
+	public void SetStatTableVisibility(bool visible){
+
+		if(_winner != null){
+			_tableTitle.Text = "End of Game Summary";
+		}
+		else{
+			_tableTitle.Text = "Player Statistics";
+		}
 		Visible = visible;
 	}
-	private void GetAndDisplayStats(){
+	public void GetAndDisplayStats(){
 		// Clear table
 		_playerNameContainer.ClearContainer();
 		_piecesDeliveredContainer.ClearContainer();
@@ -122,9 +122,5 @@ public partial class StatsUIController : PanelContainer
 		{
 			AddPlayerStatsToUI(player.playerStats.GetStats());
 		}
-	}
-
-	private void DisplayEndTable(){
-
 	}
 }

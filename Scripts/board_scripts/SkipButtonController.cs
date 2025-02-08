@@ -11,6 +11,7 @@ public partial class SkipButtonController : TickableButtonController
 		GameController.Instance.boardController.boardElementsController.OnSkipWithoutClicking += _OnButtonPressedWithoutClicking;
 	}
 	public override void OnHovered(Vector3 pos){
+		base.OnHovered(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/on_hover");
 		}
@@ -19,11 +20,13 @@ public partial class SkipButtonController : TickableButtonController
 		}
 	}
 	public override void OnPressed(Vector3 pos){
+		base.OnPressed(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("skip/on_pressed");
 		}
 	}
 	public override void OnReleased(Vector3 pos){
+		base.OnReleased(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			DoButtonReleaseAction();
 		}
@@ -38,7 +41,7 @@ public partial class SkipButtonController : TickableButtonController
 			_anim.Play("skip/RESET");
 		} 
     }
-	protected override void DisAbleButton(){
+	protected override void DisableButton(){
 		_anim.Play("skip/on_disable");
 	}
 	protected override void EnableButton(){

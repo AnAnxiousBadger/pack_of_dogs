@@ -10,17 +10,17 @@ font_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hovws"]
 bg_color = Color(0.14, 0.098, 0.06, 0)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yltt1"]
 bg_color = Color(0.704103, 0.583625, 0.319285, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="roll_bar" type="VBoxContainer" node_paths=PackedStringArray("_rollPercentLabel", "_rollLabel", "_rollbar")]
 alignment = 1

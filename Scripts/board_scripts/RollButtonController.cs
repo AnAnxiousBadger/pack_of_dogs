@@ -14,6 +14,7 @@ public partial class RollButtonController : TickableButtonController
 	}
 
 	public override void OnHovered(Vector3 pos){
+		base.OnHovered(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/on_hover");
 		}
@@ -24,12 +25,14 @@ public partial class RollButtonController : TickableButtonController
 	}
 
 	public override void OnPressed(Vector3 pos){
+		base.OnPressed(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			_anim.Play("roll/on_pressed");
 		}
 		EmitSignal(SignalName.OnPressedRoll, pos, IsActive && GameController.Instance.allowClicksOnTickableButtons);
 	}
 	public override void OnReleased(Vector3 pos){
+		base.OnReleased(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			DoButtonReleaseAction();
 		}
@@ -46,10 +49,12 @@ public partial class RollButtonController : TickableButtonController
 		EmitSignal(SignalName.OnRollPressStopped, IsActive && GameController.Instance.allowClicksOnTickableButtons);
     }
 
-    protected override void DisAbleButton(){
+    protected override void DisableButton(){
+		base.DisableButton();
 		_anim.Play("roll/on_disable");
 	}
 	protected override void EnableButton(){
+		base.EnableButton();
 		_anim.Play("roll/on_enable");
 	}
 

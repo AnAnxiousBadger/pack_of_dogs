@@ -14,11 +14,9 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_vekou"]
 font = ExtResource("3_daghw")
-font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_242n2"]
 font = ExtResource("4_dhvod")
-font_size = 8
 
 [node name="roll_stats_display" type="VBoxContainer" node_paths=PackedStringArray("_rollBarContainer", "_totalTurnsLabel", "_totalRollsLabel", "_averageRollLabel")]
 size_flags_horizontal = 3
@@ -71,42 +69,51 @@ layout_mode = 2
 
 [node name="total_turns_container" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="total_turns_container"]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "total turns:"
 label_settings = SubResource("LabelSettings_vekou")
 
 [node name="total_turns_label" type="Label" parent="total_turns_container"]
 layout_mode = 2
+size_flags_horizontal = 10
 text = "2.15"
 label_settings = SubResource("LabelSettings_242n2")
+horizontal_alignment = 1
 
 [node name="total_rolls_container" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="total_rolls_container"]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "total rolls:"
 label_settings = SubResource("LabelSettings_vekou")
 
 [node name="average_roll_label" type="Label" parent="total_rolls_container"]
 layout_mode = 2
+size_flags_horizontal = 10
 text = "2.15"
 label_settings = SubResource("LabelSettings_242n2")
+horizontal_alignment = 1
 
 [node name="average_roll_container" type="HBoxContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="average_roll_container"]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "average roll:"
 label_settings = SubResource("LabelSettings_vekou")
 
 [node name="average_roll_label" type="Label" parent="average_roll_container"]
 layout_mode = 2
+size_flags_horizontal = 10
 text = "2.15"
 label_settings = SubResource("LabelSettings_242n2")
+horizontal_alignment = 1

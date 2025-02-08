@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://djx1n8kuywk3g"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/GoatFootPrintDecalController.cs" id="1_ase23"]
+[ext_resource type="Texture2D" uid="uid://bldkx81uu1pac" path="res://Assets/textures/goat_foot_print_texture.png" id="1_ojm4y"]
+
+[node name="goat_foot_print_visual_effect" type="Node3D" node_paths=PackedStringArray("_disappearTimer")]
+script = ExtResource("1_ase23")
+_disappearTimer = NodePath("disappear_timer")
+_disappearTime = 15.0
+
+[node name="goat_foot_print_decal" type="Decal" parent="."]
+size = Vector3(0.4, 0.074, 0.4)
+texture_albedo = ExtResource("1_ojm4y")
+modulate = Color(0.19, 0.113, 0.05, 0.6)
+upper_fade = 2.41609e-05
+lower_fade = 7.8499e-05
+
+[node name="disappear_timer" type="Timer" parent="."]
+one_shot = true

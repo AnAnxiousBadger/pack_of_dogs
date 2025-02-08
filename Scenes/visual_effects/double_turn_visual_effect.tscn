@@ -1,14 +1,27 @@
-[gd_scene load_steps=33 format=4 uid="uid://bo6k7xqvn15aj"]
+[gd_scene load_steps=38 format=4 uid="uid://bo6k7xqvn15aj"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_xgltw"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_hq3fc"]
 [ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="3_2da2p"]
 [ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_bottom_gradient_texture.tres" id="3_2th2q"]
 [ext_resource type="Texture2D" uid="uid://dphqeupe087jg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_top_gradient_texture.tres" id="3_55a2i"]
+[ext_resource type="AudioStream" uid="uid://cjomyw8e24mad" path="res://Assets/sounds/audio_streams/visual_effect_sounds/double_turn_melody.mp3" id="3_e7q4k"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_n6xbg"]
 [ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_shader.tres" id="5_3gp3p"]
 [ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_01.tres" id="6_ir01n"]
 [ext_resource type="Texture2D" uid="uid://curn2elo7ribq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_gradient.tres" id="6_rjboe"]
 [ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="7_f2sj0"]
 [ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_effect_particle_texture.png" id="8_hg483"]
+
+[sub_resource type="Resource" id="Resource_rcx1k"]
+script = ExtResource("3_n6xbg")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_vdv22"]
+script = ExtResource("2_hq3fc")
+sound = ExtResource("3_e7q4k")
+identifier = "double_turn_melody"
+settings = SubResource("Resource_rcx1k")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5h4rf"]
 render_priority = 0
@@ -419,8 +432,7 @@ _data = {
 
 [node name="double_turn_visual_effect" type="Node3D"]
 script = ExtResource("1_xgltw")
-effectName = "double_turn_visual_effect"
-poolCount = 3
+effectSound = SubResource("Resource_vdv22")
 
 [node name="rosette_top_mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)

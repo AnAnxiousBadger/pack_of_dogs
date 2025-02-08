@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 public partial class RollStatsDisplayUIController : VBoxContainer
 {
@@ -24,7 +25,7 @@ public partial class RollStatsDisplayUIController : VBoxContainer
 		_totalRollsLabel.Text = totalRolls.ToString();
 
 		if(averageRoll != float.MinValue){
-			_averageRollLabel.Text = averageRoll.ToString("F2");
+			_averageRollLabel.Text = averageRoll.ToString("F2", CultureInfo.InvariantCulture);
 		}
 		else{
 			_averageRollLabel.Text = "-";

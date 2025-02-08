@@ -11,7 +11,7 @@ public partial class GameController : Node3D
 	[Export] public UIController uiController;
 	[Export] public DiceController diceController;
 	[Export] public BoardController boardController;
-	[Export] public VisualEffectPoolController visualEffectPool;
+	public VisualEffectPoolController visualEffectPool;
 	public List<BasePlayerController> players;
 	private Queue<BasePlayerController> _playersQueue;
 	public BasePlayerController currPlayer;
@@ -20,11 +20,11 @@ public partial class GameController : Node3D
 	public CollisionMask collisionMask = CollisionMask.PIECE;
 	private const float MOUSERAYDIST = 1000f;
 	private PhysicsBody3D _physicsBodyUnderMouse = null;
-	private Vector3 _staticBodyHitPos = Vector3.Zero;
+	private Vector3 _physicsBodyHitPos = Vector3.Zero;
 	public PhysicsBody3D PhysicsBodyUnderMouse {
 		get { return _physicsBodyUnderMouse; }
 		private set {
-			boardController.boardElementsController.HandleTickableInterActions(_physicsBodyUnderMouse, value, _staticBodyHitPos);
+			boardController.boardElementsController.HandleTickableInterActions(_physicsBodyUnderMouse, value, _physicsBodyHitPos);
 			_physicsBodyUnderMouse = value;
 		}
 	}
@@ -48,11 +48,14 @@ public partial class GameController : Node3D
 
 	public override void _Process(double delta)
     {
-		(PhysicsBodyUnderMouse, _staticBodyHitPos) = CastRayFromMouse();
         currPlayer?.ProcessTurn((float)delta);
     }
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        (PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
+    }
 
-	private void SetUpGame(){
+    private void SetUpGame(){
 		diceController.ReadyDiceController();
 		SetUpPlayers();
 		boardController.ReadyBoardController();
@@ -133,7 +136,6 @@ public partial class GameController : Node3D
 		_playersQueue.Clear();
 		currPlayer = null;
 		EmitSignal(SignalName.GameEnded, winner);
-		GD.Print("END");
 	}
 
 	public void RollButtonUsed(){

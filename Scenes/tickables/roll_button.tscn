@@ -1,24 +1,62 @@
-[gd_scene load_steps=9 format=3 uid="uid://co1b1b74mbd1y"]
+[gd_scene load_steps=16 format=3 uid="uid://co1b1b74mbd1y"]
 
 [ext_resource type="ArrayMesh" uid="uid://6qgfxj5bjf6m" path="res://Assets/meshes/roll_button_mesh.res" id="2_4i51b"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableEffect.cs" id="2_rre6x"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableVisualEffect.cs" id="2_423bc"]
 [ext_resource type="Material" uid="uid://blkvgwocwandk" path="res://Assets/materials/roll_button/roll_button_mat.tres" id="3_h2bec"]
 [ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/button_tickable_animations.res" id="3_jy5s7"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/TickableSoundEffect.cs" id="3_ma082"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/RollButtonController.cs" id="6_j28ii"]
 
-[sub_resource type="Resource" id="Resource_c5ehs"]
-script = ExtResource("2_rre6x")
+[sub_resource type="Resource" id="Resource_dkmy8"]
+script = ExtResource("2_423bc")
+onClickPosition = true
+allowOnDisabledTickableButtonClicks = false
 signaltype = 0
 effectName = "chipped_lime_visual_effect"
-onClickPosition = true
-allowOnDisabledTickableButtonClicks = true
 
-[sub_resource type="Resource" id="Resource_jvl5q"]
-script = ExtResource("2_rre6x")
-signaltype = 1
-effectName = "sand_dust_ring_visual_effect"
+[sub_resource type="Resource" id="Resource_8eom6"]
+script = ExtResource("2_423bc")
 onClickPosition = false
 allowOnDisabledTickableButtonClicks = false
+signaltype = 1
+effectName = "sand_dust_ring_visual_effect"
+
+[sub_resource type="Resource" id="Resource_mpiuh"]
+script = ExtResource("2_423bc")
+onClickPosition = false
+allowOnDisabledTickableButtonClicks = true
+signaltype = 3
+effectName = "sand_dust_ring_visual_effect"
+
+[sub_resource type="Resource" id="Resource_itn4n"]
+script = ExtResource("3_ma082")
+allowOnDisabled = true
+signaltype = 0
+effectName = "rock_clicked"
+
+[sub_resource type="Resource" id="Resource_vu8i1"]
+script = ExtResource("3_ma082")
+allowOnDisabled = true
+signaltype = 3
+effectName = "button_click"
+
+[sub_resource type="Resource" id="Resource_ja6pf"]
+script = ExtResource("3_ma082")
+allowOnDisabled = true
+signaltype = 4
+effectName = "button_click"
+
+[sub_resource type="Resource" id="Resource_fsjit"]
+script = ExtResource("3_ma082")
+allowOnDisabled = true
+signaltype = 2
+effectName = "button_hover"
+
+[sub_resource type="Resource" id="Resource_7dpb5"]
+script = ExtResource("3_ma082")
+allowOnDisabled = false
+signaltype = 0
+effectName = "button_hover"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x4t8j"]
 size = Vector3(5.5332, 1.8349, 2.51801)
@@ -26,8 +64,9 @@ size = Vector3(5.5332, 1.8349, 2.51801)
 [node name="roll_button_tickable" type="StaticBody3D" node_paths=PackedStringArray("_anim")]
 collision_layer = 4
 script = ExtResource("6_j28ii")
+Effects = Array[Object]([SubResource("Resource_dkmy8"), SubResource("Resource_8eom6"), SubResource("Resource_mpiuh")])
+SoundEffects = Array[Object]([SubResource("Resource_itn4n"), SubResource("Resource_vu8i1"), SubResource("Resource_ja6pf"), SubResource("Resource_fsjit"), SubResource("Resource_7dpb5")])
 _anim = NodePath("AnimationPlayer")
-_effects = Array[Object]([SubResource("Resource_c5ehs"), SubResource("Resource_jvl5q")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00708008, 0.00723267, -0.00717163)

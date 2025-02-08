@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://5302ih5o5de6"]
 
-[ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/lime_particle_mesh.res" id="1_0pmum"]
+[ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/visual_effect_meshes/lime_particle_mesh.res" id="1_0pmum"]
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_e0ddx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp55g"]

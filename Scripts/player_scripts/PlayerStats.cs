@@ -65,6 +65,7 @@ public class PlayerStats
     public Dictionary<string, object> GetStats(){
         Dictionary<string, object> stats = new()
         {
+            {"player", player},
             { "player_name", player.PlayerName },
             { "total_turns", _totalTurns},
             { "roll_settings", player.rollSettings },

@@ -7,7 +7,9 @@ public partial class BasicNodeController : BoardNodeController
     public override void DoOnLeaveNodeAction(PieceController piece){
         EmitSignal(SignalName.OnLeave, piece);
     }
-    public override void DoOnStepNodeAction(PieceController piece){}
+    public override void DoOnStepNodeAction(PieceController piece){
+        //GameController.Instance.visualEffectPool.PlayVisualEffect("sand_dust_ring_visual_effect", TopPos);
+    }
 
     public override void Highlight()
     {

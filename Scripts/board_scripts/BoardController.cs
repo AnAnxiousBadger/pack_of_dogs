@@ -6,13 +6,12 @@ using System.Linq;
 public partial class BoardController : Node3D
 {
 	// EXPORTS
+	[Export] public AudioLibrary boardControllerAudioLibrary;
 	[Export] private PiecePositions _pieceStartingPositions;
 	[Export] private PiecePositions _pieceEndPositions;
 	[Export] public BoardElementsController boardElementsController;
 	[Export] private PiecePathController _pieceMovingPath;
 	[Export] private PiecePathController _pieceKickingpath;
-	// REFERENCES
-	//public GameController gameController;
 	// OTHER
 	public List<PieceController> pieces = new();
 	private List<BoardNodeController> _nodes = new();
@@ -20,7 +19,6 @@ public partial class BoardController : Node3D
 	private Queue<(BoardNodeController, PieceController)> _nodesToDoOnStepActions = new();
 
 	public void ReadyBoardController(){
-		//this.gameController = gameController;
 		SetUpBoard();
 	}
 	

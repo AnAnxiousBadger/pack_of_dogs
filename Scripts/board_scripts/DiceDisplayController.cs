@@ -17,6 +17,7 @@ public partial class DiceDisplayController : TickableButtonController
 
 	}
 	public override void OnHovered(Vector3 pos){
+		base.OnHovered(pos);
 		if(IsActive && GameController.Instance.allowClicksOnTickableButtons){
 			if(_anim.CurrentAnimation == "roll_animation"){
 				HideNumbers();
@@ -26,8 +27,9 @@ public partial class DiceDisplayController : TickableButtonController
 			_anim.Play("hover_animation");
 		}
 	}
+    public override void OnPressed(Vector3 pos){}
 
-	private void _OnRollPressed(Vector3 pos, bool isRollActive){
+    private void _OnRollPressed(Vector3 pos, bool isRollActive){
 		if(IsActive && isRollActive){
 			_anim.Play("pre_roll_animation");
 		}
@@ -41,6 +43,7 @@ public partial class DiceDisplayController : TickableButtonController
 		this.roll = roll;
 		if(IsActive){
 			_anim.Play("roll_animation");
+			AudioManager.Instance.PlaySound(GameController.Instance.boardController.boardElementsController.boardElementsAudioLibrary.GetSound("dice_roll"), this, false);
 		}
 	}
 

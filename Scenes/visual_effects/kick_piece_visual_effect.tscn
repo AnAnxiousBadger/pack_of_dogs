@@ -1,11 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://tlk2gdo5dwcs"]
+[gd_scene load_steps=30 format=3 uid="uid://tlk2gdo5dwcs"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_mb2xp"]
-[ext_resource type="ArrayMesh" uid="uid://g6iqc6noc8dc" path="res://Assets/meshes/sickle_sword.res" id="2_lloeb"]
+[ext_resource type="ArrayMesh" uid="uid://g6iqc6noc8dc" path="res://Assets/meshes/visual_effect_meshes/sickle_sword.res" id="2_lloeb"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_rt5l4"]
 [ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_shader.tres" id="3_hehan"]
+[ext_resource type="AudioStream" uid="uid://cyhlmxqjb4sm7" path="res://Assets/sounds/audio_streams/visual_effect_sounds/kick_piece_sound.mp3" id="3_irjm7"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_jjto1"]
 [ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_01.tres" id="4_7t62a"]
 [ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="5_ca42g"]
-[ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/lime_particle_mesh.res" id="6_e8ae7"]
+[ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/visual_effect_meshes/lime_particle_mesh.res" id="6_e8ae7"]
+
+[sub_resource type="Resource" id="Resource_k66vc"]
+script = ExtResource("3_jjto1")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_m86dh"]
+script = ExtResource("2_rt5l4")
+sound = ExtResource("3_irjm7")
+identifier = "piece_hit_sound"
+settings = SubResource("Resource_k66vc")
 
 [sub_resource type="QuadMesh" id="QuadMesh_3mh7v"]
 
@@ -266,8 +279,7 @@ _data = {
 
 [node name="kick_piece_visual_effect" type="Node3D"]
 script = ExtResource("1_mb2xp")
-effectName = "kick_piece_visual_effect"
-poolCount = 3
+effectSound = SubResource("Resource_m86dh")
 
 [node name="sickle" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.861036, -0.502684, 0.0769795, -0.0890482, -3.22354e-07, 0.996028, -0.500686, -0.864471, -0.0447634, 0.33499, 0.665, 0.411834)

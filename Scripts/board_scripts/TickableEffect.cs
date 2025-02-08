@@ -1,12 +1,9 @@
 using Godot;
 using System;
-
 [GlobalClass]
-public partial class TickableEffect: Resource
+public abstract partial class TickableEffect : Resource
 {
-    public enum SignalType {PRESSED, RELEASED}
+    public enum SignalType {PRESSED, RELEASED, HOVERED, ENABLE, DISABLE}
     [Export] public SignalType signaltype = SignalType.PRESSED;
     [Export] public string effectName;
-    [Export] public bool onClickPosition = false;
-    [Export] public bool allowOnDisabledTickableButtonClicks = true;
 }

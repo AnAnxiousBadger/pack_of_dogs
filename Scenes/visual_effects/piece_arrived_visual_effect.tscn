@@ -1,0 +1,280 @@
+[gd_scene load_steps=31 format=3 uid="uid://ci7pqv5m437a7"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_kknwr"]
+[ext_resource type="Shader" uid="uid://dt62kag03gbnv" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_circle_sahder.tres" id="2_2qfu0"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_yr3fj"]
+[ext_resource type="ArrayMesh" uid="uid://bm43vn0d6jcj1" path="res://Assets/meshes/visual_effect_meshes/piece_arrived_effect_circle_mesh.res" id="3_2a8xv"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_ooeue"]
+[ext_resource type="AudioStream" uid="uid://btrr4bqo8qau2" path="res://Assets/sounds/audio_streams/visual_effect_sounds/piece_arrived_melody.mp3" id="4_kmp6y"]
+[ext_resource type="Texture2D" uid="uid://b4gvljiwvik43" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_ray.png" id="4_sdr23"]
+[ext_resource type="Texture2D" uid="uid://c5ixpijqgrw54" path="res://Assets/textures/sa_dug_cuneiform.png" id="5_3aqgq"]
+
+[sub_resource type="Resource" id="Resource_fglhl"]
+script = ExtResource("3_ooeue")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_pc572"]
+script = ExtResource("2_yr3fj")
+sound = ExtResource("4_kmp6y")
+identifier = "piece_arrived_melody"
+settings = SubResource("Resource_fglhl")
+
+[sub_resource type="Gradient" id="Gradient_rinak"]
+offsets = PackedFloat32Array(0.320558, 0.38676, 0.442509)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_opeuy"]
+gradient = SubResource("Gradient_rinak")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_2j5ko"]
+offsets = PackedFloat32Array(0, 0.205575, 0.344948, 0.487805, 0.675958, 0.832753, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8x5d6"]
+gradient = SubResource("Gradient_2j5ko")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4gp6"]
+render_priority = 0
+shader = ExtResource("2_2qfu0")
+shader_parameter/color = Color(2.5, 1.5, 0.5, 1)
+shader_parameter/noise_panning_speed = Vector2(0, -2)
+shader_parameter/circle_panning = Vector2(0, -0.3)
+shader_parameter/fresnel_power = 0.2
+shader_parameter/opacity = null
+shader_parameter/ring_gradient_texture = SubResource("GradientTexture2D_opeuy")
+shader_parameter/ring_noise_mask = SubResource("GradientTexture2D_8x5d6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwnu0"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_sdr23")
+disable_receive_shadows = true
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_xrjj0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.511551, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pvbgs"]
+curve = SubResource("Curve_xrjj0")
+
+[sub_resource type="Curve" id="Curve_pyneh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.514852, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rgtjr"]
+curve = SubResource("Curve_pyneh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_04ruu"]
+particle_flag_align_y = true
+direction = Vector3(-1, 0, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_rgtjr")
+color = Color(3, 2, 1, 1)
+alpha_curve = SubResource("CurveTexture_pvbgs")
+
+[sub_resource type="QuadMesh" id="QuadMesh_vopkv"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxokh"]
+transparency = 1
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_3aqgq")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_affk7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.30033, 1), 0.0, 0.0, 0, 0, Vector2(0.821782, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_31i26"]
+curve = SubResource("Curve_affk7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bvi65"]
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 10.0
+tangential_accel_max = 10.0
+scale_min = 0.4
+scale_max = 0.6
+color = Color(3, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_31i26")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_grkwi"]
+
+[sub_resource type="Animation" id="Animation_g2r7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("circle_mesh:material_override:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("circle_mesh:material_override:shader_parameter/circle_panning")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -0.3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("rays_particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cuneiform_particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sb863"]
+resource_name = "piece_arrived_visual_effect_animation"
+length = 0.55
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("circle_mesh:material_override:shader_parameter/opacity")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [null, 1.0, 1.0, null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("circle_mesh:material_override:shader_parameter/circle_panning")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -0.3), Vector2(0, 0.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("rays_particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("cuneiform_particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EndEffect"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4w005"]
+_data = {
+"RESET": SubResource("Animation_g2r7m"),
+"piece_arrived_visual_effect_animation": SubResource("Animation_sb863")
+}
+
+[node name="piece_arrived_visual_effect" type="Node3D"]
+script = ExtResource("1_kknwr")
+effectSound = SubResource("Resource_pc572")
+
+[node name="circle_mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_e4gp6")
+mesh = ExtResource("3_2a8xv")
+
+[node name="rays_particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_jwnu0")
+emitting = false
+amount = 4
+lifetime = 0.4
+explosiveness = 0.8
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_04ruu")
+draw_pass_1 = SubResource("QuadMesh_vopkv")
+
+[node name="cuneiform_particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wxokh")
+emitting = false
+lifetime = 0.5
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_bvi65")
+draw_pass_1 = SubResource("QuadMesh_grkwi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4w005")
+}
