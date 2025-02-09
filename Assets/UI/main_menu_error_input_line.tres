@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cn7mj15qkk2t8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hri3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fsq3"]
+bg_color = Color(0.980392, 0, 0, 0.129412)
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(1, 0, 0, 1)
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_hri3q")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_6fsq3")

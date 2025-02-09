@@ -1004,7 +1004,6 @@ stream = ExtResource("3_5rpsi")
 volume_db = -15.0
 script = ExtResource("4_tphct")
 _musicRestartTimer = NodePath("replay_timer")
-mute = false
 
 [node name="replay_timer" type="Timer" parent="audio_manager/background_music_player"]
 wait_time = 15.0
@@ -1019,6 +1018,7 @@ PoolableScenes = Array[Object]([SubResource("Resource_1ebpv"), SubResource("Reso
 
 [node name="player_01" type="Node" parent="players_container"]
 script = ExtResource("1_joypr")
+isActive = false
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Emma"
 
@@ -1030,7 +1030,6 @@ _playerName = "Szabi"
 [node name="player_03" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
 script = ExtResource("14_56tec")
 timer = NodePath("ai_timer")
-isActive = false
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Robot Emma"
 
@@ -1460,7 +1459,6 @@ label_settings = ExtResource("43_ec783")
 vertical_alignment = 1
 
 [node name="victory_UI" type="Control" parent="UI_root" node_paths=PackedStringArray("_UIController", "_anim", "_winnerText", "_quoteText", "_fatesTitle", "_fatesContainer", "_viewStatsButton", "_mainMenuButton", "_playAgainButton")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

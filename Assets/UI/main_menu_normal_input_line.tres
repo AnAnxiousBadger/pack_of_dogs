@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b84dqss172b1e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vncl"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 3
+border_color = Color(0.231373, 0.196078, 0.145098, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+LineEdit/colors/font_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(1, 1, 1, 1)
+LineEdit/styles/normal = SubResource("StyleBoxFlat_8vncl")
