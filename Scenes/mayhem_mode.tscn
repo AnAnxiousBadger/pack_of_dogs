@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bawbj8y0e0k3p"]
+
+[ext_resource type="Script" path="res://Scripts/MayhemModeLevelController.cs" id="1_di7bn"]
+[ext_resource type="Script" path="res://Scripts/TestScript.cs" id="2_1pjx4"]
+
+[node name="ROOT_mayhem" type="Node3D" node_paths=PackedStringArray("_button")]
+script = ExtResource("1_di7bn")
+_button = NodePath("Button")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 250.0
+offset_bottom = 195.0
+text = "btn"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_1pjx4")

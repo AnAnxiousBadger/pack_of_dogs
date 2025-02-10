@@ -1,10 +1,10 @@
+Node
+Button
 HBoxContainer
 MarginContainer
 VBoxContainer
 PanelContainer
-Node
 TextureRect
-Button
 AnimationPlayer
 HSeparator
 VSeparator

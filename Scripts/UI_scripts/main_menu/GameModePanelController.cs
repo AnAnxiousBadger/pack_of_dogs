@@ -7,11 +7,13 @@ public partial class GameModePanelController : PanelContainer
 {
 	private bool isHovered = false;
 	private bool isOpened = false;
+	[Export] private LevelController.LevelScene _level;
 	[Export] private Control _playersSetUpPanelMarginPanel;
 	[Export] private UIAnimationComponent _animComp;
 	[Export] private AnimationPlayer _anim;
 	[Export] private Button _playButton;
 	[Export] private PlayerSetupPanelController[] _playersSetupPanelControllers;
+	[Signal] public delegate void GameModeSelectedEventHandler(string level);
 
 	public override void _Ready()
 	{
@@ -70,7 +72,7 @@ public partial class GameModePanelController : PanelContainer
 			}
 		}
 		if(playerSettings.Count == _playersSetupPanelControllers.Length){
-			GD.Print("GO");
+			EmitSignal(SignalName.GameModeSelected, _level.ToString());
 		}
 	}
 

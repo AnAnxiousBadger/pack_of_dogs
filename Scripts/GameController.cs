@@ -35,13 +35,19 @@ public partial class GameController : Node3D
 	[Signal] public delegate void OnSkipButtonUsedEventHandler();
 	[Signal] public delegate void OnSkipButtonActivityChangeEventHandler(bool isActive);
 	[Signal] public delegate void GameEndedEventHandler(BasePlayerController winner);
-	public override void _Ready()
+    public override void _EnterTree()
+    {
+        Instance?.QueueFree();
+		Instance = this;
+    }
+    public override void _Ready()
 	{
 		if(Instance != null){
-			QueueFree();
-			return;
+			//Instance.QueueFree();
+			//return;
+			GD.Print(Instance.Name);
 		}
-		Instance = this;
+		//Instance = this;
 		SetUpGame();
 		SwitchTurn();
 	}
@@ -54,6 +60,9 @@ public partial class GameController : Node3D
     {
         (PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
     }
+	public override void _ExitTree(){
+		Instance = null;
+	}
 
     private void SetUpGame(){
 		diceController.ReadyDiceController();
