@@ -22,4 +22,12 @@ public partial class PiecePosition: Resource
         this.isOccupied = false;
         this.piece = null;
     }
+    public PiecePosition(int playerIndex, Vector3 pos){
+        this.playerIndex = playerIndex;
+        this.pos = pos;
+        this.isOccupied = false;
+        this.piece = null;
+    }
+
+    
 }

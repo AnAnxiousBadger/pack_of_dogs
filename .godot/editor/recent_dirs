@@ -1,5 +1,7 @@
-res://Scripts
+res://Assets
 res://Scenes
+res://Scripts/sound_scripts
+res://Scripts
 res://
 res://Assets/UI/button_styles
 res://Assets/UI
@@ -10,7 +12,6 @@ res://Scripts/UI_scripts/UIAnimation
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets
 res://Scenes/visual_effects
 res://Scenes/UI_scenes/end_of_game_stats
-res://Scripts/sound_scripts
 res://Assets/sounds/audio_libraries
 res://Scenes/UI_scenes
 res://Scripts/UI_scripts
@@ -19,4 +20,3 @@ res://Assets/meshes
 res://Assets/materials/shaders
 res://Scripts/tool_scripts
 res://Assets/materials
-res://Assets/materials/palm_mats

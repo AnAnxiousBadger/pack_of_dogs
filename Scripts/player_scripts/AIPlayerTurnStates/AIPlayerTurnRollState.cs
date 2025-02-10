@@ -11,8 +11,8 @@ public class AIPlayerTurnRollState : PlayerTurnBaseState
     private List<PlayerRollScore> playerRollScores;
     public override void EnterTurnState()
     {
-        GameController.Instance.diceController.CanRoll = true;
-        GameController.Instance.diceController.DiceRolled += _OnDiceRolled;
+        GlobalClassesHolder.Instance.GameController.diceController.CanRoll = true;
+        GlobalClassesHolder.Instance.GameController.diceController.DiceRolled += _OnDiceRolled;
         playerRollScores = p.CalculateRollLuckScores();
         p.timer.WaitTime = _rollWaitTime;
         p.timer.Timeout += _OnRollTimerTimeout;
@@ -21,14 +21,14 @@ public class AIPlayerTurnRollState : PlayerTurnBaseState
 
     public override void ExitTurnState()
     {
-        GameController.Instance.diceController.DiceRolled -= _OnDiceRolled;
+        GlobalClassesHolder.Instance.GameController.diceController.DiceRolled -= _OnDiceRolled;
     }
 
     public override void ProcessTurnState(float delta){}
 
     private void _OnRollTimerTimeout(){
         p.timer.Timeout -= _OnRollTimerTimeout;
-        GameController.Instance.boardController.boardElementsController.EmitSignal(BoardElementsController.SignalName.OnRollDiceWithoutClicking, p);
+        GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.EmitSignal(BoardElementsController.SignalName.OnRollDiceWithoutClicking, p);
     }
 
     private void _OnDiceRolled(int roll){
@@ -43,7 +43,7 @@ public class AIPlayerTurnRollState : PlayerTurnBaseState
         }
         // SET SKIP IF CANNOT MOVE
         if(p.GetSkippingAvailability(roll)){
-            GameController.Instance.ChangeSkipButtonActivity(true);
+            GlobalClassesHolder.Instance.GameController.ChangeSkipButtonActivity(true);
             p.timer.WaitTime = _skipWaitTime;
             p.timer.Timeout += _OnSkipTimerTimeout;
             p.timer.Start();
@@ -56,7 +56,7 @@ public class AIPlayerTurnRollState : PlayerTurnBaseState
 
     private void _OnSkipTimerTimeout(){
         p.timer.Timeout -= _OnSkipTimerTimeout;
-        GameController.Instance.boardController.boardElementsController.EmitSignal(BoardElementsController.SignalName.OnSkipWithoutClicking, p);
+        GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.EmitSignal(BoardElementsController.SignalName.OnSkipWithoutClicking, p);
     }
 
     public AIPlayerTurnRollState(AIPlayerController p) : base(p){

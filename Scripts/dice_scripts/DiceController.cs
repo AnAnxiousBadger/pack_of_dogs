@@ -4,22 +4,20 @@ using System.Collections.Generic;
 
 public partial class DiceController : Node
 {
-	// REFERENCES
-	private Timer _diceRollTimer;
 	// OTHER
 	private bool _canRoll = false;
 	public bool CanRoll {
 		get { return _canRoll; }
 		set {
 			_canRoll = value;
-			GameController.Instance.ChangeRollButtonActivity(value);
+			GlobalClassesHolder.Instance.GameController.ChangeRollButtonActivity(value);
 		}
 	}
 	// SIGNALS
 	[Signal] public delegate void DiceRolledEventHandler(int roll);
 
 	public void ReadyDiceController(){
-		GameController.Instance.OnRollButtonUsed += _OnRollDiceRollButtonUp;
+		GlobalClassesHolder.Instance.GameController.OnRollButtonUsed += _OnRollDiceRollButtonUp;
 	}
 
     private int RollDice(RollSettings settings){
@@ -47,7 +45,7 @@ public partial class DiceController : Node
 
 	private void _OnRollDiceRollButtonUp(){
 		CanRoll = false;
-		int roll = RollDice(GameController.Instance.currPlayer.rollSettings);
+		int roll = RollDice(GlobalClassesHolder.Instance.GameController.currPlayer.rollSettings);
 		EmitSignal(SignalName.DiceRolled, roll);
 	}
 

@@ -7,8 +7,19 @@ public partial class PiecePositions : Resource{
     [Export] private PiecePosition[] positions;
 
     public PiecePositions(){
-        positions = Array.Empty<PiecePosition>();
+        this.positions = Array.Empty<PiecePosition>();
     }
+	public PiecePositions(PiecePositionListResource[] res){
+		List<PiecePosition> posesList = new();
+		for (int i = 0; i < res.Length; i++)
+		{
+			for (int j = 0; j < res[i].poses.Length; j++)
+			{
+				posesList.Add(new PiecePosition(i, res[i].poses[j]));
+			}
+		}
+		this.positions = posesList.ToArray();
+	}
     public void AddPosToPositions(PiecePosition pos){
         List<PiecePosition> positions = new();
         for (int i = 0; i < this.positions.Length; i++)
@@ -29,6 +40,7 @@ public partial class PiecePositions : Resource{
 				return piecePos.pos;
 			}
 		}
+		
 		return Vector3.Zero;
 	}
 

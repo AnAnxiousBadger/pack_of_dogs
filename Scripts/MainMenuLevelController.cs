@@ -7,11 +7,12 @@ public partial class MainMenuLevelController : LevelController
     public override LevelScene CurrLevel {get { return LevelScene.MAIN_MENU;}}
     public override void _Ready()
     {
-        _classicGameModePanel.GameModeSelected += level => ChangeScene(LevelScene.MAYHEM_MODE);
+        _classicGameModePanel.GameModeSelected += settings => ChangeScene(LevelScene.CLASSIC_MODE, settings);
     }
 
-    public override void ReadyLevel()
+    public override void ReadyLevel(Godot.Collections.Dictionary<string, string> data)
     {
+        
         return;
     }
 

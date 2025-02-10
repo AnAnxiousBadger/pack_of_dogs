@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cn7mj15qkk2t8"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cn7mj15qkk2t8"]
+
+[ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="1_smmdm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hri3q"]
 
@@ -14,5 +16,6 @@ corner_radius_bottom_left = 3
 [resource]
 LineEdit/colors/font_color = Color(1, 1, 1, 1)
 LineEdit/colors/font_placeholder_color = Color(1, 0, 0, 1)
+LineEdit/fonts/font = ExtResource("1_smmdm")
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_hri3q")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_6fsq3")

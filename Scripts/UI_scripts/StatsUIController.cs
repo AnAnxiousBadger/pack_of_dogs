@@ -30,7 +30,7 @@ public partial class StatsUIController : PanelContainer
     public override void _Ready()
     {
         Visible = false;
-		GameController.Instance.GameEnded += winner => _winner = winner;
+		GlobalClassesHolder.Instance.GameController.GameEnded += winner => _winner = winner;
     }
     public void AddPlayerStatsToUI(Dictionary<string, object> stats){
 		// Set player name
@@ -118,7 +118,7 @@ public partial class StatsUIController : PanelContainer
 		_luckyScoreContainer.ClearContainer();
 
 		// Display stats
-		foreach (BasePlayerController player in GameController.Instance.players)
+		foreach (BasePlayerController player in GlobalClassesHolder.Instance.GameController.players)
 		{
 			AddPlayerStatsToUI(player.playerStats.GetStats());
 		}

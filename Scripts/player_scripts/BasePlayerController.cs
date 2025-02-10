@@ -17,7 +17,7 @@ public abstract partial class BasePlayerController : Node
 		get { return _playerName; }
 		set { 
 			_playerName = value;
-			GameController.Instance.ChangeTurnDisplaName();
+			GlobalClassesHolder.Instance.GameController.ChangeTurnDisplaName();
 		}
 	}
     public PlayerStats playerStats;
@@ -31,7 +31,7 @@ public abstract partial class BasePlayerController : Node
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
             if(_deliveredPieces == /*piecesToDeliver*/ 1){
-                GameController.Instance.EndGame(this);
+                GlobalClassesHolder.Instance.GameController.EndGame(this);
             }
         }
     }
@@ -72,7 +72,7 @@ public abstract partial class BasePlayerController : Node
 
         }
         else{
-            GameController.Instance.SwitchTurn();
+            GlobalClassesHolder.Instance.GameController.SwitchTurn();
         }
     }
 
@@ -146,7 +146,7 @@ public abstract partial class BasePlayerController : Node
                     if(!pieces[j].hasArrived){
                         int rollQualityForPiece = 0;
                         //List<BoardNodeController> destinations = pieces[j].currNode.MoveForwardAlongNodesFromNode(roll, playerIndex, false);
-                        List<BoardNodeController> destinations = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(pieces[j].currNode, roll, playerIndex, false);
+                        List<BoardNodeController> destinations = GlobalClassesHolder.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(pieces[j].currNode, roll, playerIndex, false);
                         if(destinations.Count == 0) {
                             rollQualityForPiece = -1;
                         }
@@ -188,9 +188,9 @@ public abstract partial class BasePlayerController : Node
         }
 
         List<PlayerRollScore> playerRollScores = new();
-        for (int i = 0; i < GameController.Instance.players.Count; i++)
+        for (int i = 0; i < GlobalClassesHolder.Instance.GameController.players.Count; i++)
         {
-            playerRollScores.Add(new PlayerRollScore(GameController.Instance.players[i], rollSettings));
+            playerRollScores.Add(new PlayerRollScore(GlobalClassesHolder.Instance.GameController.players[i], rollSettings));
         }
 
         for (int i = 0; i < rollSettings.rollChances.Length; i++)
@@ -212,10 +212,10 @@ public abstract partial class BasePlayerController : Node
 
         // CALCULATIONS FOR ENEMIES
         Dictionary<BasePlayerController, List<int>> enemiesRollsDict = new(); // <player, unlucky rolls>
-        for (int i = 0; i < GameController.Instance.players.Count; i++)
+        for (int i = 0; i < GlobalClassesHolder.Instance.GameController.players.Count; i++)
         {
-            if(GameController.Instance.players[i] != this){
-                enemiesRollsDict.Add(GameController.Instance.players[i], new List<int>());
+            if(GlobalClassesHolder.Instance.GameController.players[i] != this){
+                enemiesRollsDict.Add(GlobalClassesHolder.Instance.GameController.players[i], new List<int>());
 
             }  
         }
@@ -228,9 +228,9 @@ public abstract partial class BasePlayerController : Node
         }
 
 
-        for (int i = 0; i < GameController.Instance.players.Count; i++)
+        for (int i = 0; i < GlobalClassesHolder.Instance.GameController.players.Count; i++)
         {
-            BasePlayerController p = GameController.Instance.players[i];
+            BasePlayerController p = GlobalClassesHolder.Instance.GameController.players[i];
             if(p != this){
                 PlayerRollScore playerRollScore = playerRollScores.Find(pl => pl.Player == p);
 

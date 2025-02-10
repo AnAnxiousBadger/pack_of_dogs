@@ -7,7 +7,8 @@ public partial class BoardController : Node3D
 {
 	// EXPORTS
 	[Export] public AudioLibrary boardControllerAudioLibrary;
-	[Export] private PiecePositions _pieceStartingPositions;
+	/*[Export]*/ private PiecePositions _pieceStartingPositions;
+	[Export] private PiecePositionListResource[] _pieceStartingPosesLists;
 	[Export] private PiecePositions _pieceEndPositions;
 	[Export] public BoardElementsController boardElementsController;
 	[Export] private PiecePathController _pieceMovingPath;
@@ -16,7 +17,7 @@ public partial class BoardController : Node3D
 	public List<PieceController> pieces = new();
 	private List<BoardNodeController> _nodes = new();
 	private List<StartNodeController> _startNodes = new();
-	private Queue<(BoardNodeController, PieceController)> _nodesToDoOnStepActions = new();
+	//private Queue<(BoardNodeController, PieceController)> _nodesToDoOnStepActions = new();
 
 	public void ReadyBoardController(){
 		SetUpBoard();
@@ -46,6 +47,7 @@ public partial class BoardController : Node3D
 			}
 		}
 		
+		_pieceStartingPositions = new PiecePositions(_pieceStartingPosesLists);
 		for (int i = 0; i < pieces.Count; i++)
 		{
 			// Pair start nodes and pieces
@@ -56,13 +58,14 @@ public partial class BoardController : Node3D
 					_startNodes[j].currPieces.Add(pieces[i]);
 				}
 			}
+
 			// Set pieces' initial positions
 			pieces[i].Position = _pieceStartingPositions.TakeFreePosition(pieces[i]);
 			pieces[i].hasArrived = false;
 			CollisionShape3D shape = (CollisionShape3D) pieces[i].GetChild(1);
         	shape.Disabled = false;
 			// Pair pieces and players
-			pieces[i].player = GameController.Instance.players[pieces[i].playerIndex];
+			pieces[i].player = GlobalClassesHolder.Instance.GameController.players[pieces[i].playerIndex];
 			pieces[i].player.pieces.Add(pieces[i]);
 			// Set winning condition
 			pieces[i].player.piecesToDeliver += 1;
@@ -190,4 +193,12 @@ public partial class BoardController : Node3D
 	public int GetDistanceFromStartNode(BoardNodeController node,  BasePlayerController player){
 		return BreadthFirstSearchFromNodeBackwards(node, GetStartNode(player), player.playerIndex).Count;
 	}
+
+	/*public void ResetBoard(){
+		// Only reset piece starting positions for now
+		/*for (int i = 0; i < _pieceStartingPositions; i++)
+		{
+			
+		}
+	}*/
 }

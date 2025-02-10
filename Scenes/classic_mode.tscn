@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=145 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/ClassicModeLevelController.cs" id="1_d22e3"]
@@ -7,11 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/VisualEffectPoolController.cs" id="2_2no1u"]
 [ext_resource type="PackedScene" uid="uid://bo6k7xqvn15aj" path="res://Scenes/visual_effects/double_turn_visual_effect.tscn" id="2_08enj"]
 [ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_k6vlu"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioManager.cs" id="2_uamlx"]
 [ext_resource type="PackedScene" uid="uid://dby173sn3x80l" path="res://Scenes/visual_effects/highlight_node_visual_effect.tscn" id="3_3vpxh"]
-[ext_resource type="AudioStream" uid="uid://7xbpgre3dna" path="res://Assets/sounds/audio_streams/ambiance.mp3" id="3_5rpsi"]
 [ext_resource type="Script" path="res://Scripts/PoolableSettings.cs" id="4_7dg8v"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/BackgroundMusicController.cs" id="4_tphct"]
 [ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/visual_effects/chipped_lime_visual_effect.tscn" id="5_bg7ve"]
 [ext_resource type="PackedScene" uid="uid://cckbt066gn116" path="res://Scenes/board_scenes/classic_board.tscn" id="5_bteu6"]
 [ext_resource type="PackedScene" uid="uid://c12ldrm2t1xij" path="res://Scenes/visual_effects/sand_dust_ring_visual_effect.tscn" id="6_mxrkg"]
@@ -988,10 +985,11 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 5
 
-[node name="ROOT_classic_mode" type="Node3D" node_paths=PackedStringArray("_bottomRightMainMenuButton", "_victoryPanelMainMenuButton")]
+[node name="ROOT_classic_mode" type="Node3D" node_paths=PackedStringArray("_bottomRightMainMenuButton", "_victoryPanelMainMenuButton", "_bottomRightMenuReplayButton")]
 script = ExtResource("1_d22e3")
 _bottomRightMainMenuButton = NodePath("UI_root/bottom_right_menu/MarginContainer/VBoxContainer/main_menu_button_panel_container/main_menu_button_margin_container_2/main_menu_button")
 _victoryPanelMainMenuButton = NodePath("UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/main_menu_button_margin_container/main_menu_button_panel_container/main_menu_button_margin_container_2/main_menu_button")
+_bottomRightMenuReplayButton = NodePath("UI_root/bottom_right_menu/MarginContainer/VBoxContainer/replay_button_panel_container/replay_button_margin_container_2/replay_button")
 
 [node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController")]
 script = ExtResource("1_m4lkn")
@@ -1000,19 +998,6 @@ uiController = NodePath("../UI_root")
 diceController = NodePath("../dice_controller")
 boardController = NodePath("../classic_board")
 
-[node name="audio_manager" type="Node" parent="."]
-script = ExtResource("2_uamlx")
-
-[node name="background_music_player" type="AudioStreamPlayer" parent="audio_manager" node_paths=PackedStringArray("_musicRestartTimer")]
-stream = ExtResource("3_5rpsi")
-volume_db = -15.0
-script = ExtResource("4_tphct")
-_musicRestartTimer = NodePath("replay_timer")
-
-[node name="replay_timer" type="Timer" parent="audio_manager/background_music_player"]
-wait_time = 15.0
-one_shot = true
-
 [node name="visual_effect_pool" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 script = ExtResource("2_2no1u")
@@ -1020,33 +1005,33 @@ PoolableScenes = Array[Object]([SubResource("Resource_1ebpv"), SubResource("Reso
 
 [node name="players_container" type="Node" parent="."]
 
-[node name="player_01" type="Node" parent="players_container"]
+[node name="real_player_01" type="Node" parent="players_container"]
 script = ExtResource("1_joypr")
 isActive = false
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Emma"
 
-[node name="player_02" type="Node" parent="players_container"]
+[node name="real_player_02" type="Node" parent="players_container"]
 script = ExtResource("1_joypr")
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Szabi"
 
-[node name="player_03" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
+[node name="ai_player_03" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
 script = ExtResource("14_56tec")
 timer = NodePath("ai_timer")
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Robot Emma"
 
-[node name="ai_timer" type="Timer" parent="players_container/player_03"]
+[node name="ai_timer" type="Timer" parent="players_container/ai_player_03"]
 
-[node name="player_04" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
+[node name="ai_player_04" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
 script = ExtResource("14_56tec")
 timer = NodePath("ai_timer")
 isActive = false
 rollSettings = ExtResource("2_k6vlu")
 _playerName = "Robot Szabi"
 
-[node name="ai_timer" type="Timer" parent="players_container/player_04"]
+[node name="ai_timer" type="Timer" parent="players_container/ai_player_04"]
 
 [node name="dice_controller" type="Node" parent="."]
 script = ExtResource("1_57n5o")
@@ -1941,7 +1926,6 @@ icon = ExtResource("44_owamg")
 expand_icon = true
 
 [node name="bottom_right_menu" type="PanelContainer" parent="UI_root"]
-visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = 3

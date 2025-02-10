@@ -25,7 +25,7 @@ public partial class EndOfGameUIController : Control
 		_winnerText.Text = $"{winner.PlayerName} wins";
 		// Set quote
 		// Set fates title
-		foreach (BasePlayerController player in GameController.Instance.players)
+		foreach (BasePlayerController player in GlobalClassesHolder.Instance.GameController.players)
 		{
 			VBoxContainer fateContainer = _fateContainerScene.Instantiate() as VBoxContainer;
 			_fatesContainer.AddChild(fateContainer);
@@ -46,7 +46,7 @@ public partial class EndOfGameUIController : Control
 
 		Visible = true;
 		if(playSound){
-			AudioManager.Instance.PlaySound(GameController.Instance.uiController.UIControllerAudioLibrary.GetSound("end_melody"), GameController.Instance, false);
+			AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.uiController.UIControllerAudioLibrary.GetSound("end_melody"), GlobalClassesHolder.Instance.GameController, false);
 		}
 		
 		if(playAnimation)

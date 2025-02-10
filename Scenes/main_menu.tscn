@@ -729,7 +729,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("13_ivj8f")
 theme_type_variation = &"normal"
-theme_override_fonts/font = ExtResource("10_q1n0h")
 placeholder_text = "Enter a name..."
 max_length = 15
 

@@ -8,7 +8,7 @@ public partial class VisualEffectPoolController : Node3D, IPoolManager
     public Dictionary<string, Queue<IPoolable>> PoolablesDict { get; set; }
     public override void _Ready()
     {
-        GameController.Instance.visualEffectPool = this;
+        GlobalClassesHolder.Instance.GameController.visualEffectPool = this;
         ((IPoolManager)this).SpawnPoolables(this);
     }
     public IPoolable DoOnPoolingAction(IPoolable poolable, Vector3 pos)

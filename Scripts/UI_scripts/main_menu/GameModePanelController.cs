@@ -13,7 +13,7 @@ public partial class GameModePanelController : PanelContainer
 	[Export] private AnimationPlayer _anim;
 	[Export] private Button _playButton;
 	[Export] private PlayerSetupPanelController[] _playersSetupPanelControllers;
-	[Signal] public delegate void GameModeSelectedEventHandler(string level);
+	[Signal] public delegate void GameModeSelectedEventHandler(Godot.Collections.Dictionary<string, string> data);
 
 	public override void _Ready()
 	{
@@ -64,16 +64,23 @@ public partial class GameModePanelController : PanelContainer
 	}
 
 	private void _OnPlayButtonUp(){
-		List<Dictionary<string, string>> playerSettings = new();
-		foreach (PlayerSetupPanelController playerSetupPanelController in _playersSetupPanelControllers)
+		Godot.Collections.Dictionary<string, string> playerSettings = new();
+		bool error = false;
+		for (int i = 0; i < _playersSetupPanelControllers.Length; i++)
 		{
-			if(playerSetupPanelController.GetPlayerData(out Dictionary<string, string> playerDict)){
-				playerSettings.Add(playerDict);
+			if(_playersSetupPanelControllers[i].GetPlayerData(out Dictionary<string, string> playerDict)){
+				playerSettings.Add($"player_{i}_name", playerDict["player_name"]);
+				playerSettings.Add($"player_{i}_type", playerDict["player_type"]);
+			}
+			else{
+				error = true;
 			}
 		}
-		if(playerSettings.Count == _playersSetupPanelControllers.Length){
-			EmitSignal(SignalName.GameModeSelected, _level.ToString());
+		// Signal is detected by MainMenuLevelController
+		if(!error){
+			EmitSignal(SignalName.GameModeSelected, playerSettings);
 		}
+		
 	}
 
 

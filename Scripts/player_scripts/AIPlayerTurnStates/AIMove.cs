@@ -36,7 +36,7 @@ public class AIMove
         if(enemyPiecesOnDestinationNode.Count > 0){
             foreach (PieceController enemyPiece in enemyPiecesOnDestinationNode)
             {
-                score += GameController.Instance.boardController.GetDistanceFromStartNode(_destinationNode, enemyPiece.player); // Score for hitting an enemy
+                score += GlobalClassesHolder.Instance.GameController.boardController.GetDistanceFromStartNode(_destinationNode, enemyPiece.player); // Score for hitting an enemy
             }
             
         }
@@ -107,9 +107,9 @@ public class AIMove
 
         float gettingHitScore = 0f;
 
-        int distanceFromStartNode = GameController.Instance.boardController.GetDistanceFromStartNode(stayingAtNode, _piece.player);
+        int distanceFromStartNode = GlobalClassesHolder.Instance.GameController.boardController.GetDistanceFromStartNode(stayingAtNode, _piece.player);
         // For enemy players
-        foreach (BasePlayerController player in GameController.Instance.players)
+        foreach (BasePlayerController player in GlobalClassesHolder.Instance.GameController.players)
         {
             if(player != _piece.player){
                 // Get possible rolls for enemies
@@ -127,7 +127,7 @@ public class AIMove
                     foreach (int roll in rollables)
                     {
                         // Move backwards the roll amount
-                        List<BoardNodeController> backwardsNodesForRoll = GameController.Instance.boardController.MoveBackwardsAlongNodesFromNode(currCheckedNode, roll, player.playerIndex, true);
+                        List<BoardNodeController> backwardsNodesForRoll = GlobalClassesHolder.Instance.GameController.boardController.MoveBackwardsAlongNodesFromNode(currCheckedNode, roll, player.playerIndex, true);
                         foreach (BoardNodeController node in backwardsNodesForRoll)
                         {
                             // if there is enemy → add roll chance * possible backwards move to negative score

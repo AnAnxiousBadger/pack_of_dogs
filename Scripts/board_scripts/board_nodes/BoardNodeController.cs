@@ -176,7 +176,7 @@ public abstract partial class BoardNodeController : StaticBody3D
 		_onStepModQueue = new Queue<BoardNodeModifier>(mods);
 
 		if(addKickVisualEffect){
-			VisualEffectController effect = GameController.Instance.visualEffectPool.PlayVisualEffect("kick_piece_visual_effect", GlobalPosition);
+			VisualEffectController effect = GlobalClassesHolder.Instance.GameController.visualEffectPool.PlayVisualEffect("kick_piece_visual_effect", GlobalPosition);
 			effect.OnEffectEnded += _OnKickEffectFinishedStartModifierChain;
 		}
 		else{

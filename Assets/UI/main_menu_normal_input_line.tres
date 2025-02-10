@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b84dqss172b1e"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b84dqss172b1e"]
+
+[ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="1_bm20u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vncl"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -10,6 +12,8 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [resource]
+default_font = ExtResource("1_bm20u")
 LineEdit/colors/font_color = Color(1, 1, 1, 1)
 LineEdit/colors/font_placeholder_color = Color(1, 1, 1, 1)
+LineEdit/fonts/font = ExtResource("1_bm20u")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_8vncl")

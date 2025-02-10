@@ -7,10 +7,10 @@ public partial class StartNodeController : BoardNodeController
     public override void SetUpNode()
     {
         base.SetUpNode();
-        player = GameController.Instance.players[playerIndex];
+        player = GlobalClassesHolder.Instance.GameController.players[playerIndex];
     }
     public override void DoOnLeaveNodeAction(PieceController piece){
-        GameController.Instance.boardController.PieceLeavesStartPos(piece);
+        GlobalClassesHolder.Instance.GameController.boardController.PieceLeavesStartPos(piece);
     }
     public override void DoOnStepNodeAction(PieceController piece){}
 

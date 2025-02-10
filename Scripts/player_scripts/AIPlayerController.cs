@@ -11,7 +11,7 @@ public partial class AIPlayerController : BasePlayerController
     public override void StartTurn()
     {
         base.StartTurn();
-        GameController.Instance.allowClicksOnTickableButtons = false;
+        GlobalClassesHolder.Instance.GameController.allowClicksOnTickableButtons = false;
         // CREATE STATES
         rollState = new(this);
         turnStates.Add(rollState);
@@ -22,7 +22,7 @@ public partial class AIPlayerController : BasePlayerController
         selectNodeState = new(this);
         turnStates.Add(selectNodeState);*/
 
-        GameController.Instance.OnSkipButtonUsed += _OnSkipTurn;
+        GlobalClassesHolder.Instance.GameController.OnSkipButtonUsed += _OnSkipTurn;
 
         SwitchToNextTurnState();
     }
@@ -34,7 +34,7 @@ public partial class AIPlayerController : BasePlayerController
 
     public override void EndTurn()
     {
-        GameController.Instance.OnSkipButtonUsed -= _OnSkipTurn;
+        GlobalClassesHolder.Instance.GameController.OnSkipButtonUsed -= _OnSkipTurn;
         base.EndTurn();
     }
 
@@ -46,6 +46,6 @@ public partial class AIPlayerController : BasePlayerController
 
     private void _OnSkipTurn(){
         EmitSignal(SignalName.TurnSkipped);
-        GameController.Instance.SwitchTurn();
+        GlobalClassesHolder.Instance.GameController.SwitchTurn();
     }
 }

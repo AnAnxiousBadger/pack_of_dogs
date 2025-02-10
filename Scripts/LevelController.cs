@@ -16,12 +16,13 @@ public abstract partial class LevelController : Node3D
 		{LevelScene.CLASSIC_MODE, "classic_mode"},
 		{LevelScene.MAYHEM_MODE, "mayhem_mode"}
 	};
-	[Signal] public delegate void LevelChangedEventHandler(string fromName, string toPath);
+	[Signal] public delegate void LevelChangedEventHandler(string fromName, string toPath, Godot.Collections.Dictionary<string, string> data);
 	
-    protected void ChangeScene(LevelScene to){
-		EmitSignal(SignalName.LevelChanged, levelNameDict[CurrLevel], levelPathDict[levelNameDict[to]]);
+    protected void ChangeScene(LevelScene to, Godot.Collections.Dictionary<string, string> data){
+		// Signal is detected by SceneController
+		EmitSignal(SignalName.LevelChanged, levelNameDict[CurrLevel], levelPathDict[levelNameDict[to]], data);
 	}
 
-	public abstract void ReadyLevel();
+	public abstract void ReadyLevel(Godot.Collections.Dictionary<string, string> data);
 	public abstract void FinishLevel();
 }

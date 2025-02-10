@@ -37,13 +37,13 @@ public partial class UIController : Control
 
     }
     public void SetUpUI(){
-		for (int i = 0; i < GameController.Instance.players.Count; i++)
+		for (int i = 0; i < GlobalClassesHolder.Instance.GameController.players.Count; i++)
 		{
 			PlayerScoreContainerUIController scoreContainer = _playerScorePanel.Instantiate() as PlayerScoreContainerUIController;
 			_scoresPanel.AddChild(scoreContainer);
-			scoreContainer.SetPlayerScoreLabel(GameController.Instance.players[i]);
+			scoreContainer.SetPlayerScoreLabel(GlobalClassesHolder.Instance.GameController.players[i]);
 		}
-		GameController.Instance.GameEnded += SetUpVictoryUI;
+		GlobalClassesHolder.Instance.GameController.GameEnded += SetUpVictoryUI;
 		_bottomRightMenuButton.ButtonUp +=_OnBottomRightMenuButtonUp;
 		_bottomRightMenuButton.ButtonDown += _OnButtonDown;
 		_bottomRightMenu.Visible = false;
@@ -119,7 +119,7 @@ public partial class UIController : Control
 		}
 	}
 	public void PlayMenuClickSound(){
-		AudioManager.Instance.PlaySound(UIControllerAudioLibrary.GetSound("menu_click"), GameController.Instance, false);
+		AudioManager.Instance.PlaySound(UIControllerAudioLibrary.GetSound("menu_click"), GlobalClassesHolder.Instance.GameController, false);
 	}
 	public void _OnButtonDown(){
 		PlayMenuClickSound();

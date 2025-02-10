@@ -4,18 +4,42 @@ using System.Collections.Generic;
 
 public partial class AudioManager : Node
 {
-    public static AudioManager Instance { get;  private set;}
+    public static AudioManager Instance { get; private set;}
     [Export] private int _streamPlayerNum = 16;
     private string _bus = "Master";
     private Queue<AudioStreamPlayer3D> _avaiblePlayers;
+    private AudioStreamPlayer _backgroundMusicController;
+    private Timer _musicRestartTimer;
+    [Export] private bool _muteMusic = true;
+    [Export] private float _replayDelay = 15f;
 
-    public override void _Ready(){
+    public override void _EnterTree()
+    {
         if(Instance != null){
-			QueueFree();
-			return;
-		}
-		Instance = this;
+            this.QueueFree();
+            return;
+        }
+        Instance = this;
+    }
+    public override void _Ready(){
+        // Set up background music
+        Timer _musicRestartTimer = new();
+        AddChild(_musicRestartTimer);
+        _musicRestartTimer.WaitTime = _replayDelay;
+        _musicRestartTimer.OneShot = true;
 
+        _backgroundMusicController = new();
+        AddChild(_backgroundMusicController);
+        _backgroundMusicController.Stream = GD.Load<AudioStream>("res://Assets/sounds/audio_streams/background_music.mp3");
+
+        _musicRestartTimer.Timeout += StartMusic;
+        _backgroundMusicController.Finished += () => _musicRestartTimer.Start();
+        if(!_muteMusic){
+			StartMusic();
+		}
+        
+
+        // Set up sound queue
         _avaiblePlayers = new();
 
 		for (int i = 0; i < _streamPlayerNum; i++)
@@ -55,6 +79,10 @@ public partial class AudioManager : Node
         else{
             return null;
         }        
+	}
+
+    private void StartMusic(){
+		_backgroundMusicController.Playing = true;
 	}
 
     

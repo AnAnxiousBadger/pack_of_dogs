@@ -13,7 +13,7 @@ public partial class BasicNodeController : BoardNodeController
 
     public override void Highlight()
     {
-        hihglight = GameController.Instance.visualEffectPool.PlayVisualEffect("highlight_node_visual_effect", GlobalPosition + new Vector3(0f, 0.51f, 0f));
+        hihglight = GlobalClassesHolder.Instance.GameController.visualEffectPool.PlayVisualEffect("highlight_node_visual_effect", GlobalPosition + new Vector3(0f, 0.51f, 0f));
     }
 
     public override void RemoveHighlight()

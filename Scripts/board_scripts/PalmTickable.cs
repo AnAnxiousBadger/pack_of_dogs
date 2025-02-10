@@ -20,7 +20,7 @@ public partial class PalmTickable : StaticBody3D, ITickable
 
     public void OnPressed(Vector3 pos)
     {
-        GameController.Instance.boardController.boardElementsController.palmDisturbController.Distrub(pos);
+        GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.palmDisturbController.Distrub(pos);
     }
 
     public void OnReleased(Vector3 pos)

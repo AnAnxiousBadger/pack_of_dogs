@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class GameController : Node3D
 {
-	public static GameController Instance { get;  private set;}
+	//private static GameController GameController { get;  private set;}
 	// EXPORTS
 	[Export] public Camera3D cam;
 	[Export] public UIController uiController;
@@ -35,21 +35,22 @@ public partial class GameController : Node3D
 	[Signal] public delegate void OnSkipButtonUsedEventHandler();
 	[Signal] public delegate void OnSkipButtonActivityChangeEventHandler(bool isActive);
 	[Signal] public delegate void GameEndedEventHandler(BasePlayerController winner);
-    public override void _EnterTree()
-    {
-        Instance?.QueueFree();
-		Instance = this;
-    }
     public override void _Ready()
 	{
-		if(Instance != null){
-			//Instance.QueueFree();
-			//return;
-			GD.Print(Instance.Name);
-		}
-		//Instance = this;
+		GlobalClassesHolder.Instance.GameController = this;
+		//GD.Print(GlobalClassesHolder.Instance.GameController.Name);
+
 		SetUpGame();
 		SwitchTurn();
+		/*foreach (BasePlayerController player in players)
+		{
+			GD.Print(player.pieces.Count);
+			for (int i = 0; i < player.pieces.Count; i++)
+			{
+				GD.Print(player.pieces[i].GlobalPosition + " " + player.pieces[i].Visible);
+			}
+			GD.Print("============");
+		}*/
 	}
 
 	public override void _Process(double delta)
@@ -60,9 +61,6 @@ public partial class GameController : Node3D
     {
         (PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
     }
-	public override void _ExitTree(){
-		Instance = null;
-	}
 
     private void SetUpGame(){
 		diceController.ReadyDiceController();
