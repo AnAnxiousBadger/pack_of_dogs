@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 random_generator="*res://Scripts/RandomGenerator.cs"
 global_classes_holder="*res://Scripts/GlobalClassesHolder.cs"
-audio_maanger="*res://Scripts/sound_scripts/AudioManager.cs"
+audio_manager="*res://Scripts/sound_scripts/AudioManager.cs"
 
 [display]
 

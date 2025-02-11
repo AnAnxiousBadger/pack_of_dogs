@@ -1,10 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://dc0qresj865c"]
+[gd_scene load_steps=5 format=3 uid="uid://dc0qresj865c"]
 
 [ext_resource type="Script" path="res://Scripts/ScenesController.cs" id="1_t6omt"]
 [ext_resource type="PackedScene" uid="uid://c5d85fwg7u2pv" path="res://Scenes/main_menu.tscn" id="2_rsdvm"]
 
-[node name="scenes_controller" type="Node" node_paths=PackedStringArray("_currLevelController")]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0k2p8"]
+noise_type = 3
+frequency = 0.0304
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_odd7g"]
+noise = SubResource("FastNoiseLite_0k2p8")
+
+[node name="scenes_controller" type="Node" node_paths=PackedStringArray("_currLevelController", "_loadingScreen")]
 script = ExtResource("1_t6omt")
 _currLevelController = NodePath("ROOT_main_menu")
+_loadingScreen = NodePath("CanvasLayer/laoding_screen")
 
 [node name="ROOT_main_menu" parent="." instance=ExtResource("2_rsdvm")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="laoding_screen" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/laoding_screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("NoiseTexture2D_odd7g")
+expand_mode = 1
+stretch_mode = 6

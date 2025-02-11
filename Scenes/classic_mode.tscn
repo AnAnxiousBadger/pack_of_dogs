@@ -1,12 +1,10 @@
-[gd_scene load_steps=145 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=144 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/ClassicModeLevelController.cs" id="1_d22e3"]
-[ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_joypr"]
 [ext_resource type="Script" path="res://Scripts/GameController.cs" id="1_m4lkn"]
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/VisualEffectPoolController.cs" id="2_2no1u"]
 [ext_resource type="PackedScene" uid="uid://bo6k7xqvn15aj" path="res://Scenes/visual_effects/double_turn_visual_effect.tscn" id="2_08enj"]
-[ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_k6vlu"]
 [ext_resource type="PackedScene" uid="uid://dby173sn3x80l" path="res://Scenes/visual_effects/highlight_node_visual_effect.tscn" id="3_3vpxh"]
 [ext_resource type="Script" path="res://Scripts/PoolableSettings.cs" id="4_7dg8v"]
 [ext_resource type="PackedScene" uid="uid://5302ih5o5de6" path="res://Scenes/visual_effects/chipped_lime_visual_effect.tscn" id="5_bg7ve"]
@@ -22,18 +20,19 @@
 [ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_01.tscn" id="13_5bfqh"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UIController.cs" id="13_ar2w6"]
 [ext_resource type="PackedScene" uid="uid://bubr633qpfw32" path="res://Scenes/visual_effects/bleating_particles_visual_effect.tscn" id="13_su7dc"]
-[ext_resource type="Script" path="res://Scripts/player_scripts/AIPlayerController.cs" id="14_56tec"]
 [ext_resource type="PackedScene" uid="uid://ci7pqv5m437a7" path="res://Scenes/visual_effects/piece_arrived_visual_effect.tscn" id="14_bn1qx"]
 [ext_resource type="PackedScene" uid="uid://bw0g17cm7tld6" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_display.tscn" id="14_g8v77"]
 [ext_resource type="PackedScene" uid="uid://cmuly4x4bj4yh" path="res://Scenes/visual_effects/leaf_particles_01_visual_effect.tscn" id="15_wuk33"]
 [ext_resource type="StyleBox" uid="uid://dqq3v63jx3014" path="res://Assets/UI/turn_panel_background_texture.tres" id="16_qots1"]
 [ext_resource type="PackedScene" uid="uid://beto1fgt64b4g" path="res://Scenes/visual_effects/leaf_particles_02_visual_effect.tscn" id="16_vsese"]
 [ext_resource type="StyleBox" uid="uid://btw5lyrlh84uy" path="res://Assets/UI/UI_panel_brown_gold_border.tres" id="17_e855u"]
+[ext_resource type="PackedScene" uid="uid://opx4owjy1o2d" path="res://Scenes/player_scenes/real_player_controller.tscn" id="19_5eod8"]
 [ext_resource type="StyleBox" uid="uid://cdl2m5qwct8ks" path="res://Assets/UI/end_of_game_dark_style_box_texture.tres" id="19_mo5jj"]
 [ext_resource type="PackedScene" uid="uid://d32dgdt73ceui" path="res://Scenes/visual_effects/sand_click_visual_effect.tscn" id="20_lor2g"]
 [ext_resource type="FontFile" uid="uid://dvqicfkdjhvd7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Bold.ttf" id="21_dhmvn"]
 [ext_resource type="FontFile" uid="uid://ckofujjg44b2a" path="res://Assets/UI/fonts/Poppins/Poppins-Bold.ttf" id="21_sor2w"]
 [ext_resource type="StyleBox" uid="uid://bj0sti6muiqx2" path="res://Assets/UI/end_of_game_light_style_box_texture.tres" id="22_2bbm8"]
+[ext_resource type="PackedScene" uid="uid://b1efbonmbvw07" path="res://Scenes/player_scenes/ai_player_controller.tscn" id="22_8vtyo"]
 [ext_resource type="Texture2D" uid="uid://cg3vx2l2brskj" path="res://Assets/UI/cuneiform_texture.png" id="24_flpg6"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="24_hcl2s"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="25_5otke"]
@@ -985,11 +984,12 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_size = 5
 
-[node name="ROOT_classic_mode" type="Node3D" node_paths=PackedStringArray("_bottomRightMainMenuButton", "_victoryPanelMainMenuButton", "_bottomRightMenuReplayButton")]
+[node name="ROOT_classic_mode" type="Node3D" node_paths=PackedStringArray("_bottomRightMainMenuButton", "_victoryPanelMainMenuButton", "_bottomRightMenuReplayButton", "_victoryPanelReplayButton")]
 script = ExtResource("1_d22e3")
 _bottomRightMainMenuButton = NodePath("UI_root/bottom_right_menu/MarginContainer/VBoxContainer/main_menu_button_panel_container/main_menu_button_margin_container_2/main_menu_button")
 _victoryPanelMainMenuButton = NodePath("UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/main_menu_button_margin_container/main_menu_button_panel_container/main_menu_button_margin_container_2/main_menu_button")
 _bottomRightMenuReplayButton = NodePath("UI_root/bottom_right_menu/MarginContainer/VBoxContainer/replay_button_panel_container/replay_button_margin_container_2/replay_button")
+_victoryPanelReplayButton = NodePath("UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/replay_button_margin_container/replay_button_panel_container/replay_button_margin_container_2/replay_button")
 
 [node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController")]
 script = ExtResource("1_m4lkn")
@@ -997,6 +997,8 @@ cam = NodePath("../Camera3D")
 uiController = NodePath("../UI_root")
 diceController = NodePath("../dice_controller")
 boardController = NodePath("../classic_board")
+_realPlayerControllerScene = ExtResource("19_5eod8")
+_aiPlayerControllerScene = ExtResource("22_8vtyo")
 
 [node name="visual_effect_pool" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
@@ -1004,34 +1006,6 @@ script = ExtResource("2_2no1u")
 PoolableScenes = Array[Object]([SubResource("Resource_1ebpv"), SubResource("Resource_aersq"), SubResource("Resource_kcmos"), SubResource("Resource_lmdc8"), SubResource("Resource_nw70a"), SubResource("Resource_wcdbt"), SubResource("Resource_hkomx"), SubResource("Resource_s0jiq"), SubResource("Resource_dl8hu"), SubResource("Resource_4fc05"), SubResource("Resource_oy80m"), SubResource("Resource_f5n68"), SubResource("Resource_7jygf"), SubResource("Resource_xwbov")])
 
 [node name="players_container" type="Node" parent="."]
-
-[node name="real_player_01" type="Node" parent="players_container"]
-script = ExtResource("1_joypr")
-isActive = false
-rollSettings = ExtResource("2_k6vlu")
-_playerName = "Emma"
-
-[node name="real_player_02" type="Node" parent="players_container"]
-script = ExtResource("1_joypr")
-rollSettings = ExtResource("2_k6vlu")
-_playerName = "Szabi"
-
-[node name="ai_player_03" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
-script = ExtResource("14_56tec")
-timer = NodePath("ai_timer")
-rollSettings = ExtResource("2_k6vlu")
-_playerName = "Robot Emma"
-
-[node name="ai_timer" type="Timer" parent="players_container/ai_player_03"]
-
-[node name="ai_player_04" type="Node" parent="players_container" node_paths=PackedStringArray("timer")]
-script = ExtResource("14_56tec")
-timer = NodePath("ai_timer")
-isActive = false
-rollSettings = ExtResource("2_k6vlu")
-_playerName = "Robot Szabi"
-
-[node name="ai_timer" type="Timer" parent="players_container/ai_player_04"]
 
 [node name="dice_controller" type="Node" parent="."]
 script = ExtResource("1_57n5o")

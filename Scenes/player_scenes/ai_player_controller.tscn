@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1efbonmbvw07"]
+
+[ext_resource type="Script" path="res://Scripts/player_scripts/AIPlayerController.cs" id="1_egcoj"]
+[ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/original_roll_chance.tres" id="2_oumcc"]
+
+[node name="ai_player_03" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_egcoj")
+timer = NodePath("ai_timer")
+isActive = false
+rollSettings = ExtResource("2_oumcc")
+_playerName = "Robot Emma"
+
+[node name="ai_timer" type="Timer" parent="."]

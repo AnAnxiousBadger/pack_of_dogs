@@ -54,7 +54,7 @@ public partial class PlayerSetupPanelController : PanelContainer
 		}
 		playerDict.Add("player_name", playerName);
 
-		string playerType = "human_player";
+		string playerType = "real_player";
 		if(_AIPlayerButton.ButtonPressed){
 			playerType = "ai_player";
 		}
@@ -84,7 +84,7 @@ public partial class PlayerSetupPanelController : PanelContainer
 		
 		var JSONData = JsonSerializer.Deserialize<KingList>(JSONText);
 		
-		string randomName = JSONData.Kings[RandomGenerator.Instance.GetRandIntInRange(0, JSONData.Kings.Count)].Name;
+		string randomName = JSONData.Kings[RandomGenerator.Instance.GetRandIntInRange(0, JSONData.Kings.Count - 1)].Name;
 		
 		return randomName;
 	}

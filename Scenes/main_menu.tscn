@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://c5d85fwg7u2pv"]
+[gd_scene load_steps=71 format=3 uid="uid://c5d85fwg7u2pv"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/GameModePanelController.cs" id="1_32o7l"]
 [ext_resource type="Script" path="res://Scripts/MainMenuLevelController.cs" id="1_m0vgj"]
@@ -501,7 +501,106 @@ texture = SubResource("GradientTexture2D_2nkfx")
 
 [sub_resource type="LabelSettings" id="LabelSettings_vu8it"]
 font = ExtResource("2_fn0ed")
-font_size = 40
+font_size = 45
+
+[sub_resource type="Resource" id="Resource_dqka0"]
+script = ExtResource("3_fulb2")
+_property = 0
+_defaultValue = Vector2(1, 1)
+_targetValue = Vector2(1.05, 1.05)
+
+[sub_resource type="Resource" id="Resource_y8myr"]
+script = ExtResource("4_k4l67")
+signalType = 0
+targetRelativePath = "this"
+property = SubResource("Resource_dqka0")
+tweenTime = 0.2
+transitionType = 7
+
+[sub_resource type="Animation" id="Animation_o75rn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container/exit_game_mode_label:label_settings:font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [40]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2:theme_override_styles/panel:texture:gradient:offsets")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedFloat32Array(0.608833, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2:theme_override_styles/panel:texture:gradient:colors")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedColorArray(1, 1, 1, 0, 0.57, 0.00569999, 0.00569999, 0.65098)]
+}
+
+[sub_resource type="Animation" id="Animation_uh1op"]
+resource_name = "hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container/exit_game_mode_label:label_settings:font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.165746),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2:theme_override_styles/panel:texture:gradient:offsets")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedFloat32Array(0.608833, 1), PackedFloat32Array(0.329, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/PanelContainer/PanelContainer/PanelContainer2:theme_override_styles/panel:texture:gradient:colors")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedColorArray(1, 1, 1, 0, 0.57, 0.00569999, 0.00569999, 0.65098), PackedColorArray(1, 1, 1, 0, 0.47451, 0.00392157, 0.00392157, 0.756863)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5q7k"]
+_data = {
+"RESET": SubResource("Animation_o75rn"),
+"hover": SubResource("Animation_uh1op")
+}
 
 [sub_resource type="Gradient" id="Gradient_mtt0s"]
 interpolation_mode = 2
@@ -515,6 +614,10 @@ fill_to = Vector2(1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lu2ir"]
 texture = SubResource("GradientTexture2D_6uwcj")
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6svu"]
+font = ExtResource("2_fn0ed")
+font_size = 40
 
 [node name="ROOT_main_menu" type="Node3D" node_paths=PackedStringArray("_classicGameModePanel")]
 script = ExtResource("1_m0vgj")
@@ -995,7 +1098,7 @@ text = "p"
 layout_mode = 2
 text = "ai"
 
-[node name="gamemode_margin_container3" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="exit_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -1003,109 +1106,61 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3"]
+[node name="exit_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container" node_paths=PackedStringArray("_animComp", "_anim", "_playersSetupPanelControllers")]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxa18")
+script = ExtResource("1_32o7l")
+_level = 3
+_animComp = NodePath("UI_animation_component")
+_anim = NodePath("AnimationPlayer")
+_playersSetupPanelControllers = []
 
-[node name="UI_animation_component" type="Node" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer"]
+[node name="UI_animation_component" type="Node" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
+script = ExtResource("1_u4gnx")
+_tweenAnimationList = [SubResource("Resource_y8myr")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
+libraries = {
+"": SubResource("AnimationLibrary_r5q7k")
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
 clip_contents = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("5_3e3sf")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer"]
 clip_children = 1
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k3u6p")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("2_kgu3p")
 expand_mode = 4
 
-[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_lu2ir")
 
-[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
+[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="exit_game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
+[node name="exit_game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "EXIT"
-label_settings = SubResource("LabelSettings_vu8it")
+label_settings = SubResource("LabelSettings_i6svu")
 horizontal_alignment = 1
-
-[node name="secondary_panel_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "Player I:"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_length = 15
-
-[node name="Button" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "p"
-
-[node name="Button2" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "ai"
-
-[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-text = "Player II:"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
-layout_mode = 2
-
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_length = 15
-
-[node name="Button" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "p"
-
-[node name="Button2" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container3/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "ai"

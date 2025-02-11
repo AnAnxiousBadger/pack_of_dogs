@@ -2,15 +2,19 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 public partial class GameController : Node3D
 {
-	//private static GameController GameController { get;  private set;}
+	
 	// EXPORTS
 	[Export] public Camera3D cam;
 	[Export] public UIController uiController;
 	[Export] public DiceController diceController;
 	[Export] public BoardController boardController;
+	[Export] private PackedScene _realPlayerControllerScene;
+	[Export] private PackedScene _aiPlayerControllerScene;
 	public VisualEffectPoolController visualEffectPool;
 	public List<BasePlayerController> players;
 	private Queue<BasePlayerController> _playersQueue;
@@ -38,19 +42,6 @@ public partial class GameController : Node3D
     public override void _Ready()
 	{
 		GlobalClassesHolder.Instance.GameController = this;
-		//GD.Print(GlobalClassesHolder.Instance.GameController.Name);
-
-		SetUpGame();
-		SwitchTurn();
-		/*foreach (BasePlayerController player in players)
-		{
-			GD.Print(player.pieces.Count);
-			for (int i = 0; i < player.pieces.Count; i++)
-			{
-				GD.Print(player.pieces[i].GlobalPosition + " " + player.pieces[i].Visible);
-			}
-			GD.Print("============");
-		}*/
 	}
 
 	public override void _Process(double delta)
@@ -61,6 +52,38 @@ public partial class GameController : Node3D
     {
         (PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
     }
+	public async Task ReadyGameAsync(Godot.Collections.Dictionary<string, string> settings){
+		// Adding children can only be done on main thread
+		AddPlayers(settings);
+		SetUpGame();
+		SwitchTurn();
+		await Task.Run(() => {});
+	}
+	private void AddPlayers(Godot.Collections.Dictionary<string, string> settings){
+		
+		List<BasePlayerController> addedPlayers = new();
+		// Spawn players
+		for (int i = 0; i < settings["player_num"].ToInt(); i++)
+		{
+			BasePlayerController player;
+			if(settings[$"player_{i}_type"] == "real_player"){
+				player = _realPlayerControllerScene.Instantiate() as BasePlayerController;
+			}
+			else{
+				player = _aiPlayerControllerScene.Instantiate() as BasePlayerController;
+			}
+			player.PlayerName = settings[$"player_{i}_name"];
+			player.isActive = true;
+			addedPlayers.Add(player);
+		}
+
+		// Mix up player order
+		List<BasePlayerController> shuffledPlayerList = addedPlayers.OrderBy(_ => RandomGenerator.Instance.GetRandomInt()).ToList();
+		foreach (BasePlayerController player in shuffledPlayerList)
+		{
+			GetNode("../players_container").AddChild(player);
+		}		
+	}
 
     private void SetUpGame(){
 		diceController.ReadyDiceController();

@@ -9,7 +9,9 @@ public partial class RandomGenerator : Node
     public override void _Ready(){
         Instance = this;
     }
-
+    public int GetRandomInt(){
+        return (int)_rand.Randi();
+    }
     public int GetRandIntInRange(int inf, int sup){
         return _rand.RandiRange(inf, sup);
     }

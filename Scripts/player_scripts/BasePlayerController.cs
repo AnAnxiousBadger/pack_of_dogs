@@ -9,7 +9,6 @@ public abstract partial class BasePlayerController : Node
     // EXPORTS
     [Export] public bool isActive = true;
     [Export] public RollSettings rollSettings;
-    // REFERENCES
     // OTHER
     public int playerIndex = -1;
     [Export] private string _playerName = "";
@@ -30,7 +29,7 @@ public abstract partial class BasePlayerController : Node
         set { 
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
-            if(_deliveredPieces == /*piecesToDeliver*/ 1){
+            if(_deliveredPieces == piecesToDeliver){
                 GlobalClassesHolder.Instance.GameController.EndGame(this);
             }
         }

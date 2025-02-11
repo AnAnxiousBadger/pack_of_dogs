@@ -10,7 +10,7 @@ public partial class AudioManager : Node
     private Queue<AudioStreamPlayer3D> _avaiblePlayers;
     private AudioStreamPlayer _backgroundMusicController;
     private Timer _musicRestartTimer;
-    [Export] private bool _muteMusic = true;
+    [Export] private bool _muteMusic = false;
     [Export] private float _replayDelay = 15f;
 
     public override void _EnterTree()
@@ -34,9 +34,6 @@ public partial class AudioManager : Node
 
         _musicRestartTimer.Timeout += StartMusic;
         _backgroundMusicController.Finished += () => _musicRestartTimer.Start();
-        if(!_muteMusic){
-			StartMusic();
-		}
         
 
         // Set up sound queue
@@ -81,9 +78,18 @@ public partial class AudioManager : Node
         }        
 	}
 
-    private void StartMusic(){
-		_backgroundMusicController.Playing = true;
+    public void StartMusic(){
+        if(!_muteMusic){
+            _backgroundMusicController.Playing = true;
+        }
+		
 	}
+    public void StopMusic(){
+        _backgroundMusicController.Playing = false;
+    }
+    public bool IsMusicPlaying(){
+        return _backgroundMusicController.Playing;
+    }
 
     
 }

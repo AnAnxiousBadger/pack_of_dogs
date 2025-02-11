@@ -9,7 +9,8 @@ public partial class BoardController : Node3D
 	[Export] public AudioLibrary boardControllerAudioLibrary;
 	/*[Export]*/ private PiecePositions _pieceStartingPositions;
 	[Export] private PiecePositionListResource[] _pieceStartingPosesLists;
-	[Export] private PiecePositions _pieceEndPositions;
+	/*[Export]*/ private PiecePositions _pieceEndPositions;
+	[Export] private PiecePositionListResource[] _pieceEndPosesLists;
 	[Export] public BoardElementsController boardElementsController;
 	[Export] private PiecePathController _pieceMovingPath;
 	[Export] private PiecePathController _pieceKickingpath;
@@ -48,6 +49,7 @@ public partial class BoardController : Node3D
 		}
 		
 		_pieceStartingPositions = new PiecePositions(_pieceStartingPosesLists);
+		_pieceEndPositions = new PiecePositions(_pieceEndPosesLists);
 		for (int i = 0; i < pieces.Count; i++)
 		{
 			// Pair start nodes and pieces

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class MayhemModeLevelController : LevelController
 {
@@ -10,12 +11,17 @@ public partial class MayhemModeLevelController : LevelController
         //_button.ButtonUp += settings => ChangeScene(LevelScene.MAIN_MENU, settings);
     }
 
-    public override void ReadyLevel(Godot.Collections.Dictionary<string, string> data)
+    public async override Task ReadyLevelAsync(Godot.Collections.Dictionary<string, string> data)
     {
-        return;
+        await Task.Run(() => 
+            {
+                // Listened to by ScenesController
+                EmitSignal(SignalName.LevelReadied);
+            }
+        );
     }
 
-    public override void FinishLevel()
+    public override void FinishLevel(LevelScene nextLevel)
     {
         return;
     }

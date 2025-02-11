@@ -14,12 +14,16 @@ public partial class GameModePanelController : PanelContainer
 	[Export] private Button _playButton;
 	[Export] private PlayerSetupPanelController[] _playersSetupPanelControllers;
 	[Signal] public delegate void GameModeSelectedEventHandler(Godot.Collections.Dictionary<string, string> data);
+	[Signal] public delegate void GameModeClickedEventHandler();
 
 	public override void _Ready()
 	{
 		this.MouseEntered += _OnMouseEntered;
 		this.MouseExited += _OnMouseExited;
-		_playButton.ButtonUp += _OnPlayButtonUp;
+		if(_playButton != null){
+			_playButton.ButtonUp += _OnPlayButtonUp;
+		}
+		
 
 	}
     public override void _Process(double delta)
@@ -27,9 +31,12 @@ public partial class GameModePanelController : PanelContainer
         if(Input.IsActionJustReleased("left_mouse")){
 			if(!isOpened && isHovered)
 			{
+				if(_level == LevelController.LevelScene.QUIT){
+					GetTree().Quit();
+					return;
+				}
 				DisplayPlayerSetUpPanel();
 			}
-			
 		}
     }
 
@@ -49,7 +56,8 @@ public partial class GameModePanelController : PanelContainer
 		}
 	}
 
-	private void DisplayPlayerSetUpPanel(){		
+	private void DisplayPlayerSetUpPanel(){	
+		EmitSignal(SignalName.GameModeClicked);	
 		_anim.Play("click");
 		isOpened = true;
 		_animComp.OnHoverEnded();
@@ -66,6 +74,7 @@ public partial class GameModePanelController : PanelContainer
 	private void _OnPlayButtonUp(){
 		Godot.Collections.Dictionary<string, string> playerSettings = new();
 		bool error = false;
+		playerSettings.Add("player_num", $"{_playersSetupPanelControllers.Length}");
 		for (int i = 0; i < _playersSetupPanelControllers.Length; i++)
 		{
 			if(_playersSetupPanelControllers[i].GetPlayerData(out Dictionary<string, string> playerDict)){

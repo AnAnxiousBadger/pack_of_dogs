@@ -58,7 +58,7 @@ public partial class PiecePositionGeneratorTool : Node3D
 
         foreach (Node child in children)
         {
-            if(child is Marker3D marker){
+            if(child is Marker3D marker && marker.Visible){
                 markers.Add(marker);
             }
         }
