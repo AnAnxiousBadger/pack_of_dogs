@@ -1,27 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc0qresj865c"]
+[gd_scene load_steps=16 format=3 uid="uid://dc0qresj865c"]
 
 [ext_resource type="Script" path="res://Scripts/ScenesController.cs" id="1_t6omt"]
 [ext_resource type="PackedScene" uid="uid://c5d85fwg7u2pv" path="res://Scenes/main_menu.tscn" id="2_rsdvm"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingScreenController.cs" id="3_dfx3p"]
+[ext_resource type="Texture2D" uid="uid://0rlrc3md8li5" path="res://Assets/UI/loading_screens/loading_screen_royal_cemetery_of_ur.png" id="4_6trgd"]
+[ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="5_dobn5"]
+[ext_resource type="FontFile" uid="uid://dvqicfkdjhvd7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Bold.ttf" id="6_kfm6a"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0k2p8"]
-noise_type = 3
-frequency = 0.0304
-fractal_type = 0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw1h"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_odd7g"]
-noise = SubResource("FastNoiseLite_0k2p8")
+[sub_resource type="Gradient" id="Gradient_fvxt5"]
+offsets = PackedFloat32Array(0, 0.0489914, 0.59366, 0.959654, 1)
+colors = PackedColorArray(0.388235, 0.329412, 0.243137, 0, 0.270588, 0.227451, 0.160784, 0.862745, 0.294118, 0.211765, 0.184314, 0.862745, 0.270588, 0.227451, 0.160784, 0.862745, 0.388235, 0.329412, 0.243137, 0)
 
-[node name="scenes_controller" type="Node" node_paths=PackedStringArray("_currLevelController", "_loadingScreen")]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t5ioc"]
+gradient = SubResource("Gradient_fvxt5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aveqq"]
+texture = SubResource("GradientTexture1D_t5ioc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_r3btp"]
+font = ExtResource("5_dobn5")
+font_size = 14
+
+[sub_resource type="Gradient" id="Gradient_7ntof"]
+offsets = PackedFloat32Array(0, 0.256484, 0.634006, 1)
+colors = PackedColorArray(0.270588, 0.227451, 0.160784, 0, 0.270588, 0.227451, 0.160784, 0.862745, 0.294118, 0.211765, 0.184314, 0.862745, 0.270588, 0.227451, 0.160784, 0.862745)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rr3u1"]
+gradient = SubResource("Gradient_7ntof")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bfche"]
+texture = SubResource("GradientTexture1D_rr3u1")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3lnp4"]
+font = ExtResource("6_kfm6a")
+
+[node name="scenes_controller" type="Node" node_paths=PackedStringArray("currLevelController", "_loadingScreen")]
 script = ExtResource("1_t6omt")
-_currLevelController = NodePath("ROOT_main_menu")
-_loadingScreen = NodePath("CanvasLayer/laoding_screen")
+currLevelController = NodePath("ROOT_main_menu")
+_loadingScreen = NodePath("CanvasLayer/loading_screen")
 
 [node name="ROOT_main_menu" parent="." instance=ExtResource("2_rsdvm")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="laoding_screen" type="Control" parent="CanvasLayer"]
+[node name="loading_screen" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_loadingScreenTimer", "_loadingScreenImage", "_loadingScreenSubtitle")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -29,15 +55,79 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("3_dfx3p")
+_loadingScreenTimer = NodePath("loading_screen_timer")
+_loadingScreenDataJSONPath = "res://Assets/loading_screens_data.json"
+_loadingScreenImage = NodePath("loading_screen_image_panel/loading_screen_image")
+_loadingScreenSubtitle = NodePath("loading_screen_subtitle_panel/MarginContainer/loading_screen_subtitle")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/laoding_screen"]
+[node name="loading_screen_timer" type="Timer" parent="CanvasLayer/loading_screen"]
+one_shot = true
+
+[node name="loading_screen_image_panel" type="PanelContainer" parent="CanvasLayer/loading_screen"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtw1h")
+
+[node name="loading_screen_image" type="TextureRect" parent="CanvasLayer/loading_screen/loading_screen_image_panel"]
+layout_mode = 2
 mouse_filter = 0
-texture = SubResource("NoiseTexture2D_odd7g")
+texture = ExtResource("4_6trgd")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="loading_screen_subtitle_panel" type="PanelContainer" parent="CanvasLayer/loading_screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_right = -50.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_aveqq")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/loading_screen/loading_screen_subtitle_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="loading_screen_subtitle" type="Label" parent="CanvasLayer/loading_screen/loading_screen_subtitle_panel/MarginContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+text = "Ziggurats were dedicated to ancient mesopotamian gods who were belived to dwell on the top of them. Ziggurats (mainly Etemenanki, ziggurat of Marduk) is believed to be the inspiration behind the biblical Tower of Babel story."
+label_settings = SubResource("LabelSettings_r3btp")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="loading_text_panel" type="PanelContainer" parent="CanvasLayer/loading_screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -141.0
+offset_top = 30.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bfche")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/loading_screen/loading_text_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="laoding_text" type="Label" parent="CanvasLayer/loading_screen/loading_text_panel/MarginContainer"]
+layout_mode = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_3lnp4")
+horizontal_alignment = 2

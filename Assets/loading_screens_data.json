@@ -1,0 +1,22 @@
+{
+    "loading_screens":[
+        {
+            "Title": "Royal Cemetery of Ur",
+            "Subtitle": "The Royal Game of Ur was rediscovered by Sir Leonard Woolley during the excavation of the Royal Cemetery of Ur in southern Iraq. The rules of the game was reconstructed by Irving Leonard Finkel, curator of the British Museum.",
+            "Image": "loading_screen_royal_cemetery_of_ur.png",
+            "ImageSource": "https://archive.org/details/urexcavations191319join/page/n34/mode/1up?view=theater"
+        },
+        {
+            "Title": "Ziggurat of Ur",
+            "Subtitle": "Ziggurats were dedicated to ancient mesopotamian gods who were belived to dwell on the top of them. Ziggurats (mainly Etemenanki, ziggurat of Marduk) is believed to be the inspiration behind the biblical Tower of Babel story.",
+            "Image": "loading_screen_ziggurat_of_ur.png",
+            "ImageSource": "https://www.penn.museum/sites/journal/1235/"
+        },
+        {
+            "Title": "Epic of Gilgamesh",
+            "Subtitle": "Gilgamesh was an ancient mesopotamian king and mythical hero. Besides Gilgamesh's story possibly influencing the Iliad and Odyssey, Tablet XI of the Epic of Gilgamesh recovered from Niniveh (now in Mosul), though contested, has striking resemblanse to the biblical flood story.",
+            "Image": "loading_screen_gilgamesh.png",
+            "ImageSource": "https://www.britishmuseum.org/collection/image/372371001"
+        }
+    ]
+}

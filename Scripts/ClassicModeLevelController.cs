@@ -5,19 +5,10 @@ using System.Threading.Tasks;
 public partial class ClassicModeLevelController : LevelController
 {
     [Export] private bool _runUniqueScene = false;
-    [Export] private Button _bottomRightMainMenuButton;
-    [Export] private Button _victoryPanelMainMenuButton;
-    [Export] private Button _bottomRightMenuReplayButton;
-    [Export] private Button _victoryPanelReplayButton;
     public override LevelScene CurrLevel {get { return LevelScene.CLASSIC_MODE;}}
-    private Godot.Collections.Dictionary<string, string> _settings = new();
+    public Godot.Collections.Dictionary<string, string> levelSettings = new();
     public override void _Ready()
     {
-        _bottomRightMainMenuButton.ButtonUp += () => ChangeScene(LevelScene.MAIN_MENU, null, true);
-        _victoryPanelMainMenuButton.ButtonUp += () => ChangeScene(LevelScene.MAIN_MENU, null, true);
-        _bottomRightMenuReplayButton.ButtonUp += () => ChangeScene(LevelScene.CLASSIC_MODE, _settings,true);
-        _victoryPanelReplayButton.ButtonUp += () => ChangeScene(LevelScene.CLASSIC_MODE, _settings, true);
-
         if(_runUniqueScene){
             _ = RunUniqueScene();
         }
@@ -25,19 +16,20 @@ public partial class ClassicModeLevelController : LevelController
     }
     private async Task RunUniqueScene(){
         // Set up basic value for special scene run
-        _settings.Add("player_num", "2");
+        levelSettings.Add("player_num", "2");
         for (int i = 0; i < 2; i++)
-        {                
-            _settings.Add($"player_{i}_name", "real_player");
-            _settings.Add($"player_{i}_type", "real_player");
+        {
+            levelSettings.Add($"player_{i}_name", $"player_{i}");
+            levelSettings.Add($"player_{i}_type", "real_player");
         }
-        await ReadyLevelAsync(_settings);
+        await ReadyLevelAsync(levelSettings);
+        StartLevel();
     }
 
     public async override Task ReadyLevelAsync(Godot.Collections.Dictionary<string, string> settings)
     {
-        _settings = settings;
-        await GlobalClassesHolder.Instance.GameController.ReadyGameAsync(_settings);
+        levelSettings = settings;
+        await GlobalClassesHolder.Instance.GameController.ReadyGameAsync(levelSettings);
         if(!AudioManager.Instance.IsMusicPlaying()){
             AudioManager.Instance.StartMusic();
         }
@@ -50,5 +42,8 @@ public partial class ClassicModeLevelController : LevelController
             AudioManager.Instance.StopMusic();
         }
         GlobalClassesHolder.Instance.GameController = null;
+    }
+    public override void StartLevel(){
+        GlobalClassesHolder.Instance.GameController.StartGame();
     }
 }

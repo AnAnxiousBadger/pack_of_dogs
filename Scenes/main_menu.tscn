@@ -1,25 +1,27 @@
-[gd_scene load_steps=71 format=3 uid="uid://c5d85fwg7u2pv"]
+[gd_scene load_steps=73 format=3 uid="uid://c5d85fwg7u2pv"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/GameModePanelController.cs" id="1_32o7l"]
 [ext_resource type="Script" path="res://Scripts/MainMenuLevelController.cs" id="1_m0vgj"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UIAnimation/UIAnimationComponent.cs" id="1_u4gnx"]
 [ext_resource type="FontFile" uid="uid://siisdyleo1u7" path="res://Assets/UI/fonts/Poppins/Poppins-ExtraBold.ttf" id="2_fn0ed"]
+[ext_resource type="Resource" uid="uid://bep8ncc325n0y" path="res://Assets/sounds/audio_libraries/UI_audio_library.tres" id="2_jtsd3"]
 [ext_resource type="Texture2D" uid="uid://bxfwpmr5cevy4" path="res://Assets/UI/gamemode_01_thumbnail.png" id="2_kgu3p"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UIAnimation/UITweenVector2Property.cs" id="3_fulb2"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UIAnimation/UITweenAnimation.cs" id="4_k4l67"]
 [ext_resource type="StyleBox" uid="uid://d1vvr7hgkcxra" path="res://Assets/UI/offset_shadows_style_box.tres" id="5_3e3sf"]
 [ext_resource type="FontFile" uid="uid://dvqicfkdjhvd7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Bold.ttf" id="8_4s0sf"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/PlayerSetupPanelController.cs" id="9_ihwsy"]
-[ext_resource type="StyleBox" uid="uid://cdl2m5qwct8ks" path="res://Assets/UI/end_of_game_dark_style_box_texture.tres" id="9_kp1g5"]
+[ext_resource type="StyleBox" uid="uid://cdl2m5qwct8ks" path="res://Assets/UI/dark_redish_gradient_style_box_texture.tres" id="9_kp1g5"]
 [ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="10_q1n0h"]
-[ext_resource type="Texture2D" uid="uid://bwehwnibwveky" path="res://Assets/UI/human_player_icon.png" id="11_rwomw"]
-[ext_resource type="Texture2D" uid="uid://bq458jtwgr5h7" path="res://Assets/UI/ai_player_icon.png" id="12_1hgqe"]
-[ext_resource type="Texture2D" uid="uid://cl5nvd1e2x3x4" path="res://Assets/UI/generate_random_icon.png" id="12_veojx"]
+[ext_resource type="Texture2D" uid="uid://bwehwnibwveky" path="res://Assets/UI/icons/human_player_icon_32x32.png" id="11_rwomw"]
+[ext_resource type="Texture2D" uid="uid://bq458jtwgr5h7" path="res://Assets/UI/icons/ai_player_icon_32x32.png" id="12_1hgqe"]
+[ext_resource type="Texture2D" uid="uid://cl5nvd1e2x3x4" path="res://Assets/UI/icons/generate_random_icon_32x32.png" id="12_veojx"]
 [ext_resource type="Theme" uid="uid://b84dqss172b1e" path="res://Assets/UI/main_menu_normal_input_line.tres" id="13_ivj8f"]
 [ext_resource type="Theme" uid="uid://cn7mj15qkk2t8" path="res://Assets/UI/main_menu_error_input_line.tres" id="13_lpjxh"]
 [ext_resource type="StyleBox" uid="uid://bbuodcl43jbyh" path="res://Assets/UI/button_styles/button_01_normal_style.tres" id="15_2vm5p"]
 [ext_resource type="StyleBox" uid="uid://ot2adfkyp88a" path="res://Assets/UI/button_styles/button_01_hover_style.tres" id="16_0nwer"]
 [ext_resource type="StyleBox" uid="uid://be4themgp3o7w" path="res://Assets/UI/button_styles/button_01_pressed_style.tres" id="17_oij7w"]
+[ext_resource type="Texture2D" uid="uid://b41fh71jtnj6a" path="res://Assets/UI/exit_thumbnail.png" id="22_u2pev"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qliob"]
 bg_color = Color(0.760784, 0.654902, 0.466667, 1)
@@ -622,6 +624,9 @@ font_size = 40
 [node name="ROOT_main_menu" type="Node3D" node_paths=PackedStringArray("_classicGameModePanel")]
 script = ExtResource("1_m0vgj")
 _classicGameModePanel = NodePath("Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container")
+UIAudioLibrary = ExtResource("2_jtsd3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -668,12 +673,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="classic_game_mode_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container" node_paths=PackedStringArray("_playersSetUpPanelMarginPanel", "_animComp", "_anim", "_playButton", "_playersSetupPanelControllers")]
+[node name="classic_game_mode_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container" node_paths=PackedStringArray("_mainMenuLevelController", "_playersSetUpPanelMarginPanel", "_animComp", "_anim", "_playButton", "_playersSetupPanelControllers")]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxa18")
 script = ExtResource("1_32o7l")
+_mainMenuLevelController = NodePath("../../../../..")
 _level = 1
 _playersSetUpPanelMarginPanel = NodePath("VBoxContainer/players_setup_clip_anim_panel")
 _animComp = NodePath("UI_animation_component")
@@ -748,10 +754,11 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="player_setup_panel" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
+[node name="player_setup_panel" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_kp1g5")
 script = ExtResource("9_ihwsy")
+_mainMenuLevelController = NodePath("../../../../../../../../../..")
 _inputLine = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/LineEdit")
 _mainMenuNormalTheme = ExtResource("13_ivj8f")
 _mainMenuErrorTheme = ExtResource("13_lpjxh")
@@ -848,10 +855,11 @@ icon = ExtResource("12_veojx")
 icon_alignment = 1
 expand_icon = true
 
-[node name="player_setup_panel2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
+[node name="player_setup_panel2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_kp1g5")
 script = ExtResource("9_ihwsy")
+_mainMenuLevelController = NodePath("../../../../../../../../../..")
 _inputLine = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/LineEdit")
 _mainMenuNormalTheme = ExtResource("13_ivj8f")
 _mainMenuErrorTheme = ExtResource("13_lpjxh")
@@ -1034,7 +1042,7 @@ theme_override_constants/margin_bottom = 5
 [node name="game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
 layout_mode = 2
 size_flags_vertical = 8
-text = "MAYHEM"
+text = "???"
 label_settings = SubResource("LabelSettings_vu8it")
 horizontal_alignment = 1
 
@@ -1143,7 +1151,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k3u6p")
 
 [node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("2_kgu3p")
+texture = ExtResource("22_u2pev")
 expand_mode = 4
 
 [node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]

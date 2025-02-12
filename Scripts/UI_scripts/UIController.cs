@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 public partial class UIController : Control
 {
 	// EXPORTS
-	[Export] public AudioLibrary UIControllerAudioLibrary;
+	[Export] public AudioLibrary UIAudioLibrary;
 	[Export] private TurnPanelUIController _turnPanel;
 	[Export] private VBoxContainer _scoresPanel;
 	[Export] private PackedScene _playerScorePanel;
 	[Export] private StatsUIController _statsUIController;
-	[Export] private EndOfGameUIController _victoryUI;
+	[Export] private VictoryUIController _victoryUI;
 	[Export] private Timer _UITimer;
 	[Export] private float _victoryPanelWaitTime = 1f;
 	[Export] private Button _bottomRightMenuButton;
 	[Export] private PanelContainer _bottomRightMenu;
+	[Export] private Button _bottomRightMenuRestartButton;
+	[Export] private Button _bottomRightMenuMainMenuButton;
 
 	// OTHERS
 	public enum GameUIState {GAME, VICTORY};
@@ -46,6 +48,18 @@ public partial class UIController : Control
 		GlobalClassesHolder.Instance.GameController.GameEnded += SetUpVictoryUI;
 		_bottomRightMenuButton.ButtonUp +=_OnBottomRightMenuButtonUp;
 		_bottomRightMenuButton.ButtonDown += _OnButtonDown;
+
+		// Needed check to run unique scene
+		if(ScenesController.Instance != null){
+			ClassicModeLevelController levelController = (ClassicModeLevelController)ScenesController.Instance.currLevelController;
+			_bottomRightMenuRestartButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.CLASSIC_MODE, levelController.levelSettings, true);
+			_bottomRightMenuRestartButton.ButtonDown += _OnButtonDown;
+			_bottomRightMenuMainMenuButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.MAIN_MENU, null, true);
+			_bottomRightMenuMainMenuButton.ButtonDown += _OnButtonDown;
+		}
+
+		_victoryUI.SetUpVictoryUI();
+
 		_bottomRightMenu.Visible = false;
 	}
     public void SetTurnLabel(string playerName){
@@ -119,7 +133,7 @@ public partial class UIController : Control
 		}
 	}
 	public void PlayMenuClickSound(){
-		AudioManager.Instance.PlaySound(UIControllerAudioLibrary.GetSound("menu_click"), GlobalClassesHolder.Instance.GameController, false);
+		AudioManager.Instance.PlaySound(UIAudioLibrary.GetSound("menu_click"));
 	}
 	public void _OnButtonDown(){
 		PlayMenuClickSound();

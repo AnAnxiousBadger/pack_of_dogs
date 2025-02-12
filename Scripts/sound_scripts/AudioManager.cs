@@ -10,7 +10,7 @@ public partial class AudioManager : Node
     private Queue<AudioStreamPlayer3D> _avaiblePlayers;
     private AudioStreamPlayer _backgroundMusicController;
     private Timer _musicRestartTimer;
-    [Export] private bool _muteMusic = false;
+    [Export] private bool _muteMusic = true;
     [Export] private float _replayDelay = 15f;
 
     public override void _EnterTree()
@@ -75,8 +75,24 @@ public partial class AudioManager : Node
         }
         else{
             return null;
-        }        
+        }
 	}
+    public AudioStreamPlayer3D PlaySound(Dictionary<string, object> soundDictionary){
+        if(_avaiblePlayers.Count > 0){
+            AudioStreamPlayer3D audioPlayer = _avaiblePlayers.Dequeue();
+
+            // Set up player
+            audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.Disabled;
+            audioPlayer.PitchScale = 1f + (float)soundDictionary["delta_pitch_scale"];
+            audioPlayer.Stream = (AudioStream)soundDictionary["audio_stream"];
+
+            audioPlayer.Play();
+            return audioPlayer;
+        }
+        else{
+            return null;
+        }
+    }
 
     public void StartMusic(){
         if(!_muteMusic){

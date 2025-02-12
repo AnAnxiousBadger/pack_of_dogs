@@ -43,7 +43,7 @@ public partial class DiceDisplayController : TickableButtonController
 		this.roll = roll;
 		if(IsActive){
 			_anim.Play("roll_animation");
-			AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound("dice_roll"), this, false);
+			AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound("dice_roll"));
 		}
 	}
 

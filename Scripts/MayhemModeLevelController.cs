@@ -25,4 +25,9 @@ public partial class MayhemModeLevelController : LevelController
     {
         return;
     }
+
+    public override void StartLevel()
+    {
+        return;
+    }
 }

@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgdh8witafwgo"]
+[gd_scene load_steps=13 format=3 uid="uid://dgdh8witafwgo"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/PlayerScoreContainerUIController.cs" id="1_6iyy2"]
+[ext_resource type="Texture2D" uid="uid://s6mu7bbbyhi6" path="res://Assets/UI/icons/piece_icon_16x16.png" id="2_ehwvj"]
 [ext_resource type="FontFile" uid="uid://ckofujjg44b2a" path="res://Assets/UI/fonts/Poppins/Poppins-Bold.ttf" id="2_x744l"]
+[ext_resource type="Texture2D" uid="uid://y8t4pv8qu38i" path="res://Assets/UI/icons/ai_player_icon_16x16.png" id="4_wuqt3"]
 
 [sub_resource type="Gradient" id="Gradient_0nyag"]
 offsets = PackedFloat32Array(0.8, 1)
@@ -43,35 +45,17 @@ font_size = 12
 font = ExtResource("2_x744l")
 font_size = 15
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmy4t"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trkq7"]
-bg_color = Color(0.388235, 0.329412, 0.243137, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 0.583333, 0, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 13
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 17
-shadow_color = Color(0, 0, 0, 0.222)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4cc54"]
-outline_size = 3
-
-[node name="player_score_container" type="PanelContainer" node_paths=PackedStringArray("_playerNameLabel", "_playerScoreLabel", "_playerMaxScoreLabel", "_currentPanel")]
+[node name="player_score_container" type="PanelContainer" node_paths=PackedStringArray("_playerNameLabel", "_playerScoreLabel", "_playerMaxScoreLabel", "_AIIcon", "_pieceColorIcon")]
 modulate = Color(1, 1, 1, 0.8)
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_a2lkh")
 script = ExtResource("1_6iyy2")
 _playerNameLabel = NodePath("MarginContainer/HBoxContainer/player_name_label")
 _playerScoreLabel = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/player_score_label")
 _playerMaxScoreLabel = NodePath("MarginContainer/HBoxContainer/PanelContainer/MarginContainer/HBoxContainer/player_max_score_label")
-_currentPanel = NodePath("MarginContainer/HBoxContainer/current_container")
+_AIIcon = NodePath("MarginContainer/HBoxContainer/AI_icon")
+_pieceColorIcon = NodePath("MarginContainer/HBoxContainer/piece_color_icon")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -83,6 +67,11 @@ theme_override_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
+
+[node name="piece_color_icon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ehwvj")
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0.588235)
@@ -124,25 +113,7 @@ layout_mode = 2
 text = "player_01"
 label_settings = SubResource("LabelSettings_bleku")
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(20, 0)
+[node name="AI_icon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_bmy4t")
-
-[node name="current_container" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
-visible = false
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_trkq7")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/current_container"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="current_label" type="Label" parent="MarginContainer/HBoxContainer/current_container/MarginContainer"]
-layout_mode = 2
-text = "𒁺"
-label_settings = SubResource("LabelSettings_4cc54")
+texture = ExtResource("4_wuqt3")
+stretch_mode = 5

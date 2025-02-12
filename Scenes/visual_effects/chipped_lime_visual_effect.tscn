@@ -1,7 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://5302ih5o5de6"]
+[gd_scene load_steps=18 format=3 uid="uid://5302ih5o5de6"]
 
 [ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/visual_effect_meshes/lime_particle_mesh.res" id="1_0pmum"]
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_e0ddx"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/RandomSoundEffect.cs" id="2_r7fm3"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_ne0n3"]
+[ext_resource type="AudioStream" uid="uid://bysxaco3rbl85" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_01.mp3" id="4_48fn3"]
+[ext_resource type="AudioStream" uid="uid://c0ojgbpt8emrh" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_02.mp3" id="5_qkunh"]
+[ext_resource type="AudioStream" uid="uid://byqg6gvsx8u38" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_03.mp3" id="6_e11si"]
+[ext_resource type="AudioStream" uid="uid://bi7qf726smkad" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_04.mp3" id="7_go6xc"]
+[ext_resource type="AudioStream" uid="uid://kvwpjruhh6to" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_05.mp3" id="8_okf27"]
+
+[sub_resource type="Resource" id="Resource_3vutn"]
+script = ExtResource("3_ne0n3")
+deltaPitchScale = Vector2(-0.2, 0.2)
+
+[sub_resource type="Resource" id="Resource_4g0ny"]
+script = ExtResource("2_r7fm3")
+sounds = Array[AudioStream]([ExtResource("4_48fn3"), ExtResource("5_qkunh"), ExtResource("6_e11si"), ExtResource("7_go6xc"), ExtResource("8_okf27")])
+identifier = "rock_clicked"
+settings = SubResource("Resource_3vutn")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp55g"]
 vertex_color_use_as_albedo = true
@@ -32,8 +49,7 @@ color_initial_ramp = SubResource("GradientTexture1D_bamlh")
 
 [node name="chipped_lime_visual_effect" type="Node3D"]
 script = ExtResource("1_e0ddx")
-effectName = "chipped_lime_visual_effect"
-poolCount = 5
+effectSound = SubResource("Resource_4g0ny")
 
 [node name="particles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_xp55g")

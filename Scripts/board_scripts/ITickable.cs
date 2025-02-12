@@ -85,7 +85,7 @@ public interface ITickable
         {
             if(SoundEffects[i].signaltype == signalType){
                 if(IsActive || SoundEffects[i].allowOnDisabled){
-                    AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound(SoundEffects[i].effectName), TickableNode, false);
+                    AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound(SoundEffects[i].effectName));
                 }
                 
             }

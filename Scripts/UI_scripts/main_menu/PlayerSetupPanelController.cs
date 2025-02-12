@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public partial class PlayerSetupPanelController : PanelContainer
 {
+	[Export] private MainMenuLevelController _mainMenuLevelController;
 	[Export] private LineEdit _inputLine;
 	[Export] private Theme _mainMenuNormalTheme;
 	[Export] private Theme _mainMenuErrorTheme;
@@ -17,10 +18,16 @@ public partial class PlayerSetupPanelController : PanelContainer
     public override void _Ready()
     {
         _generateRandomNameButton.ButtonUp += _OnGenerateRandomName;
+		_generateRandomNameButton.ButtonDown += _OnButtonDownPlaySound;
 		_humanPlayerButton.Toggled += _OnHumanPlayerButtonToggled;
+		_humanPlayerButton.ButtonDown += _OnButtonDownPlaySound;
 		_AIPlayerButton.Toggled += _OnAIPlayerButtonToggled;
+		_AIPlayerButton.ButtonDown += _OnButtonDownPlaySound;
 		_inputLine.TextChanged += _OnInputLineTextChanged;
     }
+	private void _OnButtonDownPlaySound(){
+		AudioManager.Instance.PlaySound(_mainMenuLevelController.UIAudioLibrary.GetSound("menu_click"));
+	}
 
 	private void _OnGenerateRandomName(){
 		_inputLine.Text = GetRandomName();

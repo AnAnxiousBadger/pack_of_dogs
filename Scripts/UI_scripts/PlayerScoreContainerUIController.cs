@@ -9,7 +9,8 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 	[Export] private Label _playerScoreLabel;
 	[Export] private Label _playerMaxScoreLabel;
 	[Export] private int _maxNameLength = 15;
-	//[Export] private PanelContainer _currentPanel;
+	[Export] private TextureRect _AIIcon;
+	[Export] private TextureRect _pieceColorIcon;
 
 	public void SetPlayerScoreLabel(BasePlayerController player){
 		string playerName = player.PlayerName;
@@ -21,6 +22,13 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 		_playerMaxScoreLabel.Text = player.piecesToDeliver.ToString();
 		_player = player;
 		_player.PieceDelivered += UpdatePlayerScore;
+		if(player is AIPlayerController){
+			_AIIcon.Modulate = new Color(1f, 1f, 1f, 1f);
+		}
+		else{
+			_AIIcon.Modulate = new Color(1f, 1f, 1f, 0f);
+		}
+		_pieceColorIcon.Modulate = GlobalClassesHolder.Instance.GameController.playerPieceColors[player.playerIndex];
 		//_player.TurnStarted += ShowCurrentPlayer;
 		//_player.TurnEnded += HideCurrentPlayer;
 	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://sq6lib15ysi4"]
+[gd_scene load_steps=16 format=3 uid="uid://sq6lib15ysi4"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/TickableVisualEffect.cs" id="2_02218"]
 [ext_resource type="ArrayMesh" uid="uid://gvwb3yveeogx" path="res://Assets/meshes/skip_button_mesh.res" id="2_ar8bw"]
@@ -26,12 +26,6 @@ onClickPosition = false
 allowOnDisabledTickableButtonClicks = true
 signaltype = 3
 effectName = "sand_dust_ring_visual_effect"
-
-[sub_resource type="Resource" id="Resource_telsw"]
-script = ExtResource("3_ae47i")
-allowOnDisabled = true
-signaltype = 0
-effectName = "rock_clicked"
 
 [sub_resource type="Resource" id="Resource_g62nw"]
 script = ExtResource("3_ae47i")
@@ -84,7 +78,7 @@ _data = {
 collision_layer = 4
 script = ExtResource("5_7tcvn")
 Effects = Array[Object]([SubResource("Resource_rxw5i"), SubResource("Resource_p8uys"), SubResource("Resource_rjeph")])
-SoundEffects = Array[Object]([SubResource("Resource_telsw"), SubResource("Resource_g62nw"), SubResource("Resource_om8xf"), SubResource("Resource_lj77c"), SubResource("Resource_w7hsr")])
+SoundEffects = Array[Object]([SubResource("Resource_g62nw"), SubResource("Resource_om8xf"), SubResource("Resource_lj77c"), SubResource("Resource_w7hsr")])
 _anim = NodePath("AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

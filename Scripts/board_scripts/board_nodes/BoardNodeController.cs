@@ -15,7 +15,7 @@ public abstract partial class BoardNodeController : StaticBody3D
 	public bool canBeSteppedOn = true;
 	public List<PieceController> currPieces;
 	public virtual Vector3 TopPos{
-		get { return GlobalPosition + new Vector3(0f, 0.6f, 0f);}
+		get { return GlobalPosition + new Vector3(0f, 0.65f, 0f);}
 	}
 	private Queue<BoardNodeModifier> _onStepModQueue = new();
 	private PieceController _modsQueuePiece;

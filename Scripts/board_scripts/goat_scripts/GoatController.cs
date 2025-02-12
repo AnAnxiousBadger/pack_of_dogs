@@ -193,7 +193,7 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 	public void OnPressed(Vector3 pos){
 		if(canBleat){
 			if(Pool is GoatPathManager goatPathManager){
-				AudioStreamPlayer3D ap = AudioManager.Instance.PlaySound(goatPathManager.goatAudioLibrary.GetSound("goat_bleating"), this, false);
+				AudioStreamPlayer3D ap = AudioManager.Instance.PlaySound(goatPathManager.goatAudioLibrary.GetSound("goat_bleating"));
 				if(ap != null){
 					canBleat = false;
 					_tempAudioStreamPlayer = ap;

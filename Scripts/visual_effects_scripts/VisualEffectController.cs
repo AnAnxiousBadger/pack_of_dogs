@@ -16,7 +16,7 @@ public partial class VisualEffectController : Node3D, IPoolable
 	public virtual void Play(Vector3 globalPos){
 		GlobalPosition = globalPos;
 		if(effectSound != null){
-			AudioManager.Instance.PlaySound(effectSound.GetSound(), this, false);
+			AudioManager.Instance.PlaySound(effectSound.GetSound());
 		}
 	}
 

@@ -1,18 +1,22 @@
-[gd_resource type="Resource" script_class="AudioLibrary" load_steps=24 format=3 uid="uid://day8wi52yicbc"]
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=28 format=3 uid="uid://day8wi52yicbc"]
 
 [ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_24huf"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_sy278"]
 [ext_resource type="AudioStream" uid="uid://dmltr5p6lxqki" path="res://Assets/sounds/audio_streams/board_elements_library/button_clicked_01.mp3" id="3_5eavo"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_c6jke"]
 [ext_resource type="AudioStream" uid="uid://cms7r4aju41lw" path="res://Assets/sounds/audio_streams/board_elements_library/button_hovered_02.mp3" id="4_ja2hk"]
-[ext_resource type="AudioStream" uid="uid://ypabr1qm3j41" path="res://Assets/sounds/audio_streams/board_elements_library/rock_clicked_01.mp3" id="6_qx773"]
+[ext_resource type="AudioStream" uid="uid://bysxaco3rbl85" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_01.mp3" id="6_qx773"]
 [ext_resource type="AudioStream" uid="uid://d166c1gvm1cu7" path="res://Assets/sounds/audio_streams/board_elements_library/dice_roll_02.mp3" id="6_sawuc"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/RandomSoundEffect.cs" id="7_akdtf"]
 [ext_resource type="AudioStream" uid="uid://dfpvsqsngf7k4" path="res://Assets/sounds/audio_streams/board_elements_library/vegetation_01.mp3" id="8_skskl"]
+[ext_resource type="AudioStream" uid="uid://c0ojgbpt8emrh" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_02.mp3" id="9_thkp5"]
 [ext_resource type="AudioStream" uid="uid://cqkpkwsavxfcc" path="res://Assets/sounds/audio_streams/board_elements_library/vegetation_02.mp3" id="9_ttq1g"]
+[ext_resource type="AudioStream" uid="uid://byqg6gvsx8u38" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_03.mp3" id="10_bxboa"]
 [ext_resource type="AudioStream" uid="uid://erph6es24eoe" path="res://Assets/sounds/audio_streams/board_elements_library/vegetation_03.mp3" id="10_yfhct"]
 [ext_resource type="AudioStream" uid="uid://l37mu8ornpqk" path="res://Assets/sounds/audio_streams/board_elements_library/vegetation_04.mp3" id="11_gc4ex"]
+[ext_resource type="AudioStream" uid="uid://bi7qf726smkad" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_04.mp3" id="11_x658l"]
 [ext_resource type="AudioStream" uid="uid://diopvxvijyc2c" path="res://Assets/sounds/audio_streams/board_elements_library/vegetation_05.mp3" id="12_d73wv"]
+[ext_resource type="AudioStream" uid="uid://kvwpjruhh6to" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_05.mp3" id="12_gfo8c"]
 
 [sub_resource type="Resource" id="Resource_x3f8l"]
 script = ExtResource("3_c6jke")
@@ -44,15 +48,15 @@ sound = ExtResource("6_sawuc")
 identifier = "dice_roll"
 settings = SubResource("Resource_jqijb")
 
-[sub_resource type="Resource" id="Resource_ia4fe"]
+[sub_resource type="Resource" id="Resource_mkcua"]
 script = ExtResource("3_c6jke")
-deltaPitchScale = Vector2(-0.2, 0.2)
+deltaPitchScale = Vector2(-0.1, 0.1)
 
-[sub_resource type="Resource" id="Resource_0m7i6"]
-script = ExtResource("2_sy278")
-sound = ExtResource("6_qx773")
+[sub_resource type="Resource" id="Resource_qmvyh"]
+script = ExtResource("7_akdtf")
+sounds = Array[AudioStream]([ExtResource("6_qx773"), ExtResource("9_thkp5"), ExtResource("10_bxboa"), ExtResource("11_x658l"), ExtResource("12_gfo8c")])
 identifier = "rock_clicked"
-settings = SubResource("Resource_ia4fe")
+settings = SubResource("Resource_mkcua")
 
 [sub_resource type="Resource" id="Resource_kvlg0"]
 script = ExtResource("3_c6jke")
@@ -66,4 +70,4 @@ settings = SubResource("Resource_kvlg0")
 
 [resource]
 script = ExtResource("1_24huf")
-soundEffects = Array[Resource]([SubResource("Resource_85y53"), SubResource("Resource_myd7h"), SubResource("Resource_qiqhx"), SubResource("Resource_0m7i6"), SubResource("Resource_gfgpd")])
+soundEffects = Array[Resource]([SubResource("Resource_85y53"), SubResource("Resource_myd7h"), SubResource("Resource_qiqhx"), SubResource("Resource_qmvyh"), SubResource("Resource_gfgpd")])

@@ -23,10 +23,11 @@ public abstract partial class LevelController : Node3D
 	protected void StartLoadingScene(LevelScene scene){
 		ScenesController.Instance.StartLoadingNextLevelScene(levelPathDict[levelSceneTolevelNameDict[scene]]);
 	}
-    protected void ChangeScene(LevelScene to, Godot.Collections.Dictionary<string, string> data, bool doLoadScene){
+    public void ChangeScene(LevelScene to, Godot.Collections.Dictionary<string, string> data, bool doLoadScene){
 		ScenesController.Instance.HandleLevelChangeAsync(CurrLevel, to, data, doLoadScene);
 	}
 
 	public abstract Task ReadyLevelAsync(Godot.Collections.Dictionary<string, string> data);
 	public abstract void FinishLevel(LevelScene nextLevel);
+	public abstract void StartLevel();
 }

@@ -15,6 +15,7 @@ public partial class GameController : Node3D
 	[Export] public BoardController boardController;
 	[Export] private PackedScene _realPlayerControllerScene;
 	[Export] private PackedScene _aiPlayerControllerScene;
+	[Export] public Color[] playerPieceColors;
 	public VisualEffectPoolController visualEffectPool;
 	public List<BasePlayerController> players;
 	private Queue<BasePlayerController> _playersQueue;
@@ -56,9 +57,11 @@ public partial class GameController : Node3D
 		// Adding children can only be done on main thread
 		AddPlayers(settings);
 		SetUpGame();
-		SwitchTurn();
-		await Task.Run(() => {});
+		await Task.Run(() => {
+			return;
+		});
 	}
+	
 	private void AddPlayers(Godot.Collections.Dictionary<string, string> settings){
 		
 		List<BasePlayerController> addedPlayers = new();
@@ -111,6 +114,9 @@ public partial class GameController : Node3D
 				_playersQueue.Enqueue(p);
 			}
 		}
+	}
+	public void StartGame(){
+		SwitchTurn();
 	}
 
     public void SwitchTurn(){

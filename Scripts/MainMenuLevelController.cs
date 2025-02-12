@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 public partial class MainMenuLevelController : LevelController
 {
     [Export] public GameModePanelController _classicGameModePanel;
+    [Export] public AudioLibrary UIAudioLibrary;
     public override LevelScene CurrLevel {get { return LevelScene.MAIN_MENU;}}
     public override void _Ready()
     {
@@ -23,6 +24,11 @@ public partial class MainMenuLevelController : LevelController
     }
 
     public override void FinishLevel(LevelScene nextLevel)
+    {
+        return;
+    }
+
+    public override void StartLevel()
     {
         return;
     }

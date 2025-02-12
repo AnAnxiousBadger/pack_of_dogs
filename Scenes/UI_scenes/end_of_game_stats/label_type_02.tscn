@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmlfoec7pvxr7"]
 
 [ext_resource type="LabelSettings" uid="uid://cqgshkyxaydn8" path="res://Assets/UI/end_of_game_label_settings.tres" id="1_khvuc"]
-[ext_resource type="Texture2D" uid="uid://d0f0nhxwhu6ft" path="res://Assets/UI/crown.svg" id="2_uwbsg"]
+[ext_resource type="Texture2D" uid="uid://c71i6usi1v8sn" path="res://Assets/UI/icons/crown_icon_32x32.png" id="2_abj6a"]
 
 [node name="HBoxContainer" type="HBoxContainer"]
 offset_right = 78.0
@@ -17,7 +17,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("2_uwbsg")
+texture = ExtResource("2_abj6a")
 stretch_mode = 3

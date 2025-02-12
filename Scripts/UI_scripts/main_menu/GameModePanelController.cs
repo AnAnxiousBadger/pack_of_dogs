@@ -7,6 +7,7 @@ public partial class GameModePanelController : PanelContainer
 {
 	private bool isHovered = false;
 	private bool isOpened = false;
+	[Export] private MainMenuLevelController _mainMenuLevelController;
 	[Export] private LevelController.LevelScene _level;
 	[Export] private Control _playersSetUpPanelMarginPanel;
 	[Export] private UIAnimationComponent _animComp;
@@ -22,6 +23,7 @@ public partial class GameModePanelController : PanelContainer
 		this.MouseExited += _OnMouseExited;
 		if(_playButton != null){
 			_playButton.ButtonUp += _OnPlayButtonUp;
+			_playButton.ButtonDown += () => AudioManager.Instance.PlaySound(_mainMenuLevelController.UIAudioLibrary.GetSound("menu_click"));
 		}
 		
 
@@ -58,6 +60,7 @@ public partial class GameModePanelController : PanelContainer
 
 	private void DisplayPlayerSetUpPanel(){	
 		EmitSignal(SignalName.GameModeClicked);	
+		AudioManager.Instance.PlaySound(_mainMenuLevelController.UIAudioLibrary.GetSound("menu_click"));
 		_anim.Play("click");
 		isOpened = true;
 		_animComp.OnHoverEnded();

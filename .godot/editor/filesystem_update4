@@ -1,6 +1,8 @@
-res://Scenes/Main.tscn
+res://Assets/meshes/board_collision_mask.res
+res://Scenes/classic_mode.tscn
+res://Assets/sounds/audio_libraries/UI_audio_library.tres
 res://Assets/UI/offset_shadows_style_box.tres
-res://Assets/UI/end_of_game_dark_style_box_texture.tres
+res://Assets/UI/dark_redish_gradient_style_box_texture.tres
 res://Assets/UI/main_menu_normal_input_line.tres
 res://Assets/UI/main_menu_error_input_line.tres
 res://Assets/UI/button_styles/button_01_normal_style.tres
@@ -18,6 +20,8 @@ res://Assets/materials/shaders/highlight_node_shader/highlight_node_noise_textur
 res://Assets/materials/shaders/highlight_node_shader/highlight_node_noise_texture_01.tres
 res://Assets/materials/shaders/highlight_node_shader/highlight_node_shader.tres
 res://Assets/sounds/audio_libraries/board_controller_audio_library.tres
+res://Assets/player_0_starting_poses.tres
+res://Assets/player_1_starting_poses.tres
 res://Assets/materials/end_node_mat/end_node_mat.tres
 res://Assets/materials/node_mats/basic_node/basic_node_mat.tres
 res://Assets/materials/node_mats/rosette_02/rosette_02_node_mat.tres
@@ -58,6 +62,5 @@ res://Assets/UI/UI_god_rays_shader.tres
 res://Assets/UI/UI_clip_shader.tres
 res://Assets/UI/UI_blur_shader.tres
 res://Assets/materials/shaders/tornado_shader/tornado_shader.tres
-res://Scenes/classic_mode.tscn
+res://Scenes/Main.tscn
 res://Scenes/board_scenes/classic_board.tscn
-res://Scenes/main_menu.tscn

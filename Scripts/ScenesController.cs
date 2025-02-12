@@ -8,8 +8,8 @@ using System.Threading;
 public partial class ScenesController : Node
 {
 	public static ScenesController Instance { get; set;}
-	[Export] public LevelController _currLevelController;
-	[Export] public Control _loadingScreen;
+	[Export] public LevelController currLevelController;
+	[Export] public LoadingScreenController _loadingScreen;
 	private PackedScene _nextLoadedScene;
 	private Task _loadingTask;
     public override void _EnterTree()
@@ -21,11 +21,12 @@ public partial class ScenesController : Node
 		Instance = this;
     }
     public async void HandleLevelChangeAsync(LevelController.LevelScene from, LevelController.LevelScene to, Godot.Collections.Dictionary<string, string> data, bool doLoadScene){
-		_loadingScreen.Visible = true;
-		Task loadingScreenTask = StartLoadingScreenDelayAsync(1500);
+		_loadingScreen.ShowLoadingScreen();
+
+		Task loadingScreenTask = StartLoadingScreenDelayAsync(_loadingScreen.minimumLoadingScreenTimeInMilliSeconds);
 		
-		_currLevelController.FinishLevel(to);	
-		_currLevelController.QueueFree();
+		currLevelController.FinishLevel(to);	
+		currLevelController.QueueFree();
 
 		if(doLoadScene){
 			string toPath = LevelController.levelPathDict[LevelController.levelSceneTolevelNameDict[to]];
@@ -37,11 +38,12 @@ public partial class ScenesController : Node
 		LevelController nextLevel = _nextLoadedScene.Instantiate() as LevelController;
 		AddChild(nextLevel);
 
-		_currLevelController = nextLevel;
-		await _currLevelController.ReadyLevelAsync(data);
+		currLevelController = nextLevel;
+		await currLevelController.ReadyLevelAsync(data);
 
 		await loadingScreenTask;
-		_loadingScreen.Visible = false;
+		_loadingScreen.HideLoadingScreen();
+		currLevelController.StartLevel();
 	}
 	public void StartLoadingNextLevelScene(string path){
 		_loadingTask = LoadSceneAsync(path);
