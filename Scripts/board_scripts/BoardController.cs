@@ -67,7 +67,7 @@ public partial class BoardController : Node3D
 			CollisionShape3D shape = (CollisionShape3D) pieces[i].GetChild(1);
         	shape.Disabled = false;
 			// Pair pieces and players
-			pieces[i].player = GlobalClassesHolder.Instance.GameController.players[pieces[i].playerIndex];
+			pieces[i].player = GlobalHelper.Instance.GameController.players[pieces[i].playerIndex];
 			pieces[i].player.pieces.Add(pieces[i]);
 			// Set winning condition
 			pieces[i].player.piecesToDeliver += 1;

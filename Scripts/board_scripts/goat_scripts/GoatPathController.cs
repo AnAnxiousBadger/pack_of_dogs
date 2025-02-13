@@ -53,7 +53,7 @@ public partial class GoatPathController : Path3D
 
 	private Vector2 GetRandomPointAtDistance(Vector2 origin)
     {
-        float angle = RandomGenerator.Instance.GetRandFInRange(0f, Mathf.DegToRad(360));
+        float angle = RandomGenerator.Instance.GetRandFloatInRange(0f, Mathf.DegToRad(360));
 		return origin + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * _spawnSeparationRadius;
     }
 

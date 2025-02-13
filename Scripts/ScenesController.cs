@@ -7,7 +7,7 @@ using System.Threading;
 
 public partial class ScenesController : Node
 {
-	public static ScenesController Instance { get; set;}
+	public static ScenesController Instance { get; private set;}
 	[Export] public LevelController currLevelController;
 	[Export] public LoadingScreenController _loadingScreen;
 	private PackedScene _nextLoadedScene;
@@ -19,6 +19,10 @@ public partial class ScenesController : Node
 			return;
 		}
 		Instance = this;
+    }
+    public override void _Ready()
+    {
+        currLevelController.StartLevel();
     }
     public async void HandleLevelChangeAsync(LevelController.LevelScene from, LevelController.LevelScene to, Godot.Collections.Dictionary<string, string> data, bool doLoadScene){
 		_loadingScreen.ShowLoadingScreen();

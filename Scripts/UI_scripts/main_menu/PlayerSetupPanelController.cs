@@ -13,7 +13,6 @@ public partial class PlayerSetupPanelController : PanelContainer
 	[Export] private Button _generateRandomNameButton;
 	[Export] private Button _humanPlayerButton;
 	[Export] private Button _AIPlayerButton;
-	[Export] private string generatedJSONPath;
 
     public override void _Ready()
     {
@@ -30,7 +29,7 @@ public partial class PlayerSetupPanelController : PanelContainer
 	}
 
 	private void _OnGenerateRandomName(){
-		_inputLine.Text = GetRandomName();
+		_inputLine.Text = GlobalHelper.Instance.RandomNames[RandomGenerator.Instance.GetRandIntInRange(0, GlobalHelper.Instance.RandomNames.Count - 1)];
 		_inputLine.EmitSignal(LineEdit.SignalName.TextChanged, _inputLine.Text);
 	}
 	private void _OnHumanPlayerButtonToggled(bool isOn){
@@ -69,34 +68,4 @@ public partial class PlayerSetupPanelController : PanelContainer
 		
 		return true;
 	}
-
-
-	public class KingList
-	{
-		public List<King> Kings { get; set; } = new();
-	}
-	public class King
-	{
-		public string Name { get; set; }
-	}
-	private string GetRandomName(){
-		string path;
-		if(OS.HasFeature("editor")){
-			path = ProjectSettings.GlobalizePath(generatedJSONPath);
-		}
-		else{
-			path = OS.GetExecutablePath().GetBaseDir().PathJoin(generatedJSONPath.Remove(0, 6));
-		}
-		string JSONText = File.ReadAllText(path);
-		
-		var JSONData = JsonSerializer.Deserialize<KingList>(JSONText);
-		
-		string randomName = JSONData.Kings[RandomGenerator.Instance.GetRandIntInRange(0, JSONData.Kings.Count - 1)].Name;
-		
-		return randomName;
-	}
-
-	
-
-
 }

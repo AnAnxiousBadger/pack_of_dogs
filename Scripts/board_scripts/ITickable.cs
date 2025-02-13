@@ -64,7 +64,7 @@ public interface ITickable
     public void PlayVisualEffect(TickableEffect.SignalType signalType, Vector3 clickPos){
         for (int i = 0; i < Effects.Length; i++)
         {
-            if(Effects[i].allowOnDisabledTickableButtonClicks || (!Effects[i].allowOnDisabledTickableButtonClicks && GlobalClassesHolder.Instance.GameController.allowClicksOnTickableButtons)){
+            if(Effects[i].allowOnDisabledTickableButtonClicks || (!Effects[i].allowOnDisabledTickableButtonClicks && GlobalHelper.Instance.GameController.allowClicksOnTickableButtons)){
                 if(signalType == Effects[i].signaltype){
                     Vector3 pos;
                     if(Effects[i].onClickPosition){
@@ -73,7 +73,7 @@ public interface ITickable
                     else{
                         pos = GetGlobalPos();
                     }
-                    GlobalClassesHolder.Instance.GameController.visualEffectPool.PlayVisualEffect(Effects[i].effectName, pos);
+                    GlobalHelper.Instance.GameController.visualEffectPool.PlayVisualEffect(Effects[i].effectName, pos);
                 }
             }
             
@@ -85,7 +85,7 @@ public interface ITickable
         {
             if(SoundEffects[i].signaltype == signalType){
                 if(IsActive || SoundEffects[i].allowOnDisabled){
-                    AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound(SoundEffects[i].effectName));
+                    AudioManager.Instance.PlaySound(GlobalHelper.Instance.GameController.boardController.boardElementsController.boardElementsAudioLibrary.GetSound(SoundEffects[i].effectName));
                 }
                 
             }

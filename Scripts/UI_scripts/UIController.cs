@@ -39,13 +39,13 @@ public partial class UIController : Control
 
     }
     public void SetUpUI(){
-		for (int i = 0; i < GlobalClassesHolder.Instance.GameController.players.Count; i++)
+		for (int i = 0; i < GlobalHelper.Instance.GameController.players.Count; i++)
 		{
 			PlayerScoreContainerUIController scoreContainer = _playerScorePanel.Instantiate() as PlayerScoreContainerUIController;
 			_scoresPanel.AddChild(scoreContainer);
-			scoreContainer.SetPlayerScoreLabel(GlobalClassesHolder.Instance.GameController.players[i]);
+			scoreContainer.SetPlayerScoreLabel(GlobalHelper.Instance.GameController.players[i]);
 		}
-		GlobalClassesHolder.Instance.GameController.GameEnded += SetUpVictoryUI;
+		GlobalHelper.Instance.GameController.GameEnded += SetUpVictoryUI;
 		_bottomRightMenuButton.ButtonUp +=_OnBottomRightMenuButtonUp;
 		_bottomRightMenuButton.ButtonDown += _OnButtonDown;
 

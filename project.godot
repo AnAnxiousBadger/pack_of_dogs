@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 random_generator="*res://Scripts/RandomGenerator.cs"
-global_classes_holder="*res://Scripts/GlobalClassesHolder.cs"
+global_helper="*res://Scripts/GlobalHelper.cs"
 audio_manager="*res://Scripts/sound_scripts/AudioManager.cs"
+JSON_loader="*res://Scripts/JSONLoader.cs"
 
 [display]
 

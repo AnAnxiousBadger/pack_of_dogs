@@ -23,7 +23,7 @@ public partial class EndNodeController : BoardNodeController
 
     public override void Highlight()
     {
-        hihglight = GlobalClassesHolder.Instance.GameController.visualEffectPool.PlayVisualEffect($"end_node_{stereo}_highlight_visual_effect", GlobalPosition);
+        hihglight = GlobalHelper.Instance.GameController.visualEffectPool.PlayVisualEffect($"end_node_{stereo}_highlight_visual_effect", GlobalPosition);
     }
 
     public override void RemoveHighlight()

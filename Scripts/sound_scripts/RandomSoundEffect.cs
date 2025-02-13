@@ -11,7 +11,7 @@ public partial class RandomSoundEffect : BaseSoundEffect
         Dictionary<string, object> audioSetup = new()
         {
             { "audio_stream", sounds[RandomGenerator.Instance.GetRandIntInRange(0, sounds.Length - 1)] },
-            { "delta_pitch_scale", RandomGenerator.Instance.GetRandFInRange(settings.deltaPitchScale.X, settings.deltaPitchScale.Y) }
+            { "delta_pitch_scale", RandomGenerator.Instance.GetRandFloatInRange(settings.deltaPitchScale.X, settings.deltaPitchScale.Y) }
         };
         
         return audioSetup;

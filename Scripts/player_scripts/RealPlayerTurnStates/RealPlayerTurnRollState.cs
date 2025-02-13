@@ -8,14 +8,14 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
     private List<PlayerRollScore> playerRollScores;
     public override void EnterTurnState()
     {
-        GlobalClassesHolder.Instance.GameController.diceController.CanRoll = true;
-        GlobalClassesHolder.Instance.GameController.diceController.DiceRolled += _OnDiceRolled;
+        GlobalHelper.Instance.GameController.diceController.CanRoll = true;
+        GlobalHelper.Instance.GameController.diceController.DiceRolled += _OnDiceRolled;
         playerRollScores = p.CalculateRollLuckScores();
     }
 
     public override void ExitTurnState()
     {
-        GlobalClassesHolder.Instance.GameController.diceController.DiceRolled -= _OnDiceRolled;
+        GlobalHelper.Instance.GameController.diceController.DiceRolled -= _OnDiceRolled;
     }
 
     public override void ProcessTurnState(float delta){}
@@ -47,7 +47,7 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
         }
         // SET SKIP IF CANNOT MOVE
         if(p.GetSkippingAvailability(roll)){
-            GlobalClassesHolder.Instance.GameController.ChangeSkipButtonActivity(true);
+            GlobalHelper.Instance.GameController.ChangeSkipButtonActivity(true);
         }
 
         // SWITCH TO SELECT PIECE STATE

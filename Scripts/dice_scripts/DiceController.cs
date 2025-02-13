@@ -10,14 +10,14 @@ public partial class DiceController : Node
 		get { return _canRoll; }
 		set {
 			_canRoll = value;
-			GlobalClassesHolder.Instance.GameController.ChangeRollButtonActivity(value);
+			GlobalHelper.Instance.GameController.ChangeRollButtonActivity(value);
 		}
 	}
 	// SIGNALS
 	[Signal] public delegate void DiceRolledEventHandler(int roll);
 
 	public void ReadyDiceController(){
-		GlobalClassesHolder.Instance.GameController.OnRollButtonUsed += _OnRollDiceRollButtonUp;
+		GlobalHelper.Instance.GameController.OnRollButtonUsed += _OnRollDiceRollButtonUp;
 	}
 
     private int RollDice(RollSettings settings){
@@ -45,7 +45,7 @@ public partial class DiceController : Node
 
 	private void _OnRollDiceRollButtonUp(){
 		CanRoll = false;
-		int roll = RollDice(GlobalClassesHolder.Instance.GameController.currPlayer.rollSettings);
+		int roll = RollDice(GlobalHelper.Instance.GameController.currPlayer.rollSettings);
 		EmitSignal(SignalName.DiceRolled, roll);
 	}
 

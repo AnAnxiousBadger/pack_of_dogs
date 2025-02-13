@@ -42,7 +42,7 @@ public partial class GameController : Node3D
 	[Signal] public delegate void GameEndedEventHandler(BasePlayerController winner);
     public override void _Ready()
 	{
-		GlobalClassesHolder.Instance.GameController = this;
+		GlobalHelper.Instance.GameController = this;
 	}
 
 	public override void _Process(double delta)
@@ -81,7 +81,7 @@ public partial class GameController : Node3D
 		}
 
 		// Mix up player order
-		List<BasePlayerController> shuffledPlayerList = addedPlayers.OrderBy(_ => RandomGenerator.Instance.GetRandomInt()).ToList();
+		List<BasePlayerController> shuffledPlayerList = addedPlayers.OrderBy(_ => RandomGenerator.Instance.GetRandInt()).ToList();
 		foreach (BasePlayerController player in shuffledPlayerList)
 		{
 			GetNode("../players_container").AddChild(player);

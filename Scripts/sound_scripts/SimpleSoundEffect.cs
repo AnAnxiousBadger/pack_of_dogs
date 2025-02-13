@@ -12,7 +12,7 @@ public partial class SimpleSoundEffect : BaseSoundEffect
         Dictionary<string, object> audioSetup = new()
         {
             { "audio_stream", sound },
-            { "delta_pitch_scale", RandomGenerator.Instance.GetRandFInRange(settings.deltaPitchScale.X, settings.deltaPitchScale.Y) }
+            { "delta_pitch_scale", RandomGenerator.Instance.GetRandFloatInRange(settings.deltaPitchScale.X, settings.deltaPitchScale.Y) }
         };
 
         return audioSetup;

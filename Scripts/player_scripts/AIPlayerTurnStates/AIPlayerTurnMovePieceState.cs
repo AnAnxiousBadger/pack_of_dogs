@@ -33,7 +33,7 @@ public class AIPlayerTurnMovePieceState : PlayerTurnBaseState
 
         BoardNodeController selectedNode = _selectedMove.DestinationNode;
         selectedNode.OnAllOnStepModifierApplied += _OnPieceMovedAndProcessed;
-        GlobalClassesHolder.Instance.GameController.boardController.MovePiece(_selectedMove.Piece, selectedNode, false);
+        GlobalHelper.Instance.GameController.boardController.MovePiece(_selectedMove.Piece, selectedNode, false);
         p.EmitSignal(BasePlayerController.SignalName.PieceMoved, p.roll);
     }
     private void _OnPieceMovedAndProcessed(BoardNodeController destination){
@@ -49,7 +49,7 @@ public class AIPlayerTurnMovePieceState : PlayerTurnBaseState
         foreach (PieceController piece in p.pieces)
         {
             if(!piece.hasArrived){
-                List<BoardNodeController> piecePossibleDestinations = GlobalClassesHolder.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, piece.playerIndex, false);
+                List<BoardNodeController> piecePossibleDestinations = GlobalHelper.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, piece.playerIndex, false);
                 for (int i = 0; i < piecePossibleDestinations.Count; i++)
                 {
                     possibleMoves.Add(new AIMove(piece, piecePossibleDestinations[i], roll));

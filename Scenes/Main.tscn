@@ -57,7 +57,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_dfx3p")
 _loadingScreenTimer = NodePath("loading_screen_timer")
-_loadingScreenDataJSONPath = "res://Assets/loading_screens_data.json"
 _loadingScreenImage = NodePath("loading_screen_image_panel/loading_screen_image")
 _loadingScreenSubtitle = NodePath("loading_screen_subtitle_panel/MarginContainer/loading_screen_subtitle")
 

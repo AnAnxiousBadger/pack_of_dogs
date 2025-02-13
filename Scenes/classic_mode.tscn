@@ -1097,6 +1097,7 @@ offset_top = 40.0
 offset_bottom = 40.0
 
 [node name="stats_UI_controller" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_UIController", "_tableTitle", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
+visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = -1
@@ -1659,7 +1660,7 @@ layout_mode = 2
 
 [node name="fates_title_label" type="Label" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/fates_container_margin_container/PanelContainer/MarginContainer/fate_container"]
 layout_mode = 2
-text = "Now hear ye mortals Enki's words..."
+text = "The priest has seen you play. He now tells you your fate..."
 label_settings = SubResource("LabelSettings_4lfag")
 horizontal_alignment = 1
 

@@ -41,7 +41,7 @@ public partial class GoatPathManager : Node3D, IPoolManager
 	private void SpawnOnRandomGoatPath(){
 		int path = RandomGenerator.Instance.GetRandIntInRange(0, _goatPaths.Length - 1);
 		int num = RandomGenerator.Instance.GetRandIntInRange(_minMaxGoatNum.X, _minMaxGoatNum.Y);
-		bool dir = RandomGenerator.Instance.GetRandomBool();
+		bool dir = RandomGenerator.Instance.GetRandBool();
 		_goatPaths[path].SpawnGoats(this, num, dir);
 	}
 

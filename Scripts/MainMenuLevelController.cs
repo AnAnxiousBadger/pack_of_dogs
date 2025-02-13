@@ -6,6 +6,7 @@ public partial class MainMenuLevelController : LevelController
 {
     [Export] public GameModePanelController _classicGameModePanel;
     [Export] public AudioLibrary UIAudioLibrary;
+    [Export] private MainMenuZigguratController zigguratController;
     public override LevelScene CurrLevel {get { return LevelScene.MAIN_MENU;}}
     public override void _Ready()
     {
@@ -30,6 +31,6 @@ public partial class MainMenuLevelController : LevelController
 
     public override void StartLevel()
     {
-        return;
+        zigguratController.scaleZiggurats = true;
     }
 }

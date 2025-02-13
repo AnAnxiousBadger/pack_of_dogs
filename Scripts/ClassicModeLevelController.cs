@@ -29,7 +29,7 @@ public partial class ClassicModeLevelController : LevelController
     public async override Task ReadyLevelAsync(Godot.Collections.Dictionary<string, string> settings)
     {
         levelSettings = settings;
-        await GlobalClassesHolder.Instance.GameController.ReadyGameAsync(levelSettings);
+        await GlobalHelper.Instance.GameController.ReadyGameAsync(levelSettings);
         if(!AudioManager.Instance.IsMusicPlaying()){
             AudioManager.Instance.StartMusic();
         }
@@ -41,9 +41,9 @@ public partial class ClassicModeLevelController : LevelController
         if(nextLevel != CurrLevel){
             AudioManager.Instance.StopMusic();
         }
-        GlobalClassesHolder.Instance.GameController = null;
+        GlobalHelper.Instance.GameController = null;
     }
     public override void StartLevel(){
-        GlobalClassesHolder.Instance.GameController.StartGame();
+        GlobalHelper.Instance.GameController.StartGame();
     }
 }

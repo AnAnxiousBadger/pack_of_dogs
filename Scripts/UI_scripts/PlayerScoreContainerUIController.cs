@@ -28,7 +28,7 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 		else{
 			_AIIcon.Modulate = new Color(1f, 1f, 1f, 0f);
 		}
-		_pieceColorIcon.Modulate = GlobalClassesHolder.Instance.GameController.playerPieceColors[player.playerIndex];
+		_pieceColorIcon.Modulate = GlobalHelper.Instance.GameController.playerPieceColors[player.playerIndex];
 		//_player.TurnStarted += ShowCurrentPlayer;
 		//_player.TurnEnded += HideCurrentPlayer;
 	}

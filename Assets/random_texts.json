@@ -1,0 +1,168 @@
+{
+	"names": [
+		"Gilgamesh",
+		"Izdubar",
+		"Hammurabi",
+		"Enkidu",
+		"Utnapishtim",
+		"Alulim",
+		"Alalngar",
+		"En-men-lu-ana",
+		"En-men-gal-ana",
+		"Dumuzid",
+		"En-sipad-zid-ana",
+		"En-men-dur-ana",
+		"Ubara-Tutu",
+		"Jushur",
+		"Kullassina-bel",
+		"Nangishlishma",
+		"En-tarah-ana",
+		"Babum",
+		"Puannum",
+		"Kalibum",
+		"Kalumum",
+		"Zuqaqip",
+		"Atab",
+		"Mashda",
+		"Arwium",
+		"Etana",
+		"Balih",
+		"En-me-nuna",
+		"Melem-Kish",
+		"Barsal-nuna",
+		"Zamug",
+		"Tizqar",
+		"Ilku",
+		"Iltasadum",
+		"Enmebaragesi",
+		"Aga of Kish",
+		"János Takács",
+		"Mesh-ki-ang-gasher",
+		"Enmerkar",
+		"Lugalbanda",
+		"Dumuzid the Fisherman",
+		"Ur-Nungal",
+		"Udul-kalama",
+		"La-ba'shum",
+		"En-nun-tarah-ana",
+		"Mesh-he",
+		"Melem-ana",
+		"Lugal-kitun",
+		"Mesh-Ane-pada",
+		"Mesh-ki-ang-Nuna",
+		"Elulu",
+		"Balulu",
+		"Susuda",
+		"Dadasig",
+		"Mamagal",
+		"Kalbum",
+		"Tuge",
+		"Men-nuna",
+		"Enbi-Ishtar",
+		"Lugalngu",
+		"Hadanish",
+		"En-shag-kush-ana",
+		"Lugal-kinishe-dudu",
+		"Lugal-ure",
+		"Argandea",
+		"Nanni",
+		"Mesh-ki-ang-Nanna II",
+		"Lugal-Ane-mundu",
+		"Anbu",
+		"Anba",
+		"Bazi",
+		"Zizi of Mari",
+		"Limer",
+		"Sharrum-iter",
+		"Kug-Bau",
+		"Unzi",
+		"Undalulu",
+		"Urur",
+		"Puzur-Nirah",
+		"Ishu-Il",
+		"Shu-Suen of Akshak",
+		"Puzur-Suen",
+		"Ur-Zababa",
+		"Zimudar",
+		"Usi-watar",
+		"Eshtar-muti",
+		"Ishme-Shamash",
+		"Shu-ilishu",
+		"Nanniya",
+		"Lugal-zage-si",
+		"Sargon of Akkad",
+		"Rimush of Akkad",
+		"Manishtushu",
+		"Naram-Sin of Akkad",
+		"Shar-kali-sharri"
+	],
+	"quotes": [
+		"Then {defeated_players} fell and the kingship was taken to {winner_player}.",
+		"To accept a verdict is possible. To accept a curse is impossible.",
+		"The fox, having urinated into the sea, said: The whole of the sea is my urine!",
+		"One cannot drag out the weak, one cannot hold back the strong.",
+		"The battle-club would not find out your name -- it would just find your flesh."
+	],
+	"fates": [
+		{
+			"LuckScoreRange": 0,
+			"Text": "Let me tell you about your fate: it is an insult. Let me explain it to you: it is a disgrace. Were I to tell my neighbour about your fate, he would heap insults upon me. I looked into the water. Your destiny was drifting past. You were born on an ill-fated day."
+		},
+		{
+			"LuckScoreRange":0,
+			"Text": "No one walks together with you or directs their steps towards you. Life passes you by like water. You are dear to no just man, plague prevails over you. Like a worthless penny."
+		},
+		{
+			"LuckScoreRange": 1,
+			"Text": "Your fate is a dog, well able to bite."
+		},
+		{
+			"LuckScoreRange": 1,
+			"Text": "For a donkey there is no stench. For a donkey there is no washing with soap. You are a donkey."
+		},
+		{
+			"LuckScoreRange": 1,
+			"Text": "You are meant to be that - a thresing ox"
+		},
+		{
+			"LuckScoreRange": 1,
+			"Text": "I will feed you even though you are an outcast. I will give you drink even though you are an outcast. You are still my son, even if your god has turned against you."
+		},
+		{
+			"LuckScoreRange": 1,
+			"Text": "You say: Woe! and the boat sinks with you. You say: Alas! and the rudder breaks"
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "Your worthiness is the result of chance."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "Your of voice of duck is the glory of the marshes"
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "The Gods watched your game. They stand... undecided."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "You keep going. Like a sandal."
+		},
+		{
+			"LuckScoreRange": 3,
+			"Text": "Even a millstone will float in the river for a righteous man like you."
+		},
+		{
+			"LuckScoreRange": 3,
+			"Text": "Fortune follows you like a dog - ever watchful."
+		},
+		{
+			"LuckScoreRange": 3,
+			"Text": "The lion sees you and knows a greater beast walks the earth today."
+		},
+		{
+			"LuckScoreRange": 4,
+			"Text": "No one is tall enough to reach up and touch the heavens. No one is broad enough to lift his gaze over the whole earth. But you, who roar like a storm - may you establish yourself like a lion. No man can bring about your demise."
+		}
+	]
+}

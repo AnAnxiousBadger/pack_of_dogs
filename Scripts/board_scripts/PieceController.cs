@@ -14,7 +14,7 @@ public partial class PieceController : StaticBody3D
     private bool _isHighLit = false;
 
     public void HighlightPiece(bool allowTurnToMouse){
-        AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardControllerAudioLibrary.GetSound("picked_piece"));
+        AudioManager.Instance.PlaySound(GlobalHelper.Instance.GameController.boardController.boardControllerAudioLibrary.GetSound("picked_piece"));
         Tween tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", new Vector3(Position.X, Position.Y + 1f, Position.Z), 0.35f).SetTrans(Tween.TransitionType.Cubic);
         _isHighLit = allowTurnToMouse;
@@ -28,7 +28,7 @@ public partial class PieceController : StaticBody3D
     }
 
     public void SubscribeToGuide(Node3D guideNode){
-        AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.boardController.boardControllerAudioLibrary.GetSound("piece_moved"));
+        AudioManager.Instance.PlaySound(GlobalHelper.Instance.GameController.boardController.boardControllerAudioLibrary.GetSound("piece_moved"));
         _isMoving = true;
         _isHighLit = false;
         Rotation = Vector3.Zero;
@@ -63,8 +63,8 @@ public partial class PieceController : StaticBody3D
             {
                 player.EmitSignal(BasePlayerController.SignalName.EnemyPieceHit);
                 enemyPiece.player.EmitSignal(BasePlayerController.SignalName.PieceHit);
-                BoardNodeController startNode = GlobalClassesHolder.Instance.GameController.boardController.GetStartNode(enemyPiece.player);
-                GlobalClassesHolder.Instance.GameController.boardController.MovePiece(enemyPiece, startNode, true);
+                BoardNodeController startNode = GlobalHelper.Instance.GameController.boardController.GetStartNode(enemyPiece.player);
+                GlobalHelper.Instance.GameController.boardController.MovePiece(enemyPiece, startNode, true);
                 doKickEffect = true;
             } 
 		}
@@ -74,7 +74,7 @@ public partial class PieceController : StaticBody3D
 
     public bool CanPieceMove(int roll){
         //List<BoardNodeController> possibleDestination = currNode.MoveForwardAlongNodesFromNode(roll, playerIndex, false);
-        List<BoardNodeController> possibleDestination = GlobalClassesHolder.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(currNode, roll, playerIndex, false);
+        List<BoardNodeController> possibleDestination = GlobalHelper.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(currNode, roll, playerIndex, false);
         if(possibleDestination.Count == 0){
             return false;
         }

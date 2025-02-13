@@ -21,7 +21,7 @@ public partial class RealPlayerController : BasePlayerController
     public override void StartTurn()
     {
         base.StartTurn();
-        GlobalClassesHolder.Instance.GameController.allowClicksOnTickableButtons = true;
+        GlobalHelper.Instance.GameController.allowClicksOnTickableButtons = true;
         // CREATE STATES
         rollState = new(this);
         turnStates.Add(rollState);
@@ -30,7 +30,7 @@ public partial class RealPlayerController : BasePlayerController
         selectNodeState = new(this);
         turnStates.Add(selectNodeState);
 
-        GlobalClassesHolder.Instance.GameController.OnSkipButtonUsed += _OnSkipTurn;
+        GlobalHelper.Instance.GameController.OnSkipButtonUsed += _OnSkipTurn;
 
         SwitchToNextTurnState();
     }
@@ -42,7 +42,7 @@ public partial class RealPlayerController : BasePlayerController
 
     public override void EndTurn()
     {
-        GlobalClassesHolder.Instance.GameController.OnSkipButtonUsed -= _OnSkipTurn;
+        GlobalHelper.Instance.GameController.OnSkipButtonUsed -= _OnSkipTurn;
         base.EndTurn();
     }
 
@@ -54,11 +54,11 @@ public partial class RealPlayerController : BasePlayerController
     }
 
     public void SelectPiece(PieceController piece){
-        GlobalClassesHolder.Instance.GameController.uiController.canEscapeActOnUI = false;
+        GlobalHelper.Instance.GameController.uiController.canEscapeActOnUI = false;
         selectedPiece = piece;
 
         // Calculate where it can step
-        possibeNodes = GlobalClassesHolder.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, playerIndex, false);
+        possibeNodes = GlobalHelper.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, playerIndex, false);
 
         // Indicate possible destinations
         foreach (BoardNodeController node in possibeNodes)
@@ -67,7 +67,7 @@ public partial class RealPlayerController : BasePlayerController
         }
     }
     public void DeselectPiece(){
-        GlobalClassesHolder.Instance.GameController.uiController.canEscapeActOnUI = true;
+        GlobalHelper.Instance.GameController.uiController.canEscapeActOnUI = true;
         if(selectedPiece != null){
             foreach (BoardNodeController node in possibeNodes)
             {
@@ -80,7 +80,7 @@ public partial class RealPlayerController : BasePlayerController
 
     private void _OnSkipTurn(){
         EmitSignal(SignalName.TurnSkipped);
-        GlobalClassesHolder.Instance.GameController.SwitchTurn();
+        GlobalHelper.Instance.GameController.SwitchTurn();
     }
 
     

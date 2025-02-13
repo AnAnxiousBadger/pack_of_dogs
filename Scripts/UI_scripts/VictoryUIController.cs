@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 public partial class VictoryUIController : Control
 {
@@ -34,10 +35,16 @@ public partial class VictoryUIController : Control
     }
     public void SetUpVictoryUI(BasePlayerController winner){
 		_winnerText.Text = $"{winner.PlayerName} wins";
-		// Set quote
+		
+		List<string> defeatedPlayers = new();
+		List<string> takenFateText = new();
 		// Set fates title
-		foreach (BasePlayerController player in GlobalClassesHolder.Instance.GameController.players)
+		foreach (BasePlayerController player in GlobalHelper.Instance.GameController.players)
 		{
+			if(player != winner){
+				defeatedPlayers.Add(player.PlayerName);
+			}
+
 			VBoxContainer fateContainer = _fateContainerScene.Instantiate() as VBoxContainer;
 			_fatesContainer.AddChild(fateContainer);
 			if(player == winner){
@@ -46,8 +53,29 @@ public partial class VictoryUIController : Control
 			Label playerNameLabel = fateContainer.GetNode("player_name") as Label;
 			playerNameLabel.Text = player.PlayerName;
 			Label playerFateLabel = fateContainer.GetNode("player_fate") as Label;
-			// Generate fate
+			// Get fate
+			Fate.Luck luck = Fate.GetLuckFromLuckyScore((float)player.playerStats.GetStats()["lucky_score"]);
+			string fateText = GlobalHelper.Instance.RandomFates[luck][RandomGenerator.Instance.GetRandIntInRange(0, GlobalHelper.Instance.RandomFates[luck].Count - 1)].Text;
+			while(takenFateText.Contains(fateText))
+			{
+				fateText = GlobalHelper.Instance.RandomFates[luck][RandomGenerator.Instance.GetRandIntInRange(0, GlobalHelper.Instance.RandomFates[luck].Count - 1)].Text;
+			}
+			takenFateText.Add(fateText);
+			playerFateLabel.Text = fateText;
 		}
+
+		// Set quote
+		string quote = GlobalHelper.Instance.RandomQuotes[RandomGenerator.Instance.GetRandIntInRange(0, GlobalHelper.Instance.RandomQuotes.Count - 1)];
+		quote = quote.Replace("{winner_player}", winner.PlayerName);
+		string defeatedPlayersString = defeatedPlayers[0];
+		if(defeatedPlayers.Count > 1){
+			for (int i = 1; i < defeatedPlayers.Count; i++)
+			{
+				defeatedPlayersString += $" and {defeatedPlayers[i]}";
+			}
+		}
+		quote = quote.Replace("{defeated_players}", defeatedPlayersString);
+		_quoteText.Text = quote;
 	}
 
 	public async Task ShowVictoryPanel(bool playAnimation, bool playSound){
@@ -57,7 +85,7 @@ public partial class VictoryUIController : Control
 
 		Visible = true;
 		if(playSound){
-			AudioManager.Instance.PlaySound(GlobalClassesHolder.Instance.GameController.uiController.UIAudioLibrary.GetSound("victory_melody"));
+			AudioManager.Instance.PlaySound(GlobalHelper.Instance.GameController.uiController.UIAudioLibrary.GetSound("victory_melody"));
 		}
 		
 		if(playAnimation)

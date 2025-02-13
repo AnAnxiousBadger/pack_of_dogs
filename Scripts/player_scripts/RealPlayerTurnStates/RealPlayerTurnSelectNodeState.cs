@@ -6,7 +6,7 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
 {
     private new readonly RealPlayerController p;
     public override void EnterTurnState(){
-        GlobalClassesHolder.Instance.GameController.collisionMask = GameController.CollisionMask.NODE;
+        GlobalHelper.Instance.GameController.collisionMask = GameController.CollisionMask.NODE;
     }
 
     public override void ExitTurnState(){
@@ -24,13 +24,13 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
         }
         PhysicsBody3D body = null;
         if(Input.IsActionJustReleased("left_mouse") && p.selectedPiece != null){
-            body = GlobalClassesHolder.Instance.GameController.PhysicsBodyUnderMouse;
+            body = GlobalHelper.Instance.GameController.PhysicsBodyUnderMouse;
         }
 
         if(body is BoardNodeController node && p.possibeNodes.Contains(node)){
             // MOVE OWN PIECE
             node.OnAllOnStepModifierApplied += _OnPieceMovedAndProcessed;
-            GlobalClassesHolder.Instance.GameController.boardController.MovePiece(p.selectedPiece, node, false);
+            GlobalHelper.Instance.GameController.boardController.MovePiece(p.selectedPiece, node, false);
             p.EmitSignal(BasePlayerController.SignalName.PieceMoved, p.roll);
             p.DeselectPiece();
         }

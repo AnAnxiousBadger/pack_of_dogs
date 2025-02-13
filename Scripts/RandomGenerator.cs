@@ -9,18 +9,18 @@ public partial class RandomGenerator : Node
     public override void _Ready(){
         Instance = this;
     }
-    public int GetRandomInt(){
+    public int GetRandInt(){
         return (int)_rand.Randi();
     }
     public int GetRandIntInRange(int inf, int sup){
         return _rand.RandiRange(inf, sup);
     }
 
-    public float GetRandFInRange(float inf, float sup){
+    public float GetRandFloatInRange(float inf, float sup){
         return _rand.RandfRange(inf, sup);
     }
 
-    public bool GetRandomBool(){
+    public bool GetRandBool(){
         if(_rand.RandiRange(0, 1) == 0){
             return true;
         }

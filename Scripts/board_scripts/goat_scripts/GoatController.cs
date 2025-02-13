@@ -35,9 +35,9 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
     public override void _Ready()
     {
 		IsActive = false;
-		separationRadius = RandomGenerator.Instance.GetRandFInRange(0.35f, 0.45f);
-		_anim.Seek(RandomGenerator.Instance.GetRandFInRange(0f, 1.9f));
-		_timer.WaitTime = RandomGenerator.Instance.GetRandFInRange(3f, 5f);
+		separationRadius = RandomGenerator.Instance.GetRandFloatInRange(0.35f, 0.45f);
+		_anim.Seek(RandomGenerator.Instance.GetRandFloatInRange(0f, 1.9f));
+		_timer.WaitTime = RandomGenerator.Instance.GetRandFloatInRange(3f, 5f);
 		_timer.Timeout += _OnTimerTimeOut;
 		_timer.Start();
     }
@@ -170,7 +170,7 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 
 	private void _OnTimerTimeOut(){
 		if(_randomVelocity == Vector3.Zero){
-			_randomVelocity = Velocity.Normalized().Rotated(Vector3.Up, Mathf.RadToDeg(RandomGenerator.Instance.GetRandFInRange(-45f, 45f)));
+			_randomVelocity = Velocity.Normalized().Rotated(Vector3.Up, Mathf.RadToDeg(RandomGenerator.Instance.GetRandFloatInRange(-45f, 45f)));
 		}
 		else{
 			_randomVelocity = Vector3.Zero;
