@@ -14,6 +14,7 @@ deltaPitchScale = Vector2(-0.2, 0.2)
 script = ExtResource("2_vcq4g")
 sound = ExtResource("4_wqkrs")
 identifier = "menu_click"
+soundType = 2
 settings = SubResource("Resource_j50o5")
 
 [sub_resource type="Resource" id="Resource_p0vi1"]
@@ -24,6 +25,7 @@ deltaPitchScale = Vector2(0, 0)
 script = ExtResource("2_vcq4g")
 sound = ExtResource("5_3m82s")
 identifier = "victory_melody"
+soundType = 2
 settings = SubResource("Resource_p0vi1")
 
 [resource]

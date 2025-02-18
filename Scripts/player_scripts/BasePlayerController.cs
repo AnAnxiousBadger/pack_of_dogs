@@ -29,7 +29,7 @@ public abstract partial class BasePlayerController : Node
         set { 
             _deliveredPieces = value;
             EmitSignal(SignalName.PieceDelivered);
-            if(_deliveredPieces == /*piecesToDeliver*/ 1){
+            if(_deliveredPieces == piecesToDeliver){
                 GlobalHelper.Instance.GameController.EndGame(this);
             }
         }
@@ -49,6 +49,7 @@ public abstract partial class BasePlayerController : Node
     [Signal] public delegate void LuckEventFiredEventHandler(float score);
     [Signal] public delegate void TurnStartedEventHandler();
     [Signal] public delegate void TurnEndedEventHandler();
+    [Signal] public delegate void GoatClickedEventHandler(GoatController goat);
     
     public void ReadyPlayer(){
         if(PlayerName == ""){

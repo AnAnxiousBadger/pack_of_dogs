@@ -13,9 +13,11 @@ font_size = 14
 [node name="fate_container" type="VBoxContainer"]
 
 [node name="player_name" type="Label" parent="."]
+custom_minimum_size = Vector2(1, 16)
 layout_mode = 2
 text = "Szabi"
 label_settings = SubResource("LabelSettings_2agh3")
+autowrap_mode = 2
 
 [node name="player_fate" type="Label" parent="."]
 custom_minimum_size = Vector2(460, 10)

@@ -10,7 +10,20 @@ public partial class AudioManager : Node
     private Queue<AudioStreamPlayer3D> _avaiblePlayers;
     private AudioStreamPlayer _backgroundMusicController;
     private Timer _musicRestartTimer;
-    [Export] private bool _muteMusic = true;
+    private bool _muteMusic = false;
+    [Export] public bool MuteMusic {
+        get { return _muteMusic; }
+        set {
+            _muteMusic = value;
+            if(value){
+                _backgroundMusicController.VolumeDb = -80f;
+            }
+            else{
+                _backgroundMusicController.VolumeDb = 0f;
+            }
+            
+        }
+    }
     [Export] private float _replayDelay = 15f;
 
     public override void _EnterTree()
@@ -47,6 +60,13 @@ public partial class AudioManager : Node
 			ap.Bus = _bus;
 			ap.Finished += () => {_OnStreamFinished(ap); };
 		}
+    }
+
+    public override void _Process(double delta)
+    {
+        if(Input.IsActionJustReleased("mute")){
+            MuteMusic = !MuteMusic;
+        }
     }
 
     private void _OnStreamFinished(AudioStreamPlayer3D p){
@@ -95,9 +115,10 @@ public partial class AudioManager : Node
     }
 
     public void StartMusic(){
-        if(!_muteMusic){
+        /*if(!MuteMusic){
             _backgroundMusicController.Playing = true;
-        }
+        }*/
+        _backgroundMusicController.Playing = true;
 		
 	}
     public void StopMusic(){

@@ -21,8 +21,8 @@ public partial class GameController : Node3D
 	private Queue<BasePlayerController> _playersQueue;
 	public BasePlayerController currPlayer;
 	private Vector2 mousePos = Vector2.Zero;
-	public enum CollisionMask {NODE, PIECE}
-	public CollisionMask collisionMask = CollisionMask.PIECE;
+	//public enum CollisionMask {NODE, PIECE}
+	//public CollisionMask collisionMask = CollisionMask.PIECE;
 	private const float MOUSERAYDIST = 1000f;
 	private PhysicsBody3D _physicsBodyUnderMouse = null;
 	private Vector3 _physicsBodyHitPos = Vector3.Zero;
@@ -150,12 +150,12 @@ public partial class GameController : Node3D
 			To = end
 		};
 
-		if(collisionMask == CollisionMask.NODE){
+		/*if(collisionMask == CollisionMask.NODE){
 			rayParams.CollisionMask = 0b00000000_00000000_00000000_00000101;
 		}
 		else if(collisionMask == CollisionMask.PIECE){
 			rayParams.CollisionMask = 0b00000000_00000000_00000000_00000110;
-		}
+		}*/
 
 		Godot.Collections.Dictionary result = space.IntersectRay(rayParams);
 		if(result.ContainsKey("collider")){

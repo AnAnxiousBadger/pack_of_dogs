@@ -59,6 +59,7 @@ _pieceColorIcon = NodePath("MarginContainer/HBoxContainer/piece_color_icon")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
@@ -66,16 +67,19 @@ theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 10
 
 [node name="piece_color_icon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_ehwvj")
 stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0.588235)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c8bvq")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer"]

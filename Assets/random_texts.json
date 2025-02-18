@@ -94,7 +94,9 @@
 		"Rimush of Akkad",
 		"Manishtushu",
 		"Naram-Sin of Akkad",
-		"Shar-kali-sharri"
+		"Shar-kali-sharri",
+		"Ea-nāṣir",
+		"Nanni"
 	],
 	"quotes": [
 		"Then {defeated_players} fell and the kingship was taken to {winner_player}.",
@@ -109,8 +111,16 @@
 			"Text": "Let me tell you about your fate: it is an insult. Let me explain it to you: it is a disgrace. Were I to tell my neighbour about your fate, he would heap insults upon me. I looked into the water. Your destiny was drifting past. You were born on an ill-fated day."
 		},
 		{
-			"LuckScoreRange":0,
+			"LuckScoreRange": 0,
 			"Text": "No one walks together with you or directs their steps towards you. Life passes you by like water. You are dear to no just man, plague prevails over you. Like a worthless penny."
+		},
+		{
+			"LuckScoreRange": 0,
+			"Text": "You are a blind goat yearning for the abyss."
+		},
+		{
+			"LuckScoreRange": 0,
+			"Text": "You shall rise from the mud only to fall back in to the muck. You shall fly like ox piss in the wind."
 		},
 		{
 			"LuckScoreRange": 1,
@@ -122,7 +132,7 @@
 		},
 		{
 			"LuckScoreRange": 1,
-			"Text": "You are meant to be that - a thresing ox"
+			"Text": "You are meant to be that - a thresing ox."
 		},
 		{
 			"LuckScoreRange": 1,
@@ -130,7 +140,7 @@
 		},
 		{
 			"LuckScoreRange": 1,
-			"Text": "You say: Woe! and the boat sinks with you. You say: Alas! and the rudder breaks"
+			"Text": "You say: Woe! and the boat sinks with you. You say: Alas! and the rudder breaks."
 		},
 		{
 			"LuckScoreRange": 2,
@@ -138,7 +148,7 @@
 		},
 		{
 			"LuckScoreRange": 2,
-			"Text": "Your of voice of duck is the glory of the marshes"
+			"Text": "Your of voice of duck is the glory of the marshes."
 		},
 		{
 			"LuckScoreRange": 2,
@@ -147,6 +157,22 @@
 		{
 			"LuckScoreRange": 2,
 			"Text": "You keep going. Like a sandal."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "No harm, no heart, no bliss, no blister... just enough."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "You are an unpainted jug."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "Curses will bypass you, so will blesses."
+		},
+		{
+			"LuckScoreRange": 2,
+			"Text": "You will cause no trouble nor have any."
 		},
 		{
 			"LuckScoreRange": 3,
@@ -161,8 +187,24 @@
 			"Text": "The lion sees you and knows a greater beast walks the earth today."
 		},
 		{
+			"LuckScoreRange": 3,
+			"Text": "No copper you order shall be poor."
+		},
+		{
 			"LuckScoreRange": 4,
 			"Text": "No one is tall enough to reach up and touch the heavens. No one is broad enough to lift his gaze over the whole earth. But you, who roar like a storm - may you establish yourself like a lion. No man can bring about your demise."
+		},
+		{
+			"LuckScoreRange": 4,
+			"Text": "Sour wine sweetens, crying turns to laughter as you walk this land in prosper, plenty and bounty. O Magnanimous."
+		},
+		{
+			"LuckScoreRange": 4,
+			"Text": "You shall live atop a ziggurat, in the city that bears your name, of a people that fear you till the end of times."
+		},
+		{
+			"LuckScoreRange": 4,
+			"Text": "All the gods with all their might shall look meager compared to you. Your mane as rays shall drown them. Make me your highpriest Lion!"
 		}
 	]
 }

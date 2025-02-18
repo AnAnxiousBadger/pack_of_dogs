@@ -34,12 +34,14 @@ public partial class PlayerSetupPanelController : PanelContainer
 	}
 	private void _OnHumanPlayerButtonToggled(bool isOn){
 		_AIPlayerButton.ButtonPressed = !isOn;
+		_inputLine.GrabFocus();
 	}
 	private void _OnAIPlayerButtonToggled(bool isOn){
 		_humanPlayerButton.ButtonPressed = !isOn;
 		if(isOn && _inputLine.Text == String.Empty){
 			_OnGenerateRandomName();
 		}
+		_inputLine.GrabFocus();
 		
 	}
 	private void _OnInputLineTextChanged(string text){

@@ -199,7 +199,10 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 					_tempAudioStreamPlayer = ap;
 					_tempAudioStreamPlayer.Finished += _OnBleatFinished;
 				}
-			}
+			}			
+		}
+		if(GlobalHelper.Instance.GameController.currPlayer is RealPlayerController player){
+			player.EmitSignal(BasePlayerController.SignalName.GoatClicked, this);
 		}
 		
 	}

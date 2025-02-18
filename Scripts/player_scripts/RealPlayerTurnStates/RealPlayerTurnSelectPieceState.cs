@@ -5,7 +5,7 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
 {
     private new readonly RealPlayerController p;
     public override void EnterTurnState(){
-        GlobalHelper.Instance.GameController.collisionMask = GameController.CollisionMask.PIECE;
+        //GlobalHelper.Instance.GameController.collisionMask = GameController.CollisionMask.PIECE;
     }
 
     public override void ExitTurnState(){}
@@ -16,7 +16,18 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
         if(Input.IsActionJustReleased("left_mouse")){
             body = GlobalHelper.Instance.GameController.PhysicsBodyUnderMouse;
         }
-        if(body is PieceController piece && piece.playerIndex == p.playerIndex){
+
+        PieceController piece = null;
+        if(body is PieceController pieceClicked && pieceClicked.playerIndex == p.playerIndex){
+            piece = pieceClicked;
+            /*p.SelectPiece(piece);
+            piece.HighlightPiece(true);
+            p.SwitchToNextTurnState();*/
+        }
+        else if(body is BasicNodeController nodeClicked && nodeClicked.currPieces.Count == 1 && nodeClicked.currPieces[0].playerIndex == p.playerIndex){
+            piece = nodeClicked.currPieces[0];
+        }
+        if(piece != null){
             p.SelectPiece(piece);
             piece.HighlightPiece(true);
             p.SwitchToNextTurnState();

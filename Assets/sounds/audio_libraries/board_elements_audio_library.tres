@@ -26,6 +26,7 @@ deltaPitchScale = Vector2(-0.2, 0.2)
 script = ExtResource("2_sy278")
 sound = ExtResource("3_5eavo")
 identifier = "button_click"
+soundType = 2
 settings = SubResource("Resource_x3f8l")
 
 [sub_resource type="Resource" id="Resource_n2uxl"]
@@ -36,6 +37,7 @@ deltaPitchScale = Vector2(-0.2, 0.2)
 script = ExtResource("2_sy278")
 sound = ExtResource("4_ja2hk")
 identifier = "button_hover"
+soundType = 2
 settings = SubResource("Resource_n2uxl")
 
 [sub_resource type="Resource" id="Resource_jqijb"]
@@ -46,6 +48,7 @@ deltaPitchScale = Vector2(0, 0)
 script = ExtResource("2_sy278")
 sound = ExtResource("6_sawuc")
 identifier = "dice_roll"
+soundType = 2
 settings = SubResource("Resource_jqijb")
 
 [sub_resource type="Resource" id="Resource_mkcua"]

@@ -52,6 +52,9 @@ public partial class VictoryUIController : Control
 			}
 			Label playerNameLabel = fateContainer.GetNode("player_name") as Label;
 			playerNameLabel.Text = player.PlayerName;
+			if((int)player.playerStats.GetStats()["goats_clicked"] >= 30){
+				playerNameLabel.Text = player.PlayerName + ", the Goat Lover";
+			}
 			Label playerFateLabel = fateContainer.GetNode("player_fate") as Label;
 			// Get fate
 			Fate.Luck luck = Fate.GetLuckFromLuckyScore((float)player.playerStats.GetStats()["lucky_score"]);
@@ -64,8 +67,10 @@ public partial class VictoryUIController : Control
 			playerFateLabel.Text = fateText;
 		}
 
-		// Set quote
+		// SET QUOTE
 		string quote = GlobalHelper.Instance.RandomQuotes[RandomGenerator.Instance.GetRandIntInRange(0, GlobalHelper.Instance.RandomQuotes.Count - 1)];
+
+		// If the quote is dynamic
 		quote = quote.Replace("{winner_player}", winner.PlayerName);
 		string defeatedPlayersString = defeatedPlayers[0];
 		if(defeatedPlayers.Count > 1){
@@ -75,6 +80,17 @@ public partial class VictoryUIController : Control
 			}
 		}
 		quote = quote.Replace("{defeated_players}", defeatedPlayersString);
+
+		// If it is a complaint
+		List<string> playerNames = new();
+		foreach (BasePlayerController player in GlobalHelper.Instance.GameController.players)
+		{
+			playerNames.Add(player.PlayerName);
+		}
+		if((playerNames.Contains("Nanni") || playerNames.Contains("nanni")) && (playerNames.Contains("Ea-nassir") || playerNames.Contains("Ea-nāṣir") || playerNames.Contains("Ea nāṣir") || playerNames.Contains("Ea nasir") || playerNames.Contains("ea nāṣir") || playerNames.Contains("ea nasir") || playerNames.Contains("ea-nāṣir") || playerNames.Contains("ea-nasir")|| playerNames.Contains("Ea Nāṣir") || playerNames.Contains("Ea Nasir")|| playerNames.Contains("Ea-Nāṣir") || playerNames.Contains("Ea-Nasir"))){
+			quote = "What do you take me for, that you treat somebody like me with such contempt?";
+		}
+
 		_quoteText.Text = quote;
 	}
 

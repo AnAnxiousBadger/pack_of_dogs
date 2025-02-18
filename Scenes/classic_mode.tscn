@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=136 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/dice_scripts/DiceController.cs" id="1_57n5o"]
 [ext_resource type="Script" path="res://Scripts/ClassicModeLevelController.cs" id="1_d22e3"]
@@ -17,11 +17,11 @@
 [ext_resource type="Script" path="res://Scripts/UI_scripts/StatsUIController.cs" id="12_c0w3o"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/TurnPanelUIController.cs" id="12_eudcj"]
 [ext_resource type="PackedScene" uid="uid://cxklwjiq12pfm" path="res://Scenes/visual_effects/end_node_R_highlight_visual_effect.tscn" id="12_fdi6m"]
-[ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_01.tscn" id="13_5bfqh"]
+[ext_resource type="PackedScene" uid="uid://ce4txamrsao2" path="res://Scenes/UI_scenes/stats_UI/label_type_01.tscn" id="13_5bfqh"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/UIController.cs" id="13_ar2w6"]
 [ext_resource type="PackedScene" uid="uid://bubr633qpfw32" path="res://Scenes/visual_effects/bleating_particles_visual_effect.tscn" id="13_su7dc"]
 [ext_resource type="PackedScene" uid="uid://ci7pqv5m437a7" path="res://Scenes/visual_effects/piece_arrived_visual_effect.tscn" id="14_bn1qx"]
-[ext_resource type="PackedScene" uid="uid://bw0g17cm7tld6" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_display.tscn" id="14_g8v77"]
+[ext_resource type="PackedScene" uid="uid://bw0g17cm7tld6" path="res://Scenes/UI_scenes/stats_UI/roll_stats_display.tscn" id="14_g8v77"]
 [ext_resource type="PackedScene" uid="uid://cmuly4x4bj4yh" path="res://Scenes/visual_effects/leaf_particles_01_visual_effect.tscn" id="15_wuk33"]
 [ext_resource type="StyleBox" uid="uid://dqq3v63jx3014" path="res://Assets/UI/turn_panel_background_texture.tres" id="16_qots1"]
 [ext_resource type="PackedScene" uid="uid://beto1fgt64b4g" path="res://Scenes/visual_effects/leaf_particles_02_visual_effect.tscn" id="16_vsese"]
@@ -46,17 +46,18 @@
 [ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="43_21gbk"]
 [ext_resource type="Texture2D" uid="uid://bfbflmpb58365" path="res://Assets/UI/victory_UI/victory_spears_1.png" id="43_dpif3"]
 [ext_resource type="LabelSettings" uid="uid://cqgshkyxaydn8" path="res://Assets/UI/end_of_game_label_settings.tres" id="43_ec783"]
-[ext_resource type="PackedScene" uid="uid://bmlfoec7pvxr7" path="res://Scenes/UI_scenes/end_of_game_stats/label_type_02.tscn" id="43_t67mj"]
+[ext_resource type="PackedScene" uid="uid://bmlfoec7pvxr7" path="res://Scenes/UI_scenes/stats_UI/label_type_02.tscn" id="43_t67mj"]
 [ext_resource type="Texture2D" uid="uid://2gscaq4f136" path="res://Assets/UI/victory_UI/victory_spears_2.png" id="44_k7xk7"]
 [ext_resource type="Texture2D" uid="uid://c5be7rfrtts35" path="res://Assets/UI/icons/main_menu_icon_32x32.png" id="44_owamg"]
 [ext_resource type="Texture2D" uid="uid://cywhv8ptfjd1d" path="res://Assets/UI/icons/replay_icon_32x32.png" id="45_5lac5"]
 [ext_resource type="Texture2D" uid="uid://bi4xh1o3m6hd2" path="res://Assets/UI/victory_UI/victory_spears_3.png" id="45_7kb8i"]
 [ext_resource type="PackedScene" uid="uid://cxbuslpolumbu" path="res://Scenes/UI_scenes/fate_text_container.tscn" id="45_r3ft3"]
 [ext_resource type="Texture2D" uid="uid://bh8hvoaovvb6g" path="res://Assets/UI/victory_UI/victory_spears_4.png" id="46_hidg5"]
-[ext_resource type="StyleBox" uid="uid://bbuodcl43jbyh" path="res://Assets/UI/button_styles/button_01_normal_style.tres" id="49_jro5p"]
+[ext_resource type="StyleBox" uid="uid://bbuodcl43jbyh" path="res://Assets/UI/button_styles/menu_text_button_normal_style.tres" id="49_jro5p"]
 [ext_resource type="Shader" uid="uid://6l27jxj3larh" path="res://Assets/UI/UI_clip_shader.tres" id="49_r7xbm"]
-[ext_resource type="StyleBox" uid="uid://ot2adfkyp88a" path="res://Assets/UI/button_styles/button_01_hover_style.tres" id="50_ixqvg"]
-[ext_resource type="StyleBox" uid="uid://be4themgp3o7w" path="res://Assets/UI/button_styles/button_01_pressed_style.tres" id="51_cxmty"]
+[ext_resource type="StyleBox" uid="uid://ot2adfkyp88a" path="res://Assets/UI/button_styles/menu_text_button_hover_style.tres" id="50_ixqvg"]
+[ext_resource type="StyleBox" uid="uid://be4themgp3o7w" path="res://Assets/UI/button_styles/menu_text_button_pressed_style.tres" id="51_cxmty"]
+[ext_resource type="Theme" uid="uid://233gmhdlsqqa" path="res://Assets/UI/button_styles/menu_text_button_theme.tres" id="58_tmhla"]
 
 [sub_resource type="Resource" id="Resource_1ebpv"]
 script = ExtResource("4_7dg8v")
@@ -614,8 +615,6 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 shadow_size = 3
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4g72r"]
-
 [sub_resource type="Animation" id="Animation_iiyyp"]
 length = 0.001
 tracks/0/type = "value"
@@ -947,6 +946,8 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4g72r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vuovk"]
 bg_color = Color(0.388235, 0.329412, 0.243137, 1)
@@ -1664,14 +1665,6 @@ text = "The priest has seen you play. He now tells you your fate..."
 label_settings = SubResource("LabelSettings_4lfag")
 horizontal_alignment = 1
 
-[node name="fate_container" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/fates_container_margin_container/PanelContainer/MarginContainer/fate_container" instance=ExtResource("45_r3ft3")]
-visible = false
-layout_mode = 2
-
-[node name="fate_container2" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/fates_container_margin_container/PanelContainer/MarginContainer/fate_container" instance=ExtResource("45_r3ft3")]
-visible = false
-layout_mode = 2
-
 [node name="end_of_game_buttons_container" type="PanelContainer" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rv6q8")
@@ -1703,26 +1696,7 @@ theme_override_constants/margin_bottom = 5
 [node name="stats_button" type="Button" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/stats_button_margin_container/stats_button_panel_container/stats_button_margin_container_2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("43_21gbk")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4g72r")
-theme_override_styles/disabled = ExtResource("49_jro5p")
-theme_override_styles/hover = ExtResource("50_ixqvg")
-theme_override_styles/pressed = ExtResource("51_cxmty")
-theme_override_styles/normal = ExtResource("49_jro5p")
+theme = ExtResource("58_tmhla")
 text = "View Stats"
 icon = ExtResource("43_0gxku")
 
@@ -1748,26 +1722,7 @@ theme_override_constants/margin_bottom = 5
 [node name="main_menu_button" type="Button" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/main_menu_button_margin_container/main_menu_button_panel_container/main_menu_button_margin_container_2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("43_21gbk")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4g72r")
-theme_override_styles/disabled = ExtResource("49_jro5p")
-theme_override_styles/hover = ExtResource("50_ixqvg")
-theme_override_styles/pressed = ExtResource("51_cxmty")
-theme_override_styles/normal = ExtResource("49_jro5p")
+theme = ExtResource("58_tmhla")
 text = "Main Menu"
 icon = ExtResource("44_owamg")
 
@@ -1793,26 +1748,7 @@ theme_override_constants/margin_bottom = 5
 [node name="replay_button" type="Button" parent="UI_root/victory_UI/end_of_game_box/VBoxContainer/lower_panel/VBoxContainer/end_of_game_buttons_container/HBoxContainer/replay_button_margin_container/replay_button_panel_container/replay_button_margin_container_2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("43_21gbk")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4g72r")
-theme_override_styles/disabled = ExtResource("49_jro5p")
-theme_override_styles/hover = ExtResource("50_ixqvg")
-theme_override_styles/pressed = ExtResource("51_cxmty")
-theme_override_styles/normal = ExtResource("49_jro5p")
+theme = ExtResource("58_tmhla")
 text = "Play Again"
 icon = ExtResource("45_5lac5")
 
@@ -1876,7 +1812,6 @@ icon = ExtResource("44_owamg")
 expand_icon = true
 
 [node name="bottom_right_menu" type="PanelContainer" parent="UI_root"]
-visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = 3
@@ -1917,26 +1852,8 @@ theme_override_constants/margin_bottom = 5
 [node name="main_menu_button" type="Button" parent="UI_root/bottom_right_menu/MarginContainer/VBoxContainer/main_menu_button_panel_container/main_menu_button_margin_container_2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("43_21gbk")
+theme = ExtResource("58_tmhla")
 theme_override_font_sizes/font_size = 14
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4g72r")
-theme_override_styles/disabled = ExtResource("49_jro5p")
-theme_override_styles/hover = ExtResource("50_ixqvg")
-theme_override_styles/pressed = ExtResource("51_cxmty")
-theme_override_styles/normal = ExtResource("49_jro5p")
 text = "Main Menu"
 icon = ExtResource("44_owamg")
 
@@ -1954,25 +1871,7 @@ theme_override_constants/margin_bottom = 5
 [node name="replay_button" type="Button" parent="UI_root/bottom_right_menu/MarginContainer/VBoxContainer/replay_button_panel_container/replay_button_margin_container_2"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("43_21gbk")
+theme = ExtResource("58_tmhla")
 theme_override_font_sizes/font_size = 14
-theme_override_styles/focus = SubResource("StyleBoxEmpty_4g72r")
-theme_override_styles/disabled = ExtResource("49_jro5p")
-theme_override_styles/hover = ExtResource("50_ixqvg")
-theme_override_styles/pressed = ExtResource("51_cxmty")
-theme_override_styles/normal = ExtResource("49_jro5p")
 text = "Restart"
 icon = ExtResource("45_5lac5")

@@ -1,3 +1,5 @@
+res://Assets/UI/button_styles
+res://
 res://Scripts
 res://Assets/meshes
 res://Scripts/UI_scripts
@@ -5,8 +7,6 @@ res://Assets/sounds/audio_libraries
 res://Assets
 res://Scenes
 res://Scripts/sound_scripts
-res://
-res://Assets/UI/button_styles
 res://Assets/UI
 res://Assets/UI/fonts/Poppins
 res://Scripts/UI_scripts/main_menu
@@ -14,7 +14,6 @@ res://Assets/UI/fonts/Merriweather
 res://Scripts/UI_scripts/UIAnimation
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets
 res://Scenes/visual_effects
-res://Scenes/UI_scenes/end_of_game_stats
 res://Scenes/UI_scenes
 res://Scripts/visual_effects_scripts
 res://Assets/materials/shaders

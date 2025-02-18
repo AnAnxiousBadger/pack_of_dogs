@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bw0g17cm7tld6"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/RollStatsDisplayUIController.cs" id="1_u7yro"]
-[ext_resource type="PackedScene" uid="uid://ds5b52kdp3lqj" path="res://Scenes/UI_scenes/end_of_game_stats/roll_stats_roll_bar.tscn" id="2_q1xnv"]
+[ext_resource type="PackedScene" uid="uid://ds5b52kdp3lqj" path="res://Scenes/UI_scenes/stats_UI/roll_stats_roll_bar.tscn" id="2_q1xnv"]
 [ext_resource type="FontFile" uid="uid://de4ytv5nbl6fy" path="res://Assets/UI/fonts/Poppins/Poppins-Regular.ttf" id="3_daghw"]
 [ext_resource type="FontFile" uid="uid://ceeq2bunmt1u3" path="res://Assets/UI/fonts/Poppins/Poppins-Medium.ttf" id="4_dhvod"]
 

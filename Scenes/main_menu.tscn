@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://c5d85fwg7u2pv"]
+[gd_scene load_steps=76 format=3 uid="uid://c5d85fwg7u2pv"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/GameModePanelController.cs" id="1_32o7l"]
 [ext_resource type="Script" path="res://Scripts/MainMenuLevelController.cs" id="1_m0vgj"]
@@ -14,18 +14,17 @@
 [ext_resource type="Shader" uid="uid://b8iubafi475k0" path="res://Assets/UI/UI_blur_shader.tres" id="8_wwcwf"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/PlayerSetupPanelController.cs" id="9_ihwsy"]
 [ext_resource type="StyleBox" uid="uid://cdl2m5qwct8ks" path="res://Assets/UI/dark_redish_gradient_style_box_texture.tres" id="9_kp1g5"]
-[ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="10_q1n0h"]
+[ext_resource type="Texture2D" uid="uid://bohnvskowav3r" path="res://Assets/UI/icons/pack_of_dogs_icon_128x128.png" id="10_4k6qg"]
 [ext_resource type="Texture2D" uid="uid://bwehwnibwveky" path="res://Assets/UI/icons/human_player_icon_32x32.png" id="11_rwomw"]
 [ext_resource type="Texture2D" uid="uid://bq458jtwgr5h7" path="res://Assets/UI/icons/ai_player_icon_32x32.png" id="12_1hgqe"]
 [ext_resource type="Texture2D" uid="uid://cl5nvd1e2x3x4" path="res://Assets/UI/icons/generate_random_icon_32x32.png" id="12_veojx"]
 [ext_resource type="Theme" uid="uid://b84dqss172b1e" path="res://Assets/UI/main_menu_normal_input_line.tres" id="13_ivj8f"]
 [ext_resource type="Theme" uid="uid://cn7mj15qkk2t8" path="res://Assets/UI/main_menu_error_input_line.tres" id="13_lpjxh"]
-[ext_resource type="StyleBox" uid="uid://bbuodcl43jbyh" path="res://Assets/UI/button_styles/button_01_normal_style.tres" id="15_2vm5p"]
-[ext_resource type="StyleBox" uid="uid://ot2adfkyp88a" path="res://Assets/UI/button_styles/button_01_hover_style.tres" id="16_0nwer"]
-[ext_resource type="StyleBox" uid="uid://be4themgp3o7w" path="res://Assets/UI/button_styles/button_01_pressed_style.tres" id="17_oij7w"]
 [ext_resource type="Texture2D" uid="uid://b41fh71jtnj6a" path="res://Assets/UI/exit_thumbnail.png" id="22_u2pev"]
 [ext_resource type="ArrayMesh" uid="uid://f2nhikmji4aw" path="res://Assets/meshes/main_menu_ziggurat.res" id="23_ulwv5"]
 [ext_resource type="Material" uid="uid://cw8768jlfuvki" path="res://Assets/materials/ziggurat_mats/light_bricks_mat.tres" id="24_hucrs"]
+[ext_resource type="Theme" uid="uid://cdj6qvcb2nonp" path="res://Assets/UI/button_styles/menu_icon_button_theme.tres" id="25_0bdlr"]
+[ext_resource type="Theme" uid="uid://233gmhdlsqqa" path="res://Assets/UI/button_styles/menu_text_button_theme.tres" id="25_uilim"]
 [ext_resource type="Material" uid="uid://dibeo8tkl7h5b" path="res://Assets/materials/ziggurat_mats/dark_bricks_mat.tres" id="25_xtr8v"]
 [ext_resource type="Material" uid="uid://dcddcjb1gp8bk" path="res://Assets/materials/ziggurat_mats/sand_no_pebbles_mat.tres" id="26_tpxlm"]
 
@@ -54,8 +53,12 @@ shader_parameter/blur_amount = 2.0
 shader_parameter/color = null
 shader_parameter/color_weight = null
 
+[sub_resource type="LabelSettings" id="LabelSettings_nfha2"]
+font = ExtResource("2_fn0ed")
+font_size = 64
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uxa18"]
-bg_color = Color(0.388235, 0.329412, 0.243137, 1)
+bg_color = Color(0.39, 0.33228, 0.2457, 0.705882)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -454,58 +457,6 @@ font_size = 40
 [sub_resource type="LabelSettings" id="LabelSettings_sc4bp"]
 font = ExtResource("8_4s0sf")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dfwjy"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_calul"]
-bg_color = Color(0.373217, 0.316186, 0.23252, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xry50"]
-bg_color = Color(0.202221, 0.167093, 0.115474, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.583333, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_to6le"]
-bg_color = Color(0.202221, 0.167093, 0.115474, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g17w2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hho5t"]
-bg_color = Color(0.283076, 0.237318, 0.17012, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xx4dv"]
 bg_color = Color(0.295275, 0.247949, 0.178455, 1)
 corner_radius_top_left = 3
@@ -513,8 +464,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 shadow_size = 3
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6o81e"]
 
 [sub_resource type="Gradient" id="Gradient_6m1u3"]
 interpolation_mode = 2
@@ -651,7 +600,7 @@ font_size = 40
 
 [node name="ROOT_main_menu" type="Node3D" node_paths=PackedStringArray("_classicGameModePanel", "zigguratController")]
 script = ExtResource("1_m0vgj")
-_classicGameModePanel = NodePath("Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container")
+_classicGameModePanel = NodePath("Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container")
 UIAudioLibrary = ExtResource("2_jtsd3")
 zigguratController = NodePath("main_menu_ziggurat_controller")
 
@@ -738,25 +687,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="MarginContainer3" type="MarginContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_bottom = -20
+
+[node name="title" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer2/title"]
+layout_mode = 2
+text = "PACK OF DOGS"
+label_settings = SubResource("LabelSettings_nfha2")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer3/VBoxContainer/MarginContainer2/title"]
+layout_mode = 2
+texture = ExtResource("10_4k6qg")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="classic_gamemode_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="classic_gamemode_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -764,13 +739,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="classic_game_mode_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container" node_paths=PackedStringArray("_mainMenuLevelController", "_playersSetUpPanelMarginPanel", "_animComp", "_anim", "_playButton", "_playersSetupPanelControllers")]
+[node name="classic_game_mode_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container" node_paths=PackedStringArray("_mainMenuLevelController", "_playersSetUpPanelMarginPanel", "_animComp", "_anim", "_playButton", "_playersSetupPanelControllers")]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxa18")
 script = ExtResource("1_32o7l")
-_mainMenuLevelController = NodePath("../../../../..")
+_mainMenuLevelController = NodePath("../../../../../../..")
 _level = 1
 _playersSetUpPanelMarginPanel = NodePath("VBoxContainer/players_setup_clip_anim_panel")
 _animComp = NodePath("UI_animation_component")
@@ -778,78 +753,78 @@ _anim = NodePath("AnimationPlayer")
 _playButton = NodePath("VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/play_button_panel_container/play_button_margin_container_2/play_classic_button")
 _playersSetupPanelControllers = [NodePath("VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel"), NodePath("VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2")]
 
-[node name="UI_animation_component" type="Node" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
+[node name="UI_animation_component" type="Node" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
 script = ExtResource("1_u4gnx")
 _tweenAnimationList = [SubResource("Resource_1qdg2")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
 libraries = {
 "": SubResource("AnimationLibrary_c2y57")
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container"]
 clip_contents = true
 layout_mode = 2
 
-[node name="shadow_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer"]
+[node name="shadow_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("5_3e3sf")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container"]
 clip_children = 1
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k3u6p")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("2_kgu3p")
 expand_mode = 4
 
-[node name="gradient_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer"]
+[node name="gradient_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_ge20y")
 
-[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer/gradient_panel_container"]
+[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer/gradient_panel_container"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="classic_game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer/gradient_panel_container/title_text_margin_container"]
+[node name="classic_game_mode_label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/shadow_panel_container/PanelContainer/gradient_panel_container/title_text_margin_container"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "CLASSIC"
 label_settings = SubResource("LabelSettings_th50x")
 horizontal_alignment = 1
 
-[node name="players_setup_clip_anim_panel" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer"]
+[node name="players_setup_clip_anim_panel" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer"]
 visible = false
 modulate = Color(1, 1, 1, 0)
 clip_children = 1
 material = SubResource("ShaderMaterial_i178x")
 layout_mode = 2
 
-[node name="margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel"]
+[node name="margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container"]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="player_setup_panel" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
+[node name="player_setup_panel" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_kp1g5")
 script = ExtResource("9_ihwsy")
-_mainMenuLevelController = NodePath("../../../../../../../../../..")
+_mainMenuLevelController = NodePath("../../../../../../../../../../../..")
 _inputLine = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/LineEdit")
 _mainMenuNormalTheme = ExtResource("13_ivj8f")
 _mainMenuErrorTheme = ExtResource("13_lpjxh")
@@ -857,99 +832,97 @@ _generateRandomNameButton = NodePath("MarginContainer/VBoxContainer/MarginContai
 _humanPlayerButton = NodePath("MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/human_player_button")
 _AIPlayerButton = NodePath("MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ai_player_button")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Player I:"
 label_settings = SubResource("LabelSettings_sc4bp")
 
-[node name="human_player_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="human_player_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-tooltip_text = "Switch To Human Player"
+tooltip_text = "Human Player"
+focus_next = NodePath("../ai_player_button")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_dfwjy")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_to6le")
+theme = ExtResource("25_0bdlr")
 toggle_mode = true
 button_pressed = true
 icon = ExtResource("11_rwomw")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ai_player_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="ai_player_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-tooltip_text = "Switch To AI Player"
+tooltip_text = "AI Player"
+focus_next = NodePath("../../../MarginContainer/HBoxContainer/LineEdit")
+focus_previous = NodePath("../human_player_button")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_g17w2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_to6le")
+theme = ExtResource("25_0bdlr")
 toggle_mode = true
 icon = ExtResource("12_1hgqe")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_next = NodePath("../random_name_button")
+focus_previous = NodePath("../../../MarginContainer2/HBoxContainer/ai_player_button")
 theme = ExtResource("13_ivj8f")
 theme_type_variation = &"normal"
 placeholder_text = "Enter a name..."
-max_length = 15
+max_length = 21
 
-[node name="random_name_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="random_name_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Genrate Random Name"
+focus_next = NodePath("../../../../../../player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/human_player_button")
+focus_previous = NodePath("../LineEdit")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_to6le")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hho5t")
+theme = ExtResource("25_0bdlr")
 icon = ExtResource("12_veojx")
 icon_alignment = 1
 expand_icon = true
 
-[node name="player_setup_panel2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
+[node name="player_setup_panel2" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_inputLine", "_generateRandomNameButton", "_humanPlayerButton", "_AIPlayerButton")]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("9_kp1g5")
 script = ExtResource("9_ihwsy")
-_mainMenuLevelController = NodePath("../../../../../../../../../..")
+_mainMenuLevelController = NodePath("../../../../../../../../../../../..")
 _inputLine = NodePath("MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/LineEdit")
 _mainMenuNormalTheme = ExtResource("13_ivj8f")
 _mainMenuErrorTheme = ExtResource("13_lpjxh")
@@ -957,130 +930,119 @@ _generateRandomNameButton = NodePath("MarginContainer/VBoxContainer/MarginContai
 _humanPlayerButton = NodePath("MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/human_player_button")
 _AIPlayerButton = NodePath("MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ai_player_button2")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Player II:"
 label_settings = SubResource("LabelSettings_sc4bp")
 
-[node name="human_player_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="human_player_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Human Player"
+focus_next = NodePath("../ai_player_button2")
+focus_previous = NodePath("../../../../../../player_setup_panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/random_name_button")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_to6le")
+theme = ExtResource("25_0bdlr")
 toggle_mode = true
 button_pressed = true
 icon = ExtResource("11_rwomw")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ai_player_button2" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="ai_player_button2" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-tooltip_text = "Human Player"
+tooltip_text = "AI Player"
+focus_next = NodePath("../../../MarginContainer/HBoxContainer/LineEdit")
+focus_previous = NodePath("../human_player_button")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_to6le")
+theme = ExtResource("25_0bdlr")
 toggle_mode = true
 icon = ExtResource("12_1hgqe")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_next = NodePath("../random_name_button")
+focus_previous = NodePath("../../../MarginContainer2/HBoxContainer/ai_player_button2")
 theme = ExtResource("13_ivj8f")
 placeholder_text = "Enter a name..."
-max_length = 15
+max_length = 21
 
-[node name="random_name_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="random_name_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Genrate Random Name"
+focus_next = NodePath("../../../../../../play_button_panel_container/play_button_margin_container_2/play_classic_button")
+focus_previous = NodePath("../LineEdit")
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_to6le")
-theme_override_styles/hover = SubResource("StyleBoxFlat_calul")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xry50")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hho5t")
+theme = ExtResource("25_0bdlr")
 icon = ExtResource("12_veojx")
 icon_alignment = 1
 expand_icon = true
 
-[node name="play_button_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer"]
+[node name="play_button_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xx4dv")
 
-[node name="play_button_margin_container_2" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/play_button_panel_container"]
+[node name="play_button_margin_container_2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/play_button_panel_container"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="play_classic_button" type="Button" parent="Control/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/play_button_panel_container/play_button_margin_container_2"]
+[node name="play_classic_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/classic_gamemode_margin_container/classic_game_mode_panel_container/VBoxContainer/players_setup_clip_anim_panel/margin_container/VBoxContainer/play_button_panel_container/play_button_margin_container_2"]
 layout_mode = 2
+tooltip_text = "Start Game"
+focus_next = NodePath("../../../player_setup_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/human_player_button")
+focus_previous = NodePath("../../../player_setup_panel2/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/random_name_button")
 mouse_default_cursor_shape = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme = ExtResource("25_uilim")
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("10_q1n0h")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/focus = SubResource("StyleBoxEmpty_6o81e")
-theme_override_styles/disabled = ExtResource("15_2vm5p")
-theme_override_styles/hover = ExtResource("16_0nwer")
-theme_override_styles/pressed = ExtResource("17_oij7w")
-theme_override_styles/normal = ExtResource("15_2vm5p")
 text = "Play"
 
-[node name="gamemode_margin_container2" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="gamemode_margin_container2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -1088,54 +1050,54 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2"]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uxa18")
 
-[node name="Node" type="Node" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer"]
+[node name="Node" type="Node" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer"]
 clip_contents = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("5_3e3sf")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer"]
 clip_children = 1
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k3u6p")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("2_kgu3p")
 expand_mode = 4
 
-[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_ioi2i")
 
-[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
+[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
+[node name="game_mode_label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "???"
 label_settings = SubResource("LabelSettings_vu8it")
 horizontal_alignment = 1
 
-[node name="secondary_panel_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer"]
+[node name="secondary_panel_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
@@ -1143,59 +1105,59 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Player I:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_length = 15
 
-[node name="Button" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "p"
 
-[node name="Button2" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "ai"
 
-[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
+[node name="Label2" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Player II:"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
+[node name="LineEdit" type="LineEdit" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_length = 15
 
-[node name="Button" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
+[node name="Button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "p"
 
-[node name="Button2" type="Button" parent="Control/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
+[node name="Button2" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamemode_margin_container2/PanelContainer/VBoxContainer/secondary_panel_margin_container/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "ai"
 
-[node name="exit_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="exit_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -1203,7 +1165,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="exit_panel_container" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container" node_paths=PackedStringArray("_animComp", "_anim", "_playersSetupPanelControllers")]
+[node name="exit_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container" node_paths=PackedStringArray("_animComp", "_anim", "_playersSetupPanelControllers")]
 layout_mode = 2
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
@@ -1214,48 +1176,48 @@ _animComp = NodePath("UI_animation_component")
 _anim = NodePath("AnimationPlayer")
 _playersSetupPanelControllers = []
 
-[node name="UI_animation_component" type="Node" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
+[node name="UI_animation_component" type="Node" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
 script = ExtResource("1_u4gnx")
 _tweenAnimationList = [SubResource("Resource_y8myr")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
 libraries = {
 "": SubResource("AnimationLibrary_r5q7k")
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container"]
 clip_contents = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("5_3e3sf")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer"]
 clip_children = 1
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_k3u6p")
 
-[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 texture = ExtResource("22_u2pev")
 expand_mode = 4
 
-[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_lu2ir")
 
-[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
+[node name="title_text_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="exit_game_mode_label" type="Label" parent="Control/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
+[node name="exit_game_mode_label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/exit_margin_container/exit_panel_container/VBoxContainer/PanelContainer/PanelContainer/PanelContainer2/title_text_margin_container"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "EXIT"

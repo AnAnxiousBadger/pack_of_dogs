@@ -8,16 +8,16 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 	[Export] private Label _playerNameLabel;
 	[Export] private Label _playerScoreLabel;
 	[Export] private Label _playerMaxScoreLabel;
-	[Export] private int _maxNameLength = 15;
+	//[Export] private int _maxNameLength = 21;
 	[Export] private TextureRect _AIIcon;
 	[Export] private TextureRect _pieceColorIcon;
 
 	public void SetPlayerScoreLabel(BasePlayerController player){
-		string playerName = player.PlayerName;
-		if(playerName.Length > _maxNameLength){
+		//string playerName = player.PlayerName;
+		/*if(playerName.Length > _maxNameLength){
 			playerName = playerName.Substring(0, _maxNameLength - 3) + "...";
-		}
-		_playerNameLabel.Text = playerName;
+		}*/
+		_playerNameLabel.Text = player.PlayerName;
 		_playerScoreLabel.Text = player.DeliveredPieces.ToString();
 		_playerMaxScoreLabel.Text = player.piecesToDeliver.ToString();
 		_player = player;

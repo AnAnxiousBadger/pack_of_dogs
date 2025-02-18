@@ -14,6 +14,7 @@ deltaPitchScale = Vector2(-0.3, 0.3)
 script = ExtResource("2_cnvo0")
 sound = ExtResource("4_gjkjs")
 identifier = "picked_piece"
+soundType = 2
 settings = SubResource("Resource_u52ik")
 
 [sub_resource type="Resource" id="Resource_gp2w2"]
@@ -24,6 +25,7 @@ deltaPitchScale = Vector2(-0.3, 0.3)
 script = ExtResource("2_cnvo0")
 sound = ExtResource("5_f33lp")
 identifier = "piece_moved"
+soundType = 2
 settings = SubResource("Resource_gp2w2")
 
 [resource]
