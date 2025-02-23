@@ -1,38 +1,26 @@
-[gd_scene load_steps=20 format=3 uid="uid://d32dgdt73ceui"]
+[gd_scene load_steps=19 format=3 uid="uid://d32dgdt73ceui"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_jvh1n"]
-[ext_resource type="Texture2D" uid="uid://dlnq6m3jeymn7" path="res://Assets/smoke_sprite_sheet.png" id="1_omx2u"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/RandomSoundEffect.cs" id="2_jul8f"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_8255e"]
 [ext_resource type="AudioStream" uid="uid://bidb6r28aw2w2" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_01.mp3" id="4_1dq0t"]
 [ext_resource type="AudioStream" uid="uid://5khyes7xbhdr" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_02.mp3" id="5_fgneo"]
 [ext_resource type="AudioStream" uid="uid://c7v0we5iqxvtp" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_03.mp3" id="6_tw42x"]
 [ext_resource type="AudioStream" uid="uid://bo8ajo8usu1fj" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_04.mp3" id="7_5bvqr"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="8_8dtqu"]
 [ext_resource type="AudioStream" uid="uid://bdl6udblwsqjm" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_05.mp3" id="8_hkufb"]
 [ext_resource type="AudioStream" uid="uid://cituhhfc4tpal" path="res://Assets/sounds/audio_streams/visual_effect_sounds/tap_06.mp3" id="9_sfbvs"]
+[ext_resource type="Material" uid="uid://bomvpa17kn017" path="res://Assets/materials/smoke_mat.tres" id="10_vbgos"]
 
-[sub_resource type="Resource" id="Resource_o43rx"]
+[sub_resource type="Resource" id="Resource_kfj4j"]
 script = ExtResource("3_8255e")
-deltaPitchScale = Vector2(0, 0)
+deltaPitchScale = Vector2(-0.1, 0.1)
 
-[sub_resource type="Resource" id="Resource_oriju"]
-script = ExtResource("2_jul8f")
-sounds = Array[AudioStream]([ExtResource("4_1dq0t"), ExtResource("5_fgneo"), ExtResource("6_tw42x"), ExtResource("7_5bvqr"), ExtResource("8_hkufb"), ExtResource("9_sfbvs")])
-identifier = "tap_sound"
-settings = SubResource("Resource_o43rx")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byyk0"]
-transparency = 1
-shading_mode = 0
-specular_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_omx2u")
-disable_receive_shadows = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
+[sub_resource type="Resource" id="Resource_41e71"]
+script = ExtResource("8_8dtqu")
+identifier = "sand_tapped"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("4_1dq0t"), ExtResource("5_fgneo"), ExtResource("6_tw42x"), ExtResource("7_5bvqr"), ExtResource("8_hkufb"), ExtResource("9_sfbvs")])
+settings = SubResource("Resource_kfj4j")
 
 [sub_resource type="Curve" id="Curve_wa5lt"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.123123, 0.523077), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -67,10 +55,10 @@ anim_speed_max = 1.0
 
 [node name="sand_click_visual_effect" type="Node3D"]
 script = ExtResource("1_jvh1n")
-effectSound = SubResource("Resource_oriju")
+effectSound = SubResource("Resource_41e71")
 
 [node name="particles" type="GPUParticles3D" parent="."]
-material_override = SubResource("StandardMaterial3D_byyk0")
+material_override = ExtResource("10_vbgos")
 emitting = false
 amount = 4
 lifetime = 0.5

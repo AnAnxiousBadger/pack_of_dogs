@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxklwjiq12pfm"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/SimpleVisualEffectController.cs" id="1_07xae"]
-[ext_resource type="ArrayMesh" uid="uid://bm3746ua0ha88" path="res://Assets/meshes/end_node_R.res" id="2_nrwll"]
+[ext_resource type="ArrayMesh" uid="uid://bm3746ua0ha88" path="res://Assets/meshes/board_meshes/classic_mode/nodes/classic_end_node_R.res" id="2_nrwll"]
 [ext_resource type="Material" uid="uid://crn8evcliecg5" path="res://Assets/materials/shaders/end_node_shader/end_node_highlight_shader_mat.tres" id="3_pp4tg"]
 
 [node name="end_node_R_highlight_visual_effect" type="Node3D"]

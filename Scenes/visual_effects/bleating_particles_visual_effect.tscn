@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bubr633qpfw32"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_p10nh"]
-[ext_resource type="Texture2D" uid="uid://v3iqut1tok7v" path="res://Assets/textures/mu_sa_cuneiform.png" id="2_3e3qs"]
+[ext_resource type="Texture2D" uid="uid://v3iqut1tok7v" path="res://Assets/textures/cuneiforms/mu_sa_cuneiform.png" id="2_3e3qs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmvbs"]
 transparency = 1

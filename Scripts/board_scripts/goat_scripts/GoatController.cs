@@ -6,40 +6,51 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 {
 	public bool IsActive {get; set;}
 	public Node3D TickableNode {get  => this;}
+	// EXPORTS
+	[ExportCategory("Common Settings")]
 	[Export] public TickableVisualEffect[] Effects {get; set;}
-	[Export] public TickableSoundEffect[] SoundEffects {get; set;}
-	public List<GoatController> flock = new();
+	[Export] public AudioLibrary AudioLibrary { get; set; }
 	[Export] private AnimationPlayer _anim;
-	[Export] private Timer _timer;
-	private Vector3 _randomVelocity = Vector3.Zero;
-	[Export] private float pathPosRadius = 0.5f;
-	[Export] private float separationRadius = 0.4f;
-	[Export] private float separationFactor = 1f;
-	[Export] private float alignmentFactor = 0f;
-	[Export] private float cohesionFactor = 0f;
-	[Export] private float pathFollowFactor = 0.1f;
-	[Export] private float _randomVelocityFactor = 0.03f;
-	[Export] private float speed = 0.15f;
+	[Export] private Timer _randomVelocityTimer;
 
+	[ExportCategory("Boid Settings")]
+	[Export] private float _separationRadius = 0.4f;
+	[Export] private float _separationFactor = 1f;
+	[Export] private float _alignmentFactor = 0f;
+	[Export] private float _cohesionFactor = 0f;
+
+	[ExportCategory("Path Follow Settings")]
+	[Export] private float _minDistanceFromPathPosition = 0.5f;
+	[Export] private float _pathFollowFactor = 0.1f;
+
+	[ExportCategory("Velocity Settings")]
+	[Export] private float _speed = 0.15f;
+	[Export] private float _randomVelocityFactor = 0.03f;
+
+	// REFERENCES
+	public List<GoatController> flock = new();
+	private GoatPathController _goatPath;
 	private Queue<Vector3> _pathPoses = new();
 	private Vector3 _currPathPosTarget;
-	private GoatPathController _goatPath;
-
+	private AudioStreamPlayer3D _tempAudioStreamPlayer = null;
+	
+	// OTHERS
+	private Vector3 _randomVelocity = Vector3.Zero;
+	private bool _canBleat = true;
+	
+	// POLLABLE
 	public IPoolManager Pool {get; set;}
     public string Identifier { get; set; }
     public Node PoolableNode => this;
 
-	private bool canBleat = true;
-	private AudioStreamPlayer3D _tempAudioStreamPlayer = null;
-
     public override void _Ready()
     {
 		IsActive = false;
-		separationRadius = RandomGenerator.Instance.GetRandFloatInRange(0.35f, 0.45f);
+		_separationRadius = RandomGenerator.Instance.GetRandFloatInRange(0.35f, 0.45f);
 		_anim.Seek(RandomGenerator.Instance.GetRandFloatInRange(0f, 1.9f));
-		_timer.WaitTime = RandomGenerator.Instance.GetRandFloatInRange(3f, 5f);
-		_timer.Timeout += _OnTimerTimeOut;
-		_timer.Start();
+		_randomVelocityTimer.WaitTime = RandomGenerator.Instance.GetRandFloatInRange(3f, 5f);
+		_randomVelocityTimer.Timeout += _OnTimerTimeOut;
+		_randomVelocityTimer.Start();
     }
     public override void _PhysicsProcess(double delta)
 	{
@@ -100,10 +111,10 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 		}
 	}
 	private Vector3 GetVelocityToPath(){
-		if(Position.DistanceTo(_currPathPosTarget) < pathPosRadius){	
+		if(Position.DistanceTo(_currPathPosTarget) < _minDistanceFromPathPosition){	
 			GetNextPosTarget();
 		}
-		return (_currPathPosTarget - Position).Normalized() * pathFollowFactor;
+		return (_currPathPosTarget - Position).Normalized() * _pathFollowFactor;
 	}
 	private (Vector3, Vector3, Vector3) FlockSteer(){
 		Vector3 separationVelocity = Vector3.Zero;
@@ -120,11 +131,10 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 			if(goat != this){
 				Vector3 otherPos = goat.Position;
 				float dist = (pos - otherPos).Length();
-				if(dist < separationRadius){
+				if(dist < _separationRadius){
 					Vector3 otherGoatToThis = pos - otherPos;
 					Vector3 dirToTravel = otherGoatToThis.Normalized();
-					//Vector3 weightedVelocity = dirToTravel / dist ;
-					separationVelocity += dirToTravel * (1 - dist/separationRadius);
+					separationVelocity += dirToTravel * (1 - dist / _separationRadius);
 					numToAvoid++;
 				}
 
@@ -139,26 +149,25 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 		if(numToAvoid > 0){
 			separationVelocity /= (float)numToAvoid;
 			separationVelocity.Normalized();
-			separationVelocity *= separationFactor;
+			separationVelocity *= _separationFactor;
 		}
 		if(numToAlign > 0){
 			alignmentVelocity /= (float)numToAlign;
-			alignmentVelocity *= alignmentFactor;
+			alignmentVelocity *= _alignmentFactor;
 		}
 		if(numToCoh > 0){
 			cohesionPoint /= (float)numToCoh;
 			Vector3 cohesionDir = cohesionPoint - pos;
 			cohesionDir.Normalized();
-			cohesionVelocity = cohesionDir * cohesionFactor;
+			cohesionVelocity = cohesionDir * _cohesionFactor;
 		}
 		
 		return (separationVelocity, alignmentVelocity, cohesionVelocity);
 	}
 
-
 	private void ClampVelocity(){
 		Vector3 dir = Velocity.Normalized();
-		Velocity = dir * speed;
+		Velocity = dir * _speed;
 	}
 
 	private void UpdateRotation(float delta){
@@ -191,11 +200,11 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 		return;
 	}
 	public void OnPressed(Vector3 pos){
-		if(canBleat){
+		if(_canBleat){
 			if(Pool is GoatPathManager goatPathManager){
 				AudioStreamPlayer3D ap = AudioManager.Instance.PlaySound(goatPathManager.goatAudioLibrary.GetSound("goat_bleating"));
 				if(ap != null){
-					canBleat = false;
+					_canBleat = false;
 					_tempAudioStreamPlayer = ap;
 					_tempAudioStreamPlayer.Finished += _OnBleatFinished;
 				}
@@ -209,7 +218,7 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 	private void _OnBleatFinished(){
 		_tempAudioStreamPlayer.Finished -= _OnBleatFinished;
 		_tempAudioStreamPlayer = null;
-		canBleat = true;
+		_canBleat = true;
 	}
 	public void OnReleased(Vector3 pos){
 		return;

@@ -5,18 +5,18 @@ using System.Linq;
 
 public abstract partial class BoardNodeController : StaticBody3D
 {
-	// Exports
+	// EXPORTS
+	[ExportCategory("Common Exports")]
+	[Export] public Node3D topGuide;
+
+	[ExportCategory("Per Instance Exports")]
 	[Export] public int playerIndex = -1; // -1 for shared nodes
 	[Export] public BoardNodeController[] outNeighbours = Array.Empty<BoardNodeController>();
 	// REFERENCES
 	public List<BoardNodeController> inNeighbours = new();
-	protected MeshInstance3D _mesh;
 	// OTHER
 	public bool canBeSteppedOn = true;
 	public List<PieceController> currPieces;
-	public virtual Vector3 TopPos{
-		get { return GlobalPosition + new Vector3(0f, 0.65f, 0f);}
-	}
 	private Queue<BoardNodeModifier> _onStepModQueue = new();
 	private PieceController _modsQueuePiece;
 	// SIGNALS
@@ -24,7 +24,6 @@ public abstract partial class BoardNodeController : StaticBody3D
 	[Signal] public delegate void OnAllOnStepModifierAppliedEventHandler(BoardNodeController node);
 	
 	public virtual void SetUpNode(){
-		_mesh = (MeshInstance3D)GetNode("node_mesh");
 		currPieces = new();
 		// Set up in neighbours from given out neighbours
 		foreach (BoardNodeController outNeighbour in outNeighbours)
@@ -63,108 +62,6 @@ public abstract partial class BoardNodeController : StaticBody3D
 		}
 		return enemies;
 	}
-
-	//public List<BoardNodeController> MoveForwardAlongNodesFromNode(int steps, int playerIndex, bool canMoveToOwnPiece){
-		/*List<BoardNodeController> finalNodes = new();
-
-		int remainingSteps = steps;
-		List<BoardNodeController> currNodes = new() { this };
-		while(remainingSteps > 0){
-			List<BoardNodeController> nextNodes = new();
-			for (int i = 0; i < currNodes.Count; i++)
-			{
-				for (int j = 0; j < currNodes[i].outNeighbours.Length; j++)
-				{
-					if(playerIndex == -1 || currNodes[i].outNeighbours[j].playerIndex == -1 || currNodes[i].outNeighbours[j].playerIndex == playerIndex){
-						nextNodes.Add(currNodes[i].outNeighbours[j]);
-					}
-					
-				}
-			}
-			currNodes = nextNodes;
-			remainingSteps -= 1;
-		}
-		finalNodes = currNodes;
-		if(!canMoveToOwnPiece){
-			// Remove nodes where player already has a piece
-			finalNodes.RemoveAll(node => node.currPieces.Any(piece => piece.playerIndex == playerIndex));
-			// Remove nodes that cannot be stepped on
-			finalNodes.RemoveAll(node => !node.canBeSteppedOn);
-		}
-
-		return finalNodes;*/
-		/*return MoveAlongNodesFromNode(node => node.outNeighbours.ToList(), steps, playerIndex, canMoveToOwnPiece);
-	}
-	public List<BoardNodeController> MoveBackwardsAlongNodesFromNode(int steps, int playerIndex, bool canMoveToOwnPiece){
-		/*List<BoardNodeController> finalNodes = new();
-		int remainingSteps = steps;
-		List<BoardNodeController> currNodes = new() { this };
-		while(remainingSteps > 0){
-			List<BoardNodeController> nextNodes = new();
-			for (int i = 0; i < currNodes.Count; i++)
-			{
-				for (int j = 0; j < currNodes[i].inNeighbours.Count; j++)
-				{
-					if(playerIndex == -1 || currNodes[i].inNeighbours[j].playerIndex == -1 || currNodes[i].inNeighbours[j].playerIndex == playerIndex){
-						nextNodes.Add(currNodes[i].inNeighbours[j]);
-					}
-					
-				}
-			}
-			currNodes = nextNodes;
-			remainingSteps -= 1;
-		}
-		finalNodes = currNodes;
-		if(!canMoveToOwnPiece){
-			finalNodes.RemoveAll(node => node.currPieces.Any(piece => piece.playerIndex == playerIndex));
-			finalNodes.RemoveAll(node => !node.canBeSteppedOn);
-		}
-
-		return finalNodes;*/
-		/*return MoveAlongNodesFromNode(node => node.inNeighbours, steps, playerIndex, canMoveToOwnPiece);
-	}
-
-	private List<BoardNodeController> MoveAlongNodesFromNode(Func<BoardNodeController, List<BoardNodeController>> neighbourDirection, int steps, int playerIndex, bool canMoveToOwnPiece){
-		List<BoardNodeController> finalNodes = new();
-		int remainingSteps = steps;
-		List<BoardNodeController> currNodes = new() { this };
-		while(remainingSteps > 0){
-			List<BoardNodeController> nextNodes = new();
-			for (int i = 0; i < currNodes.Count; i++)
-			{
-				for (int j = 0; j < neighbourDirection(currNodes[i]).Count; j++)
-				{
-					if(playerIndex == -1 || neighbourDirection(currNodes[i])[j].playerIndex == -1 || neighbourDirection(currNodes[i])[j].playerIndex == playerIndex){
-						nextNodes.Add(neighbourDirection(currNodes[i])[j]);
-					}
-					
-				}
-			}
-			currNodes = nextNodes;
-			remainingSteps -= 1;
-		}
-		finalNodes = currNodes;
-		if(!canMoveToOwnPiece){
-			finalNodes.RemoveAll(node => node.currPieces.Any(piece => piece.playerIndex == playerIndex));
-			finalNodes.RemoveAll(node => !node.canBeSteppedOn);
-		}
-
-		return finalNodes;
-	}
-
-	private List<BoardNodeController> BreadthFirstSearchFromNode(BoardNodeController destination, Func<BoardNodeController, List<BoardNodeController>> neighbourDirection){
-
-	}
-	private List<BoardNodeController> BreadthFirstSearchFromNodeBackwards(BoardNodeController destination){
-		return BreadthFirstSearchFromNode(destination, node => node.inNeighbours);
-	}
-	private List<BoardNodeController> BreadthFirstSearchFromNodeForward(BoardNodeController destination){
-		return BreadthFirstSearchFromNode(destination, node => node.inNeighbours);
-	}
-
-	public int GetDistanceFromStartNode(BasePlayerController player){
-		return BreadthFirstSearchFromNodeBackwards(GameController.Instance.boardController.GetStartNode(player)).Count;
-	}*/
 
 	public void ChainOnStepModifiers(PieceController piece, bool addKickVisualEffect){
 		_modsQueuePiece = piece;

@@ -1,39 +1,26 @@
-[gd_scene load_steps=31 format=3 uid="uid://ci7pqv5m437a7"]
+[gd_scene load_steps=29 format=3 uid="uid://ci7pqv5m437a7"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_kknwr"]
 [ext_resource type="Shader" uid="uid://dt62kag03gbnv" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_circle_sahder.tres" id="2_2qfu0"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_yr3fj"]
 [ext_resource type="ArrayMesh" uid="uid://bm43vn0d6jcj1" path="res://Assets/meshes/visual_effect_meshes/piece_arrived_effect_circle_mesh.res" id="3_2a8xv"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_bw75b"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_ooeue"]
 [ext_resource type="AudioStream" uid="uid://btrr4bqo8qau2" path="res://Assets/sounds/audio_streams/visual_effect_sounds/piece_arrived_melody.mp3" id="4_kmp6y"]
 [ext_resource type="Texture2D" uid="uid://b4gvljiwvik43" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_ray.png" id="4_sdr23"]
-[ext_resource type="Texture2D" uid="uid://c5ixpijqgrw54" path="res://Assets/textures/sa_dug_cuneiform.png" id="5_3aqgq"]
+[ext_resource type="Texture2D" uid="uid://c5ixpijqgrw54" path="res://Assets/textures/cuneiforms/sa_dug_cuneiform.png" id="5_3aqgq"]
+[ext_resource type="Texture2D" uid="uid://dtwefaxeskujr" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_ring_gradien_texture.tres" id="6_n1gj1"]
+[ext_resource type="Texture2D" uid="uid://4nxvir3di22t" path="res://Assets/materials/shaders/piece_arrived_effect_shader/piece_arrived_ring_noise_gradient_texture.tres" id="7_corpu"]
 
-[sub_resource type="Resource" id="Resource_fglhl"]
+[sub_resource type="Resource" id="Resource_qy1fo"]
 script = ExtResource("3_ooeue")
 deltaPitchScale = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_pc572"]
-script = ExtResource("2_yr3fj")
-sound = ExtResource("4_kmp6y")
+[sub_resource type="Resource" id="Resource_k10a6"]
+script = ExtResource("3_bw75b")
 identifier = "piece_arrived_melody"
-settings = SubResource("Resource_fglhl")
-
-[sub_resource type="Gradient" id="Gradient_rinak"]
-offsets = PackedFloat32Array(0.320558, 0.38676, 0.442509)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_opeuy"]
-gradient = SubResource("Gradient_rinak")
-fill_from = Vector2(1, 1)
-
-[sub_resource type="Gradient" id="Gradient_2j5ko"]
-offsets = PackedFloat32Array(0, 0.205575, 0.344948, 0.487805, 0.675958, 0.832753, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8x5d6"]
-gradient = SubResource("Gradient_2j5ko")
-fill_from = Vector2(0, 1)
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("4_kmp6y")])
+settings = SubResource("Resource_qy1fo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e4gp6"]
 render_priority = 0
@@ -43,8 +30,8 @@ shader_parameter/noise_panning_speed = Vector2(0, -2)
 shader_parameter/circle_panning = Vector2(0, -0.3)
 shader_parameter/fresnel_power = 0.2
 shader_parameter/opacity = null
-shader_parameter/ring_gradient_texture = SubResource("GradientTexture2D_opeuy")
-shader_parameter/ring_noise_mask = SubResource("GradientTexture2D_8x5d6")
+shader_parameter/ring_gradient_texture = ExtResource("6_n1gj1")
+shader_parameter/ring_noise_mask = ExtResource("7_corpu")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwnu0"]
 transparency = 1
@@ -250,7 +237,7 @@ _data = {
 
 [node name="piece_arrived_visual_effect" type="Node3D"]
 script = ExtResource("1_kknwr")
-effectSound = SubResource("Resource_pc572")
+effectSound = SubResource("Resource_k10a6")
 
 [node name="circle_mesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("ShaderMaterial_e4gp6")

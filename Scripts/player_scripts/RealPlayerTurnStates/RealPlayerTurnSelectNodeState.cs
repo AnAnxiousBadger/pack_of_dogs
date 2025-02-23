@@ -5,9 +5,7 @@ using System.Collections.Generic;
 public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
 {
     private new readonly RealPlayerController p;
-    public override void EnterTurnState(){
-        //GlobalHelper.Instance.GameController.collisionMask = GameController.CollisionMask.NODE;
-    }
+    public override void EnterTurnState(){}
 
     public override void ExitTurnState(){
         p.selectedPiece?.RemoveHighlight();
@@ -30,11 +28,6 @@ public class RealPlayerTurnSelectNodeState : PlayerTurnBaseState
         BoardNodeController node = null;
         if(body is BoardNodeController nodeClicked && p.possibeNodes.Contains(nodeClicked)){
             node = nodeClicked;
-            // MOVE OWN PIECE
-            /*node.OnAllOnStepModifierApplied += _OnPieceMovedAndProcessed;
-            GlobalHelper.Instance.GameController.boardController.MovePiece(p.selectedPiece, node, false);
-            p.EmitSignal(BasePlayerController.SignalName.PieceMoved, p.roll);
-            p.DeselectPiece();*/
         }
         else if(body is PieceController pieceClicked && p.possibeNodes.Contains(pieceClicked.currNode)){
             node = pieceClicked.currNode;

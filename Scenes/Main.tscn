@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dc0qresj865c"]
 
 [ext_resource type="Script" path="res://Scripts/ScenesController.cs" id="1_t6omt"]
-[ext_resource type="PackedScene" uid="uid://c5d85fwg7u2pv" path="res://Scenes/main_menu.tscn" id="2_rsdvm"]
+[ext_resource type="PackedScene" uid="uid://c5d85fwg7u2pv" path="res://Scenes/levels/main_menu.tscn" id="2_rsdvm"]
 [ext_resource type="Script" path="res://Scripts/UI_scripts/LoadingScreenController.cs" id="3_dfx3p"]
 [ext_resource type="Texture2D" uid="uid://0rlrc3md8li5" path="res://Assets/UI/loading_screens/loading_screen_royal_cemetery_of_ur.png" id="4_6trgd"]
 [ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="5_dobn5"]

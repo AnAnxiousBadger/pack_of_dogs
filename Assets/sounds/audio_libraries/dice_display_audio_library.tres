@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=11 format=3 uid="uid://bysm2w4exsn76"]
+
+[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_sf57w"]
+[ext_resource type="AudioStream" uid="uid://cms7r4aju41lw" path="res://Assets/sounds/audio_streams/board_elements_sounds/button_hovered_02.mp3" id="2_hdmit"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/TickableSoundEffect.cs" id="3_7cug6"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="4_pxt8w"]
+[ext_resource type="AudioStream" uid="uid://d166c1gvm1cu7" path="res://Assets/sounds/audio_streams/board_elements_sounds/dice_roll_02.mp3" id="5_12j12"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="6_tj5e0"]
+
+[sub_resource type="Resource" id="Resource_8potb"]
+script = ExtResource("4_pxt8w")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_6iple"]
+script = ExtResource("3_7cug6")
+signalType = 2
+allowOnDisabled = true
+identifier = "button_hovered"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_hdmit")])
+settings = SubResource("Resource_8potb")
+
+[sub_resource type="Resource" id="Resource_yyken"]
+script = ExtResource("4_pxt8w")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_y04ng"]
+script = ExtResource("6_tj5e0")
+identifier = "dice_roll"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("5_12j12")])
+settings = SubResource("Resource_yyken")
+
+[resource]
+script = ExtResource("1_sf57w")
+soundEffects = Array[Object]([SubResource("Resource_6iple"), SubResource("Resource_y04ng")])

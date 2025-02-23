@@ -23,7 +23,6 @@ public class AIMove
         this._destinationNode = destinationNode;
         this._rollToGetToNode = roll;
         this._score = CalculateScore();
-        //GD.Print(_piece.Name + " score: " + Score);
     }
 
     private float CalculateScore(){
@@ -48,54 +47,7 @@ public class AIMove
             score += 2f;
         }
 
-        // NEGATIVE SCORES
-        /*int distanceFromStartNode = GameController.Instance.boardController.GetDistanceFromStartNode(_destinationNode, _piece.player);
-        // For enemy players
-        foreach (BasePlayerController player in GameController.Instance.players)
-        {
-            if(player != _piece.player){
-                // Get possible rolls for enemies
-                List<int> rollables = player.rollSettings.GetRollables();
-                Dictionary<int, float> rollChanceDictWitchChances = player.rollSettings.GetRollChanceDictWithChances();
-
-                Queue<BoardNodeController> nodesToCheckFrom = new();
-                nodesToCheckFrom.Enqueue(_destinationNode);
-                Queue<float> probabilityFactors = new();
-                probabilityFactors.Enqueue(1f);
-                
-                while(nodesToCheckFrom.Count > 0){ // Recursion for double rolls
-                    BoardNodeController currCheckedNode = nodesToCheckFrom.Dequeue();
-                    float probabilityFactor = probabilityFactors.Dequeue();
-                    foreach (int roll in rollables)
-                    {
-                        // Move backwards the roll amount
-                        List<BoardNodeController> backwardsNodesForRoll = GameController.Instance.boardController.MoveBackwardsAlongNodesFromNode(currCheckedNode, roll, player.playerIndex, true);
-                        foreach (BoardNodeController node in backwardsNodesForRoll)
-                        {
-                            // if there is enemy → add roll chance * possible backwards move to negative score
-                            if(node.GetEnemyPieces(_piece.player).Count > 0){
-                                for (int i = 0; i < node.GetEnemyPieces(_piece.player).Count; i++)
-                                {
-                                    GD.Print(node.Name + " - " + (float)rollChanceDictWitchChances[roll] * probabilityFactor);
-                                    score -= (float)distanceFromStartNode * rollChanceDictWitchChances[roll] * probabilityFactor;
-                                }
-                            }
-                            else if(node.HasModifier("double_turn_modifier")){
-                                // if it is double turn without enemy check for enemies recursively from double turn modifier containing nodes
-                                // multiply probabilities
-                                nodesToCheckFrom.Enqueue(node);
-                                probabilityFactors.Enqueue(rollChanceDictWitchChances[roll] * probabilityFactor);
-                            }
-                        }
-
-                    }
-
-                }
-            }
-        }*/
-
         score += CalculateGettingHitScore(_piece.currNode) - CalculateGettingHitScore(_destinationNode);
-        //GD.Print(CalculateGettingHitScore(_piece.currNode) + " - " + CalculateGettingHitScore(_destinationNode));
         
         return score;
     }

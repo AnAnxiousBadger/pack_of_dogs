@@ -4,7 +4,6 @@ using System.Net.NetworkInformation;
 
 public partial class DoubleTurnModifier : BoardNodeModifier
 {
-    [Export] private PackedScene _visualEffect;
     public override void ApplyOnStepModifier(PieceController piece)
     {
         if(piece.player == GlobalHelper.Instance.GameController.currPlayer){

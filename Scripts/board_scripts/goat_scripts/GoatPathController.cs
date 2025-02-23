@@ -23,7 +23,7 @@ public partial class GoatPathController : Path3D
 	}
 	[Signal] public delegate void AllGoatsArrivedEventHandler();
 
-	public void SpawnGoats(/*PackedScene goatScene, Node3D goatContainerNode,*/IPoolManager goatPool, int num, bool inversePos){
+	public void SpawnGoats(IPoolManager goatPool, int num, bool inversePos){
 		if(num > 0){
 			Vector3 originPos = _spawnPoint.Position;
 			if(inversePos){
@@ -78,9 +78,7 @@ public partial class GoatPathController : Path3D
 		return chosenPoint;
 	}
 
-	private GoatController SpawnGoat(IPoolManager goatPool,/*PackedScene goatScene,*/ Vector3 pos/* Node3D parent*/){
-		//GoatController goat = goatScene.Instantiate() as GoatController;
-		//parent.AddChild(goat);
+	private GoatController SpawnGoat(IPoolManager goatPool, Vector3 pos){
 		if(goatPool.GetPoolable("goat", pos) is GoatController goat){
 			goat.Position = pos;
 			return goat;
@@ -88,8 +86,6 @@ public partial class GoatPathController : Path3D
 		else{
 			return null;
 		}
-		/*goat.Position = pos;
-		return goat;*/
 	}
 
 	

@@ -1,12 +1,12 @@
 [gd_scene load_steps=27 format=3 uid="uid://4jxrgulrylax"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_jx10m"]
-[ext_resource type="Shader" uid="uid://bfghqep2eyiyn" path="res://Assets/materials/shaders/roll_button_rosette_shader/roll_button_rosette_shader.tres" id="2_r3jkh"]
-[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="3_5eigg"]
-[ext_resource type="Texture2D" uid="uid://curn2elo7ribq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_gradient.tres" id="4_jsw2q"]
-[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_effect_particle_texture.png" id="5_58bir"]
-[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="5_sv3sr"]
-[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_bottom_gradient_texture.tres" id="6_oo5qo"]
+[ext_resource type="Shader" uid="uid://bfghqep2eyiyn" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/roll_button_rosette_shader.tres" id="2_r3jkh"]
+[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_glow_shader_noise_02.tres" id="3_5eigg"]
+[ext_resource type="Texture2D" uid="uid://curn2elo7ribq" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_node_glow_gradient.tres" id="4_jsw2q"]
+[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/textures/cuneiforms/tab_cuneiform.png" id="5_58bir"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_mesh_shader.tres" id="5_sv3sr"]
+[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_bottom_gradient_texture.tres" id="6_oo5qo"]
 [ext_resource type="ArrayMesh" uid="uid://db5nk83175wnw" path="res://Assets/meshes/visual_effect_meshes/rosette_top_mesh.res" id="7_slfjh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mfwia"]
@@ -24,6 +24,7 @@ size = Vector3(2.2, 0.71, 0.99)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6flu2"]
 render_priority = 0
 shader = ExtResource("5_sv3sr")
+shader_parameter/alpha = 1.0
 shader_parameter/rosette_diffuse = ExtResource("6_oo5qo")
 
 [sub_resource type="Curve" id="Curve_nvp57"]
@@ -198,8 +199,6 @@ _data = {
 
 [node name="roll_button_rosette_highlight_visual_effect" type="Node3D"]
 script = ExtResource("1_jx10m")
-effectName = "roll_button_rosette_highlight_visual_effect"
-poolCount = 2
 
 [node name="button_highlight" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_6iedy")

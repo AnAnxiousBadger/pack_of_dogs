@@ -17,10 +17,6 @@ public partial class AIPlayerController : BasePlayerController
         turnStates.Add(rollState);
         moveState = new(this);
         turnStates.Add(moveState);
-        /*selectPieceState = new(this);
-        turnStates.Add(selectPieceState);
-        selectNodeState = new(this);
-        turnStates.Add(selectNodeState);*/
 
         GlobalHelper.Instance.GameController.OnSkipButtonUsed += _OnSkipTurn;
 

@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cljv71f0hx7ch"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/StartNodeController.cs" id="1_dbbs5"]
-[ext_resource type="Material" uid="uid://boiisfmtv7ugo" path="res://Assets/materials/base_color_materials/red_mat.tres" id="2_aynoi"]
+[ext_resource type="Material" uid="uid://boiisfmtv7ugo" path="res://Assets/materials/base_color_mats/red_mat.tres" id="2_aynoi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
 
-[node name="white_start_node" type="StaticBody3D" node_paths=PackedStringArray("outNeighbours")]
+[node name="white_start_node" type="StaticBody3D" node_paths=PackedStringArray("topGuide", "outNeighbours")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 script = ExtResource("1_dbbs5")
+topGuide = NodePath("top_guide")
 playerIndex = 0
 outNeighbours = [null]
 
@@ -18,3 +19,5 @@ skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_aynoi")
 
 [node name="modifiers" type="Node3D" parent="."]
+
+[node name="top_guide" type="Node3D" parent="."]

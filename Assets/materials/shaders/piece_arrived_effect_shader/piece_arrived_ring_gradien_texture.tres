@@ -1,0 +1,9 @@
+[gd_resource type="GradientTexture2D" load_steps=2 format=3 uid="uid://dtwefaxeskujr"]
+
+[sub_resource type="Gradient" id="Gradient_rinak"]
+offsets = PackedFloat32Array(0.320558, 0.38676, 0.442509)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[resource]
+gradient = SubResource("Gradient_rinak")
+fill_from = Vector2(1, 1)

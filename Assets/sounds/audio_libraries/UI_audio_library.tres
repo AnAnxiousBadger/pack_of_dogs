@@ -1,33 +1,33 @@
 [gd_resource type="Resource" script_class="AudioLibrary" load_steps=10 format=3 uid="uid://bep8ncc325n0y"]
 
 [ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_3twp3"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_vcq4g"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_7n42q"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_wstcj"]
 [ext_resource type="AudioStream" uid="uid://bycu08f7aao7h" path="res://Assets/sounds/audio_streams/UI_library/menu_click_02.mp3" id="4_wqkrs"]
 [ext_resource type="AudioStream" uid="uid://ce60evx3q6imi" path="res://Assets/sounds/audio_streams/UI_library/victory_melody.mp3" id="5_3m82s"]
 
-[sub_resource type="Resource" id="Resource_j50o5"]
+[sub_resource type="Resource" id="Resource_g8o0w"]
 script = ExtResource("3_wstcj")
 deltaPitchScale = Vector2(-0.2, 0.2)
 
-[sub_resource type="Resource" id="Resource_opehp"]
-script = ExtResource("2_vcq4g")
-sound = ExtResource("4_wqkrs")
+[sub_resource type="Resource" id="Resource_y55sd"]
+script = ExtResource("3_7n42q")
 identifier = "menu_click"
 soundType = 2
-settings = SubResource("Resource_j50o5")
+audioStreams = Array[AudioStream]([ExtResource("4_wqkrs")])
+settings = SubResource("Resource_g8o0w")
 
-[sub_resource type="Resource" id="Resource_p0vi1"]
+[sub_resource type="Resource" id="Resource_4pflr"]
 script = ExtResource("3_wstcj")
 deltaPitchScale = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_51n61"]
-script = ExtResource("2_vcq4g")
-sound = ExtResource("5_3m82s")
+[sub_resource type="Resource" id="Resource_ef4s6"]
+script = ExtResource("3_7n42q")
 identifier = "victory_melody"
 soundType = 2
-settings = SubResource("Resource_p0vi1")
+audioStreams = Array[AudioStream]([ExtResource("5_3m82s")])
+settings = SubResource("Resource_4pflr")
 
 [resource]
 script = ExtResource("1_3twp3")
-soundEffects = Array[Resource]([SubResource("Resource_opehp"), SubResource("Resource_51n61")])
+soundEffects = Array[Resource]([SubResource("Resource_y55sd"), SubResource("Resource_ef4s6")])

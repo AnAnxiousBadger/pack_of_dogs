@@ -3,7 +3,6 @@ using System;
 
 public partial class BoardElementsController : Node3D
 {
-	[Export] public AudioLibrary boardElementsAudioLibrary;
 	[Export] public TickableButtonController rollButton;
 	[Export] public PalmDisturbController palmDisturbController;
 	[Signal] public delegate void OnRollDiceWithoutClickingEventHandler(BasePlayerController playerRolling);

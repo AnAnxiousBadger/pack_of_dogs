@@ -1,3 +1,7 @@
+MeshInstance3D
+AudioStreamPlayer3D
+Node3D
+AnimationPlayer
 VBoxContainer
 MarginContainer
 TextureRect
@@ -8,7 +12,3 @@ AudioStreamPlayer
 PanelContainer
 DirectionalLight3D
 WorldEnvironment
-Node3D
-MeshInstance3D
-StaticBody3D
-Timer

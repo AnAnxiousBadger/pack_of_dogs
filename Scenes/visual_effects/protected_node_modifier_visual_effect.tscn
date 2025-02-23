@@ -1,27 +1,28 @@
 [gd_scene load_steps=27 format=3 uid="uid://w5o5xjmn1xn1"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_hh83t"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/SimpleSoundEffect.cs" id="2_foisf"]
-[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_node_glow_shader.tres" id="2_lsnx8"]
-[ext_resource type="Texture2D" uid="uid://d3h81ur4ekpc5" path="res://Assets/materials/shaders/protected_node_effect_color_gradient.tres" id="3_41ny5"]
+[ext_resource type="Shader" uid="uid://bud0kwwnwsckq" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_node_glow_shader.tres" id="2_lsnx8"]
+[ext_resource type="Texture2D" uid="uid://d3h81ur4ekpc5" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/protected_node_effect_color_gradient.tres" id="3_41ny5"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_ctbkw"]
 [ext_resource type="AudioStream" uid="uid://wlj6dhm5kql8" path="res://Assets/sounds/audio_streams/visual_effect_sounds/protected_sound.mp3" id="3_rlmo4"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_v84vb"]
-[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_01.tres" id="4_jn3te"]
-[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_glow_shader_noise_02.tres" id="5_1axr0"]
+[ext_resource type="Texture2D" uid="uid://bo04gaipcdakg" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_glow_shader_noise_01.tres" id="4_jn3te"]
+[ext_resource type="Texture2D" uid="uid://btk5tdcooej4y" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_glow_shader_noise_02.tres" id="5_1axr0"]
 [ext_resource type="ArrayMesh" uid="uid://bs10405u6gpp2" path="res://Assets/meshes/visual_effect_meshes/shield_mesh.res" id="6_q1x3k"]
-[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/double_turn_visual_effect/rosette_mesh_shader.tres" id="7_lj266"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_mesh_shader.tres" id="7_lj266"]
 [ext_resource type="ArrayMesh" uid="uid://4cd61hifqvv5" path="res://Assets/meshes/visual_effect_meshes/spear_mesh.res" id="8_gtu3s"]
-[ext_resource type="Texture2D" uid="uid://cy03k2ljcyh7s" path="res://Assets/materials/shaders/dul_cuneiform.png" id="9_otcik"]
+[ext_resource type="Texture2D" uid="uid://cy03k2ljcyh7s" path="res://Assets/textures/cuneiforms/dul_cuneiform.png" id="9_otcik"]
 
-[sub_resource type="Resource" id="Resource_hohs2"]
+[sub_resource type="Resource" id="Resource_q81i6"]
 script = ExtResource("3_v84vb")
 deltaPitchScale = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_gtyv8"]
-script = ExtResource("2_foisf")
-sound = ExtResource("3_rlmo4")
-identifier = "protected_sound"
-settings = SubResource("Resource_hohs2")
+[sub_resource type="Resource" id="Resource_k0j3g"]
+script = ExtResource("3_ctbkw")
+identifier = "protected_melody"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("3_rlmo4")])
+settings = SubResource("Resource_q81i6")
 
 [sub_resource type="QuadMesh" id="QuadMesh_kg76o"]
 
@@ -329,7 +330,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("nod_highlight:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/20/path = NodePath("node_highlight:surface_material_override/0:shader_parameter/shader_alpha")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -597,7 +598,7 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("nod_highlight:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/20/path = NodePath("node_highlight:surface_material_override/0:shader_parameter/shader_alpha")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
@@ -641,9 +642,9 @@ _data = {
 
 [node name="protected_node_modifier_visual_effect" type="Node3D"]
 script = ExtResource("1_hh83t")
-effectSound = SubResource("Resource_gtyv8")
+effectSound = SubResource("Resource_k0j3g")
 
-[node name="nod_highlight" type="MeshInstance3D" parent="."]
+[node name="node_highlight" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.51, 0)
 mesh = SubResource("QuadMesh_kg76o")
 surface_material_override/0 = SubResource("ShaderMaterial_wdriv")

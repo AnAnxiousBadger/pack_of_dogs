@@ -1,9 +1,9 @@
 [gd_scene load_steps=279 format=4 uid="uid://dkurlkwkdp3u1"]
 
 [ext_resource type="Script" path="res://Scripts/tool_scripts/PalmTool.cs" id="1_0d5y0"]
-[ext_resource type="ArrayMesh" uid="uid://cyvydfiaw4aul" path="res://Assets/meshes/palm_tree.res" id="1_0xrwo"]
+[ext_resource type="ArrayMesh" uid="uid://cyvydfiaw4aul" path="res://Assets/meshes/tickable_meshes/classic_mode/palm_tree.res" id="1_0xrwo"]
 [ext_resource type="PackedScene" uid="uid://ddtgho32h2hfs" path="res://Scenes/tickables/palm_tree.tscn" id="2_n1f5o"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableVisualEffect.cs" id="5_3wmsc"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/tickable_scripts/TickableVisualEffect.cs" id="5_3wmsc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpima"]
 

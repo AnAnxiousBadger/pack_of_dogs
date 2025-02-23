@@ -15,12 +15,16 @@ run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Assets/sounds/default_bus_layout.tres"
+
 [autoload]
 
-random_generator="*res://Scripts/RandomGenerator.cs"
-global_helper="*res://Scripts/GlobalHelper.cs"
+random_generator="*res://Scripts/util_scripts/RandomGenerator.cs"
+global_helper="*res://Scripts/util_scripts/GlobalHelper.cs"
 audio_manager="*res://Scripts/sound_scripts/AudioManager.cs"
-JSON_loader="*res://Scripts/JSONLoader.cs"
+JSON_loader="*res://Scripts/util_scripts/JSONLoader.cs"
 
 [display]
 

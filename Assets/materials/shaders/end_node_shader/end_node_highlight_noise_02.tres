@@ -1,0 +1,8 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://dqel13qtt35s7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_782g2"]
+frequency = 0.0027
+
+[resource]
+seamless = true
+noise = SubResource("FastNoiseLite_782g2")

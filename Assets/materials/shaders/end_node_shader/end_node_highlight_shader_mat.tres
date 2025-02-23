@@ -1,24 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://crn8evcliecg5"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://crn8evcliecg5"]
 
 [ext_resource type="Shader" uid="uid://btdsjwfvkc3ao" path="res://Assets/materials/shaders/end_node_shader/end_node_highlight_visual_effect.tres" id="1_d3vx7"]
-
-[sub_resource type="Gradient" id="Gradient_7kywq"]
-offsets = PackedFloat32Array(0.466899, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_uudlf"]
-noise_type = 3
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l016n"]
-seamless = true
-color_ramp = SubResource("Gradient_7kywq")
-noise = SubResource("FastNoiseLite_uudlf")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_782g2"]
-frequency = 0.0027
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rmmd3"]
-seamless = true
-noise = SubResource("FastNoiseLite_782g2")
+[ext_resource type="Texture2D" uid="uid://vbrhgnoj0mdh" path="res://Assets/materials/shaders/end_node_shader/end_node_highlight_noise_01.tres" id="2_yui1a"]
+[ext_resource type="Texture2D" uid="uid://dqel13qtt35s7" path="res://Assets/materials/shaders/end_node_shader/end_node_highlight_noise_02.tres" id="3_4n1c3"]
 
 [resource]
 render_priority = 0
@@ -27,5 +11,5 @@ shader_parameter/noise_01_rotation_speed = 0.1
 shader_parameter/noise_01_speed = Vector2(0.1, 0.1)
 shader_parameter/noise_02_speed = Vector2(-0.11, -0.01)
 shader_parameter/alpha = 0.5
-shader_parameter/noise_01 = SubResource("NoiseTexture2D_l016n")
-shader_parameter/noise_02 = SubResource("NoiseTexture2D_rmmd3")
+shader_parameter/noise_01 = ExtResource("2_yui1a")
+shader_parameter/noise_02 = ExtResource("3_4n1c3")

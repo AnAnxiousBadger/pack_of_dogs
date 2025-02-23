@@ -23,20 +23,6 @@ public class RealPlayerTurnRollState : PlayerTurnBaseState
     private void _OnDiceRolled(int roll){
         p.roll = roll;
 
-        
-        /*List<AIMove> possibleMoves = new();
-        foreach (PieceController piece in p.pieces)
-        {
-            if(!piece.hasArrived){
-                List<BoardNodeController> piecePossibleDestinations = GameController.Instance.boardController.MoveForwardAlongNodesFromNode(piece.currNode, roll, piece.playerIndex, false);
-                for (int i = 0; i < piecePossibleDestinations.Count; i++)
-                {
-                    possibleMoves.Add(new AIMove(piece, piecePossibleDestinations[i], roll));
-                }
-            }
-        }
-        GD.Print("------------------------");*/
-
         p.EmitSignal(BasePlayerController.SignalName.DiceRolled, roll);
         for (int i = 0; i < playerRollScores.Count; i++)
         {

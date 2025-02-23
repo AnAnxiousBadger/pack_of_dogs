@@ -13,11 +13,6 @@ public partial class RealPlayerController : BasePlayerController
     public RealPlayerTurnSelectPieceState selectPieceState;
     public RealPlayerTurnSelectNodeState selectNodeState;
 
-    /*public override void _Ready()
-    {
-        base._Ready();
-    }*/
-
     public override void StartTurn()
     {
         base.StartTurn();

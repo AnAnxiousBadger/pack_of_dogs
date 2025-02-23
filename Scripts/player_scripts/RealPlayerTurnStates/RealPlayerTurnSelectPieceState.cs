@@ -4,9 +4,7 @@ using System;
 public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
 {
     private new readonly RealPlayerController p;
-    public override void EnterTurnState(){
-        //GlobalHelper.Instance.GameController.collisionMask = GameController.CollisionMask.PIECE;
-    }
+    public override void EnterTurnState(){}
 
     public override void ExitTurnState(){}
 
@@ -20,9 +18,6 @@ public class RealPlayerTurnSelectPieceState : PlayerTurnBaseState
         PieceController piece = null;
         if(body is PieceController pieceClicked && pieceClicked.playerIndex == p.playerIndex){
             piece = pieceClicked;
-            /*p.SelectPiece(piece);
-            piece.HighlightPiece(true);
-            p.SwitchToNextTurnState();*/
         }
         else if(body is BasicNodeController nodeClicked && nodeClicked.currPieces.Count == 1 && nodeClicked.currPieces[0].playerIndex == p.playerIndex){
             piece = nodeClicked.currPieces[0];

@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgeuwx7a7oquu"]
+
+[ext_resource type="Script" path="res://Scripts/board_scripts/piece_scripts/PieceController.cs" id="1_mmf3c"]
+[ext_resource type="Resource" uid="uid://bmprjrl54tcie" path="res://Assets/sounds/audio_libraries/piece_controller_audio_library.tres" id="2_0olu4"]
+[ext_resource type="ArrayMesh" uid="uid://vvc44mosg6ek" path="res://Assets/meshes/board_meshes/piece_mesh.res" id="2_p4j3j"]
+[ext_resource type="Material" uid="uid://fqd7lvxqxi6b" path="res://Assets/materials/base_color_mats/yellow_mat.tres" id="4_7utyc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tm4u7"]
+height = 0.2
+radius = 0.36
+
+[node name="piece_01" type="StaticBody3D"]
+collision_layer = 2
+script = ExtResource("1_mmf3c")
+audioLibrary = ExtResource("2_0olu4")
+
+[node name="piece_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_p4j3j")
+surface_material_override/0 = ExtResource("4_7utyc")
+
+[node name="piece_collision_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_tm4u7")

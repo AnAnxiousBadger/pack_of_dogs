@@ -145,7 +145,6 @@ public abstract partial class BasePlayerController : Node
                 {
                     if(!pieces[j].hasArrived){
                         int rollQualityForPiece = 0;
-                        //List<BoardNodeController> destinations = pieces[j].currNode.MoveForwardAlongNodesFromNode(roll, playerIndex, false);
                         List<BoardNodeController> destinations = GlobalHelper.Instance.GameController.boardController.MoveForwardAlongNodesFromNode(pieces[j].currNode, roll, playerIndex, false);
                         if(destinations.Count == 0) {
                             rollQualityForPiece = -1;

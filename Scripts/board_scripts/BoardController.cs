@@ -2,30 +2,31 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 
 public partial class BoardController : Node3D
 {
 	// EXPORTS
-	[Export] public AudioLibrary boardControllerAudioLibrary;
-	/*[Export]*/ private PiecePositions _pieceStartingPositions;
+	
 	[Export] private PiecePositionListResource[] _pieceStartingPosesLists;
-	/*[Export]*/ private PiecePositions _pieceEndPositions;
 	[Export] private PiecePositionListResource[] _pieceEndPosesLists;
 	[Export] public BoardElementsController boardElementsController;
 	[Export] private PiecePathController _pieceMovingPath;
 	[Export] private PiecePathController _pieceKickingpath;
+
 	// OTHER
+	private PiecePositions _pieceStartingPositions;
+	private PiecePositions _pieceEndPositions;
 	public List<PieceController> pieces = new();
 	private List<BoardNodeController> _nodes = new();
 	private List<StartNodeController> _startNodes = new();
-	//private Queue<(BoardNodeController, PieceController)> _nodesToDoOnStepActions = new();
 
 	public void ReadyBoardController(){
 		SetUpBoard();
 	}
 	
 	private void SetUpBoard(){
-		// Get all pieces
+		// Get all pieces from piece container
 		Godot.Collections.Array<Node> pieceContainerChildren = GetNode("pieces_container").GetChildren();
 		
 		for (int i = 0; i < pieceContainerChildren.Count; i++)
@@ -33,7 +34,7 @@ public partial class BoardController : Node3D
 			pieces.Add((PieceController)pieceContainerChildren[i]);
 		}
 		
-		// Get all nodes
+		// Get all nodes from node container
 		Godot.Collections.Array<Node> nodeContainerChildren = GetNode("node_container").GetChildren();
 		
 		for (int i = 0; i < nodeContainerChildren.Count; i++)
@@ -48,6 +49,7 @@ public partial class BoardController : Node3D
 			}
 		}
 		
+		// Set up pieces
 		_pieceStartingPositions = new PiecePositions(_pieceStartingPosesLists);
 		_pieceEndPositions = new PiecePositions(_pieceEndPosesLists);
 		for (int i = 0; i < pieces.Count; i++)
@@ -64,12 +66,14 @@ public partial class BoardController : Node3D
 			// Set pieces' initial positions
 			pieces[i].Position = _pieceStartingPositions.TakeFreePosition(pieces[i]);
 			pieces[i].hasArrived = false;
-			CollisionShape3D shape = (CollisionShape3D) pieces[i].GetChild(1);
-        	shape.Disabled = false;
+			
 			// Pair pieces and players
 			pieces[i].player = GlobalHelper.Instance.GameController.players[pieces[i].playerIndex];
 			pieces[i].player.pieces.Add(pieces[i]);
-			// Set winning condition
+
+			pieces[i].SubscribeToGuide(GetStartNode(pieces[i].player).topGuide, pieces[i].GlobalPosition - GetStartNode(pieces[i].player).topGuide.GlobalPosition);
+			
+			// Set win condition
 			pieces[i].player.piecesToDeliver += 1;
 		}
 	}
@@ -97,7 +101,7 @@ public partial class BoardController : Node3D
 			_pieceKickingpath.SetUpPiecePath(piece.GlobalPosition, ToGlobal(_pieceStartingPositions.TakeFreePosition(piece)), piece);
 		}
 		else{
-			_pieceMovingPath.SetUpPiecePath(piece.GlobalPosition, node.TopPos, piece);
+			_pieceMovingPath.SetUpPiecePath(piece.GlobalPosition, node.topGuide.GlobalPosition, piece);
 		}
 		
         piece.currNode.currPieces.Remove(piece);
@@ -195,12 +199,4 @@ public partial class BoardController : Node3D
 	public int GetDistanceFromStartNode(BoardNodeController node,  BasePlayerController player){
 		return BreadthFirstSearchFromNodeBackwards(node, GetStartNode(player), player.playerIndex).Count;
 	}
-
-	/*public void ResetBoard(){
-		// Only reset piece starting positions for now
-		/*for (int i = 0; i < _pieceStartingPositions; i++)
-		{
-			
-		}
-	}*/
 }

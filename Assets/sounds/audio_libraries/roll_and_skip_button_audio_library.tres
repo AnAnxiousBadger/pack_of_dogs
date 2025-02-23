@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=14 format=3 uid="uid://elrvq3h2arvy"]
+
+[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_is321"]
+[ext_resource type="AudioStream" uid="uid://dmltr5p6lxqki" path="res://Assets/sounds/audio_streams/board_elements_sounds/button_clicked_01.mp3" id="2_xw0ow"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/TickableSoundEffect.cs" id="3_modoo"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="4_1f2td"]
+[ext_resource type="AudioStream" uid="uid://cms7r4aju41lw" path="res://Assets/sounds/audio_streams/board_elements_sounds/button_hovered_02.mp3" id="5_n7k4d"]
+
+[sub_resource type="Resource" id="Resource_oms2p"]
+script = ExtResource("4_1f2td")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_qhr5o"]
+script = ExtResource("3_modoo")
+signalType = 3
+allowOnDisabled = true
+identifier = "button_click"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_xw0ow")])
+settings = SubResource("Resource_oms2p")
+
+[sub_resource type="Resource" id="Resource_47u5r"]
+script = ExtResource("4_1f2td")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_kqxme"]
+script = ExtResource("3_modoo")
+signalType = 4
+allowOnDisabled = true
+identifier = "button_click"
+soundType = 1
+audioStreams = Array[AudioStream]([ExtResource("2_xw0ow")])
+settings = SubResource("Resource_47u5r")
+
+[sub_resource type="Resource" id="Resource_a8lku"]
+script = ExtResource("4_1f2td")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_pfv0n"]
+script = ExtResource("3_modoo")
+signalType = 2
+allowOnDisabled = true
+identifier = "button_hovered"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("5_n7k4d")])
+settings = SubResource("Resource_a8lku")
+
+[sub_resource type="Resource" id="Resource_ehlbm"]
+script = ExtResource("4_1f2td")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_sfg0e"]
+script = ExtResource("3_modoo")
+signalType = 0
+allowOnDisabled = false
+identifier = "button_hovered"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("5_n7k4d")])
+settings = SubResource("Resource_ehlbm")
+
+[resource]
+script = ExtResource("1_is321")
+soundEffects = Array[Object]([SubResource("Resource_qhr5o"), SubResource("Resource_kqxme"), SubResource("Resource_pfv0n"), SubResource("Resource_sfg0e")])

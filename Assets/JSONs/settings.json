@@ -1,0 +1,31 @@
+{
+    "sound_types": [
+        {
+            "typeEnumName": "NONE",
+            "typeEnumIndex": 0
+        },
+        {
+            "typeEnumName": "MUSIC",
+            "typeEnumIndex": 1
+        },
+        {
+            "typeEnumName": "EFFECT",
+            "typeEnumIndex": 2
+        },
+        {
+            "typeEnumName": "AMBIANCE",
+            "typeEnumIndex": 3
+        },
+        {
+            "typeEnumName": "DIALOGUE",
+            "typeEnumIndex": 4
+        }
+    ],
+    "sound_settings": {
+        "0":100,
+        "1":20,
+        "2":100,
+        "3":100,
+        "4":100
+    }
+}

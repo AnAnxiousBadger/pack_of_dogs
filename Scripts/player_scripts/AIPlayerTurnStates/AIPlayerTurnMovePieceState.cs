@@ -58,10 +58,7 @@ public class AIPlayerTurnMovePieceState : PlayerTurnBaseState
         }
         // Get biggest score move or random from biggests → select piece
         List<AIMove> orderedMoves = possibleMoves.OrderByDescending(move => move.Score).ToList();
-        /*foreach (AIMove move in orderedMoves)
-        {
-            GD.Print(move.Piece.Name + " - " + move.Score);
-        }*/
+
         List<AIMove> largestScoreMoves = new() {orderedMoves[0]};
         for (int i = 1; i < orderedMoves.Count; i++)
         {
@@ -70,8 +67,7 @@ public class AIPlayerTurnMovePieceState : PlayerTurnBaseState
             }
         }
         AIMove selectedMove = largestScoreMoves[RandomGenerator.Instance.GetRandIntInRange(0, largestScoreMoves.Count - 1)];
-        //GD.Print("Moved with: " + selectedMove.Piece.Name);
-        //GD.Print("----------------------");
+
         return selectedMove;
     }
 

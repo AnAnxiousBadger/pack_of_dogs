@@ -4,28 +4,29 @@ using System.Collections.Generic;
 
 public partial class AudioManager : Node
 {
+    // AUTOLOAD
     public static AudioManager Instance { get; private set;}
-    [Export] private int _streamPlayerNum = 16;
-    private string _bus = "Master";
-    private Queue<AudioStreamPlayer3D> _avaiblePlayers;
-    private AudioStreamPlayer _backgroundMusicController;
-    private Timer _musicRestartTimer;
-    private bool _muteMusic = false;
-    [Export] public bool MuteMusic {
+
+    // SETUP
+    private int _3DStreamPlayerNum = 16;
+    public bool MuteMusic {
         get { return _muteMusic; }
         set {
             _muteMusic = value;
-            if(value){
-                _backgroundMusicController.VolumeDb = -80f;
-            }
-            else{
-                _backgroundMusicController.VolumeDb = 0f;
-            }
-            
+            int musicBusIndex = AudioServer.GetBusIndex(SoundEffect.SoundType.MUSIC.ToString());
+            AudioServer.SetBusMute(musicBusIndex, value);
         }
     }
-    [Export] private float _replayDelay = 15f;
+    private float _replayMusicDelay = 15f;
 
+    // OTHERS
+    private Queue<AudioStreamPlayer3D> _avaiblePlayers;
+    private AudioStreamPlayer3D _musicPlayer;
+    private Timer _musicRestartTimer;
+    private bool _muteMusic = false;
+    private Dictionary<SoundEffect.SoundType, int> _soundSettings = new();
+
+    
     public override void _EnterTree()
     {
         if(Instance != null){
@@ -35,29 +36,24 @@ public partial class AudioManager : Node
         Instance = this;
     }
     public override void _Ready(){
+        // Load settings
+        LoadSoundSettings();
+
         // Set up background music
-        Timer _musicRestartTimer = new();
+        _musicRestartTimer = new();
         AddChild(_musicRestartTimer);
-        _musicRestartTimer.WaitTime = _replayDelay;
+        _musicRestartTimer.WaitTime = _replayMusicDelay;
         _musicRestartTimer.OneShot = true;
-
-        _backgroundMusicController = new();
-        AddChild(_backgroundMusicController);
-        _backgroundMusicController.Stream = GD.Load<AudioStream>("res://Assets/sounds/audio_streams/background_music.mp3");
-
-        _musicRestartTimer.Timeout += StartMusic;
-        _backgroundMusicController.Finished += () => _musicRestartTimer.Start();
+        _musicRestartTimer.Timeout += () => PlayMusic(ScenesController.Instance.currLevelController.LevelMusicAudioLibrary.GetRandomSound());
         
-
         // Set up sound queue
         _avaiblePlayers = new();
 
-		for (int i = 0; i < _streamPlayerNum; i++)
+		for (int i = 0; i < _3DStreamPlayerNum; i++)
 		{
 			AudioStreamPlayer3D ap = new();
 			AddChild(ap);
 			_avaiblePlayers.Enqueue(ap);
-			ap.Bus = _bus;
 			ap.Finished += () => {_OnStreamFinished(ap); };
 		}
     }
@@ -74,19 +70,36 @@ public partial class AudioManager : Node
 		_avaiblePlayers.Enqueue(p);
 	}
 
-    public AudioStreamPlayer3D PlaySound(Dictionary<string, object> soundDictionary, Node3D parentNode, bool playIn3D){
+    private void LoadSoundSettings(){
+
+        _soundSettings = JSONLoader.Instance.DeserializeJSONElement<Dictionary<SoundEffect.SoundType, int>>("settings", "sound_settings");
+        foreach(KeyValuePair<SoundEffect.SoundType, int> entry in _soundSettings)
+        {
+            int busindex = AudioServer.GetBusIndex(entry.Key.ToString());
+            if (busindex >= 0)
+            {
+                AudioServer.SetBusVolumeDb(busindex, Mathf.LinearToDb(entry.Value / 100f));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Plays a sound at the given location. It follows the <c> parentNode </c> as source.
+    /// </summary>
+    /// <param name="soundDictionary"></param>
+    /// <param name="parentNode"></param>
+    /// <param name="playIn3D"></param>
+    /// <returns></returns>
+    public AudioStreamPlayer3D PlaySoundIn3D(Dictionary<string, object> soundDictionary, Node3D parentNode){
         if(_avaiblePlayers.Count > 0){
             AudioStreamPlayer3D audioPlayer = _avaiblePlayers.Dequeue();
 
             // Set up player
-            if(playIn3D){
-                audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.InverseDistance;
-            }
-            else{
-                audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.Disabled;
-            }
+            audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.InverseDistance;
             audioPlayer.PitchScale = 1f + (float)soundDictionary["delta_pitch_scale"];
             audioPlayer.Stream = (AudioStream)soundDictionary["audio_stream"];
+            SoundEffect.SoundType soundEffectType = (SoundEffect.SoundType)soundDictionary["sound_type"];
+            audioPlayer.Bus = (StringName)soundEffectType.ToString();
 
             audioPlayer.Reparent(parentNode);
             audioPlayer.Position = Vector3.Zero;
@@ -97,14 +110,22 @@ public partial class AudioManager : Node
             return null;
         }
 	}
+
+    /// <summary>
+    /// Plays a sound without 3D attenuation.
+    /// </summary>
+    /// <param name="soundDictionary"></param>
+    /// <returns></returns>
     public AudioStreamPlayer3D PlaySound(Dictionary<string, object> soundDictionary){
-        if(_avaiblePlayers.Count > 0){
+        if(_avaiblePlayers.Count > 0 && soundDictionary != null){
             AudioStreamPlayer3D audioPlayer = _avaiblePlayers.Dequeue();
 
             // Set up player
             audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.Disabled;
             audioPlayer.PitchScale = 1f + (float)soundDictionary["delta_pitch_scale"];
             audioPlayer.Stream = (AudioStream)soundDictionary["audio_stream"];
+            SoundEffect.SoundType soundEffectType = (SoundEffect.SoundType)soundDictionary["sound_type"];
+            audioPlayer.Bus = (StringName)soundEffectType.ToString();
 
             audioPlayer.Play();
             return audioPlayer;
@@ -113,20 +134,46 @@ public partial class AudioManager : Node
             return null;
         }
     }
+    public AudioStreamPlayer3D PlayMusic(Dictionary<string, object> soundDictionary){
+        AudioStreamPlayer3D audioPlayer;
+        if(_musicPlayer != null && soundDictionary != null){
+            audioPlayer = _musicPlayer;
+        }
+        else if(_avaiblePlayers.Count > 0 && soundDictionary != null){
+            audioPlayer = _avaiblePlayers.Dequeue();
+            _musicPlayer = audioPlayer;
+        }
+        else {
+            return null;
+        }
+        audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.Disabled;
+        audioPlayer.PitchScale = 1f + (float)soundDictionary["delta_pitch_scale"];
+        audioPlayer.Stream = (AudioStream)soundDictionary["audio_stream"];
+        audioPlayer.Bus = SoundEffect.SoundType.MUSIC.ToString();
 
-    public void StartMusic(){
-        /*if(!MuteMusic){
-            _backgroundMusicController.Playing = true;
-        }*/
-        _backgroundMusicController.Playing = true;
-		
-	}
+        audioPlayer.Play();
+        _musicPlayer.Finished += _OnMusicFinished;
+
+        return audioPlayer;
+    }
     public void StopMusic(){
-        _backgroundMusicController.Playing = false;
+        if(_musicPlayer != null && _musicPlayer.IsPlaying()){
+            _musicPlayer.Finished -= _OnMusicFinished;
+            _musicPlayer.Playing = false;
+        }
     }
     public bool IsMusicPlaying(){
-        return _backgroundMusicController.Playing;
+        if(_musicPlayer != null){
+            return _musicPlayer.Playing;
+        }
+        else{
+            return false;
+        }
     }
 
-    
+    private void _OnMusicFinished(){
+        _musicPlayer.Finished -= _OnMusicFinished;
+        _musicPlayer = null;
+        _musicRestartTimer.Start();
+    }
 }

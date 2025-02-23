@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c12ldrm2t1xij"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_upuyo"]
-[ext_resource type="Material" uid="uid://bomvpa17kn017" path="res://Assets/smoke_mat.tres" id="1_usdsp"]
+[ext_resource type="Material" uid="uid://bomvpa17kn017" path="res://Assets/materials/smoke_mat.tres" id="1_usdsp"]
 
 [sub_resource type="Curve" id="Curve_e8svf"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.353135, 0.535099), 0.0, 0.0, 0, 0, Vector2(0.829545, 0), 0.0, 0.0, 0, 0]
@@ -43,8 +43,6 @@ anim_speed_max = 1.0
 
 [node name="sand_dust_ring_visual_effect" type="Node3D"]
 script = ExtResource("1_upuyo")
-effectName = "sand_dust_ring_visual_effect"
-poolCount = 5
 
 [node name="particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)

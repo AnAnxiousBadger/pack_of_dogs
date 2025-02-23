@@ -4,7 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public partial class VisualEffectController : Node3D, IPoolable
 {
-	[Export] private BaseSoundEffect effectSound;
+	[Export] private SoundEffect effectSound;
 	public string Identifier { get; set; }
 	public Node PoolableNode {
 		get{
@@ -16,7 +16,7 @@ public partial class VisualEffectController : Node3D, IPoolable
 	public virtual void Play(Vector3 globalPos){
 		GlobalPosition = globalPos;
 		if(effectSound != null){
-			AudioManager.Instance.PlaySound(effectSound.GetSound());
+			AudioManager.Instance.PlaySound(effectSound.GetSoundData());
 		}
 	}
 

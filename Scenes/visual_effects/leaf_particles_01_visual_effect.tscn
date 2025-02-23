@@ -1,7 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmuly4x4bj4yh"]
+[gd_scene load_steps=15 format=3 uid="uid://cmuly4x4bj4yh"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_sbm4r"]
 [ext_resource type="Texture2D" uid="uid://euypu04frj07" path="res://Assets/textures/leaf_particle_texture_01.png" id="2_sj8uw"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_54vjm"]
+[ext_resource type="AudioStream" uid="uid://dfpvsqsngf7k4" path="res://Assets/sounds/audio_streams/visual_effect_sounds/vegetation_01.mp3" id="4_5cf4f"]
+[ext_resource type="AudioStream" uid="uid://cqkpkwsavxfcc" path="res://Assets/sounds/audio_streams/visual_effect_sounds/vegetation_02.mp3" id="5_5wj0v"]
+[ext_resource type="AudioStream" uid="uid://erph6es24eoe" path="res://Assets/sounds/audio_streams/visual_effect_sounds/vegetation_03.mp3" id="6_cppt7"]
+[ext_resource type="AudioStream" uid="uid://l37mu8ornpqk" path="res://Assets/sounds/audio_streams/visual_effect_sounds/vegetation_04.mp3" id="7_od670"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="7_q07qk"]
+[ext_resource type="AudioStream" uid="uid://diopvxvijyc2c" path="res://Assets/sounds/audio_streams/visual_effect_sounds/vegetation_05.mp3" id="8_nntlp"]
+
+[sub_resource type="Resource" id="Resource_sn7gx"]
+script = ExtResource("3_54vjm")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_3a71e"]
+script = ExtResource("7_q07qk")
+identifier = "vegetation_clicked"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("4_5cf4f"), ExtResource("5_5wj0v"), ExtResource("6_cppt7"), ExtResource("7_od670"), ExtResource("8_nntlp")])
+settings = SubResource("Resource_sn7gx")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x54my"]
 transparency = 2
@@ -37,6 +55,7 @@ color = Color(0.509576, 0.65888, 0.197495, 1)
 
 [node name="leaf_particles_01_visual_effect" type="Node3D"]
 script = ExtResource("1_sbm4r")
+effectSound = SubResource("Resource_3a71e")
 
 [node name="particles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_x54my")

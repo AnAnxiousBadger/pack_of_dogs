@@ -1,20 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dby173sn3x80l"]
+[gd_scene load_steps=8 format=3 uid="uid://dby173sn3x80l"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/SimpleVisualEffectController.cs" id="1_kg3bg"]
 [ext_resource type="Shader" uid="uid://d3vrtlueo5ac2" path="res://Assets/materials/shaders/highlight_node_shader/highlight_node_shader.tres" id="1_qy0e2"]
+[ext_resource type="Texture2D" uid="uid://bhhdy6s2nan1c" path="res://Assets/materials/shaders/highlight_node_shader/high_light_node_radial_gradient.tres" id="3_jrgs4"]
+[ext_resource type="Texture2D" uid="uid://m17wueprxfl3" path="res://Assets/materials/shaders/highlight_node_shader/highlight_node_noise_texture_01.tres" id="4_j56t8"]
+[ext_resource type="Texture2D" uid="uid://3hal617hpv0a" path="res://Assets/materials/shaders/highlight_node_shader/highlight_node_noise_texture_02.tres" id="5_r82tq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kx5h1"]
 render_priority = 0
 shader = ExtResource("1_qy0e2")
 shader_parameter/noise_01_rotation_speed = 1.0
-shader_parameter/noise_02_rotation_speed2 = 1.0
+shader_parameter/gradient_texture = ExtResource("3_jrgs4")
+shader_parameter/noise_01_texture = ExtResource("4_j56t8")
+shader_parameter/noise_02 = ExtResource("5_r82tq")
 
 [sub_resource type="QuadMesh" id="QuadMesh_s63kg"]
 
 [node name="highlight_node_visual_effect" type="Node3D"]
 script = ExtResource("1_kg3bg")
-effectName = "highlight_node_visual_effect"
-poolCount = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

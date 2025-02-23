@@ -1,21 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://dr0xn4cbjhgst"]
+[gd_scene load_steps=8 format=3 uid="uid://dr0xn4cbjhgst"]
 
 [ext_resource type="Script" path="res://Scripts/board_scripts/board_nodes/BasicNodeController.cs" id="1_v33p2"]
-[ext_resource type="Material" uid="uid://fqd7lvxqxi6b" path="res://Assets/materials/base_color_materials/yellow_mat.tres" id="2_u8puj"]
+[ext_resource type="Material" uid="uid://fqd7lvxqxi6b" path="res://Assets/materials/base_color_mats/yellow_mat.tres" id="2_u8puj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5ls1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sswvo"]
 
-[node name="board_node_01" type="StaticBody3D"]
+[sub_resource type="Animation" id="Animation_hg5w6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("node_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v4w8r"]
+resource_name = "up_and_down"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("node_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ak7mm"]
+_data = {
+"RESET": SubResource("Animation_hg5w6"),
+"up_and_down": SubResource("Animation_v4w8r")
+}
+
+[node name="board_node_01" type="StaticBody3D" node_paths=PackedStringArray("topGuide")]
 script = ExtResource("1_v33p2")
+topGuide = NodePath("node_mesh/top_guide")
 
 [node name="node_mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_u5ls1")
 skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("2_u8puj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="top_guide" type="Node3D" parent="node_mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+
+[node name="node_collision_shape" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sswvo")
 
 [node name="modifiers" type="Node3D" parent="."]
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ak7mm")
+}

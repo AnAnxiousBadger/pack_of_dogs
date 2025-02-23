@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dw8gdbdagm0na"]
+
+[ext_resource type="Texture2D" uid="uid://bc1jhjfq8hu78" path="res://Assets/materials/classic_board_frame_mat/classic_board_frame_diffuse.png" id="1_rej3j"]
+[ext_resource type="Texture2D" uid="uid://br6abgos7227m" path="res://Assets/materials/classic_board_frame_mat/classic_board_frame_normal.png" id="2_83mgl"]
+[ext_resource type="Texture2D" uid="uid://cbpceb18nqyti" path="res://Assets/materials/classic_board_frame_mat/classic_board_frame_roughness.png" id="3_o53hq"]
+
+[resource]
+albedo_texture = ExtResource("1_rej3j")
+roughness_texture = ExtResource("3_o53hq")
+normal_enabled = true
+normal_texture = ExtResource("2_83mgl")

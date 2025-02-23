@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class GoatPathManager : Node3D, IPoolManager
 {
+	// EXPORTS
 	[Export] public AudioLibrary goatAudioLibrary;
 	[Export] private Node3D _goatContainer;
 	[Export] private GoatPathController[] _goatPaths;

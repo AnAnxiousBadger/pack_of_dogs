@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://sq6lib15ysi4"]
+[gd_scene load_steps=11 format=3 uid="uid://sq6lib15ysi4"]
 
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableVisualEffect.cs" id="2_02218"]
-[ext_resource type="ArrayMesh" uid="uid://gvwb3yveeogx" path="res://Assets/meshes/skip_button_mesh.res" id="2_ar8bw"]
-[ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/button_tickable_animations.res" id="3_0sha5"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/TickableSoundEffect.cs" id="3_ae47i"]
-[ext_resource type="Script" path="res://Scripts/board_scripts/SkipButtonController.cs" id="5_7tcvn"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/tickable_scripts/TickableVisualEffect.cs" id="2_02218"]
+[ext_resource type="ArrayMesh" uid="uid://gvwb3yveeogx" path="res://Assets/meshes/tickable_meshes/classic_mode/skip_button_mesh.res" id="2_ar8bw"]
+[ext_resource type="AnimationLibrary" uid="uid://bndep61urvc6a" path="res://Assets/animations/button_tickable_animations.res" id="3_0sha5"]
+[ext_resource type="Resource" uid="uid://elrvq3h2arvy" path="res://Assets/sounds/audio_libraries/roll_and_skip_button_audio_library.tres" id="3_lpe7h"]
+[ext_resource type="Script" path="res://Scripts/board_scripts/tickable_scripts/SkipButtonController.cs" id="5_7tcvn"]
+[ext_resource type="Material" uid="uid://2kkdxwljsdy1" path="res://Assets/materials/skip_button_mat/skip_button_mat.tres" id="5_p18he"]
 
 [sub_resource type="Resource" id="Resource_rxw5i"]
 script = ExtResource("2_02218")
@@ -27,58 +28,14 @@ allowOnDisabledTickableButtonClicks = true
 signaltype = 4
 effectName = "sand_dust_ring_visual_effect"
 
-[sub_resource type="Resource" id="Resource_g62nw"]
-script = ExtResource("3_ae47i")
-allowOnDisabled = true
-signaltype = 3
-effectName = "button_click"
-
-[sub_resource type="Resource" id="Resource_om8xf"]
-script = ExtResource("3_ae47i")
-allowOnDisabled = true
-signaltype = 4
-effectName = "button_click"
-
-[sub_resource type="Resource" id="Resource_lj77c"]
-script = ExtResource("3_ae47i")
-allowOnDisabled = true
-signaltype = 2
-effectName = "button_hover"
-
-[sub_resource type="Resource" id="Resource_w7hsr"]
-script = ExtResource("3_ae47i")
-allowOnDisabled = false
-signaltype = 0
-effectName = "button_hover"
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_r45px"]
 size = Vector3(4.25732, 1.78229, 1.74329)
-
-[sub_resource type="Animation" id="Animation_7dmkm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("tickable_animated:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqlmb"]
-_data = {
-"RESET": SubResource("Animation_7dmkm")
-}
 
 [node name="skip_button_tickable" type="StaticBody3D" node_paths=PackedStringArray("_anim")]
 collision_layer = 4
 script = ExtResource("5_7tcvn")
 Effects = Array[Object]([SubResource("Resource_rxw5i"), SubResource("Resource_rjeph"), SubResource("Resource_316ud")])
-SoundEffects = Array[Object]([SubResource("Resource_g62nw"), SubResource("Resource_om8xf"), SubResource("Resource_lj77c"), SubResource("Resource_w7hsr")])
+AudioLibrary = ExtResource("3_lpe7h")
 _anim = NodePath("AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -90,9 +47,9 @@ shape = SubResource("BoxShape3D_r45px")
 [node name="skip_button_textured" type="MeshInstance3D" parent="tickable_animated"]
 mesh = ExtResource("2_ar8bw")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_p18he")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_uqlmb"),
 "skip": ExtResource("3_0sha5")
 }
