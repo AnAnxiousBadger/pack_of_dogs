@@ -71,7 +71,7 @@ operator = 2
 operator = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_hrbku"]
-size = Vector2(1686.01, 881)
+size = Vector2(1686.01, 778)
 title = "Rotate UV"
 attached_nodes = PackedInt32Array(10, 25, 27, 15, 16, 24, 23, 21, 22, 19, 20, 18, 17, 11)
 
@@ -289,7 +289,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-416.464, -52.6131)
 flags/unshaded = true
 flags/shadows_disabled = true
 nodes/fragment/0/position = Vector2(840, 120)

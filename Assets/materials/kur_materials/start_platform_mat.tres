@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cion1ft4uebvv"]
+
+[ext_resource type="Texture2D" uid="uid://dggjmd8jifyw6" path="res://Assets/materials/kur_materials/start_platform_diffuse.png" id="1_8re2d"]
+[ext_resource type="Texture2D" uid="uid://st0uyw4ojhly" path="res://Assets/materials/kur_materials/start_platform_normal.png" id="2_0cqse"]
+[ext_resource type="Texture2D" uid="uid://e4ei0md8ep2o" path="res://Assets/materials/kur_materials/start_platform_roughness.png" id="3_o7y46"]
+
+[resource]
+albedo_texture = ExtResource("1_8re2d")
+roughness_texture = ExtResource("3_o7y46")
+normal_enabled = true
+normal_texture = ExtResource("2_0cqse")

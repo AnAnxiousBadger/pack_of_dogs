@@ -35,7 +35,7 @@ public partial class BoardController : Node3D
 		}
 		
 		// Get all nodes from node container
-		Godot.Collections.Array<Node> nodeContainerChildren = GetNode("node_container").GetChildren();
+		Godot.Collections.Array<Node> nodeContainerChildren = GetNode("nodes_container").GetChildren();
 		
 		for (int i = 0; i < nodeContainerChildren.Count; i++)
 		{

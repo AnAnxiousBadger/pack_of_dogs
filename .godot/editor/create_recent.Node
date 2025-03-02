@@ -1,6 +1,7 @@
+Node3D
+Node
 MeshInstance3D
 AudioStreamPlayer3D
-Node3D
 AnimationPlayer
 VBoxContainer
 MarginContainer
@@ -11,4 +12,3 @@ HBoxContainer
 AudioStreamPlayer
 PanelContainer
 DirectionalLight3D
-WorldEnvironment

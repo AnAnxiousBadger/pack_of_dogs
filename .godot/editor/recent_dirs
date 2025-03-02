@@ -1,3 +1,6 @@
+res://Assets/materials/kur_materials
+res://Assets/board_setup_resources/kur_mode
+res://Assets/materials/shaders/fog_shader
 res://Assets/materials/shaders/highlight_node_shader
 res://Assets/materials/shaders/end_node_shader
 res://Assets/materials/shaders/piece_arrived_effect_shader
@@ -17,6 +20,4 @@ res://Scripts/sound_scripts
 res://Assets/UI
 res://Assets/UI/fonts/Poppins
 res://Scripts/UI_scripts/main_menu
-res://Assets/UI/fonts/Merriweather
-res://Scripts/UI_scripts/UIAnimation
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets

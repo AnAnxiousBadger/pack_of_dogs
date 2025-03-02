@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PiecePositionListResource" load_steps=2 format=3 uid="uid://cxasvvhilimrv"]
+
+[ext_resource type="Script" path="res://Scripts/tool_scripts/PiecePositionListResource.cs" id="1_2yhts"]
+
+[resource]
+script = ExtResource("1_2yhts")
+poses = PackedVector3Array(9.16967, 1.522, -3.75131, 7.88028, 1.522, -3.01073, 8.8737, 1.522, -2.73161, 8.61835, 1.522, -1.74221, 9.903, 1.522, -2.3397)
