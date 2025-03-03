@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bfbqtee60xd21"]
+
+[ext_resource type="Texture2D" uid="uid://dkx1f1oxrkqxd" path="res://Assets/materials/roll_button_mat/gray_roll_button_diffuse.png" id="1_25kne"]
+[ext_resource type="Texture2D" uid="uid://garou7nnw0cp" path="res://Assets/materials/roll_button_mat/roll_button_normal.png" id="2_xs51i"]
+[ext_resource type="Texture2D" uid="uid://wld03yf48eo0" path="res://Assets/materials/roll_button_mat/roll_button_roughness.png" id="3_qrxyk"]
+
+[resource]
+specular_mode = 2
+albedo_texture = ExtResource("1_25kne")
+roughness_texture = ExtResource("3_qrxyk")
+emission = Color(0.3234, 0.49, 0.49, 1)
+normal_enabled = true
+normal_texture = ExtResource("2_xs51i")
