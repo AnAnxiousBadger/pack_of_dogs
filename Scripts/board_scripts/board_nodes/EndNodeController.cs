@@ -3,7 +3,7 @@ using Godot;
 
 public partial class EndNodeController : BoardNodeController
 {   
-    private enum MeshStereo {L, R};
+    private enum MeshStereo {L, R, LR};
     [Export] private MeshStereo _stereo;
     private VisualEffectController _hihglightEffectController;
     public override void DoOnLeaveNodeAction(PieceController piece){}

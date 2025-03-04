@@ -1,9 +1,11 @@
+res://Assets/board_setup_resources/kur_mode
+res://Scenes/board_scenes
+res://Scenes/visual_effects
 res://Assets/materials/dice_mat
 res://Assets/materials/skip_button_mat
 res://Assets/materials/roll_button_mat
 res://Assets/materials/piece_mats
 res://Assets/materials/kur_materials
-res://Assets/board_setup_resources/kur_mode
 res://Assets/materials/shaders/fog_shader
 res://Assets/materials/shaders/highlight_node_shader
 res://Assets/materials/shaders/end_node_shader
@@ -13,11 +15,9 @@ res://Assets/meshes/board_meshes/classic_mode
 res://Assets/meshes/visual_effect_meshes
 res://Assets/meshes
 res://Assets/sounds/audio_libraries
-res://Scenes/board_scenes
 res://Assets/UI/button_styles
 res://
 res://Scripts
 res://Scripts/UI_scripts
 res://Assets
-res://Scenes
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets

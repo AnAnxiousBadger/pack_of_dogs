@@ -6,7 +6,7 @@ public partial class ClassicModeLevelController : LevelController
 {
     [Export] private bool _runUniqueScene = false;
     public override LevelScene CurrLevel {get { return LevelScene.CLASSIC_MODE;}}
-    public Godot.Collections.Dictionary<string, string> levelSettings;
+    public Godot.Collections.Dictionary<string, string> levelSettings = new();
     public override void _Ready()
     {
         if(_runUniqueScene){

@@ -978,6 +978,7 @@ shadow_size = 5
 
 [node name="ROOT_classic_mode" type="Node3D"]
 script = ExtResource("1_vgp5x")
+_runUniqueScene = true
 LevelMusicAudioLibrary = SubResource("Resource_a10m2")
 
 [node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController")]
@@ -1020,7 +1021,7 @@ current = true
 fov = 20.0
 size = 9.209
 
-[node name="widn_particles" type="GPUParticles2D" parent="."]
+[node name="wind_particles" type="GPUParticles2D" parent="."]
 position = Vector2(499, 284)
 process_material = SubResource("ParticleProcessMaterial_gghh6")
 lifetime = 5.0

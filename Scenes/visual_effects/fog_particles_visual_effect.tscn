@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://tdxh04hr7xx8"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_5ixqb"]
+[ext_resource type="Texture2D" uid="uid://k277qlwgiupv" path="res://Assets/textures/smoke_sprite_sheet.jpg" id="2_ehd74"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r68nt"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_ehd74")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.5
+
+[sub_resource type="Curve" id="Curve_uhr8n"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.206061, 0.66567), 0.0, 0.0, 0, 0, Vector2(1, 0.619019), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p2stt"]
+curve = SubResource("Curve_uhr8n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_33huk"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.07288e-05
+angle_max = 90.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+radial_velocity_min = 1.99998
+radial_velocity_max = 1.99998
+gravity = Vector3(-5, 0, 0)
+tangential_accel_min = 10.0
+tangential_accel_max = 10.0
+scale_min = 2.0
+scale_max = 2.0
+color = Color(0.37414, 0.374139, 0.374139, 1)
+alpha_curve = SubResource("CurveTexture_p2stt")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_wks5d"]
+
+[node name="fog_particles_visual_effect" type="Node3D"]
+script = ExtResource("1_5ixqb")
+
+[node name="particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_r68nt")
+emitting = false
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_33huk")
+draw_pass_1 = SubResource("QuadMesh_wks5d")
