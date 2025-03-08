@@ -15,4 +15,8 @@ public partial class ParticleSystemVisualEffectController : VisualEffectControll
         base.Play(globalPos);
         _particles.Emitting = true;
     }
+    public override void Play(Vector3 globalPos, Vector3 globalRot){
+        base.Play(globalPos, globalRot);
+        _particles.Emitting = true;
+    }
 }

@@ -1,6 +1,7 @@
+res://Scenes/visual_effects
+res://Assets/materials/shaders/node_modifier_visual_effect_shaders
 res://Assets/board_setup_resources/kur_mode
 res://Scenes/board_scenes
-res://Scenes/visual_effects
 res://Assets/materials/dice_mat
 res://Assets/materials/skip_button_mat
 res://Assets/materials/roll_button_mat
@@ -19,5 +20,4 @@ res://Assets/UI/button_styles
 res://
 res://Scripts
 res://Scripts/UI_scripts
-res://Assets
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets

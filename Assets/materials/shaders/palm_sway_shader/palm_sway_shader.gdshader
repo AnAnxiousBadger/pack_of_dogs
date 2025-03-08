@@ -43,14 +43,14 @@ group_uniforms;
 
 void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
-	
+
 	vec3 world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	
+
 	float mask = texture(wind_mask_texture, UV).r;
-	
+
 	mat3 inverse_model_matrix = inverse(mat3(MODEL_MATRIX));
 	vec3 local_wind_direction = normalize(inverse_model_matrix * wind_direction);
-	
+
 	float wind_uv_scale = 1.0;
 	float scroll_speed = wind_speed;
 	if(length(world_pos - palm_disturb_pos) < disturb_radius){
@@ -67,7 +67,7 @@ void vertex() {
 		noise_intensity = disturb_noise_intensity;
 	}
 	wind_noise = wind_noise * noise_intensity;
-	
+
 	if(UV.y != 1.0){
 		VERTEX += local_wind_direction * wind_intensity * mask;
 		VERTEX.y += wind_noise * mask;

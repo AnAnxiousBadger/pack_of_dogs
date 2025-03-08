@@ -7,6 +7,10 @@ public partial class SimpleVisualEffectController : VisualEffectController
     {
         base.Play(globalPos);
     }
+    public override void Play(Vector3 globalPos, Vector3 globalRot)
+    {
+        base.Play(globalPos, globalRot);
+    }
 
     public override void EndEffect()
     {

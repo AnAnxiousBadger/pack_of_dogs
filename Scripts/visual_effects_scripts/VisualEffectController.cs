@@ -19,6 +19,13 @@ public partial class VisualEffectController : Node3D, IPoolable
 			AudioManager.Instance.PlaySound(effectSound.GetSoundData());
 		}
 	}
+	public virtual void Play(Vector3 globalPos, Vector3 globalRot){
+		GlobalPosition = globalPos;
+		GlobalRotation = globalRot;
+		if(effectSound != null){
+			AudioManager.Instance.PlaySound(effectSound.GetSoundData());
+		}
+	}
 
 	public virtual void EndEffect(){
 		EmitSignal(SignalName.OnEffectEnded, this);

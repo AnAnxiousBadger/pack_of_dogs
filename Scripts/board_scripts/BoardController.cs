@@ -76,7 +76,6 @@ public partial class BoardController : Node3D
 			// Set win condition
 			pieces[i].player.piecesToDeliver += 1;
 		}
-		GD.Print("setup");
 	}
 
 	public void PieceLeavesStartPos(PieceController piece){

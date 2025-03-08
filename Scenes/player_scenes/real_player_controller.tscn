@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://opx4owjy1o2d"]
 
 [ext_resource type="Script" path="res://Scripts/player_scripts/RealPlayerController.cs" id="1_emfoj"]
-[ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/board_setup_resources/classic_mode/original_roll_chance.tres" id="2_3kfd2"]
+[ext_resource type="Resource" uid="uid://bafisen3m5w21" path="res://Assets/board_setup_resources/original_roll_chance.tres" id="2_3kfd2"]
 
 [node name="real_player_01" type="Node"]
 script = ExtResource("1_emfoj")

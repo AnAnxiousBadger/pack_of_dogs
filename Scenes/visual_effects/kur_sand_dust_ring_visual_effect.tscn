@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://4aefmaknqhit"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_gt2jd"]
+[ext_resource type="Material" uid="uid://bomvpa17kn017" path="res://Assets/materials/smoke_mat.tres" id="2_824jw"]
+
+[sub_resource type="Curve" id="Curve_dryfa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.353135, 0.535099), 0.0, 0.0, 0, 0, Vector2(0.829545, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qoirt"]
+curve = SubResource("Curve_dryfa")
+
+[sub_resource type="Curve" id="Curve_22fpi"]
+_data = [Vector2(0, 0.472527), 0.0, 0.0, 0, 0, Vector2(0.443182, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.362637), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_58st4"]
+curve = SubResource("Curve_22fpi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_slek3"]
+particle_flag_rotate_y = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 0.1, 1)
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(1, 0, 1)
+spread = 180.0
+flatness = 1.0
+radial_velocity_min = 1.99998
+radial_velocity_max = 2.99998
+gravity = Vector3(0, 0, 0)
+damping_min = 4.0
+damping_max = 4.0
+scale_curve = SubResource("CurveTexture_58st4")
+color = Color(0.47, 0.47, 0.47, 0.54902)
+alpha_curve = SubResource("CurveTexture_qoirt")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_vvlyi"]
+
+[node name="sand_dust_ring_visual_effect" type="Node3D"]
+script = ExtResource("1_gt2jd")
+
+[node name="particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = ExtResource("2_824jw")
+cast_shadow = 0
+emitting = false
+amount = 48
+one_shot = true
+explosiveness = 1.0
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_slek3")
+draw_pass_1 = SubResource("QuadMesh_vvlyi")

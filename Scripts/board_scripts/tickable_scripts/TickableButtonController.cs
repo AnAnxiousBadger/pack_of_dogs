@@ -15,6 +15,9 @@ public abstract partial class TickableButtonController : StaticBody3D, ITickable
     public Vector3 GetGlobalPos(){
         return GlobalPosition;
     }
+    public Vector3 GetGlobalRot(){
+        return GlobalRotation;
+    }
     protected virtual void DisableButton(){
         ITickable tickable = this;
         tickable.PlaySoundEffect(ITickable.SignalType.DISABLE);

@@ -1,0 +1,867 @@
+[gd_scene load_steps=77 format=4 uid="uid://dxsywtsl0611q"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/AnimPlayerVisualEffectController.cs" id="1_sx06e"]
+[ext_resource type="AudioStream" uid="uid://cjomyw8e24mad" path="res://Assets/sounds/audio_streams/visual_effect_sounds/double_turn_melody.mp3" id="2_xrnen"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_d4tu6"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="4_g4ffb"]
+[ext_resource type="Shader" uid="uid://h7qcw8b3d8tw" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_mesh_shader.tres" id="5_bucvf"]
+[ext_resource type="Texture2D" uid="uid://dqbjl7ben5nkg" path="res://Assets/materials/shaders/node_modifier_visual_effect_shaders/rosette_bottom_gradient_texture.tres" id="7_ukmht"]
+[ext_resource type="Texture2D" uid="uid://u8br18oni240" path="res://Assets/textures/cuneiforms/tab_cuneiform.png" id="12_od0u1"]
+
+[sub_resource type="Resource" id="Resource_mttxd"]
+script = ExtResource("4_g4ffb")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_ru12j"]
+script = ExtResource("3_d4tu6")
+identifier = "double_turn_melody"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_xrnen")])
+settings = SubResource("Resource_mttxd")
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_fgx85"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_bchuv"]
+parameter_name = "alpha"
+hint = 2
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_23mdt"]
+default_input_values = [2, false, 3, 0.2]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_xut8t"]
+parameter_name = "rosette_diffuse"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mjd41"]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_o4qk8"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_kc804"]
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_hx27s"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+
+uniform sampler2D rosette_diffuse;
+uniform float alpha : hint_range(0, 1, 0.10000000149012) = 1;
+
+
+
+void fragment() {
+	vec4 n_out6p0;
+// Texture2D:6
+	n_out6p0 = texture(rosette_diffuse, UV);
+
+
+// Input:7
+	vec4 n_out7p0 = COLOR;
+	float n_out7p4 = n_out7p0.a;
+
+
+// Fresnel:2
+	float n_in2p3 = 0.20000;
+	float n_out2p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_in2p3);
+
+
+// FloatOp:9
+	float n_out9p0 = n_out7p4 * n_out2p0;
+
+
+// FloatParameter:11
+	float n_out11p0 = alpha;
+
+
+// FloatOp:10
+	float n_out10p0 = n_out9p0 * n_out11p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out6p0.xyz);
+	ALPHA = n_out10p0;
+
+
+}
+"
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeFresnel_23mdt")
+nodes/fragment/2/position = Vector2(-540, 660)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_xut8t")
+nodes/fragment/5/position = Vector2(-500, 60)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture_mjd41")
+nodes/fragment/6/position = Vector2(-140, 60)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_o4qk8")
+nodes/fragment/7/position = Vector2(-560, 420)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_kc804")
+nodes/fragment/9/position = Vector2(-200, 420)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_fgx85")
+nodes/fragment/10/position = Vector2(0, 420)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatParameter_bchuv")
+nodes/fragment/11/position = Vector2(-240, 640)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 2, 6, 0, 0, 0, 2, 0, 9, 1, 7, 4, 9, 0, 9, 0, 10, 0, 10, 0, 0, 1, 11, 0, 10, 1)
+
+[sub_resource type="Gradient" id="Gradient_7arj6"]
+colors = PackedColorArray(1, 0.866667, 0, 1, 1, 0.616667, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h784o"]
+gradient = SubResource("Gradient_7arj6")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx0k7"]
+render_priority = 0
+shader = SubResource("VisualShader_hx27s")
+shader_parameter/alpha = 1.0
+shader_parameter/rosette_diffuse = SubResource("GradientTexture2D_h784o")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8f6qh"]
+_surfaces = [{
+"aabb": AABB(-0.307875, 0.00381333, -0.307875, 0.61575, 0.0953199, 0.61575),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMA"),
+"lods": [0.00385624, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("w8CVtOGaAABSgAAAsIAAAPXb//8N2QAADZ+VtCC/AAC/r7GKLK0AADVllbQxPwAAQYAAAEd/AADxff//AAAAAK2WlbRmPQAALX6xiko+AADhmpW0Oz8AALCAAACsfwAADdn//wkkAAAgv5W08WAAACytsYo/UAAAzcCVtDVlAAC3gAAAQYAAAP/////xfQAAmMKVtK2WAAC0wbGKLX4AADs/lbQdZQAArH8AAE5/AAAJJP//8SYAAPFglbTeQAAAP1CxitJSAADJmpW0zcAAAL1/AAC3gAAADYL/////AABRaZW0mMIAANGBsYq0wQAAHWWVtMPAAABOfwAAUoAAAPEm///12wAA3kCVtA2fAADSUrGKv68AADE/lbTJmgAAR38AAL1/AAAAAP//DYIAAGY9lbRRaQAASj6xitGBAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ftgrh"]
+resource_name = "double_turn_rosette_mesh_rosette_flower_mesh_001"
+_surfaces = [{
+"aabb": AABB(-0.307875, 0.00381333, -0.307875, 0.61575, 0.0953199, 0.61575),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9Dfg=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMA"),
+"lods": [0.00385624, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQA")],
+"material": SubResource("ShaderMaterial_tx0k7"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("w8CVtOGadv9SgAAAsIB3/PXb//8N2SH7DZ+VtCC/eve/r7GKLK3a+zVllbQxP9vJQYAAAEd/OMTxff//AABxxa2WlbRmPTrALX6xiko+0cThmpW0Oz+y17CAAACsf9jVDdn//wkkR9cgv5W08WCq1SytsYo/UIfWzcCVtDVliOq3gAAAQYDk6//////xfVXtmMKVtK2Wku60wbGKLX6R7Ds/lbQdZb/ErH8AAE5/yrsJJP//8SZxvPFglbTeQI+zP1CxitJSIrzJmpW0zcCL671/AAC3gBflDYL/////9uNRaZW0mMIE3tGBsYq0wZbkHWWVtMPAjNhOfwAAUoD7z/Em///12zfP3kCVtA2f+sbSUrGKv6+nzzE/lbTJml7KR38AAL1/gcAAAP//DYJbwGY9lbRRaXK2Sj6xitGBecBCa0e0tMTBEgDFZhI6vaUP4MSYEni1Xpg9sbSgUbGDoYetQqpLsQ2hGJv4qIuYYLH8mHixAJfwucOYYrE2gqK4DYKQwLGCF8BKg6nHW4JOwE/cI3+Y2CCGytdHiIHT04882B+Hz9AcJ+bKMiShyyYk4cRNIEXLMCR51ow7G9J4OFjT0zgpzn80tdKnOKvftFyM3nxbt+CjXD7frFmS3whc")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8f6qh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_di1ef"]
+render_priority = 0
+shader = ExtResource("5_bucvf")
+shader_parameter/alpha = 1.0
+shader_parameter/rosette_diffuse = ExtResource("7_ukmht")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dbppr"]
+_surfaces = [{
+"aabb": AABB(-0.456085, -0.0305201, -0.456085, 0.912169, 0.11777, 0.912169),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMAKwAuACoAKwAvAC4AKQAsACgAKQAtACwAPQAvACsAKgAtACkAKgAuAC0AKAAsADQALwAyAC4ALwAzADIALQAwACwALQAxADAAPQAzAC8ALgAxAC0ALgAyADEALAAwADQAMwA3ADIAMwA4ADcAMQA1ADAAMQA2ADUAPQA4ADMAMgA2ADEAMgA3ADYAMAA1ADQAOAA7ADcAOAA8ADsANgA5ADUANgA6ADkAPQA8ADgANwA6ADYANwA7ADoANQA5ADQAPAAqADsAPAArACoAOgAoADkAOgApACgAPQArADwAOwApADoAOwAqACkAOQAoADQA"),
+"lods": [0.0339501, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQAKwAsACgAKwAvACwAPQAvACsAPQArADwAPQA8ADcAKAAsADQALAAwADQAOQAoADQALwAwACwALwAzADAAPQAzAC8APQA3ADMAMwA3ADAAMAA3ADQANwA8ADkANwA5ADQAPAAoADkAPAArACgA")],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 62,
+"vertex_data": PackedByteArray("ZctcjQ2AAACbgFdCjYAAAP//AACgsgAA0rhcje6xAAAFwllXOpkAALhKXI2lSgAA9X9XQix/AABJSQAAsAEAAB97XI2CNAAAJmNZV3g/AAANgFyNmTQAAI2AV0JjfwAAoLIAAAAAAADusVyNLEcAADqZWVf5PQAAWbVcjbhKAADSgFdC9X8AAE7+AABJSQAAfMtcjR97AACGwFlXJmMAAJk0XI3xfwAAY39XQnF/AAAAAAAAXk0AACxHXI0QTgAA+T1ZV8RmAABGtVyNWbUAAAmAV0LSgAAAtbYAAE7+AADfhFyNfMsAANicWVeGwAAA8X9cjWXLAABxf1dCm4AAAF5NAAD//wAAEE5cjdK4AADEZllXBcIAAKVKXI1GtQAALH9XQgmAAACwAQAAtbYAAII0XI3fhAAAeD9ZV9icAAD/f9vnZ3YAAP9/qKh6cAAA/3+JWnpwAAD/f1YbZ3YAAB6J2+cIfQAAwo6oqDN7AADCjolaM3sAAB6JVhsIfQAAooXb58KHAAAeiaiojYwAAB6JiVqNjAAAooVWG8KHAAD/f////38AAFx62+fChwAA4HaoqI2MAADgdolajYwAAFx6VhvChwAA4Hbb5wh9AAA8caioM3sAADxxiVozewAA4HZWGwh9AAD/fzID/38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w0dy4"]
+resource_name = "double_turn_rosette_mesh_rosette_flower_mesh"
+_surfaces = [{
+"aabb": AABB(-0.456085, -0.0305201, -0.456085, 0.912169, 0.11777, 0.912169),
+"attribute_data": PackedByteArray("AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfgAA////////AAAAAP//AAD6f0N+AAD///////8AAAAA//8AAPp/Q34AAP///////wAAAAD//wAA+n9DfpmZMjOZmWVmmZmZmZmZzMxmZjIzZmZlZmZmmZlmZszMMzMyMzMzZWYzM5mZMzPMzJkZAADMTAAA/38AADKzAABl5gAAAAAyM///MjMAAGVm//9lZgAAmZn//5mZAADMzP//zMzMzDIzzMxlZszMmJnMzMzMmRn//8xM////f///MrP//2Xm//+ZmTIzmZkyM5mZMjOZmTIzmZnMzJmZzMyZmczMmZnMzGZmMjNmZjIzZmYyM2ZmMjNmZszMZmbMzGZmzMxmZszMMzMyMzMzMjMzMzIzMzMyMzMzMjMzM8zMMzPMzDMzzMyZGQAAzEwAAP9/AAAyswAAZeYAAAAAmZkAAJmZAACZmf//mZn//5mZ//+ZmczMMjPMzDIzzMwyM8zMMjPMzMzMzMzMzMzMzMzMzMzMmRn//8xM////f///MrP//2Xm//8="),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("AAAEAAEABAADAAEAAwAEAAIAAgAEAAAABQAJAAYACQAIAAYACAAJAAcABwAJAAUACgAOAAsADgANAAsADQAOAAwADAAOAAoADwATABAAEwASABAAEgATABEAEQATAA8AFAAYABUAGAAXABUAFwAYABYAFgAYABQAGQAdABoAHQAcABoAHAAdABsAGwAdABkAHgAiAB8AIgAhAB8AIQAiACAAIAAiAB4AIwAnACQAJwAmACQAJgAnACUAJQAnACMAKwAuACoAKwAvAC4AKQAsACgAKQAtACwARwAvACsAKgAtACkAKgAuAC0AKAAsADYALwAyAC4ALwAzADIALQAwACwALQAxADAARgAzAC8ALgAxAC0ALgAyADEALAAwADUAMwA9ADIAMwA/AD0AMQA5ADAAMQA7ADkARQA/ADMAMgA7ADEAMgA9ADsAMAA5ADQAQABDAD4AQABEAEMAPABBADoAPABCAEEASQBEAEAAPgBCADwAPgBDAEIAOgBBADgARAAqAEMARAArACoAQgAoAEEAQgApACgASAArAEQAQwApAEIAQwAqACkAQQAoADcA"),
+"lods": [0.0339501, PackedByteArray("AAACAAEAAgADAAEABQAHAAYABwAIAAYACgAMAAsADAANAAsADwARABAAEQASABAAFAAWABUAFgAXABUAGQAbABoAGwAcABoAHgAgAB8AIAAhAB8AIwAlACQAJQAmACQATgBSAEoATwBWAFMAdwAvAFAAeABQAHIAeQByAGsASwBUAGQAVABcAGMAcABLAGUAVwBaAFUAWABfAFsAdgBgAFkAdQBoAGAAYQBnAF0AXgBpAGIAagBxAG0AbABuAGYAcwBMAG8AdABRAE0A")],
+"material": SubResource("ShaderMaterial_di1ef"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 122,
+"vertex_data": PackedByteArray("ZctcjQ2A4v6bgFdCjYC5/v//AACgsgD70rhcje6xCPwFwllXOpkr/rhKXI2lSqXO9X9XQix/38RJSQAAsAGMyh97XI2CNNrAJmNZV3g/uccNgFyNmTS/2o2AV0Jjf/nToLIAAAAAvdrusVyNLEfh0zqZWVf5PV3XWbVcjbhKuevSgFdC9X9K6E7+AABJSRvvfMtcjR97MOuGwFlXJmOv65k0XI3xf3vKY39XQnF/db8AAAAAXk1zwixHXI0QTm63+T1ZV8Rm9cBGtVyNWbXV7QmAV0LSgLzqtbYAAE7+jOXfhFyNfMuE49icWVeGwC7o8X9cjWXLfdxxf1dCm4AO1l5NAAD//6vSEE5cjdK4K83EZllXBcJk1KVKXI1GtazPLH9XQgmAKsawAQAAtbadxYI0XI3fhH68eD9ZV9ic5cX/f9vnZ3b///9/qKh6cP///3+JWnpw////f1YbZ3b//x6J2+cIfQLSwo6oqDN7Y83CjolaM3tjzR6JVhsIfQLSooXb58KHwqoeiaiojYwAnB6JiVqNjACcooVWG8KHwqr/f////3//v/9/////f17O/3////9/C+7/f////38L7v9/////f17OXHrb58KH+6lcetvnwoeIs+B2qKiNjBac4HaoqI2MHp7gdolajYwWnOB2iVqNjB6eXHpWG8KH+6lcelYbwoeIs+B22+cIfQLSPHGoqDN7Y808cYlaM3tjzeB2VhsIfQLS/38yA/9//7//fzID/39ezv9/MgP/fwvu/38yA/9/C+7/fzID/39ezv9/2+dndpX1/3/b52d2hv//f9vnZ3aF8f9/2+dndnj1/39WG2d2ofT/f1YbZ3bj7v9/Vhtndi///39WG2d2NPQeidvnCH3h2R6J2+cIfTfWHonb5wh9V9ceidvnCH1txx6JVhsIfTrWHolWGwh9wcQeiVYbCH17xB6JVhsIfbHUooXb58KHMKyihdvnwof7pKKF2+fCh4q3ooXb58KHHZOihdvnwocKrKKFVhvCh5SoooVWG8KHyLSihVYbwod2lf9/////f/+r/3////9/7Mf/f////3/b6/9/////f4vr/3////9/ELrgdolajYyhkuB2iVqNjByt4HaJWo2Mkp/gdolajYzSquB2iVqNjDev4HaJWo2MCangdtvnCH0XxOB22+cIfZTI4Hbb5wh9vNPgdtvnCH003OB2VhsIfXfF4HZWGwh9INbgdlYbCH3K0+B2VhsIfcLY/38yA/9/k67/fzID/38fx/9/MgP/f/Xs/38yA/9/Quz/fzID/39AweB+PLcXf/m/HDxrBA5ESwVbPtoBsclplubF9Jsrx/ygO8TypqbGdJ6/rQmjLKprqiitjqs+qveyxavqqoSXFK07lVa1aJmUs8yXf7ttl1q06/vdfXn7QH2d9hqRgvcKkzb8SofA0v4YdcpuFurMTBOWw8wPuMvfFM7bny5S1MQqbdmZKdHQfiTj1i4qQuf4SV/hrUWm6YVGoOJbQIDlEEb/f+7X/38F8AZw///vV///W7i3F0iZowpbdUkZR2hbODXTzj4Or4QjelwOLzFBNVP+//9/FtotNPDI4xHikQ23LbTopdTgV68gp2auYLZ11puX28h2Vp7J20hj6FgvKZ9nLt3Yt5ejx6OKtea2Zlv1o0dH6AAA/3/RSxZaHG7xSA43G+7oJdHLAHj/B4J+fQFWcVXx0XvQ+7d+RwFpjWkN5oIY/RiH5fglqYgOAXewF4DFPR05orwNj3BSJ/KJ5gMvcREo/GGASP+2fSivarAcCtkQQ/5shRkv5gVMSlPZO8w2EmGfVnw3dveIiD3Sni8Vv3QPmo9dwNip4Lb+ZcfCliAnqjGv269rmXf6JS03zMy+Nbzahjru5JQnx2CLwOO4nQy4S2Ji9OM66+JAeOr881sE88IEwYSaT5JT9G+9Qcc+AvCwM8/T")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dbppr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wrk15"]
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_6kwor"]
+linked_parent_graph_frame = 32
+function = 1
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_lo3qn"]
+default_input_values = [0, Vector2(0, 0)]
+linked_parent_graph_frame = 32
+op_type = 0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_1mxnf"]
+linked_parent_graph_frame = 32
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_k2n82"]
+linked_parent_graph_frame = 32
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_rfw0o"]
+linked_parent_graph_frame = 32
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_261hr"]
+linked_parent_graph_frame = 32
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ru8w8"]
+linked_parent_graph_frame = 32
+operator = 1
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_qpb50"]
+linked_parent_graph_frame = 32
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_qtthf"]
+linked_parent_graph_frame = 32
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_o03hq"]
+output_port_for_preview = 0
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+linked_parent_graph_frame = 32
+op_type = 0
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_7s7bi"]
+parameter_name = "noise_01"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_lojk7"]
+linked_parent_graph_frame = 32
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_gj3nw"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_j7r4n"]
+parameter_name = "noise_rotation_speed"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rjl35"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_r0gs5"]
+default_input_values = [0, 0.0, 1, 1.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_dc4s4"]
+parameter_name = "shader_alpha"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_vc1rl"]
+parameter_name = "color_gradient"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_032cy"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_w7eo2"]
+parameter_name = "noise_02"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qdyoj"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_24tcc"]
+default_input_values = [0, 0.0, 1, 1.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_spn6o"]
+output_port_for_preview = 0
+linked_parent_graph_frame = 32
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_bk87n"]
+output_port_for_preview = 0
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+linked_parent_graph_frame = 32
+op_type = 0
+operator = 1
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_my5oc"]
+linked_parent_graph_frame = 32
+function = 0
+
+[sub_resource type="VisualShader" id="VisualShader_1inm2"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D color_gradient;
+uniform float noise_rotation_speed = 1;
+uniform sampler2D noise_01;
+uniform sampler2D noise_02;
+uniform float shader_alpha = 1;
+
+
+
+void fragment() {
+	vec4 n_out39p0;
+// Texture2D:39
+	n_out39p0 = texture(color_gradient, UV);
+
+
+// Input:7
+	vec2 n_out7p0 = UV;
+
+
+// VectorOp:8
+	vec2 n_in8p1 = vec2(0.50000, 0.50000);
+	vec2 n_out8p0 = n_out7p0 - n_in8p1;
+
+
+// VectorDecompose:11
+	float n_out11p0 = n_out8p0.x;
+	float n_out11p1 = n_out8p0.y;
+
+
+// FloatParameter:33
+	float n_out33p0 = noise_rotation_speed;
+
+
+// Input:34
+	float n_out34p0 = TIME;
+
+
+// FloatOp:20
+	float n_out20p0 = n_out33p0 * n_out34p0;
+
+
+// FloatFunc:10
+	float n_out10p0 = cos(n_out20p0);
+
+
+// FloatOp:12
+	float n_out12p0 = n_out11p0 * n_out10p0;
+
+
+// FloatFunc:9
+	float n_out9p0 = sin(n_out20p0);
+
+
+// FloatOp:13
+	float n_out13p0 = n_out11p1 * n_out9p0;
+
+
+// FloatOp:16
+	float n_out16p0 = n_out12p0 - n_out13p0;
+
+
+// FloatOp:14
+	float n_out14p0 = n_out11p0 * n_out9p0;
+
+
+// FloatOp:15
+	float n_out15p0 = n_out11p1 * n_out10p0;
+
+
+// FloatOp:17
+	float n_out17p0 = n_out14p0 + n_out15p0;
+
+
+// VectorCompose:18
+	vec2 n_out18p0 = vec2(n_out16p0, n_out17p0);
+
+
+// VectorOp:19
+	vec2 n_in19p1 = vec2(0.50000, 0.50000);
+	vec2 n_out19p0 = n_out18p0 + n_in19p1;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(noise_01, n_out19p0);
+	float n_out3p1 = n_out3p0.r;
+
+
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(noise_02, UV);
+	float n_out5p1 = n_out5p0.r;
+
+
+// FloatOp:6
+	float n_out6p0 = n_out3p1 * n_out5p1;
+
+
+// FloatParameter:37
+	float n_out37p0 = shader_alpha;
+
+
+// FloatOp:36
+	float n_out36p0 = n_out6p0 * n_out37p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out39p0.xyz);
+	ALPHA = n_out36p0;
+
+
+}
+"
+nodes/fragment/0/position = Vector2(1000, -20)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_7s7bi")
+nodes/fragment/2/position = Vector2(-520, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_gj3nw")
+nodes/fragment/3/position = Vector2(-160, 0)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_w7eo2")
+nodes/fragment/4/position = Vector2(-740, 560)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_qdyoj")
+nodes/fragment/5/position = Vector2(-420, 560)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatOp_24tcc")
+nodes/fragment/6/position = Vector2(240, 300)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_spn6o")
+nodes/fragment/7/position = Vector2(-2360, -380)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_bk87n")
+nodes/fragment/8/position = Vector2(-2040, -380)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatFunc_my5oc")
+nodes/fragment/9/position = Vector2(-2040, 40)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatFunc_6kwor")
+nodes/fragment/10/position = Vector2(-2040, 140)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorDecompose_lo3qn")
+nodes/fragment/11/position = Vector2(-1800, -200)
+nodes/fragment/12/node = SubResource("VisualShaderNodeFloatOp_1mxnf")
+nodes/fragment/12/position = Vector2(-1540, -200)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_k2n82")
+nodes/fragment/13/position = Vector2(-1540, -40)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatOp_rfw0o")
+nodes/fragment/14/position = Vector2(-1540, 120)
+nodes/fragment/15/node = SubResource("VisualShaderNodeFloatOp_261hr")
+nodes/fragment/15/position = Vector2(-1540, 280)
+nodes/fragment/16/node = SubResource("VisualShaderNodeFloatOp_ru8w8")
+nodes/fragment/16/position = Vector2(-1320, -200)
+nodes/fragment/17/node = SubResource("VisualShaderNodeFloatOp_qpb50")
+nodes/fragment/17/position = Vector2(-1320, 120)
+nodes/fragment/18/node = SubResource("VisualShaderNodeVectorCompose_qtthf")
+nodes/fragment/18/position = Vector2(-1100, -60)
+nodes/fragment/19/node = SubResource("VisualShaderNodeVectorOp_o03hq")
+nodes/fragment/19/position = Vector2(-920, -60)
+nodes/fragment/20/node = SubResource("VisualShaderNodeFloatOp_lojk7")
+nodes/fragment/20/position = Vector2(-2240, 60)
+nodes/fragment/33/node = SubResource("VisualShaderNodeFloatParameter_j7r4n")
+nodes/fragment/33/position = Vector2(-2698.61, -68.1453)
+nodes/fragment/34/node = SubResource("VisualShaderNodeInput_rjl35")
+nodes/fragment/34/position = Vector2(-2700, 180)
+nodes/fragment/36/node = SubResource("VisualShaderNodeFloatOp_r0gs5")
+nodes/fragment/36/position = Vector2(540, 280)
+nodes/fragment/37/node = SubResource("VisualShaderNodeFloatParameter_dc4s4")
+nodes/fragment/37/position = Vector2(200, 460)
+nodes/fragment/38/node = SubResource("VisualShaderNodeTexture2DParameter_vc1rl")
+nodes/fragment/38/position = Vector2(80, -220)
+nodes/fragment/39/node = SubResource("VisualShaderNodeTexture_032cy")
+nodes/fragment/39/position = Vector2(460, -160)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 5, 2, 3, 1, 6, 0, 7, 0, 8, 0, 8, 0, 11, 0, 11, 0, 12, 0, 10, 0, 12, 1, 11, 1, 13, 0, 9, 0, 13, 1, 11, 0, 14, 0, 9, 0, 14, 1, 10, 0, 15, 1, 11, 1, 15, 0, 12, 0, 16, 0, 14, 0, 17, 0, 13, 0, 16, 1, 15, 0, 17, 1, 16, 0, 18, 0, 17, 0, 18, 1, 18, 0, 19, 0, 20, 0, 10, 0, 20, 0, 9, 0, 5, 1, 6, 1, 6, 0, 36, 0, 37, 0, 36, 1, 36, 0, 0, 1, 33, 0, 20, 0, 34, 0, 20, 1, 19, 0, 3, 0, 38, 0, 39, 2, 39, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_7h5va"]
+colors = PackedColorArray(1, 1, 0, 1, 0.568289, 0.187352, 0.180472, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x53ce"]
+gradient = SubResource("Gradient_7h5va")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_wpd6s"]
+offsets = PackedFloat32Array(0, 0.4625)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_imky4"]
+noise_type = 3
+frequency = 0.0065
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tj05s"]
+seamless = true
+color_ramp = SubResource("Gradient_wpd6s")
+noise = SubResource("FastNoiseLite_imky4")
+
+[sub_resource type="Gradient" id="Gradient_kek5f"]
+offsets = PackedFloat32Array(0, 0.81875)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0aqh1"]
+noise_type = 3
+frequency = 0.0033
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tooog"]
+seamless = true
+color_ramp = SubResource("Gradient_kek5f")
+noise = SubResource("FastNoiseLite_0aqh1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ev8v"]
+render_priority = 0
+shader = SubResource("VisualShader_1inm2")
+shader_parameter/noise_rotation_speed = 1.0
+shader_parameter/shader_alpha = 0.0
+shader_parameter/color_gradient = SubResource("GradientTexture2D_x53ce")
+shader_parameter/noise_01 = SubResource("NoiseTexture2D_tj05s")
+shader_parameter/noise_02 = SubResource("NoiseTexture2D_tooog")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lpfj"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("12_od0u1")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_04e0h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.261484, 1), 0.0, 0.0, 0, 0, Vector2(0.678445, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_i21uk"]
+curve = SubResource("Curve_04e0h")
+
+[sub_resource type="Curve" id="Curve_bvalp"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 0.15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1yhp7"]
+curve = SubResource("Curve_bvalp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vkper"]
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 5.0
+tangential_accel_max = 5.0
+damping_min = 0.3
+damping_max = 0.3
+scale_curve = SubResource("CurveTexture_1yhp7")
+color = Color(3, 3, 2, 1)
+alpha_curve = SubResource("CurveTexture_i21uk")
+
+[sub_resource type="QuadMesh" id="QuadMesh_46kqt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sq1ar"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_jef8x"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250883, 1), 0.0, 0.0, 0, 0, Vector2(0.742049, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_gxgl4"]
+curve = SubResource("Curve_jef8x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_muxio"]
+particle_flag_align_y = true
+angle_min = 1.07288e-05
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -5.0
+tangential_accel_max = -5.0
+damping_min = 3.0
+damping_max = 3.0
+scale_min = 0.02
+scale_max = 0.04
+color = Color(3, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_gxgl4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_y1uu0"]
+
+[sub_resource type="Animation" id="Animation_kj6aq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rosette_bottom_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rosette_bottom_mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tab_cuneiform_particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("light_particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("rosette_top_mesh:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("rosette_top_mesh:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("rosette_bottom_mesh:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("rosette_top_mesh:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_bouh7"]
+resource_name = "rosette_effect_animation"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rosette_bottom_mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.397311, 0), Vector3(0, 0.577, 0), Vector3(0, 0.397311, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rosette_bottom_mesh:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("node_glow:surface_material_override/0:shader_parameter/shader_alpha")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tab_cuneiform_particles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("light_particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"EndEffect"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("rosette_top_mesh:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.397311, 0), Vector3(0, 0.562, 0), Vector3(0, 0.397311, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("rosette_top_mesh:rotation")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -3.14159, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("rosette_bottom_mesh:scale")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1), Vector3(1.15, 1.15, 1.15), Vector3(1.1, 1.1, 1.1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("rosette_top_mesh:scale")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.1, 1.1, 1.1), Vector3(1.15, 1.15, 1.15), Vector3(1.1, 1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ah4u"]
+_data = {
+"RESET": SubResource("Animation_kj6aq"),
+"rosette_effect_animation": SubResource("Animation_bouh7")
+}
+
+[node name="kur_double_turn_visual_effect" type="Node3D"]
+script = ExtResource("1_sx06e")
+effectSound = SubResource("Resource_ru12j")
+
+[node name="rosette_top_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ftgrh")
+skeleton = NodePath("../rosette_bottom_mesh")
+
+[node name="rosette_bottom_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_w0dy4")
+skeleton = NodePath("../..")
+
+[node name="node_glow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.503465, 0)
+mesh = SubResource("QuadMesh_wrk15")
+surface_material_override/0 = SubResource("ShaderMaterial_7ev8v")
+
+[node name="tab_cuneiform_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.543442, 0)
+material_override = SubResource("StandardMaterial3D_6lpfj")
+emitting = false
+amount = 10
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_vkper")
+draw_pass_1 = SubResource("QuadMesh_46kqt")
+
+[node name="light_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539729, 0)
+material_override = SubResource("StandardMaterial3D_sq1ar")
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_muxio")
+draw_pass_1 = SubResource("QuadMesh_y1uu0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7ah4u")
+}

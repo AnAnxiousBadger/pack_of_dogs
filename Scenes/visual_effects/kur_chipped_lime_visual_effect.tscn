@@ -1,0 +1,63 @@
+[gd_scene load_steps=18 format=3 uid="uid://32t3j51q3sec"]
+
+[ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_m7aiy"]
+[ext_resource type="AudioStream" uid="uid://bysxaco3rbl85" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_01.mp3" id="2_scl6h"]
+[ext_resource type="AudioStream" uid="uid://c0ojgbpt8emrh" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_02.mp3" id="3_ci0hg"]
+[ext_resource type="AudioStream" uid="uid://byqg6gvsx8u38" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_03.mp3" id="4_4hnln"]
+[ext_resource type="AudioStream" uid="uid://bi7qf726smkad" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_04.mp3" id="5_tmmw4"]
+[ext_resource type="AudioStream" uid="uid://kvwpjruhh6to" path="res://Assets/sounds/audio_streams/visual_effect_sounds/rock_clicked_05.mp3" id="6_l4tl7"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="7_j4a3w"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="8_m28ex"]
+[ext_resource type="ArrayMesh" uid="uid://calk6sf35sara" path="res://Assets/meshes/visual_effect_meshes/lime_particle_mesh.res" id="9_61v3c"]
+
+[sub_resource type="Resource" id="Resource_aihfs"]
+script = ExtResource("8_m28ex")
+deltaPitchScale = Vector2(-0.2, 0.2)
+
+[sub_resource type="Resource" id="Resource_jxj4e"]
+script = ExtResource("7_j4a3w")
+identifier = "rock_clicked"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_scl6h"), ExtResource("3_ci0hg"), ExtResource("4_4hnln"), ExtResource("5_tmmw4"), ExtResource("6_l4tl7")])
+settings = SubResource("Resource_aihfs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp55g"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="Gradient" id="Gradient_4jh4m"]
+colors = PackedColorArray(0.18, 0.18, 0.18, 1, 0.6, 0.6, 0.6, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yjull"]
+gradient = SubResource("Gradient_4jh4m")
+
+[sub_resource type="Curve" id="Curve_h401a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f5xk8"]
+curve = SubResource("Curve_h401a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jacku"]
+particle_flag_rotate_y = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_f5xk8")
+color_initial_ramp = SubResource("GradientTexture1D_yjull")
+
+[node name="chipped_lime_visual_effect" type="Node3D"]
+script = ExtResource("1_m7aiy")
+effectSound = SubResource("Resource_jxj4e")
+
+[node name="particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_xp55g")
+emitting = false
+amount = 16
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jacku")
+draw_pass_1 = ExtResource("9_61v3c")

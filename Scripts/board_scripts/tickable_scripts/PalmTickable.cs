@@ -12,6 +12,9 @@ public partial class PalmTickable : StaticBody3D, ITickable
     {
         return GlobalPosition;
     }
+    public Vector3 GetGlobalRot(){
+        return GlobalRotation;
+    }
 
     public void OnHovered(Vector3 pos)
     {

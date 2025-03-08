@@ -1,7 +1,8 @@
+StaticBody3D
+Marker3D
 AnimationPlayer
 Node3D
 CollisionShape3D
-StaticBody3D
 GPUParticles3D
 Decal
 Node
@@ -11,4 +12,3 @@ VBoxContainer
 MarginContainer
 TextureRect
 Label
-VScrollBar

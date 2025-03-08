@@ -21,6 +21,16 @@ public partial class VisualEffectPoolController : Node3D, IPoolManager
             return null;
         } 
     }
+    public IPoolable DoOnPoolingAction(IPoolable poolable, Vector3 pos, Vector3 rot)
+    {
+        if(poolable is VisualEffectController effect){
+            effect.Play(pos, rot);
+            return poolable;
+        }
+        else{
+            return null;
+        } 
+    }
 
     public void DoOnReQueueToPoolAction(IPoolable poolable)
     {
@@ -31,6 +41,14 @@ public partial class VisualEffectPoolController : Node3D, IPoolManager
 
     public VisualEffectController PlayVisualEffect(string effectName, Vector3 globalPos){
         if(((IPoolManager)this).GetPoolable(effectName, globalPos) is VisualEffectController effect){
+            return effect;
+        }
+        else{
+            return null;
+        } 
+    }
+    public VisualEffectController PlayVisualEffect(string effectName, Vector3 globalPos, Vector3 globalRot){
+        if(((IPoolManager)this).GetPoolable(effectName, globalPos, globalRot) is VisualEffectController effect){
             return effect;
         }
         else{

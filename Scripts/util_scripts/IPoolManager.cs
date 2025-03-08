@@ -32,7 +32,13 @@ public interface IPoolManager {
         DoOnPoolingAction(poolable, pos);
         return poolable;
     }
+    public IPoolable GetPoolable(string identifier, Vector3 pos, Vector3 rot){
+        IPoolable poolable = PoolablesDict[identifier].Dequeue();
+        DoOnPoolingAction(poolable, pos, rot);
+        return poolable; 
+    }
     IPoolable DoOnPoolingAction(IPoolable poolable, Vector3 pos);
+    IPoolable DoOnPoolingAction(IPoolable poolable, Vector3 pos, Vector3 rot);
 
     public void ReQueuePoolable(IPoolable poolable){
         DoOnReQueueToPoolAction(poolable);

@@ -59,6 +59,7 @@ public interface ITickable
     /// </summary>
     /// <returns>Should return the GlobalPosition of the PhysicsBody3D.</returns>
     protected Vector3 GetGlobalPos(); 
+    protected Vector3 GetGlobalRot(); 
     /// <summary>
     /// Explicit interface method that plays all TickableEffects from the Effects array that are of signalType.
     /// </summary>
@@ -76,7 +77,7 @@ public interface ITickable
                     else{
                         pos = GetGlobalPos();
                     }
-                    GlobalHelper.Instance.GameController.visualEffectPool.PlayVisualEffect(effect.effectName, pos);
+                    GlobalHelper.Instance.GameController.visualEffectPool.PlayVisualEffect(effect.effectName, pos, GetGlobalRot());
                 }
             }
         }

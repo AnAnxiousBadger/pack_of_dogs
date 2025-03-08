@@ -229,4 +229,7 @@ public partial class GoatController : CharacterBody3D, ITickable, IPoolable
 	public Vector3 GetGlobalPos(){
 		return GlobalPosition;
 	}
+	public Vector3 GetGlobalRot(){
+        return GlobalRotation;
+    }
 }

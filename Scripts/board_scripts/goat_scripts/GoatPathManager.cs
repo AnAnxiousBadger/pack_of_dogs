@@ -30,6 +30,10 @@ public partial class GoatPathManager : Node3D, IPoolManager
 		}
 		return poolable;
     }
+	public IPoolable DoOnPoolingAction(IPoolable poolable, Vector3 pos, Vector3 rot)
+    {
+        return DoOnPoolingAction(poolable, pos);
+    }
 
     public void DoOnReQueueToPoolAction(IPoolable poolable){
 		if(poolable is GoatController goat){

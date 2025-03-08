@@ -1,7 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://tdxh04hr7xx8"]
+[gd_scene load_steps=13 format=3 uid="uid://tdxh04hr7xx8"]
 
 [ext_resource type="Script" path="res://Scripts/visual_effects_scripts/ParticleSystemVisualEffectController.cs" id="1_5ixqb"]
+[ext_resource type="AudioStream" uid="uid://bjb4vwwdf7acd" path="res://Assets/sounds/audio_streams/visual_effect_sounds/poof_sound.mp3" id="2_8hjvf"]
 [ext_resource type="Texture2D" uid="uid://k277qlwgiupv" path="res://Assets/textures/smoke_sprite_sheet.jpg" id="2_ehd74"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_4lcqw"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="4_o3jer"]
+
+[sub_resource type="Resource" id="Resource_yt7sr"]
+script = ExtResource("4_o3jer")
+deltaPitchScale = Vector2(-0.2, 0.2)
+
+[sub_resource type="Resource" id="Resource_7f84i"]
+script = ExtResource("3_4lcqw")
+identifier = "poof_sound_effect"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_8hjvf")])
+settings = SubResource("Resource_yt7sr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r68nt"]
 transparency = 1
@@ -52,6 +66,7 @@ anim_speed_max = 1.0
 
 [node name="fog_particles_visual_effect" type="Node3D"]
 script = ExtResource("1_5ixqb")
+effectSound = SubResource("Resource_7f84i")
 
 [node name="particles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_r68nt")

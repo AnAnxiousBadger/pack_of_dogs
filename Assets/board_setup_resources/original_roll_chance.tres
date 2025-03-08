@@ -1,33 +1,33 @@
 [gd_resource type="Resource" script_class="RollSettings" load_steps=8 format=3 uid="uid://bafisen3m5w21"]
 
-[ext_resource type="Script" path="res://Scripts/dice_scripts/RollChance.cs" id="1_mvbgx"]
-[ext_resource type="Script" path="res://Scripts/dice_scripts/RollSettings.cs" id="2_gk721"]
+[ext_resource type="Script" path="res://Scripts/dice_scripts/RollChance.cs" id="1_mxwdt"]
+[ext_resource type="Script" path="res://Scripts/dice_scripts/RollSettings.cs" id="2_g7cms"]
 
 [sub_resource type="Resource" id="Resource_asqeq"]
-script = ExtResource("1_mvbgx")
+script = ExtResource("1_mxwdt")
 result = 0
 weight = 1
 
 [sub_resource type="Resource" id="Resource_k8512"]
-script = ExtResource("1_mvbgx")
+script = ExtResource("1_mxwdt")
 result = 1
 weight = 4
 
 [sub_resource type="Resource" id="Resource_eqdug"]
-script = ExtResource("1_mvbgx")
+script = ExtResource("1_mxwdt")
 result = 2
 weight = 6
 
 [sub_resource type="Resource" id="Resource_2gbni"]
-script = ExtResource("1_mvbgx")
+script = ExtResource("1_mxwdt")
 result = 3
 weight = 4
 
 [sub_resource type="Resource" id="Resource_klaj3"]
-script = ExtResource("1_mvbgx")
+script = ExtResource("1_mxwdt")
 result = 4
 weight = 1
 
 [resource]
-script = ExtResource("2_gk721")
+script = ExtResource("2_g7cms")
 rollChances = Array[Object]([SubResource("Resource_asqeq"), SubResource("Resource_k8512"), SubResource("Resource_eqdug"), SubResource("Resource_2gbni"), SubResource("Resource_klaj3")])

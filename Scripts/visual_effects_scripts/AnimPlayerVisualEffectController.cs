@@ -25,6 +25,11 @@ public partial class AnimPlayerVisualEffectController : VisualEffectController
         base.Play(globalPos);
 		_anim.Play(animation);
     }
+	public override void Play(Vector3 globalPos, Vector3 globalRot)
+    {
+        base.Play(globalPos, globalRot);
+		_anim.Play(animation);
+    }
 
     public override void EndEffect()
     {
