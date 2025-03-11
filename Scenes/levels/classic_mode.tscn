@@ -1,10 +1,7 @@
-[gd_scene load_steps=143 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=137 format=3 uid="uid://dm6thl84wrgq0"]
 
-[ext_resource type="Script" path="res://Scripts/level_scripts/ClassicModeLevelController.cs" id="1_vgp5x"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="2_cf3hf"]
-[ext_resource type="AudioStream" uid="uid://7xbpgre3dna" path="res://Assets/sounds/audio_streams/classic_mode_music.mp3" id="3_f5lfv"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="4_rs660"]
-[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="5_si6yh"]
+[ext_resource type="Script" path="res://Scripts/level_scripts/GameModeLevelController.cs" id="1_yvbe8"]
+[ext_resource type="Resource" uid="uid://bups0ho1y4b3h" path="res://Assets/sounds/audio_libraries/classic_mode_audio_library.tres" id="2_fxg86"]
 [ext_resource type="Script" path="res://Scripts/level_scripts/level_specific_scripts/GameController.cs" id="6_avggm"]
 [ext_resource type="PackedScene" uid="uid://opx4owjy1o2d" path="res://Scenes/player_scenes/real_player_controller.tscn" id="7_d1kay"]
 [ext_resource type="PackedScene" uid="uid://b1efbonmbvw07" path="res://Scenes/player_scenes/ai_player_controller.tscn" id="8_e241m"]
@@ -62,21 +59,6 @@
 [ext_resource type="StyleBox" uid="uid://bbuodcl43jbyh" path="res://Assets/UI/button_styles/menu_text_button_normal_style.tres" id="60_3s05u"]
 [ext_resource type="StyleBox" uid="uid://ot2adfkyp88a" path="res://Assets/UI/button_styles/menu_text_button_hover_style.tres" id="61_8t2gh"]
 [ext_resource type="StyleBox" uid="uid://be4themgp3o7w" path="res://Assets/UI/button_styles/menu_text_button_pressed_style.tres" id="62_26w6v"]
-
-[sub_resource type="Resource" id="Resource_xtg86"]
-script = ExtResource("5_si6yh")
-deltaPitchScale = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_bn5d4"]
-script = ExtResource("4_rs660")
-identifier = "claasic_mode_music"
-soundType = 1
-audioStreams = Array[AudioStream]([ExtResource("3_f5lfv")])
-settings = SubResource("Resource_xtg86")
-
-[sub_resource type="Resource" id="Resource_a10m2"]
-script = ExtResource("2_cf3hf")
-soundEffects = Array[Object]([SubResource("Resource_bn5d4")])
 
 [sub_resource type="Resource" id="Resource_1ebpv"]
 script = ExtResource("11_jop4m")
@@ -977,9 +959,10 @@ corner_radius_bottom_left = 5
 shadow_size = 5
 
 [node name="ROOT_classic_mode" type="Node3D"]
-script = ExtResource("1_vgp5x")
-_runUniqueScene = true
-LevelMusicAudioLibrary = SubResource("Resource_a10m2")
+script = ExtResource("1_yvbe8")
+_playerNum = 2
+_currLevelScene = 1
+LevelMusicAudioLibrary = ExtResource("2_fxg86")
 
 [node name="game_controller" type="Node3D" parent="." node_paths=PackedStringArray("cam", "uiController", "diceController", "boardController")]
 script = ExtResource("6_avggm")

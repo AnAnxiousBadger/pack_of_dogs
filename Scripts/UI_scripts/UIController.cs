@@ -51,8 +51,8 @@ public partial class UIController : Control
 
 		// Needed check to run unique scene
 		if(ScenesController.Instance != null){
-			ClassicModeLevelController levelController = (ClassicModeLevelController)ScenesController.Instance.currLevelController;
-			_bottomRightMenuRestartButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.CLASSIC_MODE, levelController.levelSettings, true);
+			GameModeLevelController levelController = (GameModeLevelController)ScenesController.Instance.currLevelController;
+			_bottomRightMenuRestartButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(levelController.CurrLevel, levelController.levelSettings, true);
 			_bottomRightMenuRestartButton.ButtonDown += _OnButtonDown;
 			_bottomRightMenuMainMenuButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.MAIN_MENU, null, true);
 			_bottomRightMenuMainMenuButton.ButtonDown += _OnButtonDown;

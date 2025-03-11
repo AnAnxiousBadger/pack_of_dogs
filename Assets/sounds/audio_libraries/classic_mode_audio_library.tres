@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=7 format=3 uid="uid://bups0ho1y4b3h"]
+
+[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_rkqex"]
+[ext_resource type="AudioStream" uid="uid://7xbpgre3dna" path="res://Assets/sounds/audio_streams/classic_mode_music.mp3" id="2_vr5vp"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_p3dxo"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="4_pf4yy"]
+
+[sub_resource type="Resource" id="Resource_xtg86"]
+script = ExtResource("4_pf4yy")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_bn5d4"]
+script = ExtResource("3_p3dxo")
+identifier = "claasic_mode_music"
+soundType = 1
+audioStreams = Array[AudioStream]([ExtResource("2_vr5vp")])
+settings = SubResource("Resource_xtg86")
+
+[resource]
+script = ExtResource("1_rkqex")
+soundEffects = Array[Object]([SubResource("Resource_bn5d4")])

@@ -8,15 +8,10 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 	[Export] private Label _playerNameLabel;
 	[Export] private Label _playerScoreLabel;
 	[Export] private Label _playerMaxScoreLabel;
-	//[Export] private int _maxNameLength = 21;
 	[Export] private TextureRect _AIIcon;
 	[Export] private TextureRect _pieceColorIcon;
 
 	public void SetPlayerScoreLabel(BasePlayerController player){
-		//string playerName = player.PlayerName;
-		/*if(playerName.Length > _maxNameLength){
-			playerName = playerName.Substring(0, _maxNameLength - 3) + "...";
-		}*/
 		_playerNameLabel.Text = player.PlayerName;
 		_playerScoreLabel.Text = player.DeliveredPieces.ToString();
 		_playerMaxScoreLabel.Text = player.piecesToDeliver.ToString();
@@ -29,19 +24,9 @@ public partial class PlayerScoreContainerUIController : PanelContainer
 			_AIIcon.Modulate = new Color(1f, 1f, 1f, 0f);
 		}
 		_pieceColorIcon.Modulate = GlobalHelper.Instance.GameController.playerPieceColors[player.playerIndex];
-		//_player.TurnStarted += ShowCurrentPlayer;
-		//_player.TurnEnded += HideCurrentPlayer;
 	}
 	public void UpdatePlayerScore(){
 		_playerScoreLabel.Text = _player.DeliveredPieces.ToString();
 	}
-
-	/*private void ShowCurrentPlayer(){
-		_currentPanel.Modulate = new Color(1,1,1,1);
-	}
-
-	private void HideCurrentPlayer(){
-		_currentPanel.Modulate = new Color(1,1,1,0);
-	}*/
 
 }

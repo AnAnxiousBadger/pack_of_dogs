@@ -23,7 +23,7 @@ public partial class VictoryUIController : Control
 
 		// Needed check to run unique scene
 		if(ScenesController.Instance != null){
-			ClassicModeLevelController levelController = (ClassicModeLevelController)ScenesController.Instance.currLevelController;
+			GameModeLevelController levelController = (GameModeLevelController)ScenesController.Instance.currLevelController;
 			_mainMenuButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.MAIN_MENU, null, true);
 			_mainMenuButton.ButtonDown += _UIController._OnButtonDown;
 			_playAgainButton.ButtonUp += () => ScenesController.Instance.currLevelController.ChangeScene(LevelController.LevelScene.CLASSIC_MODE, levelController.levelSettings, true);

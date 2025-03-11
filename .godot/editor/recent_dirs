@@ -1,3 +1,8 @@
+res://Assets/materials/shaders/kur_connection_shader
+res://Assets/meshes/board_meshes/kur_mode
+res://Assets/meshes/visual_effect_meshes
+res://Assets/sounds/audio_libraries
+res://Scripts/UI_scripts/main_menu
 res://Scenes/visual_effects
 res://Assets/materials/shaders/node_modifier_visual_effect_shaders
 res://Assets/board_setup_resources/kur_mode
@@ -13,11 +18,6 @@ res://Assets/materials/shaders/end_node_shader
 res://Assets/materials/shaders/piece_arrived_effect_shader
 res://Assets/meshes/board_meshes
 res://Assets/meshes/board_meshes/classic_mode
-res://Assets/meshes/visual_effect_meshes
 res://Assets/meshes
-res://Assets/sounds/audio_libraries
 res://Assets/UI/button_styles
-res://
-res://Scripts
-res://Scripts/UI_scripts
 D:/Szabhey/Hackerman/Godot/pack_of_dogs/Assets
