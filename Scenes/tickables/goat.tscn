@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/board_scripts/goat_scripts/GoatController.cs" id="1_y48nm"]
 [ext_resource type="Script" path="res://Scripts/board_scripts/tickable_scripts/TickableVisualEffect.cs" id="2_58cqu"]
 [ext_resource type="Material" uid="uid://ej8egkw18wkc" path="res://Assets/materials/goat_mat/goat_mat.tres" id="2_ryycx"]
-[ext_resource type="Resource" uid="uid://djptsykeqrfl6" path="res://Assets/sounds/audio_libraries/goat_path_manager_audio_library.tres" id="3_ob3bd"]
+[ext_resource type="Resource" uid="uid://djptsykeqrfl6" path="res://Assets/sounds/audio_libraries/goat_audio_library.tres" id="3_ob3bd"]
 
 [sub_resource type="Resource" id="Resource_n6ow4"]
 script = ExtResource("2_58cqu")

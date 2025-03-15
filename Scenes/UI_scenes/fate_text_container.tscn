@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxbuslpolumbu"]
 
-[ext_resource type="FontFile" uid="uid://b050m1seedqwg" path="res://Assets/UI/fonts/Poppins/Poppins-SemiBold.ttf" id="1_ruv43"]
+[ext_resource type="FontFile" uid="uid://c4nmvr6o35fl7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Black.ttf" id="1_bd68f"]
 [ext_resource type="FontFile" uid="uid://bsramghb7l7vx" path="res://Assets/UI/fonts/Merriweather/Merriweather-Italic.ttf" id="2_yc4eq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2agh3"]
-font = ExtResource("1_ruv43")
+font = ExtResource("1_bd68f")
 
 [sub_resource type="LabelSettings" id="LabelSettings_fyad5"]
 font = ExtResource("2_yc4eq")

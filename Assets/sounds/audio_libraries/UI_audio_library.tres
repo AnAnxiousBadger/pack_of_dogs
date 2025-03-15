@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="AudioLibrary" load_steps=10 format=3 uid="uid://bep8ncc325n0y"]
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=13 format=3 uid="uid://bep8ncc325n0y"]
 
 [ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_3twp3"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="3_7n42q"]
 [ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="3_wstcj"]
 [ext_resource type="AudioStream" uid="uid://bycu08f7aao7h" path="res://Assets/sounds/audio_streams/UI_library/menu_click_02.mp3" id="4_wqkrs"]
 [ext_resource type="AudioStream" uid="uid://ce60evx3q6imi" path="res://Assets/sounds/audio_streams/UI_library/victory_melody.mp3" id="5_3m82s"]
+[ext_resource type="AudioStream" uid="uid://btrr4bqo8qau2" path="res://Assets/sounds/audio_streams/visual_effect_sounds/piece_arrived_melody.mp3" id="6_h8bi4"]
 
 [sub_resource type="Resource" id="Resource_g8o0w"]
 script = ExtResource("3_wstcj")
@@ -28,6 +29,17 @@ soundType = 2
 audioStreams = Array[AudioStream]([ExtResource("5_3m82s")])
 settings = SubResource("Resource_4pflr")
 
+[sub_resource type="Resource" id="Resource_gsvka"]
+script = ExtResource("3_wstcj")
+deltaPitchScale = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_mcobf"]
+script = ExtResource("3_7n42q")
+identifier = "master_volume_check"
+soundType = 0
+audioStreams = Array[AudioStream]([ExtResource("6_h8bi4")])
+settings = SubResource("Resource_gsvka")
+
 [resource]
 script = ExtResource("1_3twp3")
-soundEffects = Array[Resource]([SubResource("Resource_y55sd"), SubResource("Resource_ef4s6")])
+soundEffects = Array[Resource]([SubResource("Resource_y55sd"), SubResource("Resource_ef4s6"), SubResource("Resource_mcobf")])

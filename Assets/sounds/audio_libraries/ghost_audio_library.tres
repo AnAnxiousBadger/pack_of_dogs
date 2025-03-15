@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=9 format=3 uid="uid://dmxuhgjaoyibr"]
+
+[ext_resource type="Script" path="res://Scripts/sound_scripts/AudioLibrary.cs" id="1_mhobw"]
+[ext_resource type="AudioStream" uid="uid://ds8lfxf4apg05" path="res://Assets/sounds/audio_streams/ghost_library/ghost_01.mp3" id="2_g8k4e"]
+[ext_resource type="AudioStream" uid="uid://h00j2afyn08l" path="res://Assets/sounds/audio_streams/ghost_library/ghost_02.mp3" id="3_ca5hk"]
+[ext_resource type="AudioStream" uid="uid://svcou1xkgd1w" path="res://Assets/sounds/audio_streams/ghost_library/ghost_03.mp3" id="4_f4qk2"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffect.cs" id="5_2cmff"]
+[ext_resource type="Script" path="res://Scripts/sound_scripts/SoundEffectSettings.cs" id="6_od137"]
+
+[sub_resource type="Resource" id="Resource_05ydf"]
+script = ExtResource("6_od137")
+deltaPitchScale = Vector2(-0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_p85pl"]
+script = ExtResource("5_2cmff")
+identifier = "critter_sound"
+soundType = 2
+audioStreams = Array[AudioStream]([ExtResource("2_g8k4e"), ExtResource("3_ca5hk"), ExtResource("4_f4qk2")])
+settings = SubResource("Resource_05ydf")
+
+[resource]
+script = ExtResource("1_mhobw")
+soundEffects = Array[Object]([SubResource("Resource_p85pl")])

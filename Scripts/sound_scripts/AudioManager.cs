@@ -5,13 +5,16 @@ using System.Collections.Generic;
 public partial class AudioManager : Node
 {
     // AUTOLOAD
-    public static AudioManager Instance { get; private set;}
+    public static AudioManager Instance { get; private set; }
 
     // SETUP
     private int _3DStreamPlayerNum = 16;
-    public bool MuteMusic {
+    private bool _muteMusic = false;
+    public bool MuteMusic
+    {
         get { return _muteMusic; }
-        set {
+        set
+        {
             _muteMusic = value;
             int musicBusIndex = AudioServer.GetBusIndex(SoundEffect.SoundType.MUSIC.ToString());
             AudioServer.SetBusMute(musicBusIndex, value);
@@ -23,19 +26,20 @@ public partial class AudioManager : Node
     private Queue<AudioStreamPlayer3D> _avaiblePlayers;
     private AudioStreamPlayer3D _musicPlayer;
     private Timer _musicRestartTimer;
-    private bool _muteMusic = false;
     private Dictionary<SoundEffect.SoundType, int> _soundSettings = new();
 
-    
+
     public override void _EnterTree()
     {
-        if(Instance != null){
+        if (Instance != null)
+        {
             this.QueueFree();
             return;
         }
         Instance = this;
     }
-    public override void _Ready(){
+    public override void _Ready()
+    {
         // Load settings
         LoadSoundSettings();
 
@@ -45,35 +49,38 @@ public partial class AudioManager : Node
         _musicRestartTimer.WaitTime = _replayMusicDelay;
         _musicRestartTimer.OneShot = true;
         _musicRestartTimer.Timeout += () => PlayMusic(ScenesController.Instance.currLevelController.LevelMusicAudioLibrary.GetRandomSound());
-        
+
         // Set up sound queue
         _avaiblePlayers = new();
 
-		for (int i = 0; i < _3DStreamPlayerNum; i++)
-		{
-			AudioStreamPlayer3D ap = new();
-			AddChild(ap);
-			_avaiblePlayers.Enqueue(ap);
-			ap.Finished += () => {_OnStreamFinished(ap); };
-		}
+        for (int i = 0; i < _3DStreamPlayerNum; i++)
+        {
+            AudioStreamPlayer3D ap = new();
+            AddChild(ap);
+            _avaiblePlayers.Enqueue(ap);
+            ap.Finished += () => { _OnStreamFinished(ap); };
+        }
     }
 
     public override void _Process(double delta)
     {
-        if(Input.IsActionJustReleased("mute")){
+        if (Input.IsActionJustReleased("mute"))
+        {
             MuteMusic = !MuteMusic;
         }
     }
 
-    private void _OnStreamFinished(AudioStreamPlayer3D p){
-		p.Reparent(this);
-		_avaiblePlayers.Enqueue(p);
-	}
+    private void _OnStreamFinished(AudioStreamPlayer3D p)
+    {
+        p.Reparent(this);
+        _avaiblePlayers.Enqueue(p);
+    }
 
-    private void LoadSoundSettings(){
+    private void LoadSoundSettings()
+    {
 
         _soundSettings = JSONLoader.Instance.DeserializeJSONElement<Dictionary<SoundEffect.SoundType, int>>("settings", "sound_settings");
-        foreach(KeyValuePair<SoundEffect.SoundType, int> entry in _soundSettings)
+        foreach (KeyValuePair<SoundEffect.SoundType, int> entry in _soundSettings)
         {
             int busindex = AudioServer.GetBusIndex(entry.Key.ToString());
             if (busindex >= 0)
@@ -90,8 +97,10 @@ public partial class AudioManager : Node
     /// <param name="parentNode"></param>
     /// <param name="playIn3D"></param>
     /// <returns></returns>
-    public AudioStreamPlayer3D PlaySoundIn3D(Dictionary<string, object> soundDictionary, Node3D parentNode){
-        if(_avaiblePlayers.Count > 0){
+    public AudioStreamPlayer3D PlaySoundIn3D(Dictionary<string, object> soundDictionary, Node3D parentNode)
+    {
+        if (_avaiblePlayers.Count > 0)
+        {
             AudioStreamPlayer3D audioPlayer = _avaiblePlayers.Dequeue();
 
             // Set up player
@@ -106,18 +115,21 @@ public partial class AudioManager : Node
             audioPlayer.Play();
             return audioPlayer;
         }
-        else{
+        else
+        {
             return null;
         }
-	}
+    }
 
     /// <summary>
     /// Plays a sound without 3D attenuation.
     /// </summary>
     /// <param name="soundDictionary"></param>
     /// <returns></returns>
-    public AudioStreamPlayer3D PlaySound(Dictionary<string, object> soundDictionary){
-        if(_avaiblePlayers.Count > 0 && soundDictionary != null){
+    public AudioStreamPlayer3D PlaySound(Dictionary<string, object> soundDictionary)
+    {
+        if (_avaiblePlayers.Count > 0 && soundDictionary != null)
+        {
             AudioStreamPlayer3D audioPlayer = _avaiblePlayers.Dequeue();
 
             // Set up player
@@ -130,20 +142,25 @@ public partial class AudioManager : Node
             audioPlayer.Play();
             return audioPlayer;
         }
-        else{
+        else
+        {
             return null;
         }
     }
-    public AudioStreamPlayer3D PlayMusic(Dictionary<string, object> soundDictionary){
+    public AudioStreamPlayer3D PlayMusic(Dictionary<string, object> soundDictionary)
+    {
         AudioStreamPlayer3D audioPlayer;
-        if(_musicPlayer != null && soundDictionary != null){
+        if (_musicPlayer != null && soundDictionary != null)
+        {
             audioPlayer = _musicPlayer;
         }
-        else if(_avaiblePlayers.Count > 0 && soundDictionary != null){
+        else if (_avaiblePlayers.Count > 0 && soundDictionary != null)
+        {
             audioPlayer = _avaiblePlayers.Dequeue();
             _musicPlayer = audioPlayer;
         }
-        else {
+        else
+        {
             return null;
         }
         audioPlayer.AttenuationModel = AudioStreamPlayer3D.AttenuationModelEnum.Disabled;
@@ -156,22 +173,28 @@ public partial class AudioManager : Node
 
         return audioPlayer;
     }
-    public void StopMusic(){
-        if(_musicPlayer != null && _musicPlayer.IsPlaying()){
+    public void StopMusic()
+    {
+        if (_musicPlayer != null && _musicPlayer.IsPlaying())
+        {
             _musicPlayer.Finished -= _OnMusicFinished;
             _musicPlayer.Playing = false;
         }
     }
-    public bool IsMusicPlaying(){
-        if(_musicPlayer != null){
+    public bool IsMusicPlaying()
+    {
+        if (_musicPlayer != null)
+        {
             return _musicPlayer.Playing;
         }
-        else{
+        else
+        {
             return false;
         }
     }
 
-    private void _OnMusicFinished(){
+    private void _OnMusicFinished()
+    {
         _musicPlayer.Finished -= _OnMusicFinished;
         _musicPlayer = null;
         _musicRestartTimer.Start();

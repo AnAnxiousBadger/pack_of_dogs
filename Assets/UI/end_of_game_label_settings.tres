@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cqgshkyxaydn8"]
 
-[ext_resource type="FontFile" uid="uid://ceeq2bunmt1u3" path="res://Assets/UI/fonts/Poppins/Poppins-Medium.ttf" id="1_5s7j8"]
+[ext_resource type="FontFile" uid="uid://ocyb4epfyk5j" path="res://Assets/UI/fonts/Merriweather/Merriweather-Regular.ttf" id="1_ay3p4"]
 
 [resource]
-font = ExtResource("1_5s7j8")
+font = ExtResource("1_ay3p4")

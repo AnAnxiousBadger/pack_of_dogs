@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public partial class GameController : Node3D
 {
-	
+
 	// EXPORTS
 	[Export] public Camera3D cam;
 	[Export] public UIController uiController;
@@ -25,53 +25,63 @@ public partial class GameController : Node3D
 	private const float MOUSERAYDIST = 1000f;
 	private PhysicsBody3D _physicsBodyUnderMouse = null;
 	private Vector3 _physicsBodyHitPos = Vector3.Zero;
-	public PhysicsBody3D PhysicsBodyUnderMouse {
+	public PhysicsBody3D PhysicsBodyUnderMouse
+	{
 		get { return _physicsBodyUnderMouse; }
-		private set {
+		private set
+		{
 			boardController.boardElementsController.HandleTickableInterActions(_physicsBodyUnderMouse, value, _physicsBodyHitPos);
 			_physicsBodyUnderMouse = value;
 		}
 	}
 	public bool allowClicksOnTickableButtons = false;
+	private DateTime _gameStartTime;
+	private TimeSpan _totalGameTime;
+	private bool _gameEnded = false;
 	// SIGNALS
 	[Signal] public delegate void OnRollButtonUsedEventHandler();
 	[Signal] public delegate void OnRollButtonActivityChangeEventHandler(bool isActive);
 	[Signal] public delegate void OnSkipButtonUsedEventHandler();
 	[Signal] public delegate void OnSkipButtonActivityChangeEventHandler(bool isActive);
 	[Signal] public delegate void GameEndedEventHandler(BasePlayerController winner);
-    public override void _Ready()
+	public override void _Ready()
 	{
 		GlobalHelper.Instance.GameController = this;
 	}
 
 	public override void _Process(double delta)
-    {
-        currPlayer?.ProcessTurn((float)delta);
-    }
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        (PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
-    }
-	public async Task ReadyGameAsync(Godot.Collections.Dictionary<string, string> settings){
+	{
+		currPlayer?.ProcessTurn((float)delta);
+	}
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		(PhysicsBodyUnderMouse, _physicsBodyHitPos) = CastRayFromMouse();
+	}
+	public async Task ReadyGameAsync(Godot.Collections.Dictionary<string, string> settings)
+	{
 		// Adding children can only be done on main thread
 		AddPlayers(settings);
 		SetUpGame();
-		await Task.Run(() => {
+		await Task.Run(() =>
+		{
 			return;
 		});
 	}
-	
-	private void AddPlayers(Godot.Collections.Dictionary<string, string> settings){
-		
+
+	private void AddPlayers(Godot.Collections.Dictionary<string, string> settings)
+	{
+
 		List<BasePlayerController> addedPlayers = new();
 		// Spawn players
 		for (int i = 0; i < settings["player_num"].ToInt(); i++)
 		{
 			BasePlayerController player;
-			if(settings[$"player_{i}_type"] == "real_player"){
+			if (settings[$"player_{i}_type"] == "real_player")
+			{
 				player = _realPlayerControllerScene.Instantiate() as BasePlayerController;
 			}
-			else{
+			else
+			{
 				player = _aiPlayerControllerScene.Instantiate() as BasePlayerController;
 			}
 			player.PlayerName = settings[$"player_{i}_name"];
@@ -84,10 +94,11 @@ public partial class GameController : Node3D
 		foreach (BasePlayerController player in shuffledPlayerList)
 		{
 			GetNode("../players_container").AddChild(player);
-		}		
+		}
 	}
 
-    private void SetUpGame(){
+	private void SetUpGame()
+	{
 		diceController.ReadyDiceController();
 		SetUpPlayers();
 		boardController.ReadyBoardController();
@@ -98,7 +109,8 @@ public partial class GameController : Node3D
 		uiController.SetUpUI();
 	}
 
-	private void SetUpPlayers(){
+	private void SetUpPlayers()
+	{
 		players = new();
 		_playersQueue = new();
 
@@ -106,7 +118,8 @@ public partial class GameController : Node3D
 		for (int i = 0; i < playersArray.Count; i++)
 		{
 			BasePlayerController p = (BasePlayerController)playersArray[i];
-			if(p.isActive){
+			if (p.isActive)
+			{
 				p.playerIndex = players.Count;
 				p.ReadyPlayer();
 				players.Add(p);
@@ -114,13 +127,17 @@ public partial class GameController : Node3D
 			}
 		}
 	}
-	public void StartGame(){
+	public void StartGame()
+	{
 		SwitchTurn();
+		_gameStartTime = DateTime.UtcNow;
 	}
 
-    public void SwitchTurn(){
+	public void SwitchTurn()
+	{
 		currPlayer?.EndTurn();
-		if(_playersQueue.Count > 0){
+		if (_playersQueue.Count > 0)
+		{
 			currPlayer = _playersQueue.Dequeue();
 			currPlayer.StartTurn();
 			_playersQueue.Enqueue(currPlayer);
@@ -130,16 +147,19 @@ public partial class GameController : Node3D
 		}
 	}
 
-	public void ChangeTurnDisplaName(){
-		if(currPlayer != null){
+	public void ChangeTurnDisplaName()
+	{
+		if (currPlayer != null)
+		{
 			uiController.SetTurnLabel(currPlayer.PlayerName);
 		}
 	}
 
-	public (PhysicsBody3D, Vector3) CastRayFromMouse(){
-        PhysicsBody3D resultBody = null;
+	public (PhysicsBody3D, Vector3) CastRayFromMouse()
+	{
+		PhysicsBody3D resultBody = null;
 		Vector3 resultCoord = Vector3.Zero;
-        Vector2 mouse = GetViewport().GetMousePosition();
+		Vector2 mouse = GetViewport().GetMousePosition();
 		PhysicsDirectSpaceState3D space = GetWorld3D().DirectSpaceState;
 		Vector3 start = GetViewport().GetCamera3D().ProjectRayOrigin(mouse);
 		Vector3 end = GetViewport().GetCamera3D().ProjectPosition(mouse, MOUSERAYDIST);
@@ -150,32 +170,53 @@ public partial class GameController : Node3D
 		};
 
 		Godot.Collections.Dictionary result = space.IntersectRay(rayParams);
-		if(result.ContainsKey("collider")){
-			resultBody = (PhysicsBody3D) result["collider"];
+		if (result.ContainsKey("collider"))
+		{
+			resultBody = (PhysicsBody3D)result["collider"];
 		}
-		if(result.ContainsKey("position")){
-			resultCoord = (Vector3) result["position"];
+		if (result.ContainsKey("position"))
+		{
+			resultCoord = (Vector3)result["position"];
 		}
 
-        return (resultBody, resultCoord);
-    }
+		return (resultBody, resultCoord);
+	}
 
-	public void EndGame(BasePlayerController winner){
+	public void EndGame(BasePlayerController winner)
+	{
 		_playersQueue.Clear();
 		currPlayer = null;
+		_gameEnded = true;
+		_totalGameTime = DateTime.UtcNow - _gameStartTime;
 		EmitSignal(SignalName.GameEnded, winner);
 	}
+	public TimeSpan GetElapsedGameTime()
+	{
+		if (_gameEnded)
+		{
+			return _totalGameTime;
+		}
+		else
+		{
+			return DateTime.UtcNow - _gameStartTime;
+		}
 
-	public void RollButtonUsed(){
+	}
+
+	public void RollButtonUsed()
+	{
 		EmitSignal(SignalName.OnRollButtonUsed);
 	}
-	public void ChangeRollButtonActivity(bool isActive){
+	public void ChangeRollButtonActivity(bool isActive)
+	{
 		EmitSignal(SignalName.OnRollButtonActivityChange, isActive);
 	}
-	public void SkipButtonUsed(){
+	public void SkipButtonUsed()
+	{
 		EmitSignal(SignalName.OnSkipButtonUsed);
 	}
-	public void ChangeSkipButtonActivity(bool isActive){
+	public void ChangeSkipButtonActivity(bool isActive)
+	{
 		EmitSignal(SignalName.OnSkipButtonActivityChange, isActive);
 	}
 }

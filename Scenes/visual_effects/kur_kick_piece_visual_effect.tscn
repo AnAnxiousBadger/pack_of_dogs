@@ -296,7 +296,7 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 5, 2, 3, 1, 6, 0
 
 [sub_resource type="Gradient" id="Gradient_48x6c"]
 offsets = PackedFloat32Array(0, 0.724739, 1)
-colors = PackedColorArray(3, 3, 2, 1, 0.97614, 0.974242, 0.588658, 1, 1.5, 1.5, 1, 1)
+colors = PackedColorArray(0.994564, 0.461158, 0.435464, 1, 0.840288, 0.27555, 0.200224, 1, 0.996814, 0.57698, 0.546579, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_njxkt"]
 gradient = SubResource("Gradient_48x6c")
@@ -344,10 +344,11 @@ tangential_accel_min = 10.0
 tangential_accel_max = 10.0
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_n2a2o")
+color = Color(3, 1, 1, 1)
 alpha_curve = SubResource("CurveTexture_4dg6u")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88s5l"]
-albedo_color = Color(3, 3, 2, 1)
+albedo_color = Color(3, 1, 1, 1)
 
 [sub_resource type="Curve" id="Curve_22b6d"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

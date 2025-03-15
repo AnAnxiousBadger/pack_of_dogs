@@ -4,10 +4,12 @@ using Godot;
 public partial class BasicNodeController : BoardNodeController
 {
     private VisualEffectController _hihglightEffectController;
-    public override void DoOnLeaveNodeAction(PieceController piece){
+    public override void DoOnLeaveNodeAction(PieceController piece)
+    {
         EmitSignal(SignalName.OnLeave, piece);
     }
-    public override void DoOnStepNodeAction(PieceController piece){
+    public override void DoOnStepNodeAction(PieceController piece)
+    {
         AnimationPlayer anim = GetNode("anim") as AnimationPlayer;
         anim.Play("up_and_down");
     }

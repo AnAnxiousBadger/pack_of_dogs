@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw0g17cm7tld6"]
+[gd_scene load_steps=5 format=3 uid="uid://bw0g17cm7tld6"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/RollStatsDisplayUIController.cs" id="1_u7yro"]
 [ext_resource type="PackedScene" uid="uid://ds5b52kdp3lqj" path="res://Scenes/UI_scenes/stats_UI/roll_stats_roll_bar.tscn" id="2_q1xnv"]
-[ext_resource type="FontFile" uid="uid://de4ytv5nbl6fy" path="res://Assets/UI/fonts/Poppins/Poppins-Regular.ttf" id="3_daghw"]
-[ext_resource type="FontFile" uid="uid://ceeq2bunmt1u3" path="res://Assets/UI/fonts/Poppins/Poppins-Medium.ttf" id="4_dhvod"]
+[ext_resource type="LabelSettings" uid="uid://cqgshkyxaydn8" path="res://Assets/UI/end_of_game_label_settings.tres" id="3_4v51j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t4u1"]
 bg_color = Color(0.141176, 0.0980392, 0.0588235, 0.501961)
@@ -11,12 +10,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="LabelSettings" id="LabelSettings_vekou"]
-font = ExtResource("3_daghw")
-
-[sub_resource type="LabelSettings" id="LabelSettings_242n2"]
-font = ExtResource("4_dhvod")
 
 [node name="roll_stats_display" type="VBoxContainer" node_paths=PackedStringArray("_rollBarContainer", "_totalTurnsLabel", "_totalRollsLabel", "_averageRollLabel")]
 size_flags_horizontal = 3
@@ -75,13 +68,13 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 2
 text = "total turns:"
-label_settings = SubResource("LabelSettings_vekou")
+label_settings = ExtResource("3_4v51j")
 
 [node name="total_turns_label" type="Label" parent="total_turns_container"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "2.15"
-label_settings = SubResource("LabelSettings_242n2")
+label_settings = ExtResource("3_4v51j")
 horizontal_alignment = 1
 
 [node name="total_rolls_container" type="HBoxContainer" parent="."]
@@ -92,13 +85,13 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 2
 text = "total rolls:"
-label_settings = SubResource("LabelSettings_vekou")
+label_settings = ExtResource("3_4v51j")
 
 [node name="average_roll_label" type="Label" parent="total_rolls_container"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "2.15"
-label_settings = SubResource("LabelSettings_242n2")
+label_settings = ExtResource("3_4v51j")
 horizontal_alignment = 1
 
 [node name="average_roll_container" type="HBoxContainer" parent="."]
@@ -109,11 +102,11 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 2
 text = "average roll:"
-label_settings = SubResource("LabelSettings_vekou")
+label_settings = ExtResource("3_4v51j")
 
 [node name="average_roll_label" type="Label" parent="average_roll_container"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "2.15"
-label_settings = SubResource("LabelSettings_242n2")
+label_settings = ExtResource("3_4v51j")
 horizontal_alignment = 1

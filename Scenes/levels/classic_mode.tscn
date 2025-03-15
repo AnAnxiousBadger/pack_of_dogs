@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://dm6thl84wrgq0"]
+[gd_scene load_steps=140 format=3 uid="uid://dm6thl84wrgq0"]
 
 [ext_resource type="Script" path="res://Scripts/level_scripts/GameModeLevelController.cs" id="1_yvbe8"]
 [ext_resource type="Resource" uid="uid://bups0ho1y4b3h" path="res://Assets/sounds/audio_libraries/classic_mode_audio_library.tres" id="2_fxg86"]
@@ -45,10 +45,10 @@
 [ext_resource type="Shader" uid="uid://c36wworfifl8t" path="res://Assets/UI/UI_god_rays_shader.tres" id="46_6lr88"]
 [ext_resource type="Texture2D" uid="uid://db55vxa15amtq" path="res://Assets/UI/UI_god_rays_mask.png" id="47_ijbfy"]
 [ext_resource type="Texture2D" uid="uid://bfbflmpb58365" path="res://Assets/UI/victory_UI/victory_spears_1.png" id="48_p0k70"]
+[ext_resource type="FontFile" uid="uid://c4nmvr6o35fl7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Black.ttf" id="49_al1i4"]
 [ext_resource type="Texture2D" uid="uid://2gscaq4f136" path="res://Assets/UI/victory_UI/victory_spears_2.png" id="49_iufme"]
 [ext_resource type="Texture2D" uid="uid://bi4xh1o3m6hd2" path="res://Assets/UI/victory_UI/victory_spears_3.png" id="50_45l2j"]
 [ext_resource type="Texture2D" uid="uid://bh8hvoaovvb6g" path="res://Assets/UI/victory_UI/victory_spears_4.png" id="51_nmpfx"]
-[ext_resource type="FontFile" uid="uid://siisdyleo1u7" path="res://Assets/UI/fonts/Poppins/Poppins-ExtraBold.ttf" id="52_ghuxi"]
 [ext_resource type="FontFile" uid="uid://bsramghb7l7vx" path="res://Assets/UI/fonts/Merriweather/Merriweather-Italic.ttf" id="53_e41je"]
 [ext_resource type="Shader" uid="uid://6l27jxj3larh" path="res://Assets/UI/UI_clip_shader.tres" id="54_7wjgt"]
 [ext_resource type="Theme" uid="uid://233gmhdlsqqa" path="res://Assets/UI/button_styles/menu_text_button_theme.tres" id="55_kxbsd"]
@@ -195,6 +195,14 @@ alpha_curve = SubResource("CurveTexture_qabie")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jr4y"]
 bg_color = Color(0.760784, 0.654902, 0.466667, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2iuix"]
+font = ExtResource("49_al1i4")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_qv25v"]
+font = ExtResource("49_al1i4")
+font_size = 24
 
 [sub_resource type="Animation" id="Animation_4dw4m"]
 length = 0.001
@@ -425,6 +433,9 @@ corner_radius_bottom_left = 5
 [sub_resource type="Theme" id="Theme_bs13d"]
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_eo51d")
 
+[sub_resource type="LabelSettings" id="LabelSettings_53n33"]
+font = ExtResource("39_vxmyv")
+
 [sub_resource type="Gradient" id="Gradient_vtpsj"]
 offsets = PackedFloat32Array(0, 0.41115, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.55, 0.843137, 1, 1, 0.69, 0.639216)
@@ -590,7 +601,7 @@ texture = SubResource("GradientTexture2D_gaa3i")
 modulate_color = Color(1, 1, 1, 0.894118)
 
 [sub_resource type="LabelSettings" id="LabelSettings_uuhek"]
-font = ExtResource("52_ghuxi")
+font = ExtResource("49_al1i4")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_yth5d"]
@@ -1080,6 +1091,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("32_e6mpq")
 theme_override_font_sizes/font_size = 23
 text = "Emma"
+label_settings = SubResource("LabelSettings_2iuix")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1089,6 +1101,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("32_e6mpq")
 theme_override_font_sizes/font_size = 25
 text = "'s turn"
+label_settings = SubResource("LabelSettings_qv25v")
 horizontal_alignment = 1
 
 [node name="turn_label_animation_player" type="AnimationPlayer" parent="UI_root/turn_panel_UI_controller"]
@@ -1102,8 +1115,7 @@ anchors_preset = -1
 offset_top = 40.0
 offset_bottom = 40.0
 
-[node name="stats_UI_controller" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_UIController", "_tableTitle", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
-visible = false
+[node name="stats_UI_controller" type="PanelContainer" parent="UI_root" node_paths=PackedStringArray("_UIController", "_tableTitle", "_gameTimeLabel", "_playerNameContainer", "_piecesDeliveredContainer", "_rollStatsContainer", "_distanceMovedContainer", "_enemyPiecesHitContainer", "_piecesHitContainer", "_turnsSkippedContainer", "_luckyScoreContainer")]
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = -1
@@ -1120,6 +1132,7 @@ theme_override_styles/panel = ExtResource("33_s5rbu")
 script = ExtResource("34_32ef4")
 _UIController = NodePath("..")
 _tableTitle = NodePath("VBoxContainer/header_container/clip_panel/PanelContainer/PanelContainer/MarginContainer/table_title")
+_gameTimeLabel = NodePath("VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/game_time_label")
 _playerNameContainer = NodePath("VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer6/MarginContainer/player_names_container")
 _piecesDeliveredContainer = NodePath("VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer5/MarginContainer/pieces_delivered_container")
 _rollStatsContainer = NodePath("VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/roll_stats_container")
@@ -1196,6 +1209,31 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("43_u53hn")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Game Time"
+label_settings = ExtResource("42_aq4kx")
+
+[node name="game_time_label" type="Label" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "12:03"
+label_settings = SubResource("LabelSettings_53n33")
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="PanelContainer6" type="PanelContainer" parent="UI_root/stats_UI_controller/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -1817,6 +1855,7 @@ icon = ExtResource("57_fxfhd")
 expand_icon = true
 
 [node name="bottom_right_menu" type="PanelContainer" parent="UI_root"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.705882)
 layout_mode = 1
 anchors_preset = 3

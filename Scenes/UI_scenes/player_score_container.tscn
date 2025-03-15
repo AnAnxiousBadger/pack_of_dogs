@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/PlayerScoreContainerUIController.cs" id="1_6iyy2"]
 [ext_resource type="Texture2D" uid="uid://s6mu7bbbyhi6" path="res://Assets/UI/icons/piece_icon_16x16.png" id="2_ehwvj"]
-[ext_resource type="FontFile" uid="uid://ckofujjg44b2a" path="res://Assets/UI/fonts/Poppins/Poppins-Bold.ttf" id="2_x744l"]
+[ext_resource type="FontFile" uid="uid://c4nmvr6o35fl7" path="res://Assets/UI/fonts/Merriweather/Merriweather-Black.ttf" id="3_07rxj"]
 [ext_resource type="Texture2D" uid="uid://y8t4pv8qu38i" path="res://Assets/UI/icons/ai_player_icon_16x16.png" id="4_wuqt3"]
 
 [sub_resource type="Gradient" id="Gradient_0nyag"]
@@ -30,19 +30,19 @@ shadow_size = 1
 shadow_offset = Vector2(0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gdwca"]
-font = ExtResource("2_x744l")
-font_size = 12
+font = ExtResource("3_07rxj")
+font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_brev3"]
-font = ExtResource("2_x744l")
-font_size = 12
+font = ExtResource("3_07rxj")
+font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_nxuer"]
-font = ExtResource("2_x744l")
-font_size = 12
+font = ExtResource("3_07rxj")
+font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_bleku"]
-font = ExtResource("2_x744l")
+font = ExtResource("3_07rxj")
 font_size = 15
 
 [node name="player_score_container" type="PanelContainer" node_paths=PackedStringArray("_playerNameLabel", "_playerScoreLabel", "_playerMaxScoreLabel", "_AIIcon", "_pieceColorIcon")]

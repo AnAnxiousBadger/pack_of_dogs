@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://c5d85fwg7u2pv"]
+[gd_scene load_steps=73 format=3 uid="uid://c5d85fwg7u2pv"]
 
 [ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/GameModePanelController.cs" id="1_32o7l"]
 [ext_resource type="Script" path="res://Scripts/level_scripts/MainMenuLevelController.cs" id="1_m0vgj"]
@@ -26,6 +26,8 @@
 [ext_resource type="Material" uid="uid://dibeo8tkl7h5b" path="res://Assets/materials/ziggurat_mats/dark_bricks_mat.tres" id="25_xtr8v"]
 [ext_resource type="Texture2D" uid="uid://dcngywd1rtx8m" path="res://Assets/UI/gamemode_02_thumbnail.png" id="26_pamb7"]
 [ext_resource type="Material" uid="uid://dcddcjb1gp8bk" path="res://Assets/materials/ziggurat_mats/sand_no_pebbles_mat.tres" id="26_tpxlm"]
+[ext_resource type="Script" path="res://Scripts/UI_scripts/main_menu/SettingsPanelController.cs" id="27_7vty3"]
+[ext_resource type="FontFile" uid="uid://bsramghb7l7vx" path="res://Assets/UI/fonts/Merriweather/Merriweather-Italic.ttf" id="28_qu63o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yfr8u"]
 sky_top_color = Color(0.3577, 0.487795, 0.49, 1)
@@ -321,6 +323,10 @@ fill_to = Vector2(1, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0aabe"]
 texture = SubResource("GradientTexture2D_55dmc")
 
+[sub_resource type="LabelSettings" id="LabelSettings_hgnqm"]
+font = ExtResource("28_qu63o")
+font_size = 12
+
 [node name="ROOT_main_menu" type="Node3D" node_paths=PackedStringArray("_classicGameModePanel", "_kurGameModePanel", "zigguratController")]
 script = ExtResource("1_m0vgj")
 _classicGameModePanel = NodePath("Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/classic_game_mode_panel_container")
@@ -382,7 +388,7 @@ environment = SubResource("Environment_fm5vn")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.298908, -0.88329, -0.361183, 0, -0.378487, 0.925607, -0.954282, -0.276671, -0.113133, -1.23954, 1.14695, 0)
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_mainMenuLevelController", "_classicModeButton", "_kurModeButton", "_leaveButton", "_classicModePanelController", "_kurModePanelController")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_mainMenuLevelController", "_versionLabel", "_classicModeButton", "_kurModeButton", "_leaveButton", "_settingsButton", "_classicModePanelController", "_kurModePanelController", "_settingsPanelController")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -392,11 +398,14 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("8_e2ay7")
 _mainMenuLevelController = NodePath("..")
+_versionLabel = NodePath("version_label")
 _classicModeButton = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/classic_button_panel_container/classic_button_margin_container/classic_button")
-_kurModeButton = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container2/kur_button_margin_container/kur_button")
+_kurModeButton = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container/kur_button_margin_container/kur_button")
 _leaveButton = NodePath("exit_button_panel_container/exit_button_margin_container/exit_button")
+_settingsButton = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/settings_button_panel_container/settings_button_margin_container/settings_button")
 _classicModePanelController = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/classic_game_mode_panel_container")
 _kurModePanelController = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/kur_game_mode_panel_container")
+_settingsPanelController = NodePath("MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container")
 
 [node name="example_background" type="PanelContainer" parent="Control"]
 visible = false
@@ -614,18 +623,18 @@ toggle_mode = true
 text = "CLASSIC  MODE
 "
 
-[node name="kur_button_panel_container2" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons"]
+[node name="kur_button_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ocmcl")
 
-[node name="kur_button_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container2"]
+[node name="kur_button_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="kur_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container2/kur_button_margin_container"]
+[node name="kur_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/kur_button_panel_container/kur_button_margin_container"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -633,6 +642,26 @@ theme = ExtResource("25_uilim")
 theme_override_font_sizes/font_size = 20
 toggle_mode = true
 text = "KUR  MODE"
+
+[node name="settings_button_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ocmcl")
+
+[node name="settings_button_margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/settings_button_panel_container"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="settings_button" type="Button" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/gamode_mode_buttons/settings_button_panel_container/settings_button_margin_container"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("25_uilim")
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+text = "SETTINGS"
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -964,6 +993,7 @@ theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 text = "Play"
 
 [node name="kur_game_mode_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_playButton", "_playersSetupPanelControllers")]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -1387,6 +1417,104 @@ theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
 text = "Play"
 
+[node name="settings_panel_container" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" node_paths=PackedStringArray("_mainMenuLevelController", "_masterVolumeSlider", "_muteCheckBox")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uxa18")
+script = ExtResource("27_7vty3")
+_mainMenuLevelController = NodePath("../../../../../../..")
+_masterVolumeSlider = NodePath("players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer/VBoxContainer/MarginContainer/master_volume_slider")
+_muteCheckBox = NodePath("players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/mute_music_check_box")
+
+[node name="players_setup_clip_anim_panel" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container"]
+clip_children = 1
+material = SubResource("ShaderMaterial_i178x")
+layout_mode = 2
+
+[node name="margin_container" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="master_volume_panel" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_kp1g5")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Master Volume"
+label_settings = SubResource("LabelSettings_sc4bp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="master_volume_slider" type="HSlider" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/master_volume_panel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="music_panel" type="PanelContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("9_kp1g5")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Mute music [M]"
+label_settings = SubResource("LabelSettings_sc4bp")
+
+[node name="mute_music_check_box" type="CheckBox" parent="Control/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/settings_panel_container/players_setup_clip_anim_panel/margin_container/VBoxContainer/music_panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
 [node name="exit_button_panel_container" type="PanelContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
@@ -1415,3 +1543,14 @@ theme = ExtResource("25_uilim")
 theme_override_font_sizes/font_size = 20
 text = "LEAVE
 "
+
+[node name="version_label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "v."
+label_settings = SubResource("LabelSettings_hgnqm")
